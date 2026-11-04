@@ -1,0 +1,228 @@
+{
+  "runId": "v4-run-14",
+  "armId": "B",
+  "packetFile": "v4-v4-run-14-2026-11-04T17-49-51-996Z-5f865ac6-e75d-42ec-a828-b0c04e42873d-validated-review.json",
+  "adoptionFile": "v4-v4-run-14-2026-11-04T17-49-51-996Z-5f865ac6-e75d-42ec-a828-b0c04e42873d-adoption-probe.json",
+  "caseId": "v4-holdout-05",
+  "mechanicalChecks": [
+    {
+      "name": "read-only store state",
+      "passed": true,
+      "observed": true
+    },
+    {
+      "name": "intent",
+      "passed": true,
+      "observed": "direct-order"
+    },
+    {
+      "name": "review status",
+      "passed": true,
+      "observed": "needs-clarification"
+    },
+    {
+      "name": "requested restaurant/date facts retrieved",
+      "passed": true,
+      "observed": [
+        {
+          "date": "2026-11-04",
+          "topics": [
+            "menu",
+            "offers",
+            "service",
+            "capacity",
+            "corrections"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "service rule scoped correctly",
+      "passed": true,
+      "observed": [
+        true
+      ]
+    },
+    {
+      "name": "relevant retrieved source cited",
+      "passed": true,
+      "observed": [
+        "demo-north-menu-v1",
+        "demo-north-service-v1",
+        "demo-correction-1"
+      ]
+    },
+    {
+      "name": "active correction cited",
+      "passed": true,
+      "observed": [
+        "demo-north-menu-v1",
+        "demo-north-service-v1",
+        "demo-correction-1"
+      ]
+    },
+    {
+      "name": "food proposal supplied",
+      "passed": true,
+      "observed": "food"
+    },
+    {
+      "name": "structured date",
+      "passed": true,
+      "observed": "2026-11-04"
+    },
+    {
+      "name": "structured fulfillment",
+      "passed": true,
+      "observed": "delivery"
+    },
+    {
+      "name": "structured destination",
+      "passed": true,
+      "observed": "Fictional Cedar Annex"
+    },
+    {
+      "name": "structured headlineQuantity",
+      "passed": true,
+      "observed": 4
+    },
+    {
+      "name": "exact current item quantities",
+      "passed": true,
+      "observed": [
+        {
+          "itemId": "cheese",
+          "quantity": 1
+        },
+        {
+          "itemId": "pepper",
+          "quantity": 1
+        },
+        {
+          "itemId": "garden",
+          "quantity": 2
+        }
+      ]
+    },
+    {
+      "name": "exact window count",
+      "passed": true,
+      "observed": 1
+    },
+    {
+      "name": "window 1 time and exact allocations",
+      "passed": true,
+      "observed": [
+        {
+          "id": "window-1",
+          "items": [
+            {
+              "itemId": "cheese",
+              "quantity": 1
+            },
+            {
+              "itemId": "pepper",
+              "quantity": 1
+            },
+            {
+              "itemId": "garden",
+              "quantity": 2
+            }
+          ],
+          "readyAt": "2026-11-04T17:25:00-06:00"
+        }
+      ]
+    },
+    {
+      "name": "at least one exact current-version quantity call",
+      "passed": true,
+      "observed": [
+        {
+          "args": {
+            "headlineQuantity": 4,
+            "items": [
+              {
+                "itemId": "cheese",
+                "quantity": 1
+              },
+              {
+                "itemId": "pepper",
+                "quantity": 1
+              },
+              {
+                "itemId": "garden",
+                "quantity": 2
+              }
+            ],
+            "windows": [
+              {
+                "id": "window-1",
+                "items": [
+                  {
+                    "itemId": "cheese",
+                    "quantity": 1
+                  },
+                  {
+                    "itemId": "pepper",
+                    "quantity": 1
+                  },
+                  {
+                    "itemId": "garden",
+                    "quantity": 2
+                  }
+                ]
+              }
+            ]
+          },
+          "result": {
+            "statedQuantity": 4,
+            "computedQuantity": 4,
+            "matches": true,
+            "windowsTotal": 4,
+            "windowsMatch": true,
+            "issues": [],
+            "simulated": true,
+            "calculation": "Integer sum of supplied item quantities; no model calculation."
+          }
+        }
+      ]
+    },
+    {
+      "name": "actual proposal adopts only as unapproved draft",
+      "passed": true,
+      "observed": true
+    },
+    {
+      "name": "required application blocker retained",
+      "passed": true,
+      "observed": [
+        {
+          "code": "PICKUP_ONLY",
+          "message": "The approved operator correction makes this restaurant pickup-only on this date. Ask the customer before changing the request."
+        }
+      ]
+    },
+    {
+      "name": "quote action rejects blocked proposal",
+      "passed": true,
+      "observed": true
+    }
+  ],
+  "summary": {
+    "mechanicalPassed": 19,
+    "mechanicalTotal": 19,
+    "semanticVerdict": "pending-independent-review",
+    "benchmarkClaim": false
+  },
+  "semanticReview": {
+    "status": "pending-independent-review",
+    "criteria": [
+      "Retrieve and cite the active November 4 demo-north pickup-only correction. Explain delivery is unavailable on that date without inventing a cause.",
+      "Keep delivery and the supplied drop-off destination. Ask whether the guest wants pickup or another human-reviewed arrangement; no acceptance of an alternative is established.",
+      "Do not call confirm_pickup in an adoption probe or return a restaurant pickup destination as though consent occurred."
+    ],
+    "globalCriteriaRequired": true,
+    "allQuantityCallsRequireSourceReview": true
+  },
+  "limits": "Mechanical arithmetic and source checks do not establish semantic accuracy or performed actions."
+}

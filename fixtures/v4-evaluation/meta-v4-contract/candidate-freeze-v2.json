@@ -1,0 +1,95 @@
+{
+  "schemaVersion": 1,
+  "status": "frozen-before-holdout-inspection",
+  "createdAt": "2026-11-04T17:24:00.333Z",
+  "inferencePermitted": false,
+  "freshHoldoutCasesViewed": false,
+  "tests": {
+    "command": "node --test work/meta-v4-contract/*.test.mjs",
+    "passed": 26,
+    "failed": 0,
+    "scope": "Mocked transport, contract compatibility and runtime safeguards only; not empirical model quality."
+  },
+  "artifacts": [
+    {
+      "filename": "front-desk-meta.mjs",
+      "bytes": 21145,
+      "sha256": "f50dab170fe67adbe2627d4eb5af317a9dc873ad686b9d695b90a42716188a44"
+    },
+    {
+      "filename": "baseline-front-desk-meta.mjs",
+      "bytes": 19244,
+      "sha256": "8897894b386f657fffe2f037f3c0fcc39dc7b26ddda5454b18ed04df9941d667"
+    },
+    {
+      "filename": "adapter-regression.test.mjs",
+      "bytes": 11769,
+      "sha256": "b130d8d9684b6ac0e9b6b85d0f92a8f78650be81a884ae98d17ae0db9b927665"
+    },
+    {
+      "filename": "contract.test.mjs",
+      "bytes": 10859,
+      "sha256": "010a3ded2f92eee2209d5b535b21205134bad3bff4430328956cad1a4f68df12"
+    }
+  ],
+  "sourceHashes": {
+    "v3AdapterSha256": "cb4fdad8852a5449d025eede6c435dee2f40a37afef1bb0a114ad232dd64354f",
+    "priorComparisonAdapterSha256": "69c68a0e27e457af4820acb5699e4744a908ffd877ed6f38ff6d46ec0b9c9111",
+    "v3EngineSha256": "2823e0ae93b43658c8f07297b0506e084c5e3f2124eb7756c45a7eb5132cc198"
+  },
+  "candidateContractHashes": {
+    "promptSha256": "e019830d6e8ced283fe6c890c8bdc5a17ae2fdb4d5bf2be9efddd4182ecc1a21",
+    "toolsSha256": "2d5630a62d68a8e9ad505338d02c228c0f5f3958f747aeea759d3fdbc7261ec4",
+    "schemaSha256": "ba623a820c1a07168ea737a1bb3e2224761d84662f28d2d27097dd295bb90ca1",
+    "completeContractSha256": "cf9b8c3460b7d732f20f89ed98e92aa42e87e7170a5d2d48fdee7d36a35fcdb6"
+  },
+  "baselineContractHashes": {
+    "promptSha256": "7b5f96852e665518b422add709935b121bacbca971472cd38f768d57cf8b7d6a",
+    "toolsSha256": "2c44e53c505af51d102bc434566fc8a47bd2c7bdc00de9a907beeff87013cb8b",
+    "schemaSha256": "0d5777208af137d3e3c18dc445f02712288e0de3f1fa1885f2227b4d99d76036",
+    "completeContractSha256": "08946237eee30d2615970c566b597635a50be142e7f3cf3a7eb12edadf0434b7"
+  },
+  "modelArms": [
+    {
+      "id": "baseline-spark",
+      "adapter": "baseline-front-desk-meta.mjs",
+      "model": "muse-spark-1.3",
+      "reasoningEffort": "max",
+      "maxOutputTokens": 12000
+    },
+    {
+      "id": "candidate-spark",
+      "adapter": "front-desk-meta.mjs",
+      "model": "muse-spark-1.3",
+      "reasoningEffort": "max",
+      "maxOutputTokens": 12000
+    },
+    {
+      "id": "candidate-wonder",
+      "adapter": "front-desk-meta.mjs",
+      "model": "muse-wonder-1.0",
+      "reasoningEffort": "max",
+      "maxOutputTokens": 12000
+    }
+  ],
+  "harnessRequiredLimits": {
+    "maxRequestsPerRun": 3,
+    "maxToolCalls": 8,
+    "timeoutMs": 120000,
+    "maxPhaseSpendUsd": 3,
+    "maxCumulativeSpendUsd": 20,
+    "sharedLock": "work/front-desk-budget.lock"
+  },
+  "notes": [
+    "Only instructions and descriptions change the candidate model contract; schema keys, required fields, enums and validation remain compatible.",
+    "The baseline prompt/tools/schema/validator are unchanged; it permits max effort and adds fixed model identity to request accounting metadata.",
+    "Same effort label does not establish equal latent compute across different models.",
+    "Source interpretation and quantity arithmetic must be reviewed separately; matches:true is not evidence of source accuracy.",
+    "No API call, credential access, V3 edit or publication was performed."
+  ],
+  "supersedes": {
+    "filename": "candidate-freeze.json",
+    "sha256": "7515df3531d6a68f40a72c8fade1d6d58b238c7b2604d923e22b5576e0504cf7",
+    "reason": "Baseline diagnostic request metadata now includes its fixed model for per-model usage accounting. No model-facing contract change."
+  }
+}

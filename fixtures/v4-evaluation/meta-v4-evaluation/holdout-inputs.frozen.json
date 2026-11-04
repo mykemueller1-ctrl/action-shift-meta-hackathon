@@ -1,0 +1,99 @@
+{
+  "schemaVersion": 1,
+  "caseSetVersion": "v4-contract-holdout-2026-11-04-v1",
+  "createdAt": "2026-11-04T17:21:07.746Z",
+  "syntheticOnly": true,
+  "author": "/root/meta_current_audit",
+  "modelInputKeys": [
+    "synthetic",
+    "restaurantId",
+    "demoNow",
+    "message"
+  ],
+  "notice": "Fresh authored inputs, selected after seeing previous weaknesses. Not an external blinded benchmark. Serialize ONLY each input object to the model; id, phase, appCaseId and setupActions are local harness metadata.",
+  "cases": [
+    {
+      "id": "v4-holdout-01",
+      "phase": "initial",
+      "appCaseId": "workplace",
+      "setupActions": [],
+      "input": {
+        "synthetic": true,
+        "restaurantId": "demo-north",
+        "demoNow": "2026-11-04T10:00:00-06:00",
+        "message": "Please revise the November 9, 2026 meal for Fictional Cedar Print crew, to be collected at Maple Street Kitchen. The earlier pickup plan was 12:10: two cheese, one roasted pepper and one garden; 17:40: one cheese, two roasted pepper and two garden. Transfer one garden from the later pickup to 12:10, replace the roasted pepper at 12:10 with one cheese, and add two garden to the later pickup. Move that later pickup to 18:10 on November 9. Leave everything else in place and work out the revised total for the draft. Nine was the total on the earlier version, not a new final count."
+      }
+    },
+    {
+      "id": "v4-holdout-02",
+      "phase": "initial",
+      "appCaseId": "workplace",
+      "setupActions": [],
+      "input": {
+        "synthetic": true,
+        "restaurantId": "demo-north",
+        "demoNow": "2026-11-04T10:00:00-06:00",
+        "message": "For Fictional Copper Studio on November 10, 2026, our current request is ten pizzas in total: three cheese, four roasted pepper and two garden. We will collect all of those listed flavors together at Maple Street Kitchen at 14:20 that day. Please put this current request into a draft for review. The six-pizza request from our previous event was canceled; that is only background."
+      }
+    },
+    {
+      "id": "v4-holdout-03",
+      "phase": "initial",
+      "appCaseId": "workplace",
+      "setupActions": [],
+      "input": {
+        "synthetic": true,
+        "restaurantId": "demo-north",
+        "demoNow": "2026-11-04T10:00:00-06:00",
+        "message": "Fictional Harbor Repair crew needs seven pizzas on November 9, 2026: two cheese, three roasted pepper and two garden, for pickup at Maple Street Kitchen. Three pizzas will be collected at 12:45. The other four will be collected after our training session, but its finish time is not set. We have not chosen which flavors belong in either pickup. Please make a partial draft and ask what is still needed."
+      }
+    },
+    {
+      "id": "v4-holdout-04",
+      "phase": "initial",
+      "appCaseId": "workplace",
+      "setupActions": [],
+      "input": {
+        "synthetic": true,
+        "restaurantId": "demo-north",
+        "demoNow": "2026-11-04T10:00:00-06:00",
+        "message": "For Fictional Alder Crew on November 10, 2026, please draft six pizzas: two cheese, two roasted pepper and two garden, all for 13:35. We want pickup, but we have not chosen between Maple Street Kitchen and Maple Street South as the collection site. Ask us which site before the restaurant agrees."
+      }
+    },
+    {
+      "id": "v4-holdout-05",
+      "phase": "confirmation",
+      "appCaseId": "direct",
+      "setupActions": [
+        {
+          "caseId": "direct",
+          "action": "correct_pickup_only",
+          "payload": {
+            "operator": "Demo operator"
+          },
+          "expectedRestaurantId": "demo-north",
+          "expectedDate": "2026-11-04",
+          "expectedRuleKind": "pickup-only"
+        }
+      ],
+      "input": {
+        "synthetic": true,
+        "restaurantId": "demo-north",
+        "demoNow": "2026-11-04T10:00:00-06:00",
+        "message": "Please deliver four pizzas to Fictional Cedar Annex at 17:25 on November 4, 2026: one cheese, one roasted pepper and two garden, all together. I am requesting delivery to that building. I can discuss another arrangement, but I have not agreed to collect this order."
+      }
+    },
+    {
+      "id": "v4-holdout-06",
+      "phase": "confirmation",
+      "appCaseId": "direct",
+      "setupActions": [],
+      "input": {
+        "synthetic": true,
+        "restaurantId": "demo-north",
+        "demoNow": "2026-11-04T10:00:00-06:00",
+        "message": "I work for Fictional Juniper Fabrication at Fictional Willow Yard, and my commute passes Maple Street South. This order is for my family: eight pizzas, three cheese, two roasted pepper and three garden. I will pick up all eight together at Maple Street Kitchen on November 9, 2026 at 16:05. Could you prepare the draft?"
+      }
+    }
+  ]
+}

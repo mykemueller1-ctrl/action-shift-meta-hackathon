@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "reviewer": "Independent Codex agent",
+  "reviewedAt": "2026-11-04T17:46:53.180Z",
+  "runId": "v4-run-05",
+  "caseId": "v4-holdout-02",
+  "arm": "C",
+  "criticalPass": false,
+  "evidenceSha256": "62b46f39e7ce25787dcdf400bfea88cb532dbf5e80c9b9124512971570a3d751",
+  "evidence": {
+    "failureFile": "v4-v4-run-05-2026-11-04T17-41-33-854Z-c238cfe3-f2f8-4efa-b992-25436ab50996-failure.json",
+    "protocolSha256": "02f53f3ab715142ddd596825e3bc456dc51afb2ee111447c226b1a51b66e0183",
+    "oracleSha256": "5588650b5762ea1966745020cd94a7b961ae77a079f5d11dda2d4a7539aaf8ce",
+    "diagnostics": [
+      {
+        "file": "v4-v4-run-05-2026-11-04T17-41-33-854Z-c238cfe3-f2f8-4efa-b992-25436ab50996-request-82-diagnostic.json",
+        "sha256": "bfa5acd3205375ed7c1cf7d6b93a2cb9bd42b81f02f42e368f52732e1fe479a4"
+      },
+      {
+        "file": "v4-v4-run-05-2026-11-04T17-41-33-854Z-c238cfe3-f2f8-4efa-b992-25436ab50996-request-83-diagnostic.json",
+        "sha256": "6491bf5ba785cac9a1452b7f0a2e823c7faad8c5b60708b661078ee5376a7455"
+      },
+      {
+        "file": "v4-v4-run-05-2026-11-04T17-41-33-854Z-c238cfe3-f2f8-4efa-b992-25436ab50996-request-84-diagnostic.json",
+        "sha256": "e72aa20e22e42e9a2e7f57ac8f1fe8bdc7102ecdfde48989839ababcc2fb8624"
+      }
+    ]
+  },
+  "classification": "critical failure: rejected output contract and lost known pickup site",
+  "findings": [
+    "The provider completed all three responses; final output used intent food-question with a nonnull food proposal, which the application rejected as FRONT_DESK_OUTPUT. This is retained as failed-output-no-retry, not a transport failure.",
+    "The final structured destination was null although the guest explicitly supplied Maple Street Kitchen; a correct location in the prose does not repair the proposal.",
+    "The quantity tool correctly preserved headline ten against unchanged lines totaling nine, and the reply correctly asked ten with an additional flavor versus nine. These useful parts do not make the rejected output a pass.",
+    "No validated packet or adoption probe exists for this failed output. The review does not invent an adoption result or repair the raw result."
+  ],
+  "qualification": "Evidence hash targets raw failureFile bytes as required by stage policy. Exact provider outputs and tool arguments were separately inspected in request 82, 83, and 84 diagnostic files; the minimal failure receipt does not independently re-establish read-only before/after snapshots.",
+  "modelOutputRepaired": false,
+  "mechanicalScoreUsedAsSemanticVerdict": false
+}

@@ -74,8 +74,8 @@ function renderFacts() {
 }
 
 function renderConversation() {
-  $('conversation-history').open = !isCompletionPreview();
-  $('conversation-history-label').textContent = isCompletionPreview() ? 'Separate authored starter · not this saved guest request' : 'Conversation & retained history';
+  $('conversation-history').open = !isRecordedPreview();
+  $('conversation-history-label').textContent = isRecordedPreview() ? 'Separate authored starter · not this saved guest request' : 'Conversation & retained history';
   const current = state.current; $('conversation-title').textContent = current.id === 'workplace' ? 'A crew meal starts here.' : current.type === 'reservation' ? 'A place at the table.' : current.type === 'recovery' ? 'Care after the order.' : 'The next guest asks.';
   $('case-description').textContent = current.title;
   $('case-status').textContent = statusNames[current.status] || 'Needs operator review'; $('case-status').className = `small-label${current.status.includes('acknowledged') || current.status === 'remedy_issued' ? ' status-complete' : ''}`;
@@ -97,9 +97,9 @@ function renderConversation() {
 
 function renderPromiseStatus() {
   const current = state.current; const target = $('promise-status'); clear(target); target.hidden = current.request.kind !== 'food'; if (target.hidden) return;
-  if (isCompletionPreview()) {
+  if (isRecordedPreview()) {
     target.classList.remove('promise-held');
-    const request = el('div'); request.append(el('span', 'promise-label', 'Saved guest request · awaiting operator review'), el('strong', '', 'Not yet a working draft'), el('p', '', 'Read the source and complete the missing pickup location before using this request.'));
+    const request = el('div'); request.append(el('span', 'promise-label', 'Saved guest request · awaiting operator review'), el('strong', '', 'Not yet a working draft'), el('p', '', isCompletionPreview() ? 'Read the source and complete the missing pickup location before using this request.' : 'Read the source and review the saved proposal before using it as an unapproved draft.'));
     const kitchen = el('div'); kitchen.append(el('span', 'promise-label', 'Kitchen commitment · local simulator'), el('strong', '', 'Nothing handed off'), el('p', '', 'Opening a saved model review does not create a quote, approval or kitchen receipt.'));
     target.append(request, kitchen); return;
   }
@@ -117,7 +117,7 @@ function renderPromiseStatus() {
 
 function renderQuote() {
   const current = state.current; $('request-version').textContent = `Request v${current.requestVersion}`; const target = $('quote-content'); clear(target); clear($('approval-content'));
-  if (isCompletionPreview()) { $('request-version').textContent = 'Awaiting review'; target.append(el('h4', '', 'Review the saved guest request first.'), el('p', 'section-description', 'The separate authored starter is folded below. No missing detail has been filled and no saved model draft has been adopted.')); return; }
+  if (isRecordedPreview()) { $('request-version').textContent = 'Awaiting review'; target.append(el('h4', '', 'Review the saved guest request first.'), el('p', 'section-description', 'The separate authored starter is folded below. No missing detail has been filled and no saved model draft has been adopted.')); return; }
   if (current.type === 'reservation') {
     const box = el('div', 'reservation-summary'); box.append(el('h4', '', 'Table request')); addDetail(box, 'Party size', `${current.request.guests} guests`); addDetail(box, 'Time', clock(current.request.startsAt)); addDetail(box, 'Date', dateLabel(current.request.date)); box.append(el('p', 'pending-note', 'A table request creates no food order or payment. The restaurant must acknowledge the reviewed version.')); target.append(box);
   } else if (current.type === 'recovery') {
@@ -139,7 +139,7 @@ function renderKitchen() {
   const current = state.current; $('kitchen-title').textContent = current.type === 'reservation' ? 'The table handoff.' : current.type === 'recovery' ? 'The remedy receipt.' : 'Through to the kitchen.';
   document.querySelector('.kitchen-card .section-description').textContent = current.type === 'reservation' ? 'Owner approval and restaurant acknowledgment are separate steps.' : current.type === 'recovery' ? 'An offer, an authorization and an issuance receipt are separate steps.' : 'An owner’s approval and the kitchen’s receipt are separate steps.';
   const windows = $('service-windows'); clear(windows); const receipts = $('receipt-content'); clear(receipts);
-  if (isCompletionPreview()) { windows.append(el('p', 'section-description', 'Pickup times and quantities will appear here after the operator completes the draft. Separate approval and acknowledgment are still required.')); return; }
+  if (isRecordedPreview()) { windows.append(el('p', 'section-description', 'Pickup times and quantities will appear here after the operator reviews and adopts the draft. Separate approval and acknowledgment are still required.')); return; }
   for (const [index, window] of (current.request.windows || []).entries()) {
     const quantity = window.items.reduce((sum, item) => sum + item.quantity, 0); const pull = current.kitchenPulls?.find(item => item.windowId === window.id && item.requestVersion === current.requestVersion);
     const card = el('div', 'window-card'); const detail = el('div'); detail.append(el('h4', '', `${clock(window.readyAt)} · ${quantity} pizzas`), el('p', '', window.items.map(item => `${item.quantity} ${shortItemName(item.itemId).toLowerCase()}`).join(' · ')), el('small', '', `${window.responsibleRole} · ${pull ? `accepted v${pull.requestVersion}` : 'planned, not acknowledged'}`)); card.append(el('span', 'window-number', index + 1), detail); windows.append(card);
@@ -177,8 +177,9 @@ function payloadFor(action) {
 function renderActions() {
   let target = $('action-controls'); clear(target); const current = state.current; if (!current) return;
   const allowed = new Set(current.allowedActions || []); let approvalButton = null; const checkIds = [];
-  const pendingReview = isCompletionPreview();
-  const next = pendingReview ? ['Review the missing pickup location.', 'Muse missed a location that the guest supplied. Read the source, then record an explicit operator completion.']
+  const pendingReview = isRecordedPreview();
+  const next = isCompletionPreview() ? ['Review the missing pickup location.', 'Muse missed a location that the guest supplied. Read the source, then record an explicit operator completion.']
+    : pendingReview ? ['Review the saved crew request.', 'Check the guest’s source beside the unchanged model proposal. Using it as a draft does not approve the order.']
     : current.status === 'cancellation_requested' ? ['Acknowledge the cancellation.', 'The earlier kitchen commitment remains active until release is acknowledged.']
     : allowed.has('approve_quote') ? ['Can the restaurant commit to this version?', 'Check the price, pickup times and capacity below. Your approval covers only this request.']
     : allowed.has('acknowledge_kitchen') ? ['Get the kitchen’s acknowledgment.', 'Operator approval is recorded. The kitchen still needs to acknowledge this exact version.']
@@ -191,8 +192,8 @@ function renderActions() {
     : ['Review the current decision.', 'The history below retains the source, prior decisions and receipts.'];
   $('next-decision-title').textContent = next[0]; $('next-decision-description').textContent = next[1];
   if (pendingReview) {
-    const button = el('button', 'button primary', state.recorded ? 'Complete the missing detail' : 'Review the saved guest request'); button.type = 'button'; button.disabled = state.busy;
-    button.addEventListener('click', async () => { if (!state.recorded) await openMuseReview(); ($('operator-completion') || $('muse-source'))?.scrollIntoView({ block: 'start', behavior: 'auto' }); });
+    const button = el('button', 'button primary', state.recorded ? isCompletionPreview() ? 'Complete the missing detail' : 'Review the saved draft' : 'Review the saved guest request'); button.type = 'button'; button.disabled = state.busy;
+    button.addEventListener('click', async () => { if (!state.recorded) await openMuseReview(); ($('operator-completion') || $('original-proposal') || $('muse-source'))?.scrollIntoView({ block: 'start', behavior: 'auto' }); });
     target.append(button);
     const alternate = el('details', 'alternative-actions'); alternate.append(el('summary', '', 'Explore the separate authored starter')); target.append(alternate); target = alternate;
   }
@@ -289,6 +290,7 @@ function renderHistory() {
 function availableReviews() { return (state.status?.recordedReviews || []).filter(review => review.caseId === state.selected); }
 function availableReview() { const reviews = availableReviews(); return reviews.find(review => review.id === state.selectedReviewId) || reviews.find(review => review.preferred) || reviews[0]; }
 function isCompletionPreview() { return availableReview()?.completionOnly === true && !state.current?.proposalSource && state.current?.version === 1; }
+function isRecordedPreview() { return isCompletionPreview() || (availableReview()?.v4Selected === true && !state.current?.proposalSource && state.current?.version === 1); }
 function syncMuseButton() {
   const review = availableReview(); $('muse-button').disabled = state.busy || !review;
   const reviews = availableReviews(); const selector = $('muse-selector'); clear(selector); $('muse-selector-label').hidden = reviews.length < 2;
@@ -390,9 +392,9 @@ function renderMuse() {
     failure.append(el('p', '', 'Muse left the named pickup location out of the draft. This failed its acceptance check. The human completion below does not change that result.'));
     const details = el('details'); details.append(el('summary', '', 'Independent review notes')); for (const note of packet.replayReview.reviewNotes || []) details.append(el('p', '', note)); failure.append(details); target.append(failure);
   }
-  if (packet.evaluation?.semanticReviewStatus === 'pass-with-limitations') {
+  if ((packet.replayReview?.semanticVerdict || packet.evaluation?.semanticReviewStatus) === 'pass-with-limitations') {
     const limitations = el('div', 'blockers review-limitations'); limitations.append(el('strong', '', 'Independent review: passed with limitations'));
-    const notes = el('ul'); for (const note of packet.evaluation.reviewNotes || []) notes.append(el('li', '', note)); limitations.append(notes);
+    const notes = el('ul'); for (const note of packet.replayReview?.reviewNotes || packet.evaluation?.reviewNotes || []) notes.append(el('li', '', note)); limitations.append(notes);
     limitations.append(el('p', 'pending-note', 'This is the original saved model response. An operator must resolve these limitations before customer use. No draft reply has been sent.')); target.append(limitations);
   }
   const modelInput = packet.modelInput || packet.input;
@@ -451,7 +453,7 @@ function renderReplyEditor(parent, packet) {
 
 async function openMuseReview() {
   const descriptor = availableReview(); if (!descriptor || state.busy) return; error(''); setBusy(true);
-  try { const packet = await api(`/recorded?id=${encodeURIComponent(descriptor.id)}`); if (!(packet.mode === 'recorded-meta' || (packet.mode === 'meta-review' && packet.replayReview?.completionOnly === true && packet.replayReview.semanticVerdict === 'fail')) || packet.liveVerified !== true || packet.recorded !== true || !packet.result) throw new Error('A verified recorded Muse review was not available. No authored response has been substituted.'); state.recorded = packet; state.reviewId = descriptor.id; state.selectedReviewId = descriptor.id; renderMuse(); }
+  try { const packet = await api(`/recorded?id=${encodeURIComponent(descriptor.id)}`); const selectedV4 = descriptor.v4Selected === true && packet.replay === true && packet.replayReview?.selectionVerified === true && packet.replayReview.armId === 'B' && ['pass', 'pass-with-limitations'].includes(packet.replayReview.semanticVerdict) && packet.receipt?.model === 'muse-spark-1.3'; if (!(packet.mode === 'recorded-meta' || (packet.mode === 'meta-review' && (selectedV4 || (packet.replayReview?.completionOnly === true && packet.replayReview.semanticVerdict === 'fail')))) || packet.liveVerified !== true || packet.recorded !== true || !packet.result) throw new Error('A verified recorded Muse review was not available. No authored response has been substituted.'); state.recorded = packet; state.reviewId = descriptor.id; state.selectedReviewId = descriptor.id; renderMuse(); }
   catch (failure) { error(failure.message); }
   finally { setBusy(false); if (state.recorded) renderMuse(); }
 }

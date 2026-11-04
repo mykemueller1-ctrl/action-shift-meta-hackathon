@@ -1,0 +1,226 @@
+{
+  "schemaVersion": 1,
+  "experimentId": "meta-v4-contract-and-model-01",
+  "preparedAt": "2026-11-04T17:33:19.327Z",
+  "inferencePermitted": false,
+  "requiresSeparateRootExecutionApproval": true,
+  "acceptanceProtocolSha256": "02f53f3ab715142ddd596825e3bc456dc51afb2ee111447c226b1a51b66e0183",
+  "candidateFreezeSha256": "cea9dd99fa37bdd8aa967f0bccfa111c34d795b231f6b79219e163d06f0dddfd",
+  "baseline": {
+    "requestsStarted": 69,
+    "accountedAndReservedUsd": 0.533298,
+    "historicalUnknownReserveUsd": 0.1,
+    "sha256": "01a1f39c4db31e5d6c1f3f7dc60b654610415ce97c56a7150b4095460e0e2846"
+  },
+  "limits": {
+    "maxNewRequests": 54,
+    "maxTotalRequests": 123,
+    "maxRuns": 18,
+    "maxRequestsPerRun": 3,
+    "maxToolCalls": 8,
+    "maxPhaseSpendUsd": 3,
+    "maxTotalSpendUsd": 20,
+    "maxOutputTokens": 12000,
+    "maxRequestBytes": 160000,
+    "timeoutMs": 120000
+  },
+  "arms": [
+    {
+      "id": "A",
+      "label": "Fresh original-contract Spark max comparator",
+      "model": "muse-spark-1.3",
+      "adapter": "../meta-v4-contract/baseline-front-desk-meta.mjs",
+      "contractSha256": "08946237eee30d2615970c566b597635a50be142e7f3cf3a7eb12edadf0434b7"
+    },
+    {
+      "id": "B",
+      "label": "Clarified-contract Spark max",
+      "model": "muse-spark-1.3",
+      "adapter": "../meta-v4-contract/front-desk-meta.mjs",
+      "contractSha256": "cf9b8c3460b7d732f20f89ed98e92aa42e87e7170a5d2d48fdee7d36a35fcdb6"
+    },
+    {
+      "id": "C",
+      "label": "Clarified-contract Wonder max",
+      "model": "muse-wonder-1.0",
+      "adapter": "../meta-v4-contract/front-desk-meta.mjs",
+      "contractSha256": "cf9b8c3460b7d732f20f89ed98e92aa42e87e7170a5d2d48fdee7d36a35fcdb6"
+    }
+  ],
+  "runs": [
+    {
+      "id": "v4-run-01",
+      "caseId": "v4-holdout-01",
+      "armId": "A",
+      "phase": "initial"
+    },
+    {
+      "id": "v4-run-02",
+      "caseId": "v4-holdout-01",
+      "armId": "B",
+      "phase": "initial"
+    },
+    {
+      "id": "v4-run-03",
+      "caseId": "v4-holdout-01",
+      "armId": "C",
+      "phase": "initial"
+    },
+    {
+      "id": "v4-run-04",
+      "caseId": "v4-holdout-02",
+      "armId": "B",
+      "phase": "initial"
+    },
+    {
+      "id": "v4-run-05",
+      "caseId": "v4-holdout-02",
+      "armId": "C",
+      "phase": "initial"
+    },
+    {
+      "id": "v4-run-06",
+      "caseId": "v4-holdout-02",
+      "armId": "A",
+      "phase": "initial"
+    },
+    {
+      "id": "v4-run-07",
+      "caseId": "v4-holdout-03",
+      "armId": "C",
+      "phase": "initial"
+    },
+    {
+      "id": "v4-run-08",
+      "caseId": "v4-holdout-03",
+      "armId": "A",
+      "phase": "initial"
+    },
+    {
+      "id": "v4-run-09",
+      "caseId": "v4-holdout-03",
+      "armId": "B",
+      "phase": "initial"
+    },
+    {
+      "id": "v4-run-10",
+      "caseId": "v4-holdout-04",
+      "armId": "A",
+      "phase": "initial"
+    },
+    {
+      "id": "v4-run-11",
+      "caseId": "v4-holdout-04",
+      "armId": "C",
+      "phase": "initial"
+    },
+    {
+      "id": "v4-run-12",
+      "caseId": "v4-holdout-04",
+      "armId": "B",
+      "phase": "initial"
+    },
+    {
+      "id": "v4-run-13",
+      "caseId": "v4-holdout-05",
+      "armId": "C",
+      "phase": "confirmation"
+    },
+    {
+      "id": "v4-run-14",
+      "caseId": "v4-holdout-05",
+      "armId": "B",
+      "phase": "confirmation"
+    },
+    {
+      "id": "v4-run-15",
+      "caseId": "v4-holdout-05",
+      "armId": "A",
+      "phase": "confirmation"
+    },
+    {
+      "id": "v4-run-16",
+      "caseId": "v4-holdout-06",
+      "armId": "B",
+      "phase": "confirmation"
+    },
+    {
+      "id": "v4-run-17",
+      "caseId": "v4-holdout-06",
+      "armId": "A",
+      "phase": "confirmation"
+    },
+    {
+      "id": "v4-run-18",
+      "caseId": "v4-holdout-06",
+      "armId": "C",
+      "phase": "confirmation"
+    }
+  ],
+  "frozenFiles": [
+    {
+      "path": "holdout-inputs.frozen.json",
+      "sha256": "a548be038064ea97a589ae8f26df2ac3af97556c4689ce361dd0e63ad8548309"
+    },
+    {
+      "path": "holdout-expectations.private.frozen.json",
+      "sha256": "5588650b5762ea1966745020cd94a7b961ae77a079f5d11dda2d4a7539aaf8ce"
+    },
+    {
+      "path": "acceptance-protocol-final.frozen.json",
+      "sha256": "02f53f3ab715142ddd596825e3bc456dc51afb2ee111447c226b1a51b66e0183"
+    },
+    {
+      "path": "baseline-comparison-budget.snapshot.json",
+      "sha256": "01a1f39c4db31e5d6c1f3f7dc60b654610415ce97c56a7150b4095460e0e2846"
+    },
+    {
+      "path": "budget-policy.mjs",
+      "sha256": "32f3ef3b45305778f84d33d49bcd332f890a6c0f2108ff6e6b008e9411c06e6c"
+    },
+    {
+      "path": "ledger-io.mjs",
+      "sha256": "ff7f29f898a65523e5c01073472abfeacfa05a3f1643928a98d05aa36ab88736"
+    },
+    {
+      "path": "assessment.mjs",
+      "sha256": "46a66b3514058c920f04bc01b2e23a8148259f6cab073994ab5293d5a42e9e82"
+    },
+    {
+      "path": "stage-policy.mjs",
+      "sha256": "6083464f69489f1835e8caca9ca22680202042d004b4f885c883dc77f36ecfd0"
+    },
+    {
+      "path": "run-evaluation.mjs",
+      "sha256": "4f1bf935a98f2ad95603aacb16c2fe9d8446957fd9fb2c6dffb32453e50830be"
+    },
+    {
+      "path": "run-secure.ps1",
+      "sha256": "999a2143e3469140da5c022694ad80f23a131c007ea8bc4f0fa2637322e28d3f"
+    },
+    {
+      "path": "offline-preflight.mjs",
+      "sha256": "c358c7f72c0bd41142116cdcc9a297e321073fd784e3ef32954ce39186534a3b"
+    },
+    {
+      "path": "../meta-v4-contract/candidate-freeze-v2.json",
+      "sha256": "cea9dd99fa37bdd8aa967f0bccfa111c34d795b231f6b79219e163d06f0dddfd"
+    },
+    {
+      "path": "../meta-v4-contract/front-desk-meta.mjs",
+      "sha256": "f50dab170fe67adbe2627d4eb5af317a9dc873ad686b9d695b90a42716188a44"
+    },
+    {
+      "path": "../meta-v4-contract/baseline-front-desk-meta.mjs",
+      "sha256": "8897894b386f657fffe2f037f3c0fcc39dc7b26ddda5454b18ed04df9941d667"
+    },
+    {
+      "path": "../action-shift-v3/src/front-desk.mjs",
+      "sha256": "2823e0ae93b43658c8f07297b0506e084c5e3f2124eb7756c45a7eb5132cc198"
+    },
+    {
+      "path": "../action-shift-v3/src/front-desk-corrections.mjs",
+      "sha256": "935581b48b065fe84bfc15269cdf1ea7a1d99bc1784207545872b3e9496a2be1"
+    }
+  ]
+}

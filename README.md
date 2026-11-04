@@ -6,7 +6,9 @@ The food and labor are real costs when a team makes the wrong version. Action Sh
 
 In this standalone event prototype, Muse reads a fictional meal request and checks dated restaurant facts. Code checks the counts, price and version. A person reviews the promise before a local kitchen simulator acknowledges it. A later guest change stops the old approval from covering the new request.
 
-This v3 revision puts the operator's next decision first. A person can complete a missing pickup location or final total in a recorded proposal, with a demonstration reviewer role and reason, while the original model result stays intact. This creates an unapproved draft. Price, timing and capacity still need a separate review. Unknown item allocations remain blocked. The operational records here are authored fiction, not records from Myke’s restaurant. See [validation](docs/VALIDATION.md) for the final checks and limits.
+The V3 operator workflow puts the next decision first. A person can complete a missing pickup location or final total in a recorded proposal, with a demonstration reviewer role and reason, while the original model result stays intact. This creates an unapproved draft. Price, timing and capacity still need a separate review. Unknown item allocations remain blocked. The operational records here are authored fiction, not records from Myke’s restaurant. See [validation](docs/VALIDATION.md) for the final checks and limits.
+
+V4 adds one separately reviewed saved request: **Revised crew order · 11 pizzas**. The clarified Spark instructions kept the pickup site and revised count in the order, while still asking about genuinely missing details. All six targeted cases passed independent review; the original instructions passed three and Wonder passed one. This small comparison supports this bounded change, not a general reliability rate. The original failed example and the video remain unchanged. [Read every result and limitation](fixtures/v4-evaluation/README.md).
 
 ## Run locally
 
@@ -56,13 +58,31 @@ Before that operator workflow was added, [six reasoning comparison runs](fixture
 
 ## Source and demonstration
 
+For an explicitly authorized new model review, the selected programmatic entry point is:
+
+```javascript
+import { reviewSelectedFrontDesk } from './src/front-desk-selected-profile.mjs';
+
+// Your runner supplies the synthetic packet, fresh store, authorized key,
+// and persistent budget/usage callbacks. This is not a browser action.
+const review = await reviewSelectedFrontDesk(packet, {
+  apiKey: authorizedKey,
+  lookupFacts: store.lookupFacts,
+  checkQuantities: store.checkQuantities,
+  beforeRequest: reserveAgainstApprovedPersistentBudget,
+  onTurn: recordUsageAndRetainOutcome,
+});
+```
+
+The wrapper fixes the tested Spark max/12,000/three-request profile and rejects conflicting settings. It requires the caller's key and budget gate. The default browser server does not import or call it. See [model usage](docs/MODEL-USAGE.md) for limits and the distinction from the historical reproduction example.
+
 [Watch the demonstration](https://mykemueller1-ctrl.github.io/action-shift-meta-hackathon/), or open `docs/index.html` from this release. The final video is under three minutes and uses recorded browser interaction with larger visual captions and persistent replay/simulation labels. It is silent. No voice is attributed to Myke. It follows the operator from the original source through a completed draft, current approval and changed kitchen version, then a separate dated correction and consent example.
 
 The earlier Evidence Inbox release is retained separately and is not included here.
 
 ## Build and scope
 
-The v1 implementation and subsequent v2/v3 revisions were written November 4, 2026, during the event, with AI coding assistance. Myke’s restaurant experience, the Action Shift name and Never86’d product concepts predate the event. Retained Mini Brain/operator documents informed the plain language, source preservation and explicit review pattern. No earlier product implementation or private restaurant corpus is included. See [provenance](docs/PROVENANCE.md) and [architecture](docs/ARCHITECTURE.md).
+The v1 implementation and subsequent v2/v3/v4 revisions were written November 4, 2026, during the event, with AI coding assistance. Myke’s restaurant experience, the Action Shift name and Never86’d product concepts predate the event. Retained Mini Brain/operator documents informed the plain language, source preservation and explicit review pattern. No earlier product implementation or private restaurant corpus is included. See [provenance](docs/PROVENANCE.md) and [architecture](docs/ARCHITECTURE.md).
 
 The demo listens on loopback only. It has no production authentication, tenant access controls, live social channel, telephony, ordering, reservation or payment integration. Real customer records and credentials are excluded. No contest submission, eligibility decision or customer outcome is implied.
 

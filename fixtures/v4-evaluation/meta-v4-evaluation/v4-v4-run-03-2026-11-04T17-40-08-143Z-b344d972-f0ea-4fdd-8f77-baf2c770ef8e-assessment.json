@@ -1,0 +1,290 @@
+{
+  "runId": "v4-run-03",
+  "armId": "C",
+  "packetFile": "v4-v4-run-03-2026-11-04T17-40-08-143Z-b344d972-f0ea-4fdd-8f77-baf2c770ef8e-validated-review.json",
+  "adoptionFile": "v4-v4-run-03-2026-11-04T17-40-08-143Z-b344d972-f0ea-4fdd-8f77-baf2c770ef8e-adoption-probe.json",
+  "caseId": "v4-holdout-01",
+  "mechanicalChecks": [
+    {
+      "name": "read-only store state",
+      "passed": true,
+      "observed": true
+    },
+    {
+      "name": "intent",
+      "passed": true,
+      "observed": "workplace-meal"
+    },
+    {
+      "name": "review status",
+      "passed": false,
+      "observed": "needs-clarification"
+    },
+    {
+      "name": "requested restaurant/date facts retrieved",
+      "passed": true,
+      "observed": [
+        {
+          "date": "2026-11-09",
+          "topics": [
+            "menu",
+            "service",
+            "offers",
+            "capacity",
+            "corrections"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "service rule scoped correctly",
+      "passed": true,
+      "observed": [
+        false
+      ]
+    },
+    {
+      "name": "relevant retrieved source cited",
+      "passed": true,
+      "observed": [
+        "demo-north-menu-v1",
+        "demo-north-service-v1"
+      ]
+    },
+    {
+      "name": "food proposal supplied",
+      "passed": true,
+      "observed": "food"
+    },
+    {
+      "name": "structured date",
+      "passed": true,
+      "observed": "2026-11-09"
+    },
+    {
+      "name": "structured fulfillment",
+      "passed": true,
+      "observed": "pickup"
+    },
+    {
+      "name": "structured destination",
+      "passed": false,
+      "observed": "Fictional Cedar Print crew"
+    },
+    {
+      "name": "structured headlineQuantity",
+      "passed": true,
+      "observed": 11
+    },
+    {
+      "name": "exact current item quantities",
+      "passed": true,
+      "observed": [
+        {
+          "itemId": "cheese",
+          "quantity": 4
+        },
+        {
+          "itemId": "pepper",
+          "quantity": 2
+        },
+        {
+          "itemId": "garden",
+          "quantity": 5
+        }
+      ]
+    },
+    {
+      "name": "exact window count",
+      "passed": true,
+      "observed": 2
+    },
+    {
+      "name": "window 1 time and exact allocations",
+      "passed": true,
+      "observed": [
+        {
+          "id": "window-1210",
+          "items": [
+            {
+              "itemId": "cheese",
+              "quantity": 3
+            },
+            {
+              "itemId": "garden",
+              "quantity": 2
+            }
+          ],
+          "readyAt": "2026-11-09T12:10:00-06:00"
+        }
+      ]
+    },
+    {
+      "name": "window 2 time and exact allocations",
+      "passed": true,
+      "observed": [
+        {
+          "id": "window-1810",
+          "items": [
+            {
+              "itemId": "cheese",
+              "quantity": 1
+            },
+            {
+              "itemId": "pepper",
+              "quantity": 2
+            },
+            {
+              "itemId": "garden",
+              "quantity": 3
+            }
+          ],
+          "readyAt": "2026-11-09T18:10:00-06:00"
+        }
+      ]
+    },
+    {
+      "name": "at least one exact current-version quantity call",
+      "passed": true,
+      "observed": [
+        {
+          "args": {
+            "headlineQuantity": 11,
+            "items": [
+              {
+                "itemId": "cheese",
+                "quantity": 4
+              },
+              {
+                "itemId": "pepper",
+                "quantity": 2
+              },
+              {
+                "itemId": "garden",
+                "quantity": 5
+              }
+            ],
+            "windows": [
+              {
+                "id": "window-1210",
+                "items": [
+                  {
+                    "itemId": "cheese",
+                    "quantity": 3
+                  },
+                  {
+                    "itemId": "garden",
+                    "quantity": 2
+                  }
+                ]
+              },
+              {
+                "id": "window-1810",
+                "items": [
+                  {
+                    "itemId": "cheese",
+                    "quantity": 1
+                  },
+                  {
+                    "itemId": "pepper",
+                    "quantity": 2
+                  },
+                  {
+                    "itemId": "garden",
+                    "quantity": 3
+                  }
+                ]
+              }
+            ]
+          },
+          "result": {
+            "statedQuantity": 11,
+            "computedQuantity": 11,
+            "matches": true,
+            "windowsTotal": 11,
+            "windowsMatch": true,
+            "issues": [],
+            "simulated": true,
+            "calculation": "Integer sum of supplied item quantities; no model calculation."
+          }
+        }
+      ]
+    },
+    {
+      "name": "actual proposal adopts only as unapproved draft",
+      "passed": true,
+      "observed": true
+    },
+    {
+      "name": "valid quote matches independent cents",
+      "passed": true,
+      "observed": {
+        "valid": true,
+        "blockers": [],
+        "quantityCheck": {
+          "statedQuantity": 11,
+          "computedQuantity": 11,
+          "matches": true,
+          "windowsTotal": 11,
+          "windowsMatch": true,
+          "issues": [],
+          "simulated": true,
+          "calculation": "Integer sum of supplied item quantities; no model calculation."
+        },
+        "items": [
+          {
+            "itemId": "cheese",
+            "name": "Classic cheese pizza",
+            "quantity": 4,
+            "unitPriceCents": 1500,
+            "lineTotalCents": 6000,
+            "sourceId": "demo-north-menu-v1"
+          },
+          {
+            "itemId": "pepper",
+            "name": "Roasted pepper pizza",
+            "quantity": 2,
+            "unitPriceCents": 1800,
+            "lineTotalCents": 3600,
+            "sourceId": "demo-north-menu-v1"
+          },
+          {
+            "itemId": "garden",
+            "name": "Garden pizza",
+            "quantity": 5,
+            "unitPriceCents": 1700,
+            "lineTotalCents": 8500,
+            "sourceId": "demo-north-menu-v1"
+          }
+        ],
+        "totalCents": 18100,
+        "currency": "USD",
+        "priceBasis": "Fictional tax-inclusive menu prices; no real charge.",
+        "factIds": [
+          "demo-north-menu-v1",
+          "demo-north-service-v1"
+        ],
+        "factVersion": "ccf81aea0ab7dd72",
+        "requestHash": "a9aa0df1cd1d25362715dd1afc519cabd62b3bae0b1bc926df0f254c4ae4a8b9",
+        "simulated": true
+      }
+    }
+  ],
+  "summary": {
+    "mechanicalPassed": 16,
+    "mechanicalTotal": 18,
+    "semanticVerdict": "pending-independent-review",
+    "benchmarkClaim": false
+  },
+  "semanticReview": {
+    "status": "pending-independent-review",
+    "criteria": [
+      "Label eleven as calculated from the revision and nine as historical when discussing them.",
+      "Do not ask the guest to confirm arithmetic that is fully determined.",
+      "Retain the explicitly named pickup site in the structured destination."
+    ],
+    "globalCriteriaRequired": true,
+    "allQuantityCallsRequireSourceReview": true
+  },
+  "limits": "Mechanical arithmetic and source checks do not establish semantic accuracy or performed actions."
+}

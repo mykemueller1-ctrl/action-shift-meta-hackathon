@@ -1,0 +1,911 @@
+{
+  "reviewer": "Independent Codex agent",
+  "createdAt": "2026-11-04T17:56:10.683Z",
+  "finalSemanticReviewSha256": "dc65a8d2f534d0f1d23d5a18e71995bedc0f3b854c1451e6c74f89004b40616b",
+  "ratesUsdPerMillionTokens": {
+    "muse-spark-1.3": {
+      "input": 1.25,
+      "output": 4.25
+    },
+    "muse-wonder-1.0": {
+      "input": 4,
+      "output": 20
+    }
+  },
+  "source": "Pinned experiment budget-policy.mjs rates; provider-reported input/output usage from all54 saved request diagnostics, including failed-output run05. Cached input charged at full input rate.",
+  "budgetPolicySha256": "32f3ef3b45305778f84d33d49bcd332f890a6c0f2108ff6e6b008e9411c06e6c",
+  "phaseEstimatedUsd": 0.943479,
+  "priorAccountedAndReservedUsd": 0.533298,
+  "historicalUnknownReserveUsdIncluded": 0.1,
+  "cumulativeAccountedAndReservedUsd": 1.476777,
+  "requests": 54,
+  "arms": {
+    "A": {
+      "model": "muse-spark-1.3",
+      "cases": 6,
+      "criticalPass": 3,
+      "requests": 18,
+      "inputTokens": 65194,
+      "outputTokens": 22999,
+      "estimatedUsd": 0.179244,
+      "medianProviderRequestTimeMs": 35387,
+      "totalProviderRequestTimeMs": 234283
+    },
+    "B": {
+      "model": "muse-spark-1.3",
+      "cases": 6,
+      "criticalPass": 6,
+      "requests": 18,
+      "inputTokens": 70167,
+      "outputTokens": 17978,
+      "estimatedUsd": 0.164123,
+      "medianProviderRequestTimeMs": 32611,
+      "totalProviderRequestTimeMs": 180851
+    },
+    "C": {
+      "model": "muse-wonder-1.0",
+      "cases": 6,
+      "criticalPass": 1,
+      "requests": 18,
+      "inputTokens": 57588,
+      "outputTokens": 18488,
+      "estimatedUsd": 0.600112,
+      "medianProviderRequestTimeMs": 24497,
+      "totalProviderRequestTimeMs": 148711
+    }
+  },
+  "runs": [
+    {
+      "runId": "v4-run-01",
+      "caseId": "v4-holdout-01",
+      "arm": "A",
+      "criticalPass": false,
+      "evidenceSha256": "443e07cda9bf4296f1293aa6c279661b9f7c0bf1f6b8b665f5972a3107e4ef22",
+      "requests": 3,
+      "inputTokens": 11778,
+      "outputTokens": 5629,
+      "providerRequestTimeMs": 57114,
+      "estimatedUsd": 0.038647,
+      "requestEvidence": [
+        {
+          "number": 70,
+          "responseId": "resp_6aeb6d9bb35a9e828e0f4918",
+          "model": "muse-spark-1.3",
+          "inputTokens": 2495,
+          "outputTokens": 902,
+          "elapsedMs": 10152,
+          "estimatedUsd": 0.006953,
+          "diagnosticFile": "v4-v4-run-01-2026-11-04T17-38-25-369Z-d570b10b-8a33-47c4-97c9-2b52ce04859c-request-70-diagnostic.json",
+          "diagnosticSha256": "caf254589ec44361103dfa7c3d7429d37cbf63b65ef7d6a91c6b69b589f37091"
+        },
+        {
+          "number": 71,
+          "responseId": "resp_6aeb6da53a381eae0d7a4329",
+          "model": "muse-spark-1.3",
+          "inputTokens": 4048,
+          "outputTokens": 1080,
+          "elapsedMs": 10039,
+          "estimatedUsd": 0.00965,
+          "diagnosticFile": "v4-v4-run-01-2026-11-04T17-38-25-369Z-d570b10b-8a33-47c4-97c9-2b52ce04859c-request-71-diagnostic.json",
+          "diagnosticSha256": "527c9777d6199cd35b7d557ad722d6ef67b10706f8d74fe4a76f34443cd48db8"
+        },
+        {
+          "number": 72,
+          "responseId": "resp_6aeb6dca1eb3b4d8a30a4328",
+          "model": "muse-spark-1.3",
+          "inputTokens": 5235,
+          "outputTokens": 3647,
+          "elapsedMs": 36923,
+          "estimatedUsd": 0.022044,
+          "diagnosticFile": "v4-v4-run-01-2026-11-04T17-38-25-369Z-d570b10b-8a33-47c4-97c9-2b52ce04859c-request-72-diagnostic.json",
+          "diagnosticSha256": "f5483a5050f3fcf325bd51d13db15a2b90af6ea7ef68993305845da23d60f0f5"
+        }
+      ]
+    },
+    {
+      "runId": "v4-run-02",
+      "caseId": "v4-holdout-01",
+      "arm": "B",
+      "criticalPass": true,
+      "evidenceSha256": "544464b379d0b8b3a504565825ed5828dfb77cd9440e68c12c11794d7e36823a",
+      "requests": 3,
+      "inputTokens": 11993,
+      "outputTokens": 3047,
+      "providerRequestTimeMs": 30727,
+      "estimatedUsd": 0.027943,
+      "requestEvidence": [
+        {
+          "number": 73,
+          "responseId": "resp_6aeb6ddab74f4c445d9c48f9",
+          "model": "muse-spark-1.3",
+          "inputTokens": 2861,
+          "outputTokens": 729,
+          "elapsedMs": 9846,
+          "estimatedUsd": 0.006675,
+          "diagnosticFile": "v4-v4-run-02-2026-11-04T17-39-28-790Z-eef04ada-8163-45da-b614-9a79f2bb124b-request-73-diagnostic.json",
+          "diagnosticSha256": "3db8e637aabb9be3fda1644602b7204a47f696af35d8cdc0a37ed66ea67d5ec0"
+        },
+        {
+          "number": 74,
+          "responseId": "resp_6aeb6ddf859f0e558b9f4fe7",
+          "model": "muse-spark-1.3",
+          "inputTokens": 4241,
+          "outputTokens": 576,
+          "elapsedMs": 5017,
+          "estimatedUsd": 0.00775,
+          "diagnosticFile": "v4-v4-run-02-2026-11-04T17-39-28-790Z-eef04ada-8163-45da-b614-9a79f2bb124b-request-74-diagnostic.json",
+          "diagnosticSha256": "60f57dd6d737936749844c91089efc7835cfb536ba299f99d869541a00af1c6a"
+        },
+        {
+          "number": 75,
+          "responseId": "resp_6aeb6def0186bdf81d0247b1",
+          "model": "muse-spark-1.3",
+          "inputTokens": 4891,
+          "outputTokens": 1742,
+          "elapsedMs": 15864,
+          "estimatedUsd": 0.013518,
+          "diagnosticFile": "v4-v4-run-02-2026-11-04T17-39-28-790Z-eef04ada-8163-45da-b614-9a79f2bb124b-request-75-diagnostic.json",
+          "diagnosticSha256": "48c406cbefcf33bd8c4b6f10df511d7c5764603517ab25decd0f92f212b8358c"
+        }
+      ]
+    },
+    {
+      "runId": "v4-run-03",
+      "caseId": "v4-holdout-01",
+      "arm": "C",
+      "criticalPass": false,
+      "evidenceSha256": "bab5b7d4b5e29a43021eda921d70e17a56cc1d4bde0b661432e94d59ef0daa84",
+      "requests": 3,
+      "inputTokens": 9828,
+      "outputTokens": 2964,
+      "providerRequestTimeMs": 21043,
+      "estimatedUsd": 0.098592,
+      "requestEvidence": [
+        {
+          "number": 76,
+          "responseId": "resp_6aeb6dfb397d3ab0b02542d3",
+          "model": "muse-wonder-1.0",
+          "inputTokens": 1930,
+          "outputTokens": 878,
+          "elapsedMs": 3207,
+          "estimatedUsd": 0.02528,
+          "diagnosticFile": "v4-v4-run-03-2026-11-04T17-40-08-143Z-b344d972-f0ea-4fdd-8f77-baf2c770ef8e-request-76-diagnostic.json",
+          "diagnosticSha256": "c714a533882da3f0285a634928d8c251e402c17ccfa6a4876db4cfc1f1abee45"
+        },
+        {
+          "number": 77,
+          "responseId": "resp_6aeb6e024b30e8b994924541",
+          "model": "muse-wonder-1.0",
+          "inputTokens": 3457,
+          "outputTokens": 912,
+          "elapsedMs": 6851,
+          "estimatedUsd": 0.032068,
+          "diagnosticFile": "v4-v4-run-03-2026-11-04T17-40-08-143Z-b344d972-f0ea-4fdd-8f77-baf2c770ef8e-request-77-diagnostic.json",
+          "diagnosticSha256": "41c232cafd00e9b51be19949ae262c728305e08e5dd0b08ce766adbcd77c483b"
+        },
+        {
+          "number": 78,
+          "responseId": "resp_6aeb6e0ca160215f387d4b12",
+          "model": "muse-wonder-1.0",
+          "inputTokens": 4441,
+          "outputTokens": 1174,
+          "elapsedMs": 10985,
+          "estimatedUsd": 0.041244,
+          "diagnosticFile": "v4-v4-run-03-2026-11-04T17-40-08-143Z-b344d972-f0ea-4fdd-8f77-baf2c770ef8e-request-78-diagnostic.json",
+          "diagnosticSha256": "3a2af5fcd7dc3195a92aa5518670d811e9b9e15bfd9cb086dfc6ca9fe56e68e6"
+        }
+      ]
+    },
+    {
+      "runId": "v4-run-04",
+      "caseId": "v4-holdout-02",
+      "arm": "B",
+      "criticalPass": true,
+      "evidenceSha256": "89cf13c6ae5fd8ea97e2d2f5970965daeeb8be29f1ec42db7ef26ef6ecc08b1d",
+      "requests": 3,
+      "inputTokens": 11680,
+      "outputTokens": 3638,
+      "providerRequestTimeMs": 35882,
+      "estimatedUsd": 0.030062,
+      "requestEvidence": [
+        {
+          "number": 79,
+          "responseId": "resp_6aeb6e213a0120536b9a4b40",
+          "model": "muse-spark-1.3",
+          "inputTokens": 2803,
+          "outputTokens": 449,
+          "elapsedMs": 4667,
+          "estimatedUsd": 0.005412,
+          "diagnosticFile": "v4-v4-run-04-2026-11-04T17-40-44-423Z-71feadca-c78c-4a5a-82d4-80fe1747da32-request-79-diagnostic.json",
+          "diagnosticSha256": "9605e8cd003d8b726ef7a4b9490c06bfb3cfc4f1926741644780e6c8d8278ab6"
+        },
+        {
+          "number": 80,
+          "responseId": "resp_6aeb6e2b7b40fcd375d14b4b",
+          "model": "muse-spark-1.3",
+          "inputTokens": 3903,
+          "outputTokens": 964,
+          "elapsedMs": 10466,
+          "estimatedUsd": 0.008976,
+          "diagnosticFile": "v4-v4-run-04-2026-11-04T17-40-44-423Z-71feadca-c78c-4a5a-82d4-80fe1747da32-request-80-diagnostic.json",
+          "diagnosticSha256": "2f0a211756b816cc84637fad9cd06605d786de9a7f6759bf0bf4dcc5fdc467be"
+        },
+        {
+          "number": 81,
+          "responseId": "resp_6aeb6e40343e7daa6b1f40ad",
+          "model": "muse-spark-1.3",
+          "inputTokens": 4974,
+          "outputTokens": 2225,
+          "elapsedMs": 20749,
+          "estimatedUsd": 0.015674,
+          "diagnosticFile": "v4-v4-run-04-2026-11-04T17-40-44-423Z-71feadca-c78c-4a5a-82d4-80fe1747da32-request-81-diagnostic.json",
+          "diagnosticSha256": "a863795fed68966d982e296f9768f41f52c24345d8f61ead59299e4481cc6e8f"
+        }
+      ]
+    },
+    {
+      "runId": "v4-run-05",
+      "caseId": "v4-holdout-02",
+      "arm": "C",
+      "criticalPass": false,
+      "evidenceSha256": "62b46f39e7ce25787dcdf400bfea88cb532dbf5e80c9b9124512971570a3d751",
+      "requests": 3,
+      "inputTokens": 9439,
+      "outputTokens": 3794,
+      "providerRequestTimeMs": 27309,
+      "estimatedUsd": 0.113636,
+      "requestEvidence": [
+        {
+          "number": 82,
+          "responseId": "resp_6aeb6e526c2348814be843c9",
+          "model": "muse-wonder-1.0",
+          "inputTokens": 1872,
+          "outputTokens": 889,
+          "elapsedMs": 4812,
+          "estimatedUsd": 0.025268,
+          "diagnosticFile": "v4-v4-run-05-2026-11-04T17-41-33-854Z-c238cfe3-f2f8-4efa-b992-25436ab50996-request-82-diagnostic.json",
+          "diagnosticSha256": "bfa5acd3205375ed7c1cf7d6b93a2cb9bd42b81f02f42e368f52732e1fe479a4"
+        },
+        {
+          "number": 83,
+          "responseId": "resp_6aeb6e5799eb3191a36b4b4b",
+          "model": "muse-wonder-1.0",
+          "inputTokens": 3410,
+          "outputTokens": 642,
+          "elapsedMs": 5388,
+          "estimatedUsd": 0.02648,
+          "diagnosticFile": "v4-v4-run-05-2026-11-04T17-41-33-854Z-c238cfe3-f2f8-4efa-b992-25436ab50996-request-83-diagnostic.json",
+          "diagnosticSha256": "6491bf5ba785cac9a1452b7f0a2e823c7faad8c5b60708b661078ee5376a7455"
+        },
+        {
+          "number": 84,
+          "responseId": "resp_6aeb6e6996fa0c6fcb344cf6",
+          "model": "muse-wonder-1.0",
+          "inputTokens": 4157,
+          "outputTokens": 2263,
+          "elapsedMs": 17109,
+          "estimatedUsd": 0.061888,
+          "diagnosticFile": "v4-v4-run-05-2026-11-04T17-41-33-854Z-c238cfe3-f2f8-4efa-b992-25436ab50996-request-84-diagnostic.json",
+          "diagnosticSha256": "e72aa20e22e42e9a2e7f57ac8f1fe8bdc7102ecdfde48989839ababcc2fb8624"
+        }
+      ]
+    },
+    {
+      "runId": "v4-run-06",
+      "caseId": "v4-holdout-02",
+      "arm": "A",
+      "criticalPass": false,
+      "evidenceSha256": "500fce4b65aff61f9ea00cf9a96f49af89321f82d80fd78981e4b979323871e9",
+      "requests": 3,
+      "inputTokens": 10821,
+      "outputTokens": 3483,
+      "providerRequestTimeMs": 34696,
+      "estimatedUsd": 0.02833,
+      "requestEvidence": [
+        {
+          "number": 85,
+          "responseId": "resp_6aeb6e83d8fea7082ea9429a",
+          "model": "muse-spark-1.3",
+          "inputTokens": 2437,
+          "outputTokens": 333,
+          "elapsedMs": 3581,
+          "estimatedUsd": 0.004462,
+          "diagnosticFile": "v4-v4-run-06-2026-11-04T17-42-23-756Z-79bc038e-e319-4fb6-a291-b5c070529187-request-85-diagnostic.json",
+          "diagnosticSha256": "b89608803b19ec0ddd9c54aa3f119da2aa2246f85a359bca878e0371a4c2eb5f"
+        },
+        {
+          "number": 86,
+          "responseId": "resp_6aeb6e91dc60321102e44c4e",
+          "model": "muse-spark-1.3",
+          "inputTokens": 3421,
+          "outputTokens": 1435,
+          "elapsedMs": 14101,
+          "estimatedUsd": 0.010375,
+          "diagnosticFile": "v4-v4-run-06-2026-11-04T17-42-23-756Z-79bc038e-e319-4fb6-a291-b5c070529187-request-86-diagnostic.json",
+          "diagnosticSha256": "997b92dcd8d35b4e21e38357a6f2a29846797847007391d69c1290681b0a42fc"
+        },
+        {
+          "number": 87,
+          "responseId": "resp_6aeb6ea22964fdc5d45c4e11",
+          "model": "muse-spark-1.3",
+          "inputTokens": 4963,
+          "outputTokens": 1715,
+          "elapsedMs": 17014,
+          "estimatedUsd": 0.013493,
+          "diagnosticFile": "v4-v4-run-06-2026-11-04T17-42-23-756Z-79bc038e-e319-4fb6-a291-b5c070529187-request-87-diagnostic.json",
+          "diagnosticSha256": "4684d1771a4c86c70f739fc267e4c2079805694a28ba882f3d8e5de6cc3637b0"
+        }
+      ]
+    },
+    {
+      "runId": "v4-run-07",
+      "caseId": "v4-holdout-03",
+      "arm": "C",
+      "criticalPass": false,
+      "evidenceSha256": "aa8ad16249e064477a361fc2534357816af9a6442bfcdd9d6b343c2ae7960be5",
+      "requests": 3,
+      "inputTokens": 9292,
+      "outputTokens": 2800,
+      "providerRequestTimeMs": 23383,
+      "estimatedUsd": 0.093168,
+      "requestEvidence": [
+        {
+          "number": 88,
+          "responseId": "resp_6aeb6eb25a64257402e64900",
+          "model": "muse-wonder-1.0",
+          "inputTokens": 1877,
+          "outputTokens": 832,
+          "elapsedMs": 4392,
+          "estimatedUsd": 0.024148,
+          "diagnosticFile": "v4-v4-run-07-2026-11-04T17-43-10-003Z-eb75a115-732d-4e67-804c-3a46f689550e-request-88-diagnostic.json",
+          "diagnosticSha256": "6bea36b4b0cd9f07d87619ede340ca0e1975d2e097429da12de91fe915339b91"
+        },
+        {
+          "number": 89,
+          "responseId": "resp_6aeb6eb7f6d521ef20814840",
+          "model": "muse-wonder-1.0",
+          "inputTokens": 3358,
+          "outputTokens": 603,
+          "elapsedMs": 4943,
+          "estimatedUsd": 0.025492,
+          "diagnosticFile": "v4-v4-run-07-2026-11-04T17-43-10-003Z-eb75a115-732d-4e67-804c-3a46f689550e-request-89-diagnostic.json",
+          "diagnosticSha256": "6ac5bc8cb504bcc7de53ae1072dcb9839d330273d58ee0d7acb7a15e7c1321e4"
+        },
+        {
+          "number": 90,
+          "responseId": "resp_6aeb6ec5b9d81be6bb1f4716",
+          "model": "muse-wonder-1.0",
+          "inputTokens": 4057,
+          "outputTokens": 1365,
+          "elapsedMs": 14048,
+          "estimatedUsd": 0.043528,
+          "diagnosticFile": "v4-v4-run-07-2026-11-04T17-43-10-003Z-eb75a115-732d-4e67-804c-3a46f689550e-request-90-diagnostic.json",
+          "diagnosticSha256": "6c531e44bc54e5d8136b3e63a20aaae83acd6a062babc63c51ac7f19cbfffb06"
+        }
+      ]
+    },
+    {
+      "runId": "v4-run-08",
+      "caseId": "v4-holdout-03",
+      "arm": "A",
+      "criticalPass": true,
+      "evidenceSha256": "01efcc4b6ab2a4b814d8e26a10175af94a4177724a8c101f905350f33bbfe0ae",
+      "requests": 3,
+      "inputTokens": 11878,
+      "outputTokens": 5483,
+      "providerRequestTimeMs": 51786,
+      "estimatedUsd": 0.038151,
+      "requestEvidence": [
+        {
+          "number": 91,
+          "responseId": "resp_6aeb6ee1663adea0adfc443a",
+          "model": "muse-spark-1.3",
+          "inputTokens": 2442,
+          "outputTokens": 1409,
+          "elapsedMs": 12805,
+          "estimatedUsd": 0.009041,
+          "diagnosticFile": "v4-v4-run-08-2026-11-04T17-43-48-384Z-d781f062-ef02-487c-bca5-80abb49427d4-request-91-diagnostic.json",
+          "diagnosticSha256": "707fbb1eb7f1e0d63d16b37c658485769f20751e1ea6dc7da990e8e8dcec12a2"
+        },
+        {
+          "number": 92,
+          "responseId": "resp_6aeb6ee56aff169bb1c24a3a",
+          "model": "muse-spark-1.3",
+          "inputTokens": 4502,
+          "outputTokens": 334,
+          "elapsedMs": 4764,
+          "estimatedUsd": 0.007047,
+          "diagnosticFile": "v4-v4-run-08-2026-11-04T17-43-48-384Z-d781f062-ef02-487c-bca5-80abb49427d4-request-92-diagnostic.json",
+          "diagnosticSha256": "457a512b8e799e86f90e107b5b9f92302742168f20c8e83e357b49246cb2a276"
+        },
+        {
+          "number": 93,
+          "responseId": "resp_6aeb6f08477c33fb462549e7",
+          "model": "muse-spark-1.3",
+          "inputTokens": 4934,
+          "outputTokens": 3740,
+          "elapsedMs": 34217,
+          "estimatedUsd": 0.022063,
+          "diagnosticFile": "v4-v4-run-08-2026-11-04T17-43-48-384Z-d781f062-ef02-487c-bca5-80abb49427d4-request-93-diagnostic.json",
+          "diagnosticSha256": "b854c52abc3267d4e806df9b5e19fe5a0528286bea8d1f4d8eb6600939dde7cd"
+        }
+      ]
+    },
+    {
+      "runId": "v4-run-09",
+      "caseId": "v4-holdout-03",
+      "arm": "B",
+      "criticalPass": true,
+      "evidenceSha256": "8513d442366547247e7f73fd7324d7e1a647ecf934cb9b4dfd3ecbd469ccb0ec",
+      "requests": 3,
+      "inputTokens": 12084,
+      "outputTokens": 3489,
+      "providerRequestTimeMs": 34495,
+      "estimatedUsd": 0.029935,
+      "requestEvidence": [
+        {
+          "number": 94,
+          "responseId": "resp_6aeb6f16eeae9409acda4511",
+          "model": "muse-spark-1.3",
+          "inputTokens": 2808,
+          "outputTokens": 242,
+          "elapsedMs": 2918,
+          "estimatedUsd": 0.004539,
+          "diagnosticFile": "v4-v4-run-09-2026-11-04T17-44-51-440Z-a2b4af5d-2e60-4bd4-963e-ebe158939904-request-94-diagnostic.json",
+          "diagnosticSha256": "ea9f1171687dcdd74fda4613445de945002897aecd5b46db9f6696a30d4194de"
+        },
+        {
+          "number": 95,
+          "responseId": "resp_6aeb6f2774640b83d9874fd6",
+          "model": "muse-spark-1.3",
+          "inputTokens": 3701,
+          "outputTokens": 1776,
+          "elapsedMs": 16753,
+          "estimatedUsd": 0.012175,
+          "diagnosticFile": "v4-v4-run-09-2026-11-04T17-44-51-440Z-a2b4af5d-2e60-4bd4-963e-ebe158939904-request-95-diagnostic.json",
+          "diagnosticSha256": "e202dcb065dce213b91ee3e1cc7eae1534eaef408843eb9ed6981295f73db61e"
+        },
+        {
+          "number": 96,
+          "responseId": "resp_6aeb6f357051af96b07a4b10",
+          "model": "muse-spark-1.3",
+          "inputTokens": 5575,
+          "outputTokens": 1471,
+          "elapsedMs": 14824,
+          "estimatedUsd": 0.013221,
+          "diagnosticFile": "v4-v4-run-09-2026-11-04T17-44-51-440Z-a2b4af5d-2e60-4bd4-963e-ebe158939904-request-96-diagnostic.json",
+          "diagnosticSha256": "b4d331dece366af8a38c5ef3f6918469e2b139eb9762a2c7cb2f3a07e39436b1"
+        }
+      ]
+    },
+    {
+      "runId": "v4-run-10",
+      "caseId": "v4-holdout-04",
+      "arm": "A",
+      "criticalPass": true,
+      "evidenceSha256": "02edc9f32d431abf12923819a07a0251836c90eed6083c0df23858c566cccc3a",
+      "requests": 3,
+      "inputTokens": 10224,
+      "outputTokens": 2244,
+      "providerRequestTimeMs": 23209,
+      "estimatedUsd": 0.022318,
+      "requestEvidence": [
+        {
+          "number": 97,
+          "responseId": "resp_6aeb6f4167c8efac1563485b",
+          "model": "muse-spark-1.3",
+          "inputTokens": 2422,
+          "outputTokens": 469,
+          "elapsedMs": 4956,
+          "estimatedUsd": 0.005021,
+          "diagnosticFile": "v4-v4-run-10-2026-11-04T17-45-32-526Z-0b8e6264-8928-457a-a152-562593948d78-request-97-diagnostic.json",
+          "diagnosticSha256": "cc34e86d8ec01c5e68bcdde812e6f7cdf0fc92e29c13181c5a1d0515c15c1088"
+        },
+        {
+          "number": 98,
+          "responseId": "resp_6aeb6f4ad49cea23fcda4ad5",
+          "model": "muse-spark-1.3",
+          "inputTokens": 3542,
+          "outputTokens": 644,
+          "elapsedMs": 9093,
+          "estimatedUsd": 0.007165,
+          "diagnosticFile": "v4-v4-run-10-2026-11-04T17-45-32-526Z-0b8e6264-8928-457a-a152-562593948d78-request-98-diagnostic.json",
+          "diagnosticSha256": "ef391b5d842f38ed3a3161242967e7e0e908bc1e60fa08de05dc22ce2805a9a6"
+        },
+        {
+          "number": 99,
+          "responseId": "resp_6aeb6f53520d3a994dac427f",
+          "model": "muse-spark-1.3",
+          "inputTokens": 4260,
+          "outputTokens": 1131,
+          "elapsedMs": 9160,
+          "estimatedUsd": 0.010132,
+          "diagnosticFile": "v4-v4-run-10-2026-11-04T17-45-32-526Z-0b8e6264-8928-457a-a152-562593948d78-request-99-diagnostic.json",
+          "diagnosticSha256": "f7009cead059e498daf3ff8840cc87337e76e948d994a26ea760e98a64a77753"
+        }
+      ]
+    },
+    {
+      "runId": "v4-run-11",
+      "caseId": "v4-holdout-04",
+      "arm": "C",
+      "criticalPass": true,
+      "evidenceSha256": "811f61c36a89089afaacc552ddee30b51a6d7fef92befee1dea6fb5ba3709d94",
+      "requests": 3,
+      "inputTokens": 9093,
+      "outputTokens": 2746,
+      "providerRequestTimeMs": 23448,
+      "estimatedUsd": 0.091292,
+      "requestEvidence": [
+        {
+          "number": 100,
+          "responseId": "resp_6aeb6f659e8aed3585074529",
+          "model": "muse-wonder-1.0",
+          "inputTokens": 1857,
+          "outputTokens": 870,
+          "elapsedMs": 6515,
+          "estimatedUsd": 0.024828,
+          "diagnosticFile": "v4-v4-run-11-2026-11-04T17-46-07-352Z-b0c350be-1789-46a5-bc98-bb2aafe217be-request-100-diagnostic.json",
+          "diagnosticSha256": "360b0d8cc184c62d0760851c534f94dc133e72af7e6ca1e4be26594e0ec8530e"
+        },
+        {
+          "number": 101,
+          "responseId": "resp_6aeb6f698b36151362834636",
+          "model": "muse-wonder-1.0",
+          "inputTokens": 3376,
+          "outputTokens": 412,
+          "elapsedMs": 3738,
+          "estimatedUsd": 0.021744,
+          "diagnosticFile": "v4-v4-run-11-2026-11-04T17-46-07-352Z-b0c350be-1789-46a5-bc98-bb2aafe217be-request-101-diagnostic.json",
+          "diagnosticSha256": "68a1bee23465ed4ded99924a63237c425622ab47ee85238bdef444430f4d1519"
+        },
+        {
+          "number": 102,
+          "responseId": "resp_6aeb6f76b6ec178a9c0e4af5",
+          "model": "muse-wonder-1.0",
+          "inputTokens": 3860,
+          "outputTokens": 1464,
+          "elapsedMs": 13195,
+          "estimatedUsd": 0.04472,
+          "diagnosticFile": "v4-v4-run-11-2026-11-04T17-46-07-352Z-b0c350be-1789-46a5-bc98-bb2aafe217be-request-102-diagnostic.json",
+          "diagnosticSha256": "b6b58cf2402eba4b0d36cbe3ae5efd0901c36cdf17adff2ef6d7fad5c3a888b6"
+        }
+      ]
+    },
+    {
+      "runId": "v4-run-12",
+      "caseId": "v4-holdout-04",
+      "arm": "B",
+      "criticalPass": true,
+      "evidenceSha256": "dd75ffd155a8dc0301bffb73a35c1f770abaca4c6a66c80bbea90e67fe92382e",
+      "requests": 3,
+      "inputTokens": 11275,
+      "outputTokens": 2066,
+      "providerRequestTimeMs": 21799,
+      "estimatedUsd": 0.022875,
+      "requestEvidence": [
+        {
+          "number": 103,
+          "responseId": "resp_6aeb6f95a998275796334e18",
+          "model": "muse-spark-1.3",
+          "inputTokens": 2788,
+          "outputTokens": 495,
+          "elapsedMs": 5977,
+          "estimatedUsd": 0.005589,
+          "diagnosticFile": "v4-v4-run-12-2026-11-04T17-46-55-211Z-065a38b7-b027-42e9-96c8-193ab3533057-request-103-diagnostic.json",
+          "diagnosticSha256": "02d98d877522b73b629999338be26e2869fa0833b075f688f74e02bd434cf38b"
+        },
+        {
+          "number": 104,
+          "responseId": "resp_6aeb6f9aad3afc6b1ad84a67",
+          "model": "muse-spark-1.3",
+          "inputTokens": 3934,
+          "outputTokens": 545,
+          "elapsedMs": 5127,
+          "estimatedUsd": 0.007234,
+          "diagnosticFile": "v4-v4-run-12-2026-11-04T17-46-55-211Z-065a38b7-b027-42e9-96c8-193ab3533057-request-104-diagnostic.json",
+          "diagnosticSha256": "59cfdebb91d30ba6d2d74d33f00b673b9175cb702cf291eb33d70083c032197a"
+        },
+        {
+          "number": 105,
+          "responseId": "resp_6aeb6fa406b846b3cb17444e",
+          "model": "muse-spark-1.3",
+          "inputTokens": 4553,
+          "outputTokens": 1026,
+          "elapsedMs": 10695,
+          "estimatedUsd": 0.010052,
+          "diagnosticFile": "v4-v4-run-12-2026-11-04T17-46-55-211Z-065a38b7-b027-42e9-96c8-193ab3533057-request-105-diagnostic.json",
+          "diagnosticSha256": "c72e6a104fd938bc0c0b768de2676b52296321d8ae9ef7550cdacdaa54786c6a"
+        }
+      ]
+    },
+    {
+      "runId": "v4-run-13",
+      "caseId": "v4-holdout-05",
+      "arm": "C",
+      "criticalPass": false,
+      "evidenceSha256": "8a87a24cf56aca7e6407fa637024e8bf7f9c411aa709bc24c77823b11fedcc81",
+      "requests": 3,
+      "inputTokens": 10103,
+      "outputTokens": 2758,
+      "providerRequestTimeMs": 25546,
+      "estimatedUsd": 0.095572,
+      "requestEvidence": [
+        {
+          "number": 106,
+          "responseId": "resp_6aeb7016fc99ad3808e74ab9",
+          "model": "muse-wonder-1.0",
+          "inputTokens": 1850,
+          "outputTokens": 1061,
+          "elapsedMs": 8719,
+          "estimatedUsd": 0.02862,
+          "diagnosticFile": "v4-v4-run-13-2026-11-04T17-49-01-443Z-e222e9a0-3cd9-4ade-aa71-84bed1bc617b-request-106-diagnostic.json",
+          "diagnosticSha256": "32a1f3274edee282d6816e813321a3a93153dd7c8ff499104981e44715beec46"
+        },
+        {
+          "number": 107,
+          "responseId": "resp_6aeb7019c13cd46c9fd8405e",
+          "model": "muse-wonder-1.0",
+          "inputTokens": 3877,
+          "outputTokens": 427,
+          "elapsedMs": 3203,
+          "estimatedUsd": 0.024048,
+          "diagnosticFile": "v4-v4-run-13-2026-11-04T17-49-01-443Z-e222e9a0-3cd9-4ade-aa71-84bed1bc617b-request-107-diagnostic.json",
+          "diagnosticSha256": "2105c50c535a292966468ca04d536425794f9b9245340cd2164f8c92e2d79a28"
+        },
+        {
+          "number": 108,
+          "responseId": "resp_6aeb70263f3122e9f0a64179",
+          "model": "muse-wonder-1.0",
+          "inputTokens": 4376,
+          "outputTokens": 1270,
+          "elapsedMs": 13624,
+          "estimatedUsd": 0.042904,
+          "diagnosticFile": "v4-v4-run-13-2026-11-04T17-49-01-443Z-e222e9a0-3cd9-4ade-aa71-84bed1bc617b-request-108-diagnostic.json",
+          "diagnosticSha256": "9ec0fdc6b96cdcf037f6861deaece72bd07207ce61b1d144e6a112b30021b52b"
+        }
+      ]
+    },
+    {
+      "runId": "v4-run-14",
+      "caseId": "v4-holdout-05",
+      "arm": "B",
+      "criticalPass": true,
+      "evidenceSha256": "9d5dce8e088ebae653768d22ec24f957f35bfc76b4b85b29eeed282cb5acb04e",
+      "requests": 3,
+      "inputTokens": 12026,
+      "outputTokens": 3781,
+      "providerRequestTimeMs": 37599,
+      "estimatedUsd": 0.031103,
+      "requestEvidence": [
+        {
+          "number": 109,
+          "responseId": "resp_6aeb704505b7129fd8c240cb",
+          "model": "muse-spark-1.3",
+          "inputTokens": 2781,
+          "outputTokens": 396,
+          "elapsedMs": 5690,
+          "estimatedUsd": 0.00516,
+          "diagnosticFile": "v4-v4-run-14-2026-11-04T17-49-51-996Z-5f865ac6-e75d-42ec-a828-b0c04e42873d-request-109-diagnostic.json",
+          "diagnosticSha256": "aae11dc3700ca72443397cb5a3358784933d369ae56b4987bc227d42950e9525"
+        },
+        {
+          "number": 110,
+          "responseId": "resp_6aeb704f9f9437c1d5254f7d",
+          "model": "muse-spark-1.3",
+          "inputTokens": 4145,
+          "outputTokens": 881,
+          "elapsedMs": 9467,
+          "estimatedUsd": 0.008926,
+          "diagnosticFile": "v4-v4-run-14-2026-11-04T17-49-51-996Z-5f865ac6-e75d-42ec-a828-b0c04e42873d-request-110-diagnostic.json",
+          "diagnosticSha256": "70d4a1bab3f0fd9c19cfbab5dcd6b906ff0f3973897c1401bffad7d389bde3f0"
+        },
+        {
+          "number": 111,
+          "responseId": "resp_6aeb706585054aa7e88e4f84",
+          "model": "muse-spark-1.3",
+          "inputTokens": 5100,
+          "outputTokens": 2504,
+          "elapsedMs": 22442,
+          "estimatedUsd": 0.017017,
+          "diagnosticFile": "v4-v4-run-14-2026-11-04T17-49-51-996Z-5f865ac6-e75d-42ec-a828-b0c04e42873d-request-111-diagnostic.json",
+          "diagnosticSha256": "5b894df4264e2c84c492cf85f8ead67b0bdddbf64ab7ce7f40ebb40f333611d4"
+        }
+      ]
+    },
+    {
+      "runId": "v4-run-15",
+      "caseId": "v4-holdout-05",
+      "arm": "A",
+      "criticalPass": true,
+      "evidenceSha256": "3cbf8c42acc402f381a43adc23068b20b5fa485ef1e04e5b9a7d2b132f2e761e",
+      "requests": 3,
+      "inputTokens": 10340,
+      "outputTokens": 2782,
+      "providerRequestTimeMs": 31400,
+      "estimatedUsd": 0.024749,
+      "requestEvidence": [
+        {
+          "number": 112,
+          "responseId": "resp_6aeb708516fcd409fc5d4559",
+          "model": "muse-spark-1.3",
+          "inputTokens": 2415,
+          "outputTokens": 280,
+          "elapsedMs": 6640,
+          "estimatedUsd": 0.004209,
+          "diagnosticFile": "v4-v4-run-15-2026-11-04T17-50-54-798Z-98cadc4d-9204-4ef1-b1f1-c7b2f0c45627-request-112-diagnostic.json",
+          "diagnosticSha256": "d1a808cf6926e3cf5e679498ae41f8194db18dec211f8a8d23dda2d5db0342f9"
+        },
+        {
+          "number": 113,
+          "responseId": "resp_6aeb708a031bcdd62d134633",
+          "model": "muse-spark-1.3",
+          "inputTokens": 3663,
+          "outputTokens": 525,
+          "elapsedMs": 4894,
+          "estimatedUsd": 0.00681,
+          "diagnosticFile": "v4-v4-run-15-2026-11-04T17-50-54-798Z-98cadc4d-9204-4ef1-b1f1-c7b2f0c45627-request-113-diagnostic.json",
+          "diagnosticSha256": "aed25b50c28b1c238fdc602eb4aca229761e4b760546a34a7536a7f0fe4d754d"
+        },
+        {
+          "number": 114,
+          "responseId": "resp_6aeb709e819ac7f27fd84ffb",
+          "model": "muse-spark-1.3",
+          "inputTokens": 4262,
+          "outputTokens": 1977,
+          "elapsedMs": 19866,
+          "estimatedUsd": 0.01373,
+          "diagnosticFile": "v4-v4-run-15-2026-11-04T17-50-54-798Z-98cadc4d-9204-4ef1-b1f1-c7b2f0c45627-request-114-diagnostic.json",
+          "diagnosticSha256": "86d2db37316b12575270de49e11ba2b9f3ebb91f8336a9d0d01030a8b2e5d1b1"
+        }
+      ]
+    },
+    {
+      "runId": "v4-run-16",
+      "caseId": "v4-holdout-06",
+      "arm": "B",
+      "criticalPass": true,
+      "evidenceSha256": "6cc538663bbbddf7d2b6d022f98e575cc8ea72273853e3cab213b8de4eac3961",
+      "requests": 3,
+      "inputTokens": 11109,
+      "outputTokens": 1957,
+      "providerRequestTimeMs": 20349,
+      "estimatedUsd": 0.022205,
+      "requestEvidence": [
+        {
+          "number": 115,
+          "responseId": "resp_6aeb70b12f7025f4851345d0",
+          "model": "muse-spark-1.3",
+          "inputTokens": 2795,
+          "outputTokens": 329,
+          "elapsedMs": 4365,
+          "estimatedUsd": 0.004892,
+          "diagnosticFile": "v4-v4-run-16-2026-11-04T17-51-41-264Z-f7ed453a-52d3-4a80-a2a4-08dcca760a56-request-115-diagnostic.json",
+          "diagnosticSha256": "63fb1de9e0a77b94729763fef59d195e29edb9275d1891a0c1d07b9f6bedcf26"
+        },
+        {
+          "number": 116,
+          "responseId": "resp_6aeb70b8297120d13c074d20",
+          "model": "muse-spark-1.3",
+          "inputTokens": 3775,
+          "outputTokens": 690,
+          "elapsedMs": 6687,
+          "estimatedUsd": 0.007652,
+          "diagnosticFile": "v4-v4-run-16-2026-11-04T17-51-41-264Z-f7ed453a-52d3-4a80-a2a4-08dcca760a56-request-116-diagnostic.json",
+          "diagnosticSha256": "6f1005b3ca48a17407b89e7cfa7cf7304851f9a08ceffdba4b4371e6849fc4db"
+        },
+        {
+          "number": 117,
+          "responseId": "resp_6aeb70c1c9fadb7a4dbd4416",
+          "model": "muse-spark-1.3",
+          "inputTokens": 4539,
+          "outputTokens": 938,
+          "elapsedMs": 9297,
+          "estimatedUsd": 0.009661,
+          "diagnosticFile": "v4-v4-run-16-2026-11-04T17-51-41-264Z-f7ed453a-52d3-4a80-a2a4-08dcca760a56-request-117-diagnostic.json",
+          "diagnosticSha256": "afa35ac60475cf4f68b7aa33a9d38ddedab6a4dd6bb9afce93676975fb36f0ed"
+        }
+      ]
+    },
+    {
+      "runId": "v4-run-17",
+      "caseId": "v4-holdout-06",
+      "arm": "A",
+      "criticalPass": false,
+      "evidenceSha256": "6d034071751e1f6f2c91beb6c7943fd0eae1abe239ab9549e3bc87684a911376",
+      "requests": 3,
+      "inputTokens": 10153,
+      "outputTokens": 3378,
+      "providerRequestTimeMs": 36078,
+      "estimatedUsd": 0.027049,
+      "requestEvidence": [
+        {
+          "number": 118,
+          "responseId": "resp_6aeb70e7cdf649b5ea0f4f90",
+          "model": "muse-spark-1.3",
+          "inputTokens": 2429,
+          "outputTokens": 504,
+          "elapsedMs": 6028,
+          "estimatedUsd": 0.005179,
+          "diagnosticFile": "v4-v4-run-17-2026-11-04T17-52-33-977Z-b7d7802b-fdac-4e15-b2b5-df99b073bcf1-request-118-diagnostic.json",
+          "diagnosticSha256": "5d45a300660a8fe9834f900d4dccbd800b17fa5bfd82634eee4085e8d82c3117"
+        },
+        {
+          "number": 119,
+          "responseId": "resp_6aeb70ed220cca38094a43e2",
+          "model": "muse-spark-1.3",
+          "inputTokens": 3584,
+          "outputTokens": 482,
+          "elapsedMs": 5201,
+          "estimatedUsd": 0.006529,
+          "diagnosticFile": "v4-v4-run-17-2026-11-04T17-52-33-977Z-b7d7802b-fdac-4e15-b2b5-df99b073bcf1-request-119-diagnostic.json",
+          "diagnosticSha256": "0c84573333ede69b94763ca85fb1e112d8347cc782532f36e1ec20bb80abc6e7"
+        },
+        {
+          "number": 120,
+          "responseId": "resp_6aeb71062212538cb53b42b9",
+          "model": "muse-spark-1.3",
+          "inputTokens": 4140,
+          "outputTokens": 2392,
+          "elapsedMs": 24849,
+          "estimatedUsd": 0.015341,
+          "diagnosticFile": "v4-v4-run-17-2026-11-04T17-52-33-977Z-b7d7802b-fdac-4e15-b2b5-df99b073bcf1-request-120-diagnostic.json",
+          "diagnosticSha256": "428d8fa6261f6f6afad7a4a163c035f3e83306910db7cad328bdd61521720d1c"
+        }
+      ]
+    },
+    {
+      "runId": "v4-run-18",
+      "caseId": "v4-holdout-06",
+      "arm": "C",
+      "criticalPass": false,
+      "evidenceSha256": "aca1fecde9ac7116cdd4fb8ef70b948ef63b8e6a48468bd56fad7cd93b301616",
+      "requests": 3,
+      "inputTokens": 9833,
+      "outputTokens": 3426,
+      "providerRequestTimeMs": 27982,
+      "estimatedUsd": 0.107852,
+      "requestEvidence": [
+        {
+          "number": 121,
+          "responseId": "resp_6aeb7123c7386a580d59475a",
+          "model": "muse-wonder-1.0",
+          "inputTokens": 1864,
+          "outputTokens": 1236,
+          "elapsedMs": 7469,
+          "estimatedUsd": 0.032176,
+          "diagnosticFile": "v4-v4-run-18-2026-11-04T17-53-31-999Z-4a7805f2-ff3a-4469-9b36-7caf52b5270e-request-121-diagnostic.json",
+          "diagnosticSha256": "fe2ad5d11eba0d5b02d0544e824c466dc24a7c23af99a419401223e7d52b66c0"
+        },
+        {
+          "number": 122,
+          "responseId": "resp_6aeb71263ae76db6d7ef49b9",
+          "model": "muse-wonder-1.0",
+          "inputTokens": 3749,
+          "outputTokens": 399,
+          "elapsedMs": 3477,
+          "estimatedUsd": 0.022976,
+          "diagnosticFile": "v4-v4-run-18-2026-11-04T17-53-31-999Z-4a7805f2-ff3a-4469-9b36-7caf52b5270e-request-122-diagnostic.json",
+          "diagnosticSha256": "9a9f992e73812eda3f7030645b6b19edb15be021d448c96b247d918075311b93"
+        },
+        {
+          "number": 123,
+          "responseId": "resp_6aeb71379d20b20394914082",
+          "model": "muse-wonder-1.0",
+          "inputTokens": 4220,
+          "outputTokens": 1791,
+          "elapsedMs": 17036,
+          "estimatedUsd": 0.0527,
+          "diagnosticFile": "v4-v4-run-18-2026-11-04T17-53-31-999Z-4a7805f2-ff3a-4469-9b36-7caf52b5270e-request-123-diagnostic.json",
+          "diagnosticSha256": "3ee0f26fe9f90c6807c8a72bc964d0d1288381447bc44c06bd78247d3ab6b2f3"
+        }
+      ]
+    }
+  ],
+  "limits": [
+    "Usage-based estimate under pinned rates, not an independently retrieved billing invoice.",
+    "Latency is sum of observed provider request elapsed times per run; median of6 runs per arm. It excludes owner idle time and harness I/O.",
+    "One run per arm per authored case, no randomized repeated reliability sample; equal max effort labels do not imply equal internal compute.",
+    "No extra inference or paid call was made to construct this review."
+  ]
+}

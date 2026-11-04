@@ -1,0 +1,13 @@
+{
+  "runId": "v4-run-05",
+  "caseId": "v4-holdout-02",
+  "arm": "C",
+  "code": "FRONT_DESK_OUTPUT",
+  "criticalPass": false,
+  "costs": {
+    "phaseUsd": 0.30888,
+    "cumulativeUsd": 0.842178
+  },
+  "remainingRuns": "next-scheduled-run-permitted-after-owner-review",
+  "unknownOutcomesRetainFullReserve": true
+}

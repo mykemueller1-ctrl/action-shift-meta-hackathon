@@ -1,0 +1,32 @@
+{
+  "runId": "v4-run-11",
+  "executionId": "2026-11-04T17-46-07-352Z-b0c350be-1789-46a5-bc98-bb2aafe217be",
+  "requestNumber": 102,
+  "request": {
+    "id": "resp_6aeb6f76b6ec178a9c0e4af5",
+    "model": "muse-wonder-1.0",
+    "reasoningEffort": "max",
+    "maxOutputTokens": 12000,
+    "inputTokens": 3860,
+    "outputTokens": 1464,
+    "reasoningTokens": 992,
+    "elapsedMs": 13195,
+    "status": "completed"
+  },
+  "output": [
+    {
+      "type": "message",
+      "id": "msg_d0229627-935c-4b0d-b371-9362b56b8a7e",
+      "role": "assistant",
+      "content": [
+        {
+          "type": "output_text",
+          "text": "{\n  \"intent\": \"workplace-meal\",\n  \"proposal\": {\n    \"date\": \"2026-11-10\",\n    \"destination\": null,\n    \"fulfillment\": \"pickup\",\n    \"headlineQuantity\": 6,\n    \"items\": [\n      {\n        \"itemId\": \"cheese\",\n        \"quantity\": 2\n      },\n      {\n        \"itemId\": \"pepper\",\n        \"quantity\": 2\n      },\n      {\n        \"itemId\": \"garden\",\n        \"quantity\": 2\n      }\n    ],\n    \"kind\": \"food\",\n    \"windows\": [\n      {\n        \"id\": \"w-1335\",\n        \"items\": [\n          {\n            \"itemId\": \"cheese\",\n            \"quantity\": 2\n          },\n          {\n            \"itemId\": \"pepper\",\n            \"quantity\": 2\n          },\n          {\n            \"itemId\": \"garden\",\n            \"quantity\": 2\n          }\n        ],\n        \"readyAt\": \"2026-11-10T13:35:00-06:00\"\n      }\n    ]\n  },\n  \"questions\": [\n    \"Which collection site do you choose before the restaurant agrees: Maple Street Kitchen or Maple Street South?\"\n  ],\n  \"reply\": \"DRAFT: Hello Fictional Alder Crew, thank you! For human review on November 10, 2026 at 13:35, we have a proposed pickup request for six pizzas: two Classic cheese, two Roasted pepper, and two Garden. This is not confirmed yet. Please let us know which collection site you choose—Maple Street Kitchen or Maple Street South—so a person can review the request.\",\n  \"sourceIds\": [\n    \"demo-north-menu-v1\",\n    \"demo-north-service-v1\"\n  ],\n  \"status\": \"needs-clarification\",\n  \"summary\": \"Workplace-meal proposal for November 10 at 13:35: 2 cheese, 2 roasted pepper, and 2 garden pizzas (headline 6 matches item total). Pickup is requested, but the collection site is unresolved, so this unapproved proposal needs the guest's site choice and human review before any agreement.\"\n}",
+          "annotations": [],
+          "logprobs": []
+        }
+      ],
+      "status": "completed"
+    }
+  ]
+}

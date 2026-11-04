@@ -33,3 +33,11 @@ The deliberately failed replay lives in a separate human review manifest. Its ra
 Reply editing is a separate verified path. Browser review saved corrected wording separately from the original model reply, with an operator record and unsent status. These edits remain session state. Saving a draft does not route or send a message. In the new delivery example, adoption preserved requested delivery and the restored rule blocked quoting. Only explicit authored guest consent switched the request to pickup and produced a new version.
 
 The runtime uses Node built in modules and browser APIs. No dependency installation is required. Tests use local servers and mocked model transports. Source reference checks and passing tests do not prove the model’s interpretation or real restaurant outcomes.
+
+## Optional V4 replay
+
+V4 preserves the original adapter, recordings, human-completion path and video. A separate frozen adapter clarifies current-version totals and pickup destinations without adding tools or relaxing validation. An optional manifest selects one independently reviewed Spark result. The loader checks its model/settings, frozen adapter and contract hashes, the six-case review record and exact packet/run/input identities before exposing it.
+
+The original packet, including its pending-at-capture evaluation label, remains unchanged. Final review metadata lives in a separate replay envelope. Only a configured server provider may return that replay; the browser cannot replace its bytes. Loading it is local and requires no key or network call. Adopting it creates an unapproved draft and preserves the same quote, version, consent and simulated acknowledgment boundaries.
+
+The added 11-pizza replay is a separate choice. The default failed example still supports the V3 human-completion walkthrough. The video does not depict the V4 inference. The complete comparison includes every other-arm failure and the frozen expectations used outside model input.

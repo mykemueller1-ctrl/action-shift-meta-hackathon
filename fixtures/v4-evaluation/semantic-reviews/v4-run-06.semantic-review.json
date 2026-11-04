@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "reviewer": "Independent Codex agent",
+  "reviewedAt": "2026-11-04T17:46:53.189Z",
+  "runId": "v4-run-06",
+  "caseId": "v4-holdout-02",
+  "arm": "A",
+  "criticalPass": false,
+  "evidenceSha256": "500fce4b65aff61f9ea00cf9a96f49af89321f82d80fd78981e4b979323871e9",
+  "evidence": {
+    "packetFile": "v4-v4-run-06-2026-11-04T17-42-23-756Z-79bc038e-e319-4fb6-a291-b5c070529187-validated-review.json",
+    "protocolSha256": "02f53f3ab715142ddd596825e3bc456dc51afb2ee111447c226b1a51b66e0183",
+    "oracleSha256": "5588650b5762ea1966745020cd94a7b961ae77a079f5d11dda2d4a7539aaf8ce",
+    "assessmentFile": "v4-v4-run-06-2026-11-04T17-42-23-756Z-79bc038e-e319-4fb6-a291-b5c070529187-assessment.json",
+    "assessmentSha256": "2b8cdebc10d2a5b2d8c272f3ae0cb3889d937db491470b0b104b31ca02de9c4f",
+    "adoptionFile": "v4-v4-run-06-2026-11-04T17-42-23-756Z-79bc038e-e319-4fb6-a291-b5c070529187-adoption-probe.json",
+    "adoptionSha256": "110b84fcc8257d3ae78099fd8e9f636d867fac839af53b1dca1ec0d00d622d60"
+  },
+  "classification": "critical failure: employer substituted for explicit pickup site",
+  "findings": [
+    "Structured destination is Fictional Copper Studio, the employer/beneficiary, rather than the explicitly named Maple Street Kitchen pickup site. The correct site in reply prose does not repair the proposal.",
+    "Headline ten, lines totaling nine, exact November 10 14:20 pickup allocation and clarification question are correct. The canceled historical six is not used.",
+    "Raw proposal is structurally adopted as an unapproved draft with the wrong destination. QUANTITY_MISMATCH remains, prepare_quote rejects, and 15100 cents is only the blocked arithmetic reference. These downstream count guards do not validate location meaning.",
+    "Correct dated facts/citations, no store mutation during inference, no approval/receipts or actual external action claimed."
+  ],
+  "qualification": "Wrong known-location semantics remain a critical failure even though the quantity-conflict control worked.",
+  "modelInputMatchesFrozenFourFieldInput": true,
+  "readOnlyStateUnchanged": true,
+  "modelOutputRepaired": false,
+  "mechanicalScoreUsedAsSemanticVerdict": false
+}

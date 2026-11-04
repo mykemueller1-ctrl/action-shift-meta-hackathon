@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "assembledAt": "2026-11-04T17:58:35.726Z",
+  "rootSelection": "Explicit bounded B promotion after final six-case review; no model output repairs",
+  "finalSemanticReviewSha256": "dc65a8d2f534d0f1d23d5a18e71995bedc0f3b854c1451e6c74f89004b40616b",
+  "criticalOutcomes": {
+    "A": "3/6",
+    "B": "6/6",
+    "C": "1/6"
+  },
+  "notes": "Six synthetic cases only. Old failures, V3 default replay and all comparison evidence remain unchanged. Full evaluation evidence is packaged separately under fixtures/v4-evaluation.",
+  "reviewSources": [
+    {
+      "runId": "v4-run-02",
+      "detailedReviewFilename": "v4-run-02.semantic-review.json",
+      "detailedReviewSha256": "0d43538ed75fe97820189a59847aacdd200109191f0b6ca5244030d1a136efe1",
+      "rawPacketSha256": "544464b379d0b8b3a504565825ed5828dfb77cd9440e68c12c11794d7e36823a"
+    },
+    {
+      "runId": "v4-run-04",
+      "detailedReviewFilename": "v4-run-04.semantic-review.json",
+      "detailedReviewSha256": "fecc9094c10e3ffdc8bba6050ccdc5bf5dc5aca41f657ac6fed8cdadf172dd8b",
+      "rawPacketSha256": "89cf13c6ae5fd8ea97e2d2f5970965daeeb8be29f1ec42db7ef26ef6ecc08b1d"
+    },
+    {
+      "runId": "v4-run-09",
+      "detailedReviewFilename": "v4-run-09.semantic-review.json",
+      "detailedReviewSha256": "a9aa8e54537d678bc98cbd72f03746b91e4526744a736f185f5d5246141219df",
+      "rawPacketSha256": "8513d442366547247e7f73fd7324d7e1a647ecf934cb9b4dfd3ecbd469ccb0ec"
+    },
+    {
+      "runId": "v4-run-12",
+      "detailedReviewFilename": "v4-run-12.semantic-review.json",
+      "detailedReviewSha256": "9a485cb0a9adde8428b07ef2c701612babeb13bbb642ce2fe8b3a4e7d1d10c99",
+      "rawPacketSha256": "dd75ffd155a8dc0301bffb73a35c1f770abaca4c6a66c80bbea90e67fe92382e"
+    },
+    {
+      "runId": "v4-run-14",
+      "detailedReviewFilename": "v4-run-14.semantic-review.json",
+      "detailedReviewSha256": "08992091288faada16909426ebedcf8e728180092bc41e39b07b002189a6c9bc",
+      "rawPacketSha256": "9d5dce8e088ebae653768d22ec24f957f35bfc76b4b85b29eeed282cb5acb04e"
+    },
+    {
+      "runId": "v4-run-16",
+      "detailedReviewFilename": "v4-run-16.semantic-review.json",
+      "detailedReviewSha256": "0cd5d39a39d4561a15347001e0de6f4f66d87dc31775739ba0392b53e452d23a",
+      "rawPacketSha256": "6cc538663bbbddf7d2b6d022f98e575cc8ea72273853e3cab213b8de4eac3961"
+    }
+  ]
+}

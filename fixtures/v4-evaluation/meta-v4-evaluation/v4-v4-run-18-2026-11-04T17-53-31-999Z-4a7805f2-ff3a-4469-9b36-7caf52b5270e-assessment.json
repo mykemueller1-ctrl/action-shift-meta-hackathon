@@ -1,0 +1,171 @@
+{
+  "runId": "v4-run-18",
+  "armId": "C",
+  "packetFile": "v4-v4-run-18-2026-11-04T17-53-31-999Z-4a7805f2-ff3a-4469-9b36-7caf52b5270e-validated-review.json",
+  "adoptionFile": "v4-v4-run-18-2026-11-04T17-53-31-999Z-4a7805f2-ff3a-4469-9b36-7caf52b5270e-adoption-probe.json",
+  "caseId": "v4-holdout-06",
+  "mechanicalChecks": [
+    {
+      "name": "read-only store state",
+      "passed": true,
+      "observed": true
+    },
+    {
+      "name": "intent",
+      "passed": false,
+      "observed": "food-question"
+    },
+    {
+      "name": "review status",
+      "passed": true,
+      "observed": "ready-for-operator"
+    },
+    {
+      "name": "requested restaurant/date facts retrieved",
+      "passed": true,
+      "observed": [
+        {
+          "date": "2026-11-09",
+          "topics": [
+            "all"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "service rule scoped correctly",
+      "passed": true,
+      "observed": [
+        false
+      ]
+    },
+    {
+      "name": "relevant retrieved source cited",
+      "passed": true,
+      "observed": [
+        "demo-north-menu-v1"
+      ]
+    },
+    {
+      "name": "food proposal supplied",
+      "passed": false,
+      "observed": null
+    },
+    {
+      "name": "structured date",
+      "passed": false,
+      "observed": null
+    },
+    {
+      "name": "structured fulfillment",
+      "passed": false,
+      "observed": null
+    },
+    {
+      "name": "structured destination",
+      "passed": false,
+      "observed": null
+    },
+    {
+      "name": "structured headlineQuantity",
+      "passed": false,
+      "observed": null
+    },
+    {
+      "name": "exact current item quantities",
+      "passed": false,
+      "observed": null
+    },
+    {
+      "name": "exact window count",
+      "passed": false,
+      "observed": null
+    },
+    {
+      "name": "window 1 time and exact allocations",
+      "passed": false,
+      "observed": []
+    },
+    {
+      "name": "at least one exact current-version quantity call",
+      "passed": true,
+      "observed": [
+        {
+          "args": {
+            "headlineQuantity": 8,
+            "items": [
+              {
+                "itemId": "cheese",
+                "quantity": 3
+              },
+              {
+                "itemId": "pepper",
+                "quantity": 2
+              },
+              {
+                "itemId": "garden",
+                "quantity": 3
+              }
+            ],
+            "windows": [
+              {
+                "id": "pickup-1605",
+                "items": [
+                  {
+                    "itemId": "cheese",
+                    "quantity": 3
+                  },
+                  {
+                    "itemId": "pepper",
+                    "quantity": 2
+                  },
+                  {
+                    "itemId": "garden",
+                    "quantity": 3
+                  }
+                ]
+              }
+            ]
+          },
+          "result": {
+            "statedQuantity": 8,
+            "computedQuantity": 8,
+            "matches": true,
+            "windowsTotal": 8,
+            "windowsMatch": true,
+            "issues": [],
+            "simulated": true,
+            "calculation": "Integer sum of supplied item quantities; no model calculation."
+          }
+        }
+      ]
+    },
+    {
+      "name": "actual proposal adopts only as unapproved draft",
+      "passed": false,
+      "observed": false
+    },
+    {
+      "name": "valid quote matches independent cents",
+      "passed": false,
+      "observed": null
+    }
+  ],
+  "summary": {
+    "mechanicalPassed": 6,
+    "mechanicalTotal": 17,
+    "semanticVerdict": "pending-independent-review",
+    "benchmarkClaim": false
+  },
+  "semanticReview": {
+    "status": "pending-independent-review",
+    "criteria": [
+      "Retain pickup at Maple Street Kitchen, not Fictional Willow Yard, employer name or Maple Street South.",
+      "Classify the family order as direct-order; mentioning employment does not make it a workplace meal.",
+      "Do not ask to clarify a pickup site, time, total or flavor allocation already stated."
+    ],
+    "globalCriteriaRequired": true,
+    "allQuantityCallsRequireSourceReview": true
+  },
+  "limits": "Mechanical arithmetic and source checks do not establish semantic accuracy or performed actions."
+}

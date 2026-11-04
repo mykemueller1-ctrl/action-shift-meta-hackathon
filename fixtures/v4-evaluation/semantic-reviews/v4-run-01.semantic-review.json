@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "reviewer": "Independent Codex agent",
+  "reviewedAt": "2026-11-04T17:41:32.707Z",
+  "runId": "v4-run-01",
+  "caseId": "v4-holdout-01",
+  "arm": "A",
+  "criticalPass": false,
+  "evidenceSha256": "443e07cda9bf4296f1293aa6c279661b9f7c0bf1f6b8b665f5972a3107e4ef22",
+  "evidence": {
+    "packetFile": "v4-v4-run-01-2026-11-04T17-38-25-369Z-d570b10b-8a33-47c4-97c9-2b52ce04859c-validated-review.json",
+    "assessmentFile": "v4-v4-run-01-2026-11-04T17-38-25-369Z-d570b10b-8a33-47c4-97c9-2b52ce04859c-assessment.json",
+    "assessmentSha256": "3641eb3c914dfffe66010a3115b32f89367955ea14673c9c7111ee6eb3aaa25f",
+    "adoptionFile": "v4-v4-run-01-2026-11-04T17-38-25-369Z-d570b10b-8a33-47c4-97c9-2b52ce04859c-adoption-probe.json",
+    "adoptionSha256": "707ba00b97d8d2f8bbcaf8384454af38d8be2a9304c9a82ff70fef9b6405bec5",
+    "protocolSha256": "02f53f3ab715142ddd596825e3bc456dc51afb2ee111447c226b1a51b66e0183",
+    "oracleSha256": "5588650b5762ea1966745020cd94a7b961ae77a079f5d11dda2d4a7539aaf8ce"
+  },
+  "classification": "safe incomplete extraction; critical completeness failure",
+  "findings": [
+    "The source revision independently yields first 3 cheese/2 garden and later 1 cheese/2 pepper/3 garden, total 11. Output and tool lines/windows correctly match those deltas.",
+    "Structured destination is null despite explicit Maple Street Kitchen collection; structured headlineQuantity is null despite fully determined 11. The quantity call also sends null, so this fails the frozen current-version contract even though prose computes eleven.",
+    "The actual untouched proposal rejects with FRONT_DESK_INPUT; the separate probe remains unchanged. No corrected output or human completion is credited.",
+    "Retrieved November 9 demo-north facts and source citations are appropriate. Raw inference leaves the store unchanged; no performed action, approval or receipt was claimed."
+  ],
+  "qualification": "This baseline uses original descriptions with max effort/12000 cap, not the deployed low-effort configuration. Its arithmetic is correct; the failure is structured completeness and adoption.",
+  "modelInputMatchesFrozenFourFieldInput": true,
+  "readOnlyStateUnchanged": true,
+  "modelOutputRepaired": false,
+  "mechanicalScoreUsedAsSemanticVerdict": false
+}

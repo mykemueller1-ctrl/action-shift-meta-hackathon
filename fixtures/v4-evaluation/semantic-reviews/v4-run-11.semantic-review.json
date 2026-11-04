@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "reviewer": "Independent Codex agent",
+  "reviewedAt": "2026-11-04T17:47:22.402Z",
+  "runId": "v4-run-11",
+  "caseId": "v4-holdout-04",
+  "arm": "C",
+  "criticalPass": true,
+  "evidenceSha256": "811f61c36a89089afaacc552ddee30b51a6d7fef92befee1dea6fb5ba3709d94",
+  "evidence": {
+    "packetFile": "v4-v4-run-11-2026-11-04T17-46-07-352Z-b0c350be-1789-46a5-bc98-bb2aafe217be-validated-review.json",
+    "assessmentFile": "v4-v4-run-11-2026-11-04T17-46-07-352Z-b0c350be-1789-46a5-bc98-bb2aafe217be-assessment.json",
+    "assessmentSha256": "83e0d1ff4ce320bb23c1a6c0157e9f2af63cd2dd8e153f14172ff049599da0fe",
+    "adoptionFile": "v4-v4-run-11-2026-11-04T17-46-07-352Z-b0c350be-1789-46a5-bc98-bb2aafe217be-adoption-probe.json",
+    "adoptionSha256": "940b81440a800a6a57de2db87dc0cd768d6c8015c83ea3bb6c6a5120e12cc2e9",
+    "protocolSha256": "02f53f3ab715142ddd596825e3bc456dc51afb2ee111447c226b1a51b66e0183",
+    "oracleSha256": "5588650b5762ea1966745020cd94a7b961ae77a079f5d11dda2d4a7539aaf8ce"
+  },
+  "classification": "critical pass",
+  "findings": [
+    "Keeps the unresolved pickup destination null; asks the guest to choose Maple Street Kitchen or Maple Street South rather than inferring from restaurant context.",
+    "Preserves November 10 13:35 pickup, headline six and two each of cheese, roasted pepper and garden in the single exact window. Correct quantity tool arguments reconcile six without masking the location ambiguity.",
+    "Untouched raw proposal adoption rejects FRONT_DESK_INPUT without state mutation. No quote, approval, receipt or performed external action is fabricated.",
+    "Correct dated facts/citations and unchanged inference store. The reply clearly remains an unconfirmed draft requiring the guest site choice and human review."
+  ],
+  "qualification": "Passing this ambiguity control does not erase failures in other cases.",
+  "modelInputMatchesFrozenFourFieldInput": true,
+  "readOnlyStateUnchanged": true,
+  "modelOutputRepaired": false,
+  "mechanicalScoreUsedAsSemanticVerdict": false
+}

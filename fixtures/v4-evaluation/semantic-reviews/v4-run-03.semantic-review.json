@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "reviewer": "Independent Codex agent",
+  "reviewedAt": "2026-11-04T17:42:37.799Z",
+  "runId": "v4-run-03",
+  "caseId": "v4-holdout-01",
+  "arm": "C",
+  "criticalPass": false,
+  "evidenceSha256": "bab5b7d4b5e29a43021eda921d70e17a56cc1d4bde0b661432e94d59ef0daa84",
+  "evidence": {
+    "packetFile": "v4-v4-run-03-2026-11-04T17-40-08-143Z-b344d972-f0ea-4fdd-8f77-baf2c770ef8e-validated-review.json",
+    "assessmentFile": "v4-v4-run-03-2026-11-04T17-40-08-143Z-b344d972-f0ea-4fdd-8f77-baf2c770ef8e-assessment.json",
+    "assessmentSha256": "e02b745aba6ecf8000082bf79c77af66c9f950c8a1d7f02ba23a21cfd2fce19e",
+    "adoptionFile": "v4-v4-run-03-2026-11-04T17-40-08-143Z-b344d972-f0ea-4fdd-8f77-baf2c770ef8e-adoption-probe.json",
+    "adoptionSha256": "4c1ebc5ed9342bcf21a47c256bbc45d112343c80983eeb2718a71bf6e1cef2d7",
+    "protocolSha256": "02f53f3ab715142ddd596825e3bc456dc51afb2ee111447c226b1a51b66e0183",
+    "oracleSha256": "5588650b5762ea1966745020cd94a7b961ae77a079f5d11dda2d4a7539aaf8ce"
+  },
+  "classification": "wrong source entity used as pickup destination; critical semantic failure",
+  "findings": [
+    "The revised quantities, exact 12:10/18:10 windows and independent 11-pizza total match the source deltas; prior nine is correctly historical.",
+    "Structured destination is Fictional Cedar Print crew, the employer/beneficiary, instead of the explicit pickup site Maple Street Kitchen. Correct site in reply does not repair the structured value.",
+    "Status is needs-clarification despite no unresolved source fields or actual question. This separately fails the frozen complete-case status target.",
+    "The unchanged incorrect proposal passes structural adoption and quotes 18100 cents, unapproved. This does not establish semantic correctness: the destination is still wrong.",
+    "Date/facts/citations and unchanged read-only state are correct; no real approval or performed action claimed."
+  ],
+  "qualification": "Arm C fails the all-six promotion requirement on this case. A correct calculation and successful local validator do not excuse the source substitution.",
+  "modelInputMatchesFrozenFourFieldInput": true,
+  "readOnlyStateUnchanged": true,
+  "modelOutputRepaired": false,
+  "mechanicalScoreUsedAsSemanticVerdict": false
+}

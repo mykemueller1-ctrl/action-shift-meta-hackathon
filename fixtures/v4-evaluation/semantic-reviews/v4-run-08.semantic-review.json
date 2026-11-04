@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "reviewer": "Independent Codex agent",
+  "reviewedAt": "2026-11-04T17:46:53.194Z",
+  "runId": "v4-run-08",
+  "caseId": "v4-holdout-03",
+  "arm": "A",
+  "criticalPass": true,
+  "evidenceSha256": "01efcc4b6ab2a4b814d8e26a10175af94a4177724a8c101f905350f33bbfe0ae",
+  "evidence": {
+    "packetFile": "v4-v4-run-08-2026-11-04T17-43-48-384Z-d781f062-ef02-487c-bca5-80abb49427d4-validated-review.json",
+    "protocolSha256": "02f53f3ab715142ddd596825e3bc456dc51afb2ee111447c226b1a51b66e0183",
+    "oracleSha256": "5588650b5762ea1966745020cd94a7b961ae77a079f5d11dda2d4a7539aaf8ce",
+    "assessmentFile": "v4-v4-run-08-2026-11-04T17-43-48-384Z-d781f062-ef02-487c-bca5-80abb49427d4-assessment.json",
+    "assessmentSha256": "b28cfa4f58322dcd206809fcc8c027bb20538ae60b4a7b4368d4c1390483dd46",
+    "adoptionFile": "v4-v4-run-08-2026-11-04T17-43-48-384Z-d781f062-ef02-487c-bca5-80abb49427d4-adoption-probe.json",
+    "adoptionSha256": "9974828b553aa10cd3692cd118d7c512d8374287656f5de8b6503edc40f4f314"
+  },
+  "classification": "critical pass",
+  "findings": [
+    "Preserves the known Maple Street Kitchen pickup site, November 9 date, headline seven and exact two cheese/three pepper/two garden overall counts.",
+    "Both window allocations remain empty; first ready time is 12:45 and the later time is null. Questions and prose retain three then four and ask the exact missing flavor assignments and later time.",
+    "Only the overall quantity check is submitted, with windows empty. No intermediate tool call invents allocations or time. Raw proposal adoption rejects FRONT_DESK_INPUT unchanged. Both separate labeled test-only isolation probes reject with unchanged state.",
+    "Correct dated facts/citations, unchanged inference store, no approval/receipts or actual external action claimed."
+  ],
+  "qualification": "A passes this uncertainty control; it is not evidence of success on its earlier complete-request/location cases.",
+  "modelInputMatchesFrozenFourFieldInput": true,
+  "readOnlyStateUnchanged": true,
+  "modelOutputRepaired": false,
+  "mechanicalScoreUsedAsSemanticVerdict": false
+}

@@ -1,0 +1,338 @@
+{
+  "schemaVersion": 1,
+  "experimentId": "v4-model-contract-2026-11-04-v1",
+  "frozenAt": "2026-11-04T17:26:19.475Z",
+  "status": "Frozen local specification; only existing build owner may execute after its transport/source/budget preflight is recorded.",
+  "scope": "No calls by reviewer. Preserve V3 and every earlier raw result/verdict. No automatic publication or promotion. Latest user authorizes improvements within $20 total today, not a separate $20 per worker/experiment.",
+  "inputs": {
+    "file": "holdout-inputs.frozen.json",
+    "sha256": "a548be038064ea97a589ae8f26df2ac3af97556c4689ce361dd0e63ad8548309",
+    "oracleFile": "holdout-expectations.private.frozen.json",
+    "oracleSha256": "5588650b5762ea1966745020cd94a7b961ae77a079f5d11dda2d4a7539aaf8ce",
+    "serializedModelKeys": [
+      "synthetic",
+      "restaurantId",
+      "demoNow",
+      "message"
+    ],
+    "prohibitedInModelPayload": [
+      "scenarioId",
+      "case ID/name",
+      "arm/phase labels",
+      "appCaseId",
+      "setupActions",
+      "expected or reference outputs",
+      "oracle text/hashes",
+      "evaluation criteria",
+      "adoption outcome",
+      "source-delta oracle"
+    ],
+    "harnessRule": "Construct a metadata packet locally if adapter requires scenarioId, then call frontDeskModelInput; independently record/assert the actual first user JSON has exactly four allowed keys and matches the frozen .input object. Tool results are only genuine current facts/calculations."
+  },
+  "common": {
+    "reasoningEffort": "max",
+    "maxOutputTokens": 12000,
+    "maxRequestsPerRun": 3,
+    "maxToolCallsPerRun": 8,
+    "timeoutMs": 120000,
+    "maxContextBytes": 160000,
+    "store": false,
+    "automaticRetries": 0,
+    "tools": "Same two read-only tools and same local implementation for every arm.",
+    "outputSchemaShape": "Same exact keys, types, required fields and validation for all arms; only B/C shared descriptions differ from A.",
+    "sampling": "Identical supported API defaults; no arm-specific temperature or other knobs.",
+    "freshStorePerRun": true,
+    "setup": "Apply only the local setupActions for that case before binding read-only lookupFacts/checkQuantities. Use current store version; never serialize setup metadata to model."
+  },
+  "arms": [
+    {
+      "id": "A",
+      "label": "Fresh original-contract Spark max comparator",
+      "model": "muse-spark-1.3",
+      "contract": "Original V3 instructions, tool descriptions, result-schema descriptions, schema structure and validator unchanged.",
+      "changesFromCurrentDeployment": "Transport envelope raises effort low→max and max_output_tokens 5000→12000. This is not the deployed low-effort baseline or a rescore of historical packets."
+    },
+    {
+      "id": "B",
+      "label": "Clarified-contract Spark max",
+      "model": "muse-spark-1.3",
+      "contract": "Generic quantity/pickup description and instruction clarification only; same wording in tool and result. Apply operator-contract-review-2026-11-04.md, preserving exact runtime validation/tool behavior and no per-case hints.",
+      "comparison": "A versus B isolates the frozen contract clarification bundle under the same model/settings."
+    },
+    {
+      "id": "C",
+      "label": "Clarified-contract Wonder max",
+      "model": "muse-wonder-1.0",
+      "contract": "Byte-identical instructions, tool/schema descriptions and validator to B; only model ID differs.",
+      "comparison": "B versus C compares models at the same declared max effort/output cap. Equal setting names and token caps do not mean equal compute or sampling behavior. A versus C combines contract and model changes; do not attribute it to one."
+    }
+  ],
+  "runOrder": [
+    {
+      "runId": "v4-run-01",
+      "caseId": "v4-holdout-01",
+      "arm": "A",
+      "phase": "initial"
+    },
+    {
+      "runId": "v4-run-02",
+      "caseId": "v4-holdout-01",
+      "arm": "B",
+      "phase": "initial"
+    },
+    {
+      "runId": "v4-run-03",
+      "caseId": "v4-holdout-01",
+      "arm": "C",
+      "phase": "initial"
+    },
+    {
+      "runId": "v4-run-04",
+      "caseId": "v4-holdout-02",
+      "arm": "B",
+      "phase": "initial"
+    },
+    {
+      "runId": "v4-run-05",
+      "caseId": "v4-holdout-02",
+      "arm": "C",
+      "phase": "initial"
+    },
+    {
+      "runId": "v4-run-06",
+      "caseId": "v4-holdout-02",
+      "arm": "A",
+      "phase": "initial"
+    },
+    {
+      "runId": "v4-run-07",
+      "caseId": "v4-holdout-03",
+      "arm": "C",
+      "phase": "initial"
+    },
+    {
+      "runId": "v4-run-08",
+      "caseId": "v4-holdout-03",
+      "arm": "A",
+      "phase": "initial"
+    },
+    {
+      "runId": "v4-run-09",
+      "caseId": "v4-holdout-03",
+      "arm": "B",
+      "phase": "initial"
+    },
+    {
+      "runId": "v4-run-10",
+      "caseId": "v4-holdout-04",
+      "arm": "A",
+      "phase": "initial"
+    },
+    {
+      "runId": "v4-run-11",
+      "caseId": "v4-holdout-04",
+      "arm": "C",
+      "phase": "initial"
+    },
+    {
+      "runId": "v4-run-12",
+      "caseId": "v4-holdout-04",
+      "arm": "B",
+      "phase": "initial"
+    },
+    {
+      "runId": "v4-run-13",
+      "caseId": "v4-holdout-05",
+      "arm": "C",
+      "phase": "confirmation"
+    },
+    {
+      "runId": "v4-run-14",
+      "caseId": "v4-holdout-05",
+      "arm": "B",
+      "phase": "confirmation"
+    },
+    {
+      "runId": "v4-run-15",
+      "caseId": "v4-holdout-05",
+      "arm": "A",
+      "phase": "confirmation"
+    },
+    {
+      "runId": "v4-run-16",
+      "caseId": "v4-holdout-06",
+      "arm": "B",
+      "phase": "confirmation"
+    },
+    {
+      "runId": "v4-run-17",
+      "caseId": "v4-holdout-06",
+      "arm": "A",
+      "phase": "confirmation"
+    },
+    {
+      "runId": "v4-run-18",
+      "caseId": "v4-holdout-06",
+      "arm": "C",
+      "phase": "confirmation"
+    }
+  ],
+  "stagePolicy": {
+    "initialCases": [
+      "v4-holdout-01",
+      "v4-holdout-02",
+      "v4-holdout-03",
+      "v4-holdout-04"
+    ],
+    "initialMaxRuns": 12,
+    "initialMaxRequests": 36,
+    "confirmationCases": [
+      "v4-holdout-05",
+      "v4-holdout-06"
+    ],
+    "confirmationMaxRuns": 6,
+    "confirmationMaxRequests": 18,
+    "maximumRuns": 18,
+    "maximumRequests": 54,
+    "confirmationRule": "Run both confirmation cases across all three arms if initial stage is complete, at least one of B/C passes all four initial cases critically, and reservation/budget gates permit the remaining planned requests. Initial strict improvement over A is NOT required to advance. If neither B/C passes all four, the final all-six gate is impossible and stop appropriately. Do not tune prompts after seeing initial results.",
+    "semanticFailure": "A complete semantic failure is retained and does not earn a retry. Finish scheduled initial pairs where budget/transport permit, rather than selectively omitting an unfavorable case.",
+    "economy": "Do not require early critical gain: case 06 can reveal an improvement not visible in the first four. Stop early only if neither candidate passes all four initial critical cases, or transport/budget prevents safe completion. A budget-limited final comparison is inconclusive, not a promotion."
+  },
+  "budget": {
+    "totalAuthorizedTodayUsd": 20,
+    "initialPhaseCapUsd": 3,
+    "defaultExperimentCapUsd": 3,
+    "note": "The $3 experiment guard includes initial and confirmation calls by default. Any owner-side increase requires a recorded guard revision before further requests and must remain within the same $20 daily cap; it is not new user money.",
+    "singleSpender": "Existing build owner only.",
+    "preRequest": "Read shared charged/reserved ledger and conservative official-price reservation for this request including remaining input/output capacity. Stop BEFORE a request if daily or phase/experiment guard would be exceeded. Unknown/timeout outcomes keep reservation until accounted. Never force all calls to fit the plan.",
+    "noAutomaticRetries": true
+  },
+  "preflight": {
+    "required": [
+      "Freeze generic clarified candidate before reading holdout contents; record candidate source/prompt/tools/schema/validator hashes and exact allowed diff.",
+      "Verify official availability, model IDs, max-effort support, structured-output/tool compatibility, output limits and prices for both models. If the verified Wonder ID differs, record a protocol revision before first call; no fallback under the same arm label.",
+      "Pin current core/facts and demonstrate fresh-store setup produces the expected dated correction only for case 05. No .local-state from demo capture is inherited.",
+      "Capture offline request construction to verify A original content and B/C identical clarified content; IDs/oracles excluded; exact settings common.",
+      "Record no-network integrity validation of cases/oracles and source-delta arithmetic.",
+      "Root/owner records preflight completion and run manifest before inference; do not ask Myke to repeat the already supplied $20 authorization."
+    ],
+    "baselineSource": "C:/Users/Owner/Documents/Codex/2026-11-03/got-meta-open-in-chrome-there/work/action-shift-v3/src/front-desk-meta.mjs",
+    "baselineAdapterSha256": "cb4fdad8852a5449d025eede6c435dee2f40a37afef1bb0a114ad232dd64354f",
+    "baselineCoreSha256": "2823e0ae93b43658c8f07297b0506e084c5e3f2124eb7756c45a7eb5132cc198",
+    "localIntegrityEvidence": {
+      "file": "preflight-integrity-local.json",
+      "sha256": "0069aa165de262a9770adc7e634285c524fd4c42c0a81186866a234b73817b48"
+    }
+  },
+  "scoring": {
+    "criticalCasePass": "Every source-bound required field, tool-argument constraint, narrow clarification/consent behavior and actual adoption/blocking condition in the frozen oracle passes. A null proposal can be safe abstention but fails known-field preservation when the oracle expects a partial proposal. Tool matches:true alone is not a pass.",
+    "sourceMeaning": "Independently apply each stated line/window change to the supplied prior plan, then compare exact quantities and service times to output. Never infer correctness from model/tool agreement over the same invented lines.",
+    "toolArguments": "Read every call, not only the last. Known overall counts and unknown allocation/time boundaries apply during tool use as well as final output.",
+    "prose": "Check current/historical/derived distinctions and the next question semantically; style/length never compensates for a critical error.",
+    "safeAbstention": "Report separately from correct completion and separately from unsafe fabrication; it does not pass a completeness gate.",
+    "schemaOrModelOutputFailure": "Retain as critical failed/incomplete run with its usage. Do not repair output, swap models, or retry. Continue safely to other scheduled arms only if transport/accounting remains trustworthy and no executable-boundary invariant failed.",
+    "fatalStop": "Stop the remaining queue for authentication/access mismatch, transport status/unknown charge preventing safe reservation, budget breach risk, exposed-secret or unexpected executable tool boundary, or inability to verify which model/settings ran. Missing pairs are inconclusive, never a win.",
+    "caseResults": "One row per arm/case with each critical check, exact omissions, safe vs unsafe failure, adoption outcome, raw evidence IDs, latency, tokens and actual/calculated cost. Retain failures and qualifications."
+  },
+  "promotionGate": {
+    "initialScreen": "At least one of B/C must pass all four initial cases critically to advance, with no early strict-gain requirement. Complete confirmation 05/06 when the budget allows. The final gate still requires all six critical passes, at least one strict gain over A and no critical regression.",
+    "final": "A candidate must complete all six runs, pass every critical case criterion and adoption boundary, show at least one strict fresh critical improvement over A, and no critical regression relative to A. Any missing pair or protocol/budget stop makes promotion unestablished.",
+    "modelUpgrade": "C should be recommended over B only if C yields a strict critical improvement over B on this frozen set without any critical loss and after reporting latency/cost. If B and C tie on all critical cases, report no demonstrated Wonder advantage and prefer the less costly/simpler passing candidate; do not claim latest/larger is automatically better.",
+    "noPromotionOn": [
+      "invented current quantity or allocation",
+      "lost supplied destination",
+      "filled ambiguous destination",
+      "made-up time",
+      "delivery changed to pickup without consent",
+      "unsupported courier or service cause",
+      "invented real action/approval/receipt",
+      "a self-consistent but incorrect revision",
+      "any critical failure or incomplete confirmation"
+    ],
+    "result": "Passing permits a bounded recommendation and separately reviewed V4 candidate; it does not modify V3, rescore earlier failures, prove a reliability rate, or authorize automatic publication.",
+    "explicitCaseGroups": {
+      "completePositives": [
+        "v4-holdout-01",
+        "v4-holdout-06"
+      ],
+      "uncertaintyConflictConsentControls": [
+        "v4-holdout-02",
+        "v4-holdout-03",
+        "v4-holdout-04",
+        "v4-holdout-05"
+      ],
+      "allMustPass": true
+    },
+    "tiePolicy": "If B and C tie on ALL critical and semantic checks, report a tie and no evidence of Wonder quality superiority. Prefer the lower observed cost/latency default unless the owner documented a user-driven reason before looking at results. Retain both result sets and disclose any cost/latency tradeoff rather than inventing a ranking.",
+    "originalFailuresRetained": true
+  },
+  "adoptionProbes": {
+    "separateFromModel": true,
+    "method": "Use the existing apply_request_proposal action on a fresh identical in-memory store after preserving/scoring raw output. Pass the actual result.proposal verbatim with explicit Demo operator and authored local probe provenance. Do not route new IDs through the frozen recording loader or pretend they were approved recordings.",
+    "beforeAfter": "Record all cases before/after read-only inference; they must match. Record probe before/after, requestVersion, proposalSource.sourceVerified false for unconfigured direct probes, approval/quote/receipts. Complete drafts remain unapproved with no receipts. Only call prepare_quote separately for expected valid/blocker checks; never approve or acknowledge.",
+    "retention": "A rejected adoption must leave state unchanged. Conflicting total and unsupported delivery may be adopted as unapproved drafts but must have QUANTITY_MISMATCH/PICKUP_ONLY and reject quote preparation. Unknown allocations/time or ambiguous destination reject adoption. Do not conflate these outcomes.",
+    "noSemanticRepair": true
+  },
+  "limits": [
+    "Six deliberately targeted synthetic inputs are a local development holdout, not external blind evaluation or a reliability benchmark.",
+    "Authors knew earlier failure categories; neither old failure corrections nor current prompt redesign make prior failures disappear.",
+    "One sample per arm/case cannot establish statistical significance or stable ranking.",
+    "A uses max/12000 instead of deployed low/5000; do not attribute gains versus historical deployment to contract alone. A→B is the contemporaneous contract comparison.",
+    "B→C fixes declared effort but max can imply different internal compute per model; report that limitation.",
+    "If output truncates at the common cap, keep that failure; increasing only one arm invalidates the comparison. A new paired experiment must be separately frozen."
+  ],
+  "protocolRevision": "2a-final",
+  "supersedes": {
+    "file": "acceptance-protocol-v2.frozen.json",
+    "sha256": "0342ec2adf3e8a573ecfc18fd5da8c1c10d0efbe347a5e58856b57c2c5bbc236",
+    "reason": "Pre-call stage-advancement correction requested by root, before any live call/results. Case 06 is a further complete positive and may reveal a critical gain even if initial four arms tie. Preserve all previous freeze files; no cases, oracles, arms, budgets or final gate change."
+  },
+  "candidateFreeze": {
+    "path": "C:\\Users\\Owner\\Documents\\Codex\\2026-11-03\\got-meta-open-in-chrome-there\\work\\meta-v4-contract\\candidate-freeze-v2.json",
+    "sha256": "cea9dd99fa37bdd8aa967f0bccfa111c34d795b231f6b79219e163d06f0dddfd",
+    "status": "frozen-before-holdout-inspection",
+    "createdAt": "2026-11-04T17:24:00.333Z",
+    "originalContractAdapter": "C:\\Users\\Owner\\Documents\\Codex\\2026-11-03\\got-meta-open-in-chrome-there\\work\\meta-v4-contract\\baseline-front-desk-meta.mjs",
+    "clarifiedContractAdapter": "C:\\Users\\Owner\\Documents\\Codex\\2026-11-03\\got-meta-open-in-chrome-there\\work\\meta-v4-contract\\front-desk-meta.mjs",
+    "artifacts": [
+      {
+        "filename": "front-desk-meta.mjs",
+        "sha256": "f50dab170fe67adbe2627d4eb5af317a9dc873ad686b9d695b90a42716188a44",
+        "bytes": 21145
+      },
+      {
+        "filename": "baseline-front-desk-meta.mjs",
+        "sha256": "8897894b386f657fffe2f037f3c0fcc39dc7b26ddda5454b18ed04df9941d667",
+        "bytes": 19244
+      },
+      {
+        "filename": "adapter-regression.test.mjs",
+        "sha256": "b130d8d9684b6ac0e9b6b85d0f92a8f78650be81a884ae98d17ae0db9b927665",
+        "bytes": 11769
+      },
+      {
+        "filename": "contract.test.mjs",
+        "sha256": "010a3ded2f92eee2209d5b535b21205134bad3bff4430328956cad1a4f68df12",
+        "bytes": 10859
+      }
+    ],
+    "baselineContractHashes": {
+      "promptSha256": "7b5f96852e665518b422add709935b121bacbca971472cd38f768d57cf8b7d6a",
+      "toolsSha256": "2c44e53c505af51d102bc434566fc8a47bd2c7bdc00de9a907beeff87013cb8b",
+      "schemaSha256": "0d5777208af137d3e3c18dc445f02712288e0de3f1fa1885f2227b4d99d76036",
+      "completeContractSha256": "08946237eee30d2615970c566b597635a50be142e7f3cf3a7eb12edadf0434b7"
+    },
+    "candidateContractHashes": {
+      "promptSha256": "e019830d6e8ced283fe6c890c8bdc5a17ae2fdb4d5bf2be9efddd4182ecc1a21",
+      "toolsSha256": "2d5630a62d68a8e9ad505338d02c228c0f5f3958f747aeea759d3fdbc7261ec4",
+      "schemaSha256": "ba623a820c1a07168ea737a1bb3e2224761d84662f28d2d27097dd295bb90ca1",
+      "completeContractSha256": "cf9b8c3460b7d732f20f89ed98e92aa42e87e7170a5d2d48fdee7d36a35fcdb6"
+    },
+    "priorFreezeRetained": {
+      "filename": "candidate-freeze.json",
+      "sha256": "7515df3531d6a68f40a72c8fade1d6d58b238c7b2604d923e22b5576e0504cf7",
+      "reason": "Baseline diagnostic request metadata now includes its fixed model for per-model usage accounting. No model-facing contract change."
+    },
+    "diagnosticOnlyCorrection": "Baseline accounting metadata now includes fixed model identity. Original model-facing prompt, tools, schema and validator unchanged."
+  }
+}

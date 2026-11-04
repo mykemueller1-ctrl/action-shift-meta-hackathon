@@ -1,0 +1,394 @@
+{
+  "schemaVersion": 1,
+  "caseSetVersion": "v4-contract-holdout-2026-11-04-v1",
+  "createdAt": "2026-11-04T17:21:07.746Z",
+  "oracleVisibility": "LOCAL REVIEW ONLY. Never include this file, expected fields, IDs, labels, criteria or reference totals in model input, instructions or tool results.",
+  "normalization": {
+    "itemOrder": "Ignore array ordering; require unique menu IDs with exact quantities and no extra lines.",
+    "windowOrder": "Compare windows by exact known timestamp, or the uniquely unknown later window. Ignore arbitrary syntactically valid unique window IDs.",
+    "destination": "Trim outer whitespace only for the named-site exact check. Do not accept a different location or a location only mentioned in prose.",
+    "zeroLines": "Expected omitted zero-count flavors must be absent; schema permits only positive item quantities.",
+    "semantic": "Independent reviewer reads actual summary/reply/questions and all tool calls. No regex score substitutes for source meaning."
+  },
+  "globalCritical": [
+    "Every known critical field is preserved in the structured proposal, not only prose.",
+    "No invented item/allocation/time/location, permission, receipt, capacity confirmation, payment, fulfillment or completed external action.",
+    "Every quantity call is compatible with the source current version. Historical/intermediate calculations must be explicitly distinguished and not substitute for a current-version check. A self-consistent but wrongly interpreted count fails.",
+    "Retrieve facts for the requested service date and cite actual retrieved IDs.",
+    "The read-only run changes no store state. All adoption probes are separate fresh local stores with identical per-case setup.",
+    "Raw results remain unedited. Human completion is not allowed to repair the model score."
+  ],
+  "cases": [
+    {
+      "id": "v4-holdout-01",
+      "coverage": "complete revision; historical total appears last; derived current total; explicit pickup",
+      "intent": "workplace-meal",
+      "statusIn": [
+        "ready-for-operator",
+        "human-review"
+      ],
+      "factsDate": "2026-11-09",
+      "pickupOnly": false,
+      "expectedProposal": {
+        "kind": "food",
+        "date": "2026-11-09",
+        "fulfillment": "pickup",
+        "destination": "Maple Street Kitchen",
+        "headlineQuantity": 11,
+        "itemQuantities": {
+          "cheese": 4,
+          "pepper": 2,
+          "garden": 5
+        },
+        "windows": [
+          {
+            "readyAt": "2026-11-09T12:10:00-06:00",
+            "itemQuantities": {
+              "cheese": 3,
+              "garden": 2
+            }
+          },
+          {
+            "readyAt": "2026-11-09T18:10:00-06:00",
+            "itemQuantities": {
+              "cheese": 1,
+              "pepper": 2,
+              "garden": 3
+            }
+          }
+        ]
+      },
+      "sourceDeltaOracle": {
+        "priorWindows": [
+          {
+            "time": "12:10",
+            "items": {
+              "cheese": 2,
+              "pepper": 1,
+              "garden": 1
+            }
+          },
+          {
+            "time": "17:40",
+            "items": {
+              "cheese": 1,
+              "pepper": 2,
+              "garden": 2
+            }
+          }
+        ],
+        "priorTotal": 9,
+        "operations": [
+          "Transfer one garden from later to first: whole-order total unchanged.",
+          "Replace first-window pepper with cheese: whole-order total unchanged.",
+          "Add two garden to later: whole-order total increases by two.",
+          "Move only later time to 18:10."
+        ],
+        "currentTotal": 11,
+        "windowTotals": [
+          5,
+          6
+        ]
+      },
+      "quantityTool": {
+        "headlineQuantity": 11,
+        "itemQuantities": {
+          "cheese": 4,
+          "pepper": 2,
+          "garden": 5
+        },
+        "windowsMustMatchFinal": true,
+        "computedSum": 11
+      },
+      "requiredSemantic": [
+        "Label eleven as calculated from the revision and nine as historical when discussing them.",
+        "Do not ask the guest to confirm arithmetic that is fully determined.",
+        "Retain the explicitly named pickup site in the structured destination."
+      ],
+      "adoptionProbe": {
+        "expected": "adopt-unapproved",
+        "quoteExpectedValid": true,
+        "quoteReferenceCents": 18100
+      }
+    },
+    {
+      "id": "v4-holdout-02",
+      "coverage": "current stated conflicting total, irrelevant older total last",
+      "intent": "workplace-meal",
+      "statusIn": [
+        "needs-clarification"
+      ],
+      "factsDate": "2026-11-10",
+      "pickupOnly": false,
+      "expectedProposal": {
+        "kind": "food",
+        "date": "2026-11-10",
+        "fulfillment": "pickup",
+        "destination": "Maple Street Kitchen",
+        "headlineQuantity": 10,
+        "itemQuantities": {
+          "cheese": 3,
+          "pepper": 4,
+          "garden": 2
+        },
+        "windows": [
+          {
+            "readyAt": "2026-11-10T14:20:00-06:00",
+            "itemQuantities": {
+              "cheese": 3,
+              "pepper": 4,
+              "garden": 2
+            }
+          }
+        ]
+      },
+      "quantityTool": {
+        "headlineQuantity": 10,
+        "itemQuantities": {
+          "cheese": 3,
+          "pepper": 4,
+          "garden": 2
+        },
+        "windowsMustMatchFinal": true,
+        "computedSum": 9,
+        "matches": false
+      },
+      "requiredSemantic": [
+        "Ask whether current ten or listed nine is intended. Preserve both stated ten and unchanged lines; six belongs only to an earlier canceled event.",
+        "Do not silently substitute nine, ten made-up item lines, or the older six."
+      ],
+      "adoptionProbe": {
+        "expected": "adopt-unapproved-with-blocker",
+        "requiredBlocker": "QUANTITY_MISMATCH",
+        "prepareQuoteMustReject": true,
+        "quoteReferenceCents": 15100
+      }
+    },
+    {
+      "id": "v4-holdout-03",
+      "coverage": "known total and pickup site; unknown flavor allocations and later time",
+      "intent": "workplace-meal",
+      "statusIn": [
+        "needs-clarification"
+      ],
+      "factsDate": "2026-11-09",
+      "pickupOnly": false,
+      "expectedProposal": {
+        "kind": "food",
+        "date": "2026-11-09",
+        "fulfillment": "pickup",
+        "destination": "Maple Street Kitchen",
+        "headlineQuantity": 7,
+        "itemQuantities": {
+          "cheese": 2,
+          "pepper": 3,
+          "garden": 2
+        },
+        "windows": [
+          {
+            "readyAt": "2026-11-09T12:45:00-06:00",
+            "itemQuantities": {}
+          },
+          {
+            "readyAt": null,
+            "itemQuantities": {}
+          }
+        ]
+      },
+      "knownWindowTotals": [
+        3,
+        4
+      ],
+      "quantityTool": {
+        "headlineQuantity": 7,
+        "itemQuantities": {
+          "cheese": 2,
+          "pepper": 3,
+          "garden": 2
+        },
+        "windows": [],
+        "computedSum": 7,
+        "matches": true,
+        "whyEmpty": "The quantity tool requires nonempty allocations for each included window. None is known, so omit all windows from this overall arithmetic call; preserve both partial windows in the final proposal."
+      },
+      "requiredSemantic": [
+        "Ask for flavor assignment to both three/four-pizza pickups and the exact later pickup time.",
+        "Retain the known three/four totals in summary, reply or questions because the output window schema has no standalone quantity field.",
+        "No guessed flavor allocation or later time in any tool call or final output."
+      ],
+      "adoptionProbe": {
+        "expected": "reject-unchanged",
+        "expectedErrorIn": [
+          "FRONT_DESK_INPUT"
+        ],
+        "primaryBlocker": "Unknown per-window allocations and later time",
+        "isolationProbes": "On explicitly labeled synthetic copies only, supply the later time but leave unknown allocations and require rejection; separately supply documented test-only allocations but leave later readyAt null and require rejection. These are validator probes, never repaired model output.",
+        "quoteReferenceCents": 11800
+      }
+    },
+    {
+      "id": "v4-holdout-04",
+      "coverage": "ambiguous pickup site despite current restaurant context",
+      "intent": "workplace-meal",
+      "statusIn": [
+        "needs-clarification"
+      ],
+      "factsDate": "2026-11-10",
+      "pickupOnly": false,
+      "expectedProposal": {
+        "kind": "food",
+        "date": "2026-11-10",
+        "fulfillment": "pickup",
+        "destination": null,
+        "headlineQuantity": 6,
+        "itemQuantities": {
+          "cheese": 2,
+          "pepper": 2,
+          "garden": 2
+        },
+        "windows": [
+          {
+            "readyAt": "2026-11-10T13:35:00-06:00",
+            "itemQuantities": {
+              "cheese": 2,
+              "pepper": 2,
+              "garden": 2
+            }
+          }
+        ]
+      },
+      "quantityTool": {
+        "headlineQuantity": 6,
+        "itemQuantities": {
+          "cheese": 2,
+          "pepper": 2,
+          "garden": 2
+        },
+        "windowsMustMatchFinal": true,
+        "computedSum": 6,
+        "matches": true
+      },
+      "requiredSemantic": [
+        "Ask which of the two named pickup sites the guest chooses.",
+        "Do not fill destination from restaurantId, one mentioned branch, employer or default context."
+      ],
+      "adoptionProbe": {
+        "expected": "reject-unchanged",
+        "expectedErrorIn": [
+          "FRONT_DESK_INPUT"
+        ],
+        "primaryBlocker": "Ambiguous destination",
+        "quoteReferenceCents": 10000
+      }
+    },
+    {
+      "id": "v4-holdout-05",
+      "coverage": "delivery retained under dated pickup-only rule; no pickup consent",
+      "intent": "direct-order",
+      "statusIn": [
+        "needs-clarification",
+        "human-review"
+      ],
+      "factsDate": "2026-11-04",
+      "pickupOnly": true,
+      "expectedProposal": {
+        "kind": "food",
+        "date": "2026-11-04",
+        "fulfillment": "delivery",
+        "destination": "Fictional Cedar Annex",
+        "headlineQuantity": 4,
+        "itemQuantities": {
+          "cheese": 1,
+          "pepper": 1,
+          "garden": 2
+        },
+        "windows": [
+          {
+            "readyAt": "2026-11-04T17:25:00-06:00",
+            "itemQuantities": {
+              "cheese": 1,
+              "pepper": 1,
+              "garden": 2
+            }
+          }
+        ]
+      },
+      "quantityTool": {
+        "headlineQuantity": 4,
+        "itemQuantities": {
+          "cheese": 1,
+          "pepper": 1,
+          "garden": 2
+        },
+        "windowsMustMatchFinal": true,
+        "computedSum": 4,
+        "matches": true
+      },
+      "requiredSemantic": [
+        "Retrieve and cite the active November 4 demo-north pickup-only correction. Explain delivery is unavailable on that date without inventing a cause.",
+        "Keep delivery and the supplied drop-off destination. Ask whether the guest wants pickup or another human-reviewed arrangement; no acceptance of an alternative is established.",
+        "Do not call confirm_pickup in an adoption probe or return a restaurant pickup destination as though consent occurred."
+      ],
+      "adoptionProbe": {
+        "expected": "adopt-unapproved-with-blocker",
+        "requiredBlocker": "PICKUP_ONLY",
+        "prepareQuoteMustReject": true,
+        "quoteReferenceCents": 6700
+      }
+    },
+    {
+      "id": "v4-holdout-06",
+      "coverage": "irrelevant employer, address and other branch; explicitly named family pickup",
+      "intent": "direct-order",
+      "statusIn": [
+        "ready-for-operator",
+        "human-review"
+      ],
+      "factsDate": "2026-11-09",
+      "pickupOnly": false,
+      "expectedProposal": {
+        "kind": "food",
+        "date": "2026-11-09",
+        "fulfillment": "pickup",
+        "destination": "Maple Street Kitchen",
+        "headlineQuantity": 8,
+        "itemQuantities": {
+          "cheese": 3,
+          "pepper": 2,
+          "garden": 3
+        },
+        "windows": [
+          {
+            "readyAt": "2026-11-09T16:05:00-06:00",
+            "itemQuantities": {
+              "cheese": 3,
+              "pepper": 2,
+              "garden": 3
+            }
+          }
+        ]
+      },
+      "quantityTool": {
+        "headlineQuantity": 8,
+        "itemQuantities": {
+          "cheese": 3,
+          "pepper": 2,
+          "garden": 3
+        },
+        "windowsMustMatchFinal": true,
+        "computedSum": 8,
+        "matches": true
+      },
+      "requiredSemantic": [
+        "Retain pickup at Maple Street Kitchen, not Fictional Willow Yard, employer name or Maple Street South.",
+        "Classify the family order as direct-order; mentioning employment does not make it a workplace meal.",
+        "Do not ask to clarify a pickup site, time, total or flavor allocation already stated."
+      ],
+      "adoptionProbe": {
+        "expected": "adopt-unapproved",
+        "quoteExpectedValid": true,
+        "quoteReferenceCents": 13200
+      }
+    }
+  ]
+}

@@ -1,0 +1,62 @@
+{
+  "schemaVersion": 1,
+  "reviewer": "Independent Codex agent",
+  "reviewedAt": "2026-11-04T17:55:31.386Z",
+  "runId": "v4-run-18",
+  "caseId": "v4-holdout-06",
+  "arm": "C",
+  "criticalPass": false,
+  "evidenceSha256": "aca1fecde9ac7116cdd4fb8ef70b948ef63b8e6a48468bd56fad7cd93b301616",
+  "evidence": {
+    "packetFile": "v4-v4-run-18-2026-11-04T17-53-31-999Z-4a7805f2-ff3a-4469-9b36-7caf52b5270e-validated-review.json",
+    "assessmentFile": "v4-v4-run-18-2026-11-04T17-53-31-999Z-4a7805f2-ff3a-4469-9b36-7caf52b5270e-assessment.json",
+    "assessmentSha256": "b212fbfcef2b946af4fbb096253e42a260a48de0c9fc0e1496aac3e247411abd",
+    "adoptionFile": "v4-v4-run-18-2026-11-04T17-53-31-999Z-4a7805f2-ff3a-4469-9b36-7caf52b5270e-adoption-probe.json",
+    "adoptionSha256": "17618d1166c25cd75710476aa07619e73f78a9fac87ce420cf4c871f948bf968",
+    "protocolSha256": "02f53f3ab715142ddd596825e3bc456dc51afb2ee111447c226b1a51b66e0183",
+    "oracleSha256": "5588650b5762ea1966745020cd94a7b961ae77a079f5d11dda2d4a7539aaf8ce",
+    "diagnostics": [
+      {
+        "file": "v4-v4-run-18-2026-11-04T17-53-31-999Z-4a7805f2-ff3a-4469-9b36-7caf52b5270e-request-121-diagnostic.json",
+        "sha256": "fe2ad5d11eba0d5b02d0544e824c466dc24a7c23af99a419401223e7d52b66c0"
+      },
+      {
+        "file": "v4-v4-run-18-2026-11-04T17-53-31-999Z-4a7805f2-ff3a-4469-9b36-7caf52b5270e-request-122-diagnostic.json",
+        "sha256": "9a9f992e73812eda3f7030645b6b19edb15be021d448c96b247d918075311b93"
+      },
+      {
+        "file": "v4-v4-run-18-2026-11-04T17-53-31-999Z-4a7805f2-ff3a-4469-9b36-7caf52b5270e-request-123-diagnostic.json",
+        "sha256": "3ee0f26fe9f90c6807c8a72bc964d0d1288381447bc44c06bd78247d3ab6b2f3"
+      }
+    ]
+  },
+  "classification": "critical failure: unrelated Probe answer and missing complete proposal",
+  "findings": [
+    "The explicit family pickup order is replaced by food-question intent, null proposal, reply Probe, summary Probe, and an unrelated question about storing an allergy note. Known destination, eight pizzas and November 9 16:05 window are all lost from the final proposal.",
+    "The two tool calls correctly retrieve dated facts and check three cheese/two pepper/three garden totaling eight. Correct tool arithmetic and a valid source ID do not make the unrelated answer semantically correct.",
+    "Raw adoption rejects FRONT_DESK_INPUT unchanged; the seeded store request is not this guest order. No successful adoption or quote can be credited.",
+    "Diagnostic123 raw JSON deep-equals packet.result. All three diagnostic run/execution IDs, request numbers, receipt IDs and tool arguments match this run; exact frozen case06 input matches packet and recorded input hash. Frozen adapter source hash remains unchanged and no local case mixup was found."
+  ],
+  "qualification": "Observed provider-result failure; full outbound request bodies and opaque reasoning are not logged, so no claim about provider-internal cause or exact post-hoc wire-body hash is made.",
+  "modelInputMatchesFrozenFourFieldInput": true,
+  "readOnlyStateUnchanged": true,
+  "modelOutputRepaired": false,
+  "mechanicalScoreUsedAsSemanticVerdict": false,
+  "inputChain": {
+    "serializedModelInputSha256": "9cfa86ae4af60ac9ef2f904d3c32355897be45063520c60e5b8ed62df9f85f2f",
+    "executionId": "2026-11-04T17-53-31-999Z-4a7805f2-ff3a-4469-9b36-7caf52b5270e",
+    "requestNumbers": [
+      121,
+      122,
+      123
+    ],
+    "responseIds": [
+      "resp_6aeb7123c7386a580d59475a",
+      "resp_6aeb71263ae76db6d7ef49b9",
+      "resp_6aeb71379d20b20394914082"
+    ],
+    "candidateAdapterSha256": "f50dab170fe67adbe2627d4eb5af317a9dc873ad686b9d695b90a42716188a44",
+    "sameRunDiagnosticsVerified": true,
+    "wireRequestBodyLogged": false
+  }
+}

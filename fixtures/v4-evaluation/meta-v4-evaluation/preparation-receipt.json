@@ -1,0 +1,23 @@
+{
+  "preparedAt": "2026-11-04T17:34:27.037Z",
+  "status": "ready-for-root-review-not-execution",
+  "technicalProtocolSha256": "81003e1586a9f8110ff358f252423d27f69494ea2bf73512d229730c1630c60c",
+  "baselineUnchanged": true,
+  "baselineSha256": "01a1f39c4db31e5d6c1f3f7dc60b654610415ce97c56a7150b4095460e0e2846",
+  "tests": {
+    "passed": 20,
+    "failed": 0,
+    "command": "node --test work/meta-v4-evaluation/budget-policy.test.mjs work/meta-v4-evaluation/assessment.test.mjs"
+  },
+  "offlinePreflightSha256": "412c9e5f228f16e545d9f96bf78825ae314f25b52a63bf6bf2779a4041d5b193",
+  "offlineRequestsConstructed": 18,
+  "networkCalls": 0,
+  "newBudgetRequests": 0,
+  "totalRequestsStarted": 69,
+  "phaseCapUsd": 3,
+  "cumulativeCapUsd": 20,
+  "initialCumulativeAccountedReservedUsd": 0.533298,
+  "sharedLockPresent": false,
+  "credentialRead": false,
+  "publicationActions": false
+}

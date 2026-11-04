@@ -117,3 +117,13 @@ The newly captured footage includes the actual saved Meta fact lookup, the uncha
 ## Claims not established
 
 General reliability, semantic correctness across unseen cases, production isolation, live channel access, real orders, customer adoption, time saved, financial gain and contest submission remain unestablished by this package.
+
+## V4 model comparison
+
+The [complete frozen comparison](../fixtures/v4-evaluation/README.md) contains six synthetic cases across three arms, one attempt each: original-contract Spark max (A), clarified-contract Spark max (B), and clarified-contract Wonder max (C). All use a 12,000 output cap and identical tool implementations. Independent semantic review—not arithmetic checks alone—recorded A 3/6, B 6/6 and C 1/6 critical passes.
+
+B retained the requested pickup site and current count, preserved an explicit count mismatch, left unknown allocations/time and ambiguous sites unresolved, honored the dated pickup-only rule without inventing consent, and ignored irrelevant employer/commute details. It gained over A on cases 01, 02 and 06 with no lost A pass. That satisfies the frozen bounded promotion rule. No inference retry, answer repair or post-result prompt tuning was used.
+
+The evaluation is a small targeted holdout, not a reliability benchmark. Two complete positive cases and four correctly unresolved or blocked controls are different outcomes; pass does not mean every order was ready to commit. Historical model evaluations remain separate. The V3 video still shows the earlier failed result and explicit human completion, not this new inference.
+
+V4's strict loader and release engineering checks are reported separately in the final release receipt. The model comparison does not establish production authentication, live guest channels, payments, real kitchen execution, adoption or savings.

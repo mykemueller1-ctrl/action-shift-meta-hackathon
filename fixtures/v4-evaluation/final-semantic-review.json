@@ -1,0 +1,131 @@
+{
+  "reviewer": "Independent Codex agent",
+  "runs": [
+    {
+      "runId": "v4-run-01",
+      "caseId": "v4-holdout-01",
+      "arm": "A",
+      "criticalPass": false,
+      "evidenceSha256": "443e07cda9bf4296f1293aa6c279661b9f7c0bf1f6b8b665f5972a3107e4ef22"
+    },
+    {
+      "runId": "v4-run-02",
+      "caseId": "v4-holdout-01",
+      "arm": "B",
+      "criticalPass": true,
+      "evidenceSha256": "544464b379d0b8b3a504565825ed5828dfb77cd9440e68c12c11794d7e36823a"
+    },
+    {
+      "runId": "v4-run-03",
+      "caseId": "v4-holdout-01",
+      "arm": "C",
+      "criticalPass": false,
+      "evidenceSha256": "bab5b7d4b5e29a43021eda921d70e17a56cc1d4bde0b661432e94d59ef0daa84"
+    },
+    {
+      "runId": "v4-run-04",
+      "caseId": "v4-holdout-02",
+      "arm": "B",
+      "criticalPass": true,
+      "evidenceSha256": "89cf13c6ae5fd8ea97e2d2f5970965daeeb8be29f1ec42db7ef26ef6ecc08b1d"
+    },
+    {
+      "runId": "v4-run-05",
+      "caseId": "v4-holdout-02",
+      "arm": "C",
+      "criticalPass": false,
+      "evidenceSha256": "62b46f39e7ce25787dcdf400bfea88cb532dbf5e80c9b9124512971570a3d751"
+    },
+    {
+      "runId": "v4-run-06",
+      "caseId": "v4-holdout-02",
+      "arm": "A",
+      "criticalPass": false,
+      "evidenceSha256": "500fce4b65aff61f9ea00cf9a96f49af89321f82d80fd78981e4b979323871e9"
+    },
+    {
+      "runId": "v4-run-07",
+      "caseId": "v4-holdout-03",
+      "arm": "C",
+      "criticalPass": false,
+      "evidenceSha256": "aa8ad16249e064477a361fc2534357816af9a6442bfcdd9d6b343c2ae7960be5"
+    },
+    {
+      "runId": "v4-run-08",
+      "caseId": "v4-holdout-03",
+      "arm": "A",
+      "criticalPass": true,
+      "evidenceSha256": "01efcc4b6ab2a4b814d8e26a10175af94a4177724a8c101f905350f33bbfe0ae"
+    },
+    {
+      "runId": "v4-run-09",
+      "caseId": "v4-holdout-03",
+      "arm": "B",
+      "criticalPass": true,
+      "evidenceSha256": "8513d442366547247e7f73fd7324d7e1a647ecf934cb9b4dfd3ecbd469ccb0ec"
+    },
+    {
+      "runId": "v4-run-10",
+      "caseId": "v4-holdout-04",
+      "arm": "A",
+      "criticalPass": true,
+      "evidenceSha256": "02edc9f32d431abf12923819a07a0251836c90eed6083c0df23858c566cccc3a"
+    },
+    {
+      "runId": "v4-run-11",
+      "caseId": "v4-holdout-04",
+      "arm": "C",
+      "criticalPass": true,
+      "evidenceSha256": "811f61c36a89089afaacc552ddee30b51a6d7fef92befee1dea6fb5ba3709d94"
+    },
+    {
+      "runId": "v4-run-12",
+      "caseId": "v4-holdout-04",
+      "arm": "B",
+      "criticalPass": true,
+      "evidenceSha256": "dd75ffd155a8dc0301bffb73a35c1f770abaca4c6a66c80bbea90e67fe92382e"
+    },
+    {
+      "runId": "v4-run-13",
+      "caseId": "v4-holdout-05",
+      "arm": "C",
+      "criticalPass": false,
+      "evidenceSha256": "8a87a24cf56aca7e6407fa637024e8bf7f9c411aa709bc24c77823b11fedcc81"
+    },
+    {
+      "runId": "v4-run-14",
+      "caseId": "v4-holdout-05",
+      "arm": "B",
+      "criticalPass": true,
+      "evidenceSha256": "9d5dce8e088ebae653768d22ec24f957f35bfc76b4b85b29eeed282cb5acb04e"
+    },
+    {
+      "runId": "v4-run-15",
+      "caseId": "v4-holdout-05",
+      "arm": "A",
+      "criticalPass": true,
+      "evidenceSha256": "3cbf8c42acc402f381a43adc23068b20b5fa485ef1e04e5b9a7d2b132f2e761e"
+    },
+    {
+      "runId": "v4-run-16",
+      "caseId": "v4-holdout-06",
+      "arm": "B",
+      "criticalPass": true,
+      "evidenceSha256": "6cc538663bbbddf7d2b6d022f98e575cc8ea72273853e3cab213b8de4eac3961"
+    },
+    {
+      "runId": "v4-run-17",
+      "caseId": "v4-holdout-06",
+      "arm": "A",
+      "criticalPass": false,
+      "evidenceSha256": "6d034071751e1f6f2c91beb6c7943fd0eae1abe239ab9549e3bc87684a911376"
+    },
+    {
+      "runId": "v4-run-18",
+      "caseId": "v4-holdout-06",
+      "arm": "C",
+      "criticalPass": false,
+      "evidenceSha256": "aca1fecde9ac7116cdd4fb8ef70b948ef63b8e6a48468bd56fad7cd93b301616"
+    }
+  ]
+}

@@ -45,7 +45,7 @@ async function editPacketAndUpdateLocalHash(directory, mutate) {
 test('all real fixture bytes match the manifest and retain reviewed limitations and failures', async () => {
   const loaded = await loadFrontDeskRecordings();
   assert.equal(loaded.manifest.reviews.length, 10);
-  assert.equal(loaded.recordedReviews.length, 4 + (loaded.additionalManifest?.reviews.filter(entry => entry.displayInApp).length || 0) + (loaded.humanReviewManifest ? 1 : 0));
+  assert.equal(loaded.recordedReviews.length, 4 + (loaded.additionalManifest?.reviews.filter(entry => entry.displayInApp).length || 0) + (loaded.humanReviewManifest ? 1 : 0) + (loaded.v4Manifest?.reviews.filter(entry => entry.displayInApp).length || 0));
   let passed = 0; let total = 0;
   for (const entry of loaded.manifest.reviews) {
     const bytes = await readFile(path.join(fixtureRoot, entry.filename));
@@ -141,7 +141,7 @@ test('mock secondary permits only reviewed case-02 and case-03 with an approved 
 test('pinned v2 preserves reviewed limitations and model input while failed case-01 stays outside replay', async () => {
   const loaded = await loadFrontDeskRecordings();
   assert.deepEqual(loaded.additionalManifest.reviews.map(entry => entry.id).sort(), ['case-02', 'case-03']);
-  assert.equal(loaded.recordedReviews.length, 5 + (loaded.humanReviewManifest ? 1 : 0));
+  assert.equal(loaded.recordedReviews.length, 5 + (loaded.humanReviewManifest ? 1 : 0) + (loaded.v4Manifest?.reviews.filter(entry => entry.displayInApp).length || 0));
   const descriptor = loaded.recordedReviews.find(entry => entry.id === 'case-02');
   assert.equal(descriptor.caseId, 'direct'); assert.equal(descriptor.preferred, true);
   const packet = await loaded.recordedReviewProvider('case-02');

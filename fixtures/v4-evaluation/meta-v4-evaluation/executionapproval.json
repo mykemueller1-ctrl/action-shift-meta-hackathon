@@ -1,0 +1,9 @@
+{
+  "approved": true,
+  "approver": "root",
+  "technicalProtocolSha256": "81003e1586a9f8110ff358f252423d27f69494ea2bf73512d229730c1630c60c",
+  "acceptanceProtocolSha256": "02f53f3ab715142ddd596825e3bc456dc51afb2ee111447c226b1a51b66e0183",
+  "maxNewRequests": 54,
+  "maxPhaseSpendUsd": 3,
+  "maxCumulativeSpendUsd": 20
+}

@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "reviewer": "Independent Codex agent",
+  "reviewedAt": "2026-11-04T17:46:53.196Z",
+  "runId": "v4-run-09",
+  "caseId": "v4-holdout-03",
+  "arm": "B",
+  "criticalPass": true,
+  "evidenceSha256": "8513d442366547247e7f73fd7324d7e1a647ecf934cb9b4dfd3ecbd469ccb0ec",
+  "evidence": {
+    "packetFile": "v4-v4-run-09-2026-11-04T17-44-51-440Z-a2b4af5d-2e60-4bd4-963e-ebe158939904-validated-review.json",
+    "protocolSha256": "02f53f3ab715142ddd596825e3bc456dc51afb2ee111447c226b1a51b66e0183",
+    "oracleSha256": "5588650b5762ea1966745020cd94a7b961ae77a079f5d11dda2d4a7539aaf8ce",
+    "assessmentFile": "v4-v4-run-09-2026-11-04T17-44-51-440Z-a2b4af5d-2e60-4bd4-963e-ebe158939904-assessment.json",
+    "assessmentSha256": "5e5c56234a9f56579f81cbe1193548abfed9b7b019c2877717975c6cd77be4a8",
+    "adoptionFile": "v4-v4-run-09-2026-11-04T17-44-51-440Z-a2b4af5d-2e60-4bd4-963e-ebe158939904-adoption-probe.json",
+    "adoptionSha256": "d230bf0b1f557e694909c0b5c5ec49f03b44a80581e63a5ef67442fc06439411"
+  },
+  "classification": "critical pass",
+  "findings": [
+    "Preserves Maple Street Kitchen, November 9 date, headline seven and exact overall flavor counts. Both window item arrays remain empty; first time is 12:45 and later time remains null.",
+    "Questions correctly retain the three/four split, ask flavor allocation for both windows and ask the missing second pickup time. No invented slot, flavor allocation or consent appears.",
+    "Only the overall quantity check is submitted with windows empty; the raw proposal is rejected FRONT_DESK_INPUT without state change. Separate labeled test-only probes establish each allocation/time guard independently; they are not repaired model outputs.",
+    "Correct dated facts/citations, unchanged inference store, no approval/receipts or actual external action claimed."
+  ],
+  "qualification": "B passes its first three cases. Remaining ambiguity control and both confirmation cases are still required before promotion.",
+  "modelInputMatchesFrozenFourFieldInput": true,
+  "readOnlyStateUnchanged": true,
+  "modelOutputRepaired": false,
+  "mechanicalScoreUsedAsSemanticVerdict": false
+}

@@ -1,0 +1,1577 @@
+{
+  "runId": "v4-run-13",
+  "caseId": "v4-holdout-05",
+  "armId": "C",
+  "mode": "Separate fresh local validator probe with identical explicit setup. No human completion, approval or external action.",
+  "setupProof": [
+    {
+      "restaurantId": "demo-north",
+      "date": "2026-11-04",
+      "pickupOnly": true,
+      "correctionIds": [
+        "demo-correction-1"
+      ]
+    }
+  ],
+  "accepted": false,
+  "errorCode": "FRONT_DESK_INPUT",
+  "unchangedOnRejection": true,
+  "unapprovedDraft": false,
+  "request": {
+    "kind": "food",
+    "headlineQuantity": 2,
+    "items": [
+      {
+        "itemId": "cheese",
+        "quantity": 2
+      }
+    ],
+    "date": "2026-11-04",
+    "fulfillment": "delivery",
+    "destination": "Fictional Studio B",
+    "windows": [
+      {
+        "id": "pickup",
+        "readyAt": "2026-11-04T13:00:00-06:00",
+        "items": [
+          {
+            "itemId": "cheese",
+            "quantity": 2
+          }
+        ],
+        "responsibleRole": "Demo counter lead"
+      }
+    ]
+  },
+  "blockers": [
+    {
+      "code": "PICKUP_ONLY",
+      "message": "The approved operator correction makes this restaurant pickup-only on this date. Ask the customer before changing the request."
+    }
+  ],
+  "quote": null,
+  "prepareQuoteRejected": null,
+  "beforeState": {
+    "cases": [
+      {
+        "id": "workplace",
+        "type": "workplace-meal",
+        "title": "From food post to two crew meals",
+        "restaurantId": "demo-north",
+        "version": 2,
+        "requestVersion": 2,
+        "status": "operator_correction_pending",
+        "mode": "authored-simulation",
+        "simulated": true,
+        "modelCalls": 0,
+        "messages": [
+          {
+            "id": "post-1",
+            "channel": "food-post",
+            "text": "Fresh pizzas from Maple Street Kitchen. Ask us about feeding your crew.",
+            "at": "2026-11-04T10:00:00-06:00",
+            "synthetic": true
+          },
+          {
+            "id": "praise-1",
+            "channel": "comment",
+            "text": "Those look good!",
+            "at": "2026-11-04T10:00:00-06:00",
+            "synthetic": true
+          },
+          {
+            "id": "question-1",
+            "channel": "message",
+            "text": "Is the autumn lunch special still available today? What is a current choice?",
+            "at": "2026-11-04T10:00:00-06:00",
+            "synthetic": true
+          },
+          {
+            "id": "request-1",
+            "channel": "message",
+            "text": "We need 12 pizzas today: 6 cheese, 4 roasted pepper and 3 garden. Please deliver to Fictional Workshop A, with 6 at noon and 7 at 6 p.m.",
+            "at": "2026-11-04T10:00:00-06:00",
+            "synthetic": true
+          }
+        ],
+        "request": {
+          "kind": "food",
+          "headlineQuantity": 12,
+          "items": [
+            {
+              "itemId": "cheese",
+              "quantity": 6
+            },
+            {
+              "itemId": "pepper",
+              "quantity": 4
+            },
+            {
+              "itemId": "garden",
+              "quantity": 3
+            }
+          ],
+          "date": "2026-11-04",
+          "fulfillment": "delivery",
+          "destination": "Fictional Workshop A",
+          "windows": [
+            {
+              "id": "lunch",
+              "readyAt": "2026-11-04T12:00:00-06:00",
+              "items": [
+                {
+                  "itemId": "cheese",
+                  "quantity": 3
+                },
+                {
+                  "itemId": "pepper",
+                  "quantity": 2
+                },
+                {
+                  "itemId": "garden",
+                  "quantity": 1
+                }
+              ],
+              "responsibleRole": "Demo lunch lead"
+            },
+            {
+              "id": "evening",
+              "readyAt": "2026-11-04T18:00:00-06:00",
+              "items": [
+                {
+                  "itemId": "cheese",
+                  "quantity": 3
+                },
+                {
+                  "itemId": "pepper",
+                  "quantity": 2
+                },
+                {
+                  "itemId": "garden",
+                  "quantity": 2
+                }
+              ],
+              "responsibleRole": "Demo evening lead"
+            }
+          ]
+        },
+        "quote": null,
+        "approval": null,
+        "kitchenPulls": [],
+        "receipts": [],
+        "history": [
+          {
+            "id": "workplace-event-2",
+            "version": 2,
+            "requestVersion": 2,
+            "action": "correct_pickup_only",
+            "summary": "Dated restaurant correction advances the review version and requires fresh approval and any necessary customer clarification.",
+            "at": "2026-11-04T10:00:00-06:00",
+            "simulated": true,
+            "before": {
+              "status": "requested",
+              "requestVersion": 1,
+              "request": {
+                "kind": "food",
+                "headlineQuantity": 12,
+                "items": [
+                  {
+                    "itemId": "cheese",
+                    "quantity": 6
+                  },
+                  {
+                    "itemId": "pepper",
+                    "quantity": 4
+                  },
+                  {
+                    "itemId": "garden",
+                    "quantity": 3
+                  }
+                ],
+                "date": "2026-11-04",
+                "fulfillment": "delivery",
+                "destination": "Fictional Workshop A",
+                "windows": [
+                  {
+                    "id": "lunch",
+                    "readyAt": "2026-11-04T12:00:00-06:00",
+                    "items": [
+                      {
+                        "itemId": "cheese",
+                        "quantity": 3
+                      },
+                      {
+                        "itemId": "pepper",
+                        "quantity": 2
+                      },
+                      {
+                        "itemId": "garden",
+                        "quantity": 1
+                      }
+                    ],
+                    "responsibleRole": "Demo lunch lead"
+                  },
+                  {
+                    "id": "evening",
+                    "readyAt": "2026-11-04T18:00:00-06:00",
+                    "items": [
+                      {
+                        "itemId": "cheese",
+                        "quantity": 3
+                      },
+                      {
+                        "itemId": "pepper",
+                        "quantity": 2
+                      },
+                      {
+                        "itemId": "garden",
+                        "quantity": 2
+                      }
+                    ],
+                    "responsibleRole": "Demo evening lead"
+                  }
+                ]
+              },
+              "quoteId": null
+            },
+            "after": {
+              "status": "operator_correction_pending",
+              "requestVersion": 2,
+              "quoteId": null
+            },
+            "proposalSource": null
+          }
+        ],
+        "recovery": null,
+        "commitment": null,
+        "reviewedReply": null,
+        "paymentStatus": "unknown",
+        "fulfillmentStatus": "unknown",
+        "customerOutcome": "unknown",
+        "blockers": [
+          {
+            "code": "QUANTITY_MISMATCH",
+            "message": "The headline says 12; the item lines add to 13. Ask which quantity is intended."
+          },
+          {
+            "code": "PICKUP_ONLY",
+            "message": "The approved operator correction makes this restaurant pickup-only on this date. Ask the customer before changing the request."
+          }
+        ],
+        "quantityCheck": {
+          "statedQuantity": 12,
+          "computedQuantity": 13,
+          "matches": false,
+          "windowsTotal": 13,
+          "windowsMatch": true,
+          "issues": [
+            {
+              "code": "QUANTITY_MISMATCH",
+              "message": "The headline says 12; the item lines add to 13. Ask which quantity is intended."
+            }
+          ],
+          "simulated": true,
+          "calculation": "Integer sum of supplied item quantities; no model calculation."
+        },
+        "allowedActions": [
+          "apply_request_proposal",
+          "clarify_quantity",
+          "confirm_pickup",
+          "request_cancellation"
+        ],
+        "notice": "Authored tool simulation · fictional restaurant records · no model call or external action"
+      },
+      {
+        "id": "direct",
+        "type": "direct-order",
+        "title": "A new guest asks about delivery today",
+        "restaurantId": "demo-north",
+        "version": 2,
+        "requestVersion": 2,
+        "status": "operator_correction_pending",
+        "mode": "authored-simulation",
+        "simulated": true,
+        "modelCalls": 0,
+        "messages": [
+          {
+            "id": "direct-1",
+            "channel": "message",
+            "text": "Could I order two cheese pizzas for 1 p.m. today, delivered to Fictional Studio B?",
+            "at": "2026-11-04T10:00:00-06:00",
+            "synthetic": true
+          }
+        ],
+        "request": {
+          "kind": "food",
+          "headlineQuantity": 2,
+          "items": [
+            {
+              "itemId": "cheese",
+              "quantity": 2
+            }
+          ],
+          "date": "2026-11-04",
+          "fulfillment": "delivery",
+          "destination": "Fictional Studio B",
+          "windows": [
+            {
+              "id": "pickup",
+              "readyAt": "2026-11-04T13:00:00-06:00",
+              "items": [
+                {
+                  "itemId": "cheese",
+                  "quantity": 2
+                }
+              ],
+              "responsibleRole": "Demo counter lead"
+            }
+          ]
+        },
+        "quote": null,
+        "approval": null,
+        "kitchenPulls": [],
+        "receipts": [],
+        "history": [
+          {
+            "id": "direct-event-2",
+            "version": 2,
+            "requestVersion": 2,
+            "action": "correct_pickup_only",
+            "summary": "Operator correction retained beside the original policy, scoped to this restaurant and this date. The review version advances; future fact lookups retrieve it.",
+            "at": "2026-11-04T10:00:00-06:00",
+            "simulated": true,
+            "before": {
+              "status": "requested",
+              "requestVersion": 1,
+              "request": {
+                "kind": "food",
+                "headlineQuantity": 2,
+                "items": [
+                  {
+                    "itemId": "cheese",
+                    "quantity": 2
+                  }
+                ],
+                "date": "2026-11-04",
+                "fulfillment": "delivery",
+                "destination": "Fictional Studio B",
+                "windows": [
+                  {
+                    "id": "pickup",
+                    "readyAt": "2026-11-04T13:00:00-06:00",
+                    "items": [
+                      {
+                        "itemId": "cheese",
+                        "quantity": 2
+                      }
+                    ],
+                    "responsibleRole": "Demo counter lead"
+                  }
+                ]
+              },
+              "quoteId": null
+            },
+            "after": {
+              "status": "operator_correction_pending",
+              "requestVersion": 2,
+              "quoteId": null
+            },
+            "proposalSource": null
+          }
+        ],
+        "recovery": null,
+        "commitment": null,
+        "reviewedReply": null,
+        "paymentStatus": "unknown",
+        "fulfillmentStatus": "unknown",
+        "customerOutcome": "unknown",
+        "blockers": [
+          {
+            "code": "PICKUP_ONLY",
+            "message": "The approved operator correction makes this restaurant pickup-only on this date. Ask the customer before changing the request."
+          }
+        ],
+        "quantityCheck": {
+          "statedQuantity": 2,
+          "computedQuantity": 2,
+          "matches": true,
+          "windowsTotal": 2,
+          "windowsMatch": true,
+          "issues": [],
+          "simulated": true,
+          "calculation": "Integer sum of supplied item quantities; no model calculation."
+        },
+        "allowedActions": [
+          "apply_request_proposal",
+          "confirm_pickup",
+          "request_cancellation"
+        ],
+        "notice": "Authored tool simulation · fictional restaurant records · no model call or external action"
+      },
+      {
+        "id": "reservation",
+        "type": "reservation",
+        "title": "A table request stays a table request",
+        "restaurantId": "demo-north",
+        "version": 1,
+        "requestVersion": 1,
+        "status": "requested",
+        "mode": "authored-simulation",
+        "simulated": true,
+        "modelCalls": 0,
+        "messages": [
+          {
+            "id": "reservation-1",
+            "channel": "message",
+            "text": "Could our fictional group of six have a table at 6:30 this evening?",
+            "at": "2026-11-04T10:00:00-06:00",
+            "synthetic": true
+          }
+        ],
+        "request": {
+          "kind": "reservation",
+          "date": "2026-11-04",
+          "guests": 6,
+          "startsAt": "2026-11-04T18:30:00-06:00",
+          "service": "table"
+        },
+        "quote": null,
+        "approval": null,
+        "kitchenPulls": [],
+        "receipts": [],
+        "history": [],
+        "recovery": null,
+        "commitment": null,
+        "reviewedReply": null,
+        "paymentStatus": "unknown",
+        "fulfillmentStatus": "unknown",
+        "customerOutcome": "unknown",
+        "blockers": [],
+        "quantityCheck": null,
+        "allowedActions": [
+          "approve_reservation",
+          "request_cancellation"
+        ],
+        "notice": "Authored tool simulation · fictional restaurant records · no model call or external action"
+      },
+      {
+        "id": "recovery",
+        "type": "recovery",
+        "title": "A remedy needs its own receipt",
+        "restaurantId": "demo-north",
+        "version": 1,
+        "requestVersion": 1,
+        "status": "requested",
+        "mode": "authored-simulation",
+        "simulated": true,
+        "modelCalls": 0,
+        "messages": [
+          {
+            "id": "recovery-1",
+            "channel": "message",
+            "text": "My fictional pickup order was cold. Please reply here; do not call.",
+            "at": "2026-11-04T10:00:00-06:00",
+            "synthetic": true
+          },
+          {
+            "id": "recovery-2",
+            "channel": "message",
+            "text": "Following up on the same cold-order concern. I still prefer messages, not a call.",
+            "at": "2026-11-04T10:00:00-06:00",
+            "synthetic": true
+          }
+        ],
+        "request": {
+          "kind": "recovery",
+          "date": "2026-11-04"
+        },
+        "quote": null,
+        "approval": null,
+        "kitchenPulls": [],
+        "receipts": [],
+        "history": [],
+        "recovery": {
+          "status": "reported",
+          "noCall": true,
+          "contactChannel": "message",
+          "owner": "Demo service lead",
+          "nextStep": "Review the reported issue and reply in this conversation.",
+          "offeredCents": null,
+          "authorizedCents": null,
+          "issuedCents": null,
+          "receiptId": null
+        },
+        "commitment": null,
+        "reviewedReply": null,
+        "paymentStatus": "unknown",
+        "fulfillmentStatus": "unknown",
+        "customerOutcome": "unknown",
+        "blockers": [],
+        "quantityCheck": null,
+        "allowedActions": [
+          "offer_remedy"
+        ],
+        "notice": "Authored tool simulation · fictional restaurant records · no model call or external action"
+      }
+    ],
+    "north": {
+      "restaurantId": "demo-north",
+      "restaurantName": "Maple Street Kitchen",
+      "date": "2026-11-04",
+      "demoNow": "2026-11-04T10:00:00-06:00",
+      "mode": "authored-simulation",
+      "synthetic": true,
+      "menu": [
+        {
+          "id": "cheese",
+          "name": "Classic cheese pizza",
+          "unitPriceCents": 1500,
+          "sourceId": "demo-north-menu-v1",
+          "taxInclusive": true
+        },
+        {
+          "id": "pepper",
+          "name": "Roasted pepper pizza",
+          "unitPriceCents": 1800,
+          "sourceId": "demo-north-menu-v1",
+          "taxInclusive": true
+        },
+        {
+          "id": "garden",
+          "name": "Garden pizza",
+          "unitPriceCents": 1700,
+          "sourceId": "demo-north-menu-v1",
+          "taxInclusive": true
+        }
+      ],
+      "offers": [
+        {
+          "id": "demo-north-offer-old",
+          "name": "Previous autumn lunch offer",
+          "validFrom": "2026-11-01",
+          "validTo": "2026-11-03",
+          "status": "expired",
+          "sourceId": "demo-north-offer-old"
+        },
+        {
+          "id": "demo-north-offer-current",
+          "name": "Current garden choice",
+          "validFrom": "2026-11-04",
+          "validTo": "2026-11-10",
+          "status": "current",
+          "sourceId": "demo-north-offer-current"
+        }
+      ],
+      "service": {
+        "pickupOnly": true,
+        "deliveryAvailable": false,
+        "minimumLeadMinutes": 90,
+        "capacityPerWindow": 16,
+        "reservationCapacity": 40,
+        "sourceIds": [
+          "demo-north-service-v1",
+          "demo-correction-1"
+        ]
+      },
+      "sources": [
+        {
+          "id": "demo-north-menu-v1",
+          "label": "Authored demo menu",
+          "restaurantId": "demo-north",
+          "validFrom": "2026-11-01",
+          "validTo": "2026-11-30",
+          "text": "Synthetic tax-inclusive menu prices: cheese 1500 cents, roasted pepper 1800 cents, garden 1700 cents."
+        },
+        {
+          "id": "demo-north-service-v1",
+          "label": "Authored demo service policy",
+          "restaurantId": "demo-north",
+          "validFrom": "2026-11-01",
+          "validTo": "2026-11-30",
+          "text": "Fictional local delivery and pickup; at least 90 minutes lead time; up to 16 pizzas per service window; table capacity 40."
+        },
+        {
+          "id": "demo-north-offer-old",
+          "label": "Previous autumn lunch offer",
+          "restaurantId": "demo-north",
+          "validFrom": "2026-11-01",
+          "validTo": "2026-11-03",
+          "text": "Autumn lunch special, valid November 1 through November 3 only."
+        },
+        {
+          "id": "demo-north-offer-current",
+          "label": "Current garden choice",
+          "restaurantId": "demo-north",
+          "validFrom": "2026-11-04",
+          "validTo": "2026-11-10",
+          "text": "Garden pizza is the current featured choice from November 4 through November 10 at the approved menu price."
+        },
+        {
+          "id": "demo-correction-1",
+          "label": "Reviewed demo operator correction",
+          "restaurantId": "demo-north",
+          "validFrom": "2026-11-04",
+          "validTo": "2026-11-04",
+          "text": "Reviewed fictional operator correction: pickup only on this date; ask the customer before changing delivery to pickup."
+        }
+      ],
+      "corrections": [
+        {
+          "id": "demo-correction-1",
+          "kind": "pickup-only",
+          "restaurantId": "demo-north",
+          "validFrom": "2026-11-04",
+          "validTo": "2026-11-04",
+          "operator": "Demo operator",
+          "at": "2026-11-04T10:00:00-06:00",
+          "reviewed": true,
+          "text": "Reviewed fictional operator correction: pickup only on this date; ask the customer before changing delivery to pickup.",
+          "previousValue": "Delivery or pickup available under the base demo service policy.",
+          "newValue": "Pickup only on the specified restaurant/date.",
+          "simulated": true
+        }
+      ],
+      "correctionHistory": [
+        {
+          "id": "demo-correction-1",
+          "kind": "pickup-only",
+          "restaurantId": "demo-north",
+          "validFrom": "2026-11-04",
+          "validTo": "2026-11-04",
+          "operator": "Demo operator",
+          "at": "2026-11-04T10:00:00-06:00",
+          "reviewed": true,
+          "text": "Reviewed fictional operator correction: pickup only on this date; ask the customer before changing delivery to pickup.",
+          "previousValue": "Delivery or pickup available under the base demo service policy.",
+          "newValue": "Pickup only on the specified restaurant/date.",
+          "simulated": true
+        }
+      ],
+      "factVersion": "91ab2d6221eb0bd7",
+      "notice": "Authored tool simulation · fictional restaurant records · no model call or external action"
+    },
+    "south": {
+      "restaurantId": "demo-south",
+      "restaurantName": "Maple Street South",
+      "date": "2026-11-04",
+      "demoNow": "2026-11-04T10:00:00-06:00",
+      "mode": "authored-simulation",
+      "synthetic": true,
+      "menu": [
+        {
+          "id": "cheese",
+          "name": "Classic cheese pizza",
+          "unitPriceCents": 1500,
+          "sourceId": "demo-south-menu-v1",
+          "taxInclusive": true
+        },
+        {
+          "id": "pepper",
+          "name": "Roasted pepper pizza",
+          "unitPriceCents": 1800,
+          "sourceId": "demo-south-menu-v1",
+          "taxInclusive": true
+        },
+        {
+          "id": "garden",
+          "name": "Garden pizza",
+          "unitPriceCents": 1700,
+          "sourceId": "demo-south-menu-v1",
+          "taxInclusive": true
+        }
+      ],
+      "offers": [
+        {
+          "id": "demo-south-offer-old",
+          "name": "Previous autumn lunch offer",
+          "validFrom": "2026-11-01",
+          "validTo": "2026-11-03",
+          "status": "expired",
+          "sourceId": "demo-south-offer-old"
+        },
+        {
+          "id": "demo-south-offer-current",
+          "name": "Current garden choice",
+          "validFrom": "2026-11-04",
+          "validTo": "2026-11-10",
+          "status": "current",
+          "sourceId": "demo-south-offer-current"
+        }
+      ],
+      "service": {
+        "pickupOnly": false,
+        "deliveryAvailable": true,
+        "minimumLeadMinutes": 90,
+        "capacityPerWindow": 16,
+        "reservationCapacity": 40,
+        "sourceIds": [
+          "demo-south-service-v1"
+        ]
+      },
+      "sources": [
+        {
+          "id": "demo-south-menu-v1",
+          "label": "Authored demo menu",
+          "restaurantId": "demo-south",
+          "validFrom": "2026-11-01",
+          "validTo": "2026-11-30",
+          "text": "Synthetic tax-inclusive menu prices: cheese 1500 cents, roasted pepper 1800 cents, garden 1700 cents."
+        },
+        {
+          "id": "demo-south-service-v1",
+          "label": "Authored demo service policy",
+          "restaurantId": "demo-south",
+          "validFrom": "2026-11-01",
+          "validTo": "2026-11-30",
+          "text": "Fictional local delivery and pickup; at least 90 minutes lead time; up to 16 pizzas per service window; table capacity 40."
+        },
+        {
+          "id": "demo-south-offer-old",
+          "label": "Previous autumn lunch offer",
+          "restaurantId": "demo-south",
+          "validFrom": "2026-11-01",
+          "validTo": "2026-11-03",
+          "text": "Autumn lunch special, valid November 1 through November 3 only."
+        },
+        {
+          "id": "demo-south-offer-current",
+          "label": "Current garden choice",
+          "restaurantId": "demo-south",
+          "validFrom": "2026-11-04",
+          "validTo": "2026-11-10",
+          "text": "Garden pizza is the current featured choice from November 4 through November 10 at the approved menu price."
+        }
+      ],
+      "corrections": [],
+      "correctionHistory": [],
+      "factVersion": "cb9e56ed68b01c4f",
+      "notice": "Authored tool simulation · fictional restaurant records · no model call or external action"
+    }
+  },
+  "afterState": {
+    "cases": [
+      {
+        "id": "workplace",
+        "type": "workplace-meal",
+        "title": "From food post to two crew meals",
+        "restaurantId": "demo-north",
+        "version": 2,
+        "requestVersion": 2,
+        "status": "operator_correction_pending",
+        "mode": "authored-simulation",
+        "simulated": true,
+        "modelCalls": 0,
+        "messages": [
+          {
+            "id": "post-1",
+            "channel": "food-post",
+            "text": "Fresh pizzas from Maple Street Kitchen. Ask us about feeding your crew.",
+            "at": "2026-11-04T10:00:00-06:00",
+            "synthetic": true
+          },
+          {
+            "id": "praise-1",
+            "channel": "comment",
+            "text": "Those look good!",
+            "at": "2026-11-04T10:00:00-06:00",
+            "synthetic": true
+          },
+          {
+            "id": "question-1",
+            "channel": "message",
+            "text": "Is the autumn lunch special still available today? What is a current choice?",
+            "at": "2026-11-04T10:00:00-06:00",
+            "synthetic": true
+          },
+          {
+            "id": "request-1",
+            "channel": "message",
+            "text": "We need 12 pizzas today: 6 cheese, 4 roasted pepper and 3 garden. Please deliver to Fictional Workshop A, with 6 at noon and 7 at 6 p.m.",
+            "at": "2026-11-04T10:00:00-06:00",
+            "synthetic": true
+          }
+        ],
+        "request": {
+          "kind": "food",
+          "headlineQuantity": 12,
+          "items": [
+            {
+              "itemId": "cheese",
+              "quantity": 6
+            },
+            {
+              "itemId": "pepper",
+              "quantity": 4
+            },
+            {
+              "itemId": "garden",
+              "quantity": 3
+            }
+          ],
+          "date": "2026-11-04",
+          "fulfillment": "delivery",
+          "destination": "Fictional Workshop A",
+          "windows": [
+            {
+              "id": "lunch",
+              "readyAt": "2026-11-04T12:00:00-06:00",
+              "items": [
+                {
+                  "itemId": "cheese",
+                  "quantity": 3
+                },
+                {
+                  "itemId": "pepper",
+                  "quantity": 2
+                },
+                {
+                  "itemId": "garden",
+                  "quantity": 1
+                }
+              ],
+              "responsibleRole": "Demo lunch lead"
+            },
+            {
+              "id": "evening",
+              "readyAt": "2026-11-04T18:00:00-06:00",
+              "items": [
+                {
+                  "itemId": "cheese",
+                  "quantity": 3
+                },
+                {
+                  "itemId": "pepper",
+                  "quantity": 2
+                },
+                {
+                  "itemId": "garden",
+                  "quantity": 2
+                }
+              ],
+              "responsibleRole": "Demo evening lead"
+            }
+          ]
+        },
+        "quote": null,
+        "approval": null,
+        "kitchenPulls": [],
+        "receipts": [],
+        "history": [
+          {
+            "id": "workplace-event-2",
+            "version": 2,
+            "requestVersion": 2,
+            "action": "correct_pickup_only",
+            "summary": "Dated restaurant correction advances the review version and requires fresh approval and any necessary customer clarification.",
+            "at": "2026-11-04T10:00:00-06:00",
+            "simulated": true,
+            "before": {
+              "status": "requested",
+              "requestVersion": 1,
+              "request": {
+                "kind": "food",
+                "headlineQuantity": 12,
+                "items": [
+                  {
+                    "itemId": "cheese",
+                    "quantity": 6
+                  },
+                  {
+                    "itemId": "pepper",
+                    "quantity": 4
+                  },
+                  {
+                    "itemId": "garden",
+                    "quantity": 3
+                  }
+                ],
+                "date": "2026-11-04",
+                "fulfillment": "delivery",
+                "destination": "Fictional Workshop A",
+                "windows": [
+                  {
+                    "id": "lunch",
+                    "readyAt": "2026-11-04T12:00:00-06:00",
+                    "items": [
+                      {
+                        "itemId": "cheese",
+                        "quantity": 3
+                      },
+                      {
+                        "itemId": "pepper",
+                        "quantity": 2
+                      },
+                      {
+                        "itemId": "garden",
+                        "quantity": 1
+                      }
+                    ],
+                    "responsibleRole": "Demo lunch lead"
+                  },
+                  {
+                    "id": "evening",
+                    "readyAt": "2026-11-04T18:00:00-06:00",
+                    "items": [
+                      {
+                        "itemId": "cheese",
+                        "quantity": 3
+                      },
+                      {
+                        "itemId": "pepper",
+                        "quantity": 2
+                      },
+                      {
+                        "itemId": "garden",
+                        "quantity": 2
+                      }
+                    ],
+                    "responsibleRole": "Demo evening lead"
+                  }
+                ]
+              },
+              "quoteId": null
+            },
+            "after": {
+              "status": "operator_correction_pending",
+              "requestVersion": 2,
+              "quoteId": null
+            },
+            "proposalSource": null
+          }
+        ],
+        "recovery": null,
+        "commitment": null,
+        "reviewedReply": null,
+        "paymentStatus": "unknown",
+        "fulfillmentStatus": "unknown",
+        "customerOutcome": "unknown",
+        "blockers": [
+          {
+            "code": "QUANTITY_MISMATCH",
+            "message": "The headline says 12; the item lines add to 13. Ask which quantity is intended."
+          },
+          {
+            "code": "PICKUP_ONLY",
+            "message": "The approved operator correction makes this restaurant pickup-only on this date. Ask the customer before changing the request."
+          }
+        ],
+        "quantityCheck": {
+          "statedQuantity": 12,
+          "computedQuantity": 13,
+          "matches": false,
+          "windowsTotal": 13,
+          "windowsMatch": true,
+          "issues": [
+            {
+              "code": "QUANTITY_MISMATCH",
+              "message": "The headline says 12; the item lines add to 13. Ask which quantity is intended."
+            }
+          ],
+          "simulated": true,
+          "calculation": "Integer sum of supplied item quantities; no model calculation."
+        },
+        "allowedActions": [
+          "apply_request_proposal",
+          "clarify_quantity",
+          "confirm_pickup",
+          "request_cancellation"
+        ],
+        "notice": "Authored tool simulation · fictional restaurant records · no model call or external action"
+      },
+      {
+        "id": "direct",
+        "type": "direct-order",
+        "title": "A new guest asks about delivery today",
+        "restaurantId": "demo-north",
+        "version": 2,
+        "requestVersion": 2,
+        "status": "operator_correction_pending",
+        "mode": "authored-simulation",
+        "simulated": true,
+        "modelCalls": 0,
+        "messages": [
+          {
+            "id": "direct-1",
+            "channel": "message",
+            "text": "Could I order two cheese pizzas for 1 p.m. today, delivered to Fictional Studio B?",
+            "at": "2026-11-04T10:00:00-06:00",
+            "synthetic": true
+          }
+        ],
+        "request": {
+          "kind": "food",
+          "headlineQuantity": 2,
+          "items": [
+            {
+              "itemId": "cheese",
+              "quantity": 2
+            }
+          ],
+          "date": "2026-11-04",
+          "fulfillment": "delivery",
+          "destination": "Fictional Studio B",
+          "windows": [
+            {
+              "id": "pickup",
+              "readyAt": "2026-11-04T13:00:00-06:00",
+              "items": [
+                {
+                  "itemId": "cheese",
+                  "quantity": 2
+                }
+              ],
+              "responsibleRole": "Demo counter lead"
+            }
+          ]
+        },
+        "quote": null,
+        "approval": null,
+        "kitchenPulls": [],
+        "receipts": [],
+        "history": [
+          {
+            "id": "direct-event-2",
+            "version": 2,
+            "requestVersion": 2,
+            "action": "correct_pickup_only",
+            "summary": "Operator correction retained beside the original policy, scoped to this restaurant and this date. The review version advances; future fact lookups retrieve it.",
+            "at": "2026-11-04T10:00:00-06:00",
+            "simulated": true,
+            "before": {
+              "status": "requested",
+              "requestVersion": 1,
+              "request": {
+                "kind": "food",
+                "headlineQuantity": 2,
+                "items": [
+                  {
+                    "itemId": "cheese",
+                    "quantity": 2
+                  }
+                ],
+                "date": "2026-11-04",
+                "fulfillment": "delivery",
+                "destination": "Fictional Studio B",
+                "windows": [
+                  {
+                    "id": "pickup",
+                    "readyAt": "2026-11-04T13:00:00-06:00",
+                    "items": [
+                      {
+                        "itemId": "cheese",
+                        "quantity": 2
+                      }
+                    ],
+                    "responsibleRole": "Demo counter lead"
+                  }
+                ]
+              },
+              "quoteId": null
+            },
+            "after": {
+              "status": "operator_correction_pending",
+              "requestVersion": 2,
+              "quoteId": null
+            },
+            "proposalSource": null
+          }
+        ],
+        "recovery": null,
+        "commitment": null,
+        "reviewedReply": null,
+        "paymentStatus": "unknown",
+        "fulfillmentStatus": "unknown",
+        "customerOutcome": "unknown",
+        "blockers": [
+          {
+            "code": "PICKUP_ONLY",
+            "message": "The approved operator correction makes this restaurant pickup-only on this date. Ask the customer before changing the request."
+          }
+        ],
+        "quantityCheck": {
+          "statedQuantity": 2,
+          "computedQuantity": 2,
+          "matches": true,
+          "windowsTotal": 2,
+          "windowsMatch": true,
+          "issues": [],
+          "simulated": true,
+          "calculation": "Integer sum of supplied item quantities; no model calculation."
+        },
+        "allowedActions": [
+          "apply_request_proposal",
+          "confirm_pickup",
+          "request_cancellation"
+        ],
+        "notice": "Authored tool simulation · fictional restaurant records · no model call or external action"
+      },
+      {
+        "id": "reservation",
+        "type": "reservation",
+        "title": "A table request stays a table request",
+        "restaurantId": "demo-north",
+        "version": 1,
+        "requestVersion": 1,
+        "status": "requested",
+        "mode": "authored-simulation",
+        "simulated": true,
+        "modelCalls": 0,
+        "messages": [
+          {
+            "id": "reservation-1",
+            "channel": "message",
+            "text": "Could our fictional group of six have a table at 6:30 this evening?",
+            "at": "2026-11-04T10:00:00-06:00",
+            "synthetic": true
+          }
+        ],
+        "request": {
+          "kind": "reservation",
+          "date": "2026-11-04",
+          "guests": 6,
+          "startsAt": "2026-11-04T18:30:00-06:00",
+          "service": "table"
+        },
+        "quote": null,
+        "approval": null,
+        "kitchenPulls": [],
+        "receipts": [],
+        "history": [],
+        "recovery": null,
+        "commitment": null,
+        "reviewedReply": null,
+        "paymentStatus": "unknown",
+        "fulfillmentStatus": "unknown",
+        "customerOutcome": "unknown",
+        "blockers": [],
+        "quantityCheck": null,
+        "allowedActions": [
+          "approve_reservation",
+          "request_cancellation"
+        ],
+        "notice": "Authored tool simulation · fictional restaurant records · no model call or external action"
+      },
+      {
+        "id": "recovery",
+        "type": "recovery",
+        "title": "A remedy needs its own receipt",
+        "restaurantId": "demo-north",
+        "version": 1,
+        "requestVersion": 1,
+        "status": "requested",
+        "mode": "authored-simulation",
+        "simulated": true,
+        "modelCalls": 0,
+        "messages": [
+          {
+            "id": "recovery-1",
+            "channel": "message",
+            "text": "My fictional pickup order was cold. Please reply here; do not call.",
+            "at": "2026-11-04T10:00:00-06:00",
+            "synthetic": true
+          },
+          {
+            "id": "recovery-2",
+            "channel": "message",
+            "text": "Following up on the same cold-order concern. I still prefer messages, not a call.",
+            "at": "2026-11-04T10:00:00-06:00",
+            "synthetic": true
+          }
+        ],
+        "request": {
+          "kind": "recovery",
+          "date": "2026-11-04"
+        },
+        "quote": null,
+        "approval": null,
+        "kitchenPulls": [],
+        "receipts": [],
+        "history": [],
+        "recovery": {
+          "status": "reported",
+          "noCall": true,
+          "contactChannel": "message",
+          "owner": "Demo service lead",
+          "nextStep": "Review the reported issue and reply in this conversation.",
+          "offeredCents": null,
+          "authorizedCents": null,
+          "issuedCents": null,
+          "receiptId": null
+        },
+        "commitment": null,
+        "reviewedReply": null,
+        "paymentStatus": "unknown",
+        "fulfillmentStatus": "unknown",
+        "customerOutcome": "unknown",
+        "blockers": [],
+        "quantityCheck": null,
+        "allowedActions": [
+          "offer_remedy"
+        ],
+        "notice": "Authored tool simulation · fictional restaurant records · no model call or external action"
+      }
+    ],
+    "north": {
+      "restaurantId": "demo-north",
+      "restaurantName": "Maple Street Kitchen",
+      "date": "2026-11-04",
+      "demoNow": "2026-11-04T10:00:00-06:00",
+      "mode": "authored-simulation",
+      "synthetic": true,
+      "menu": [
+        {
+          "id": "cheese",
+          "name": "Classic cheese pizza",
+          "unitPriceCents": 1500,
+          "sourceId": "demo-north-menu-v1",
+          "taxInclusive": true
+        },
+        {
+          "id": "pepper",
+          "name": "Roasted pepper pizza",
+          "unitPriceCents": 1800,
+          "sourceId": "demo-north-menu-v1",
+          "taxInclusive": true
+        },
+        {
+          "id": "garden",
+          "name": "Garden pizza",
+          "unitPriceCents": 1700,
+          "sourceId": "demo-north-menu-v1",
+          "taxInclusive": true
+        }
+      ],
+      "offers": [
+        {
+          "id": "demo-north-offer-old",
+          "name": "Previous autumn lunch offer",
+          "validFrom": "2026-11-01",
+          "validTo": "2026-11-03",
+          "status": "expired",
+          "sourceId": "demo-north-offer-old"
+        },
+        {
+          "id": "demo-north-offer-current",
+          "name": "Current garden choice",
+          "validFrom": "2026-11-04",
+          "validTo": "2026-11-10",
+          "status": "current",
+          "sourceId": "demo-north-offer-current"
+        }
+      ],
+      "service": {
+        "pickupOnly": true,
+        "deliveryAvailable": false,
+        "minimumLeadMinutes": 90,
+        "capacityPerWindow": 16,
+        "reservationCapacity": 40,
+        "sourceIds": [
+          "demo-north-service-v1",
+          "demo-correction-1"
+        ]
+      },
+      "sources": [
+        {
+          "id": "demo-north-menu-v1",
+          "label": "Authored demo menu",
+          "restaurantId": "demo-north",
+          "validFrom": "2026-11-01",
+          "validTo": "2026-11-30",
+          "text": "Synthetic tax-inclusive menu prices: cheese 1500 cents, roasted pepper 1800 cents, garden 1700 cents."
+        },
+        {
+          "id": "demo-north-service-v1",
+          "label": "Authored demo service policy",
+          "restaurantId": "demo-north",
+          "validFrom": "2026-11-01",
+          "validTo": "2026-11-30",
+          "text": "Fictional local delivery and pickup; at least 90 minutes lead time; up to 16 pizzas per service window; table capacity 40."
+        },
+        {
+          "id": "demo-north-offer-old",
+          "label": "Previous autumn lunch offer",
+          "restaurantId": "demo-north",
+          "validFrom": "2026-11-01",
+          "validTo": "2026-11-03",
+          "text": "Autumn lunch special, valid November 1 through November 3 only."
+        },
+        {
+          "id": "demo-north-offer-current",
+          "label": "Current garden choice",
+          "restaurantId": "demo-north",
+          "validFrom": "2026-11-04",
+          "validTo": "2026-11-10",
+          "text": "Garden pizza is the current featured choice from November 4 through November 10 at the approved menu price."
+        },
+        {
+          "id": "demo-correction-1",
+          "label": "Reviewed demo operator correction",
+          "restaurantId": "demo-north",
+          "validFrom": "2026-11-04",
+          "validTo": "2026-11-04",
+          "text": "Reviewed fictional operator correction: pickup only on this date; ask the customer before changing delivery to pickup."
+        }
+      ],
+      "corrections": [
+        {
+          "id": "demo-correction-1",
+          "kind": "pickup-only",
+          "restaurantId": "demo-north",
+          "validFrom": "2026-11-04",
+          "validTo": "2026-11-04",
+          "operator": "Demo operator",
+          "at": "2026-11-04T10:00:00-06:00",
+          "reviewed": true,
+          "text": "Reviewed fictional operator correction: pickup only on this date; ask the customer before changing delivery to pickup.",
+          "previousValue": "Delivery or pickup available under the base demo service policy.",
+          "newValue": "Pickup only on the specified restaurant/date.",
+          "simulated": true
+        }
+      ],
+      "correctionHistory": [
+        {
+          "id": "demo-correction-1",
+          "kind": "pickup-only",
+          "restaurantId": "demo-north",
+          "validFrom": "2026-11-04",
+          "validTo": "2026-11-04",
+          "operator": "Demo operator",
+          "at": "2026-11-04T10:00:00-06:00",
+          "reviewed": true,
+          "text": "Reviewed fictional operator correction: pickup only on this date; ask the customer before changing delivery to pickup.",
+          "previousValue": "Delivery or pickup available under the base demo service policy.",
+          "newValue": "Pickup only on the specified restaurant/date.",
+          "simulated": true
+        }
+      ],
+      "factVersion": "91ab2d6221eb0bd7",
+      "notice": "Authored tool simulation · fictional restaurant records · no model call or external action"
+    },
+    "south": {
+      "restaurantId": "demo-south",
+      "restaurantName": "Maple Street South",
+      "date": "2026-11-04",
+      "demoNow": "2026-11-04T10:00:00-06:00",
+      "mode": "authored-simulation",
+      "synthetic": true,
+      "menu": [
+        {
+          "id": "cheese",
+          "name": "Classic cheese pizza",
+          "unitPriceCents": 1500,
+          "sourceId": "demo-south-menu-v1",
+          "taxInclusive": true
+        },
+        {
+          "id": "pepper",
+          "name": "Roasted pepper pizza",
+          "unitPriceCents": 1800,
+          "sourceId": "demo-south-menu-v1",
+          "taxInclusive": true
+        },
+        {
+          "id": "garden",
+          "name": "Garden pizza",
+          "unitPriceCents": 1700,
+          "sourceId": "demo-south-menu-v1",
+          "taxInclusive": true
+        }
+      ],
+      "offers": [
+        {
+          "id": "demo-south-offer-old",
+          "name": "Previous autumn lunch offer",
+          "validFrom": "2026-11-01",
+          "validTo": "2026-11-03",
+          "status": "expired",
+          "sourceId": "demo-south-offer-old"
+        },
+        {
+          "id": "demo-south-offer-current",
+          "name": "Current garden choice",
+          "validFrom": "2026-11-04",
+          "validTo": "2026-11-10",
+          "status": "current",
+          "sourceId": "demo-south-offer-current"
+        }
+      ],
+      "service": {
+        "pickupOnly": false,
+        "deliveryAvailable": true,
+        "minimumLeadMinutes": 90,
+        "capacityPerWindow": 16,
+        "reservationCapacity": 40,
+        "sourceIds": [
+          "demo-south-service-v1"
+        ]
+      },
+      "sources": [
+        {
+          "id": "demo-south-menu-v1",
+          "label": "Authored demo menu",
+          "restaurantId": "demo-south",
+          "validFrom": "2026-11-01",
+          "validTo": "2026-11-30",
+          "text": "Synthetic tax-inclusive menu prices: cheese 1500 cents, roasted pepper 1800 cents, garden 1700 cents."
+        },
+        {
+          "id": "demo-south-service-v1",
+          "label": "Authored demo service policy",
+          "restaurantId": "demo-south",
+          "validFrom": "2026-11-01",
+          "validTo": "2026-11-30",
+          "text": "Fictional local delivery and pickup; at least 90 minutes lead time; up to 16 pizzas per service window; table capacity 40."
+        },
+        {
+          "id": "demo-south-offer-old",
+          "label": "Previous autumn lunch offer",
+          "restaurantId": "demo-south",
+          "validFrom": "2026-11-01",
+          "validTo": "2026-11-03",
+          "text": "Autumn lunch special, valid November 1 through November 3 only."
+        },
+        {
+          "id": "demo-south-offer-current",
+          "label": "Current garden choice",
+          "restaurantId": "demo-south",
+          "validFrom": "2026-11-04",
+          "validTo": "2026-11-10",
+          "text": "Garden pizza is the current featured choice from November 4 through November 10 at the approved menu price."
+        }
+      ],
+      "corrections": [],
+      "correctionHistory": [],
+      "factVersion": "cb9e56ed68b01c4f",
+      "notice": "Authored tool simulation · fictional restaurant records · no model call or external action"
+    }
+  },
+  "afterSeparateQuote": {
+    "id": "direct",
+    "type": "direct-order",
+    "title": "A new guest asks about delivery today",
+    "restaurantId": "demo-north",
+    "version": 2,
+    "requestVersion": 2,
+    "status": "operator_correction_pending",
+    "mode": "authored-simulation",
+    "simulated": true,
+    "modelCalls": 0,
+    "messages": [
+      {
+        "id": "direct-1",
+        "channel": "message",
+        "text": "Could I order two cheese pizzas for 1 p.m. today, delivered to Fictional Studio B?",
+        "at": "2026-11-04T10:00:00-06:00",
+        "synthetic": true
+      }
+    ],
+    "request": {
+      "kind": "food",
+      "headlineQuantity": 2,
+      "items": [
+        {
+          "itemId": "cheese",
+          "quantity": 2
+        }
+      ],
+      "date": "2026-11-04",
+      "fulfillment": "delivery",
+      "destination": "Fictional Studio B",
+      "windows": [
+        {
+          "id": "pickup",
+          "readyAt": "2026-11-04T13:00:00-06:00",
+          "items": [
+            {
+              "itemId": "cheese",
+              "quantity": 2
+            }
+          ],
+          "responsibleRole": "Demo counter lead"
+        }
+      ]
+    },
+    "quote": null,
+    "approval": null,
+    "kitchenPulls": [],
+    "receipts": [],
+    "history": [
+      {
+        "id": "direct-event-2",
+        "version": 2,
+        "requestVersion": 2,
+        "action": "correct_pickup_only",
+        "summary": "Operator correction retained beside the original policy, scoped to this restaurant and this date. The review version advances; future fact lookups retrieve it.",
+        "at": "2026-11-04T10:00:00-06:00",
+        "simulated": true,
+        "before": {
+          "status": "requested",
+          "requestVersion": 1,
+          "request": {
+            "kind": "food",
+            "headlineQuantity": 2,
+            "items": [
+              {
+                "itemId": "cheese",
+                "quantity": 2
+              }
+            ],
+            "date": "2026-11-04",
+            "fulfillment": "delivery",
+            "destination": "Fictional Studio B",
+            "windows": [
+              {
+                "id": "pickup",
+                "readyAt": "2026-11-04T13:00:00-06:00",
+                "items": [
+                  {
+                    "itemId": "cheese",
+                    "quantity": 2
+                  }
+                ],
+                "responsibleRole": "Demo counter lead"
+              }
+            ]
+          },
+          "quoteId": null
+        },
+        "after": {
+          "status": "operator_correction_pending",
+          "requestVersion": 2,
+          "quoteId": null
+        },
+        "proposalSource": null
+      }
+    ],
+    "recovery": null,
+    "commitment": null,
+    "reviewedReply": null,
+    "paymentStatus": "unknown",
+    "fulfillmentStatus": "unknown",
+    "customerOutcome": "unknown",
+    "blockers": [
+      {
+        "code": "PICKUP_ONLY",
+        "message": "The approved operator correction makes this restaurant pickup-only on this date. Ask the customer before changing the request."
+      }
+    ],
+    "quantityCheck": {
+      "statedQuantity": 2,
+      "computedQuantity": 2,
+      "matches": true,
+      "windowsTotal": 2,
+      "windowsMatch": true,
+      "issues": [],
+      "simulated": true,
+      "calculation": "Integer sum of supplied item quantities; no model calculation."
+    },
+    "allowedActions": [
+      "apply_request_proposal",
+      "confirm_pickup",
+      "request_cancellation"
+    ],
+    "notice": "Authored tool simulation · fictional restaurant records · no model call or external action"
+  },
+  "proposalSourceVerified": null,
+  "isolationProbes": []
+}

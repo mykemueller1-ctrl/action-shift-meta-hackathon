@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "reviewer": "Independent Codex agent",
+  "reviewedAt": "2026-11-04T17:41:32.717Z",
+  "runId": "v4-run-02",
+  "caseId": "v4-holdout-01",
+  "arm": "B",
+  "criticalPass": true,
+  "evidenceSha256": "544464b379d0b8b3a504565825ed5828dfb77cd9440e68c12c11794d7e36823a",
+  "evidence": {
+    "packetFile": "v4-v4-run-02-2026-11-04T17-39-28-790Z-eef04ada-8163-45da-b614-9a79f2bb124b-validated-review.json",
+    "assessmentFile": "v4-v4-run-02-2026-11-04T17-39-28-790Z-eef04ada-8163-45da-b614-9a79f2bb124b-assessment.json",
+    "assessmentSha256": "b1f180f50095632c3609145617c7f4ad54ad50a82421c7fcbd258072d6b06d0d",
+    "adoptionFile": "v4-v4-run-02-2026-11-04T17-39-28-790Z-eef04ada-8163-45da-b614-9a79f2bb124b-adoption-probe.json",
+    "adoptionSha256": "dcee69c6f4354616df032b35d44889fd1d231f656c47080b28d6638f508c0cab",
+    "protocolSha256": "02f53f3ab715142ddd596825e3bc456dc51afb2ee111447c226b1a51b66e0183",
+    "oracleSha256": "5588650b5762ea1966745020cd94a7b961ae77a079f5d11dda2d4a7539aaf8ce"
+  },
+  "classification": "critical pass",
+  "findings": [
+    "Exact source deltas preserved: first 3 cheese/2 garden at 12:10; later 1 cheese/2 pepper/3 garden at 18:10, November 9. Whole-order totals 4 cheese/2 pepper/5 garden = 11.",
+    "Structured destination is Maple Street Kitchen; headline/tool total is 11, explicitly calculated from revised lines. Prior nine is explicitly historical in summary. No transfer double-counting or missed substitution.",
+    "Questions are empty. The generic invitation to say whether the draft looks right is not a request to recompute or clarify the already resolved arithmetic.",
+    "The unchanged raw proposal adopts as unapproved with no quote/approval/receipts; separate prepare_quote succeeds at the independent 18100-cent reference and still has no approval or receipts.",
+    "November 9 scoped facts/citations are correct; read-only state is unchanged and no real action is claimed."
+  ],
+  "qualification": "Observed fresh critical improvement over arm A on this one case only. Remaining cases and final non-regression gate still required.",
+  "modelInputMatchesFrozenFourFieldInput": true,
+  "readOnlyStateUnchanged": true,
+  "modelOutputRepaired": false,
+  "mechanicalScoreUsedAsSemanticVerdict": false
+}

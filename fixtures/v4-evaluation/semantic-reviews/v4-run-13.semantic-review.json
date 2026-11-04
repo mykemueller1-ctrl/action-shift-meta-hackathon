@@ -1,0 +1,63 @@
+{
+  "schemaVersion": 1,
+  "reviewer": "Independent Codex agent",
+  "reviewedAt": "2026-11-04T17:51:13.897Z",
+  "runId": "v4-run-13",
+  "caseId": "v4-holdout-05",
+  "arm": "C",
+  "criticalPass": false,
+  "evidenceSha256": "8a87a24cf56aca7e6407fa637024e8bf7f9c411aa709bc24c77823b11fedcc81",
+  "evidence": {
+    "packetFile": "v4-v4-run-13-2026-11-04T17-49-01-443Z-e222e9a0-3cd9-4ade-aa71-84bed1bc617b-validated-review.json",
+    "assessmentFile": "v4-v4-run-13-2026-11-04T17-49-01-443Z-e222e9a0-3cd9-4ade-aa71-84bed1bc617b-assessment.json",
+    "assessmentSha256": "86d7e0134e134e1eb05365c248ad13bec3da9588552e84780486b626146c9520",
+    "adoptionFile": "v4-v4-run-13-2026-11-04T17-49-01-443Z-e222e9a0-3cd9-4ade-aa71-84bed1bc617b-adoption-probe.json",
+    "adoptionSha256": "adecc63701f334f66648d21c241799d1db974856c5ce75ac8c26824dedb7cf01",
+    "protocolSha256": "02f53f3ab715142ddd596825e3bc456dc51afb2ee111447c226b1a51b66e0183",
+    "oracleSha256": "5588650b5762ea1966745020cd94a7b961ae77a079f5d11dda2d4a7539aaf8ce",
+    "diagnostics": [
+      {
+        "file": "v4-v4-run-13-2026-11-04T17-49-01-443Z-e222e9a0-3cd9-4ade-aa71-84bed1bc617b-request-106-diagnostic.json",
+        "sha256": "32a1f3274edee282d6816e813321a3a93153dd7c8ff499104981e44715beec46"
+      },
+      {
+        "file": "v4-v4-run-13-2026-11-04T17-49-01-443Z-e222e9a0-3cd9-4ade-aa71-84bed1bc617b-request-107-diagnostic.json",
+        "sha256": "2105c50c535a292966468ca04d536425794f9b9245340cd2164f8c92e2d79a28"
+      },
+      {
+        "file": "v4-v4-run-13-2026-11-04T17-49-01-443Z-e222e9a0-3cd9-4ade-aa71-84bed1bc617b-request-108-diagnostic.json",
+        "sha256": "9ec0fdc6b96cdcf037f6861deaece72bd07207ce61b1d144e6a112b30021b52b"
+      }
+    ]
+  },
+  "classification": "critical failure: unrelated final answer and lost request/correction semantics",
+  "findings": [
+    "The guest requested four pizzas for delivery to Fictional Cedar Annex on November 4 at 17:25. The final output instead discusses tofu/chicken, unsalted rice, peanuts/shellfish, and a $160 breakdown absent from the guest input or retrieved facts.",
+    "The final food-question intent, null proposal, and empty citations discard the supplied destination, counts, date and time. It does not explain the active pickup-only correction or seek the required consent for an alternative.",
+    "The first provider turn correctly acknowledges the delivery request and the two tool calls correctly retrieve the active correction and check four pizzas. The final summary falsely says no approved facts were retrieved. Passing arithmetic does not repair this semantic derailment.",
+    "Raw proposal adoption rejects FRONT_DESK_INPUT unchanged. The existing seeded store blocker is not evidence of successful adoption of this request; no quote or approval is established.",
+    "Provider diagnostic108 contains the exact final JSON, deep-equal to packet.result. Diagnostics106-108 match the same run/execution, request numbers and receipt IDs. Frozen case05 input matches packet and recorded serialized input hash. Source has fresh per-call input, no conversation or previous_response_id, and appends only same-run outputs/results. No local fixture or shared-conversation mixup found."
+  ],
+  "qualification": "Classified as an observed provider-result semantic failure without attributing provider-internal cause. Outbound HTTP bodies and opaque reasoning were not logged, so exact full wire payload hashes cannot be independently reconstructed after the fact.",
+  "modelInputMatchesFrozenFourFieldInput": true,
+  "readOnlyStateUnchanged": true,
+  "modelOutputRepaired": false,
+  "mechanicalScoreUsedAsSemanticVerdict": false,
+  "inputChain": {
+    "serializedModelInputSha256": "24050826215fb0daa6ceb49cdafafbde4341cf043147540b5dc27083edb94706",
+    "executionId": "2026-11-04T17-49-01-443Z-e222e9a0-3cd9-4ade-aa71-84bed1bc617b",
+    "requestNumbers": [
+      106,
+      107,
+      108
+    ],
+    "responseIds": [
+      "resp_6aeb7016fc99ad3808e74ab9",
+      "resp_6aeb7019c13cd46c9fd8405e",
+      "resp_6aeb70263f3122e9f0a64179"
+    ],
+    "candidateAdapterSha256": "f50dab170fe67adbe2627d4eb5af317a9dc873ad686b9d695b90a42716188a44",
+    "sameRunDiagnosticsVerified": true,
+    "wireRequestBodyLogged": false
+  }
+}

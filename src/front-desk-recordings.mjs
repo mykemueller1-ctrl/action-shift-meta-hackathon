@@ -4,6 +4,7 @@ import { readFile } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { loadOptionalV4Recordings } from './front-desk-v4-recordings.mjs';
 
 const fixtureRoot = fileURLToPath(new URL('../fixtures/front-desk/', import.meta.url));
 const fail = () => { throw new Error('The reviewed front-desk recordings failed their integrity check.'); };
@@ -86,6 +87,12 @@ export async function loadFrontDeskRecordings(directory = fixtureRoot) {
     packets.set(entry.id, { ...packet, replay: true, replayReview });
     recordedReviews.push({ id: entry.id, title: entry.title, caseId: entry.caseId, createdAt: packet.receipt.recordedAt, preferred: true, completionOnly: true, semanticVerdict: 'fail' });
   }
+  const v4 = await loadOptionalV4Recordings(path.resolve(directory, '..', 'v4'));
+  if (v4) for (const descriptor of v4.recordedReviews) {
+    if (packets.has(descriptor.id)) fail();
+    if (descriptor.preferred) for (const old of recordedReviews) if (old.caseId === descriptor.caseId) delete old.preferred;
+    packets.set(descriptor.id, await v4.recordedReviewProvider(descriptor.id)); recordedReviews.push(structuredClone(descriptor));
+  }
   return {
     recordedReviews: structuredClone(recordedReviews),
     recordedReviewProvider: async id => {
@@ -95,5 +102,6 @@ export async function loadFrontDeskRecordings(directory = fixtureRoot) {
     manifest: structuredClone(manifest),
     additionalManifest: structuredClone(additionalManifest),
     humanReviewManifest: structuredClone(humanReviewManifest),
+    v4Manifest: v4 ? structuredClone(v4.manifest) : null,
   };
 }

@@ -1,0 +1,32 @@
+{
+  "runId": "v4-run-16",
+  "executionId": "2026-11-04T17-51-41-264Z-f7ed453a-52d3-4a80-a2a4-08dcca760a56",
+  "requestNumber": 117,
+  "request": {
+    "id": "resp_6aeb70c1c9fadb7a4dbd4416",
+    "model": "muse-spark-1.3",
+    "reasoningEffort": "max",
+    "maxOutputTokens": 12000,
+    "inputTokens": 4539,
+    "outputTokens": 938,
+    "reasoningTokens": 575,
+    "elapsedMs": 9297,
+    "status": "completed"
+  },
+  "output": [
+    {
+      "type": "message",
+      "id": "msg_71b555aa-f469-4f9a-9c24-85366481c277",
+      "role": "assistant",
+      "content": [
+        {
+          "type": "output_text",
+          "text": "{\"intent\": \"direct-order\",\"proposal\": {\"date\": \"2026-11-09\",\"destination\": \"Maple Street Kitchen\",\"fulfillment\": \"pickup\",\"headlineQuantity\": 8,\"items\": [{\"itemId\": \"cheese\",\"quantity\": 3},{\"itemId\": \"pepper\",\"quantity\": 2},{\"itemId\": \"garden\",\"quantity\": 3}],\"kind\": \"food\",\"windows\": [{\"id\": \"pickup-1605\",\"items\": [{\"itemId\": \"cheese\",\"quantity\": 3},{\"itemId\": \"pepper\",\"quantity\": 2},{\"itemId\": \"garden\",\"quantity\": 3}],\"readyAt\": \"2026-11-09T16:05:00-06:00\"}]},\"questions\": [],\"reply\": \"Thank you! Here is a DRAFT for your review: 8 pizzas for pickup together at Maple Street Kitchen on November 9, 2026 at 4:05 PM — 3 Classic cheese, 2 Roasted pepper, and 3 Garden. This draft is for your family order and is still pending review by our team before anything is confirmed. Please let us know if you'd like any changes!\",\"sourceIds\": [\"demo-north-menu-v1\",\"demo-north-service-v1\"],\"status\": \"ready-for-operator\",\"summary\": \"Family direct-order for 8 pizzas (3 cheese, 2 pepper, 3 garden) for pickup together 2026-11-09 16:05 at Maple Street Kitchen. Employer/commute mention is context only; guest states order is for family. Quantities check matches (8=8, windows match). Within 16 per-window capacity and lead time.\"}",
+          "annotations": [],
+          "logprobs": []
+        }
+      ],
+      "status": "completed"
+    }
+  ]
+}

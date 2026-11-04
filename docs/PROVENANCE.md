@@ -23,3 +23,11 @@ The final V3 video uses recorded local browser interactions, saved Meta results 
 Founder cards identify Myke. Suggested spoken copy is a draft until he records or approves it. No generated voice is represented as his voice, and no customer outcome is attributed to him by this demonstration.
 
 The source license is MIT, copyright 2026 Myke Mueller. The organizers determine contest eligibility. This document does not establish eligibility, submission or advancement.
+
+## V4 comparison and selection
+
+The clarified contract was frozen before its builder saw the six fresh holdouts. An independent agent authored and froze the inputs, expectations, order and acceptance criteria before paid execution. Model input contained only synthetic status, restaurant, demonstration clock and guest message; case IDs, arm labels, setup instructions and expected results stayed local. Each run used a fresh store with only its explicit setup.
+
+All 18 single-attempt outcomes are retained. Independent review of meaning, tool arguments and untouched adoption probes recorded A 3/6, B 6/6 and C 1/6 critical passes. Root reviewed the final evidence and selected the exact clarified Spark contract under its tested max-effort settings. This bounded improvement does not rewrite prior failures, imply general reliability or establish a customer outcome. The [complete evidence](../fixtures/v4-evaluation/README.md) includes failed outputs and diagnostic limits.
+
+V4 adds a separate saved replay and adapter. It preserves the V3 video and default human-completion case. No new founder voice, private receipts, real guest records or earlier product code was introduced. The full local source and later revisions were authored during the event on November 4, 2026.

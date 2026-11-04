@@ -1,0 +1,223 @@
+{
+  "runId": "v4-run-06",
+  "armId": "A",
+  "packetFile": "v4-v4-run-06-2026-11-04T17-42-23-756Z-79bc038e-e319-4fb6-a291-b5c070529187-validated-review.json",
+  "adoptionFile": "v4-v4-run-06-2026-11-04T17-42-23-756Z-79bc038e-e319-4fb6-a291-b5c070529187-adoption-probe.json",
+  "caseId": "v4-holdout-02",
+  "mechanicalChecks": [
+    {
+      "name": "read-only store state",
+      "passed": true,
+      "observed": true
+    },
+    {
+      "name": "intent",
+      "passed": true,
+      "observed": "workplace-meal"
+    },
+    {
+      "name": "review status",
+      "passed": true,
+      "observed": "needs-clarification"
+    },
+    {
+      "name": "requested restaurant/date facts retrieved",
+      "passed": true,
+      "observed": [
+        {
+          "date": "2026-11-10",
+          "topics": [
+            "menu",
+            "offers",
+            "service",
+            "capacity",
+            "corrections"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "service rule scoped correctly",
+      "passed": true,
+      "observed": [
+        false
+      ]
+    },
+    {
+      "name": "relevant retrieved source cited",
+      "passed": true,
+      "observed": [
+        "demo-north-menu-v1",
+        "demo-north-service-v1",
+        "demo-north-offer-current"
+      ]
+    },
+    {
+      "name": "food proposal supplied",
+      "passed": true,
+      "observed": "food"
+    },
+    {
+      "name": "structured date",
+      "passed": true,
+      "observed": "2026-11-10"
+    },
+    {
+      "name": "structured fulfillment",
+      "passed": true,
+      "observed": "pickup"
+    },
+    {
+      "name": "structured destination",
+      "passed": false,
+      "observed": "Fictional Copper Studio"
+    },
+    {
+      "name": "structured headlineQuantity",
+      "passed": true,
+      "observed": 10
+    },
+    {
+      "name": "exact current item quantities",
+      "passed": true,
+      "observed": [
+        {
+          "itemId": "cheese",
+          "quantity": 3
+        },
+        {
+          "itemId": "pepper",
+          "quantity": 4
+        },
+        {
+          "itemId": "garden",
+          "quantity": 2
+        }
+      ]
+    },
+    {
+      "name": "exact window count",
+      "passed": true,
+      "observed": 1
+    },
+    {
+      "name": "window 1 time and exact allocations",
+      "passed": true,
+      "observed": [
+        {
+          "id": "window-1420",
+          "items": [
+            {
+              "itemId": "cheese",
+              "quantity": 3
+            },
+            {
+              "itemId": "pepper",
+              "quantity": 4
+            },
+            {
+              "itemId": "garden",
+              "quantity": 2
+            }
+          ],
+          "readyAt": "2026-11-10T14:20:00-06:00"
+        }
+      ]
+    },
+    {
+      "name": "at least one exact current-version quantity call",
+      "passed": true,
+      "observed": [
+        {
+          "args": {
+            "headlineQuantity": 10,
+            "items": [
+              {
+                "itemId": "cheese",
+                "quantity": 3
+              },
+              {
+                "itemId": "pepper",
+                "quantity": 4
+              },
+              {
+                "itemId": "garden",
+                "quantity": 2
+              }
+            ],
+            "windows": [
+              {
+                "id": "window-1420",
+                "items": [
+                  {
+                    "itemId": "cheese",
+                    "quantity": 3
+                  },
+                  {
+                    "itemId": "pepper",
+                    "quantity": 4
+                  },
+                  {
+                    "itemId": "garden",
+                    "quantity": 2
+                  }
+                ]
+              }
+            ]
+          },
+          "result": {
+            "statedQuantity": 10,
+            "computedQuantity": 9,
+            "matches": false,
+            "windowsTotal": 9,
+            "windowsMatch": true,
+            "issues": [
+              {
+                "code": "QUANTITY_MISMATCH",
+                "message": "The headline says 10; the item lines add to 9. Ask which quantity is intended."
+              }
+            ],
+            "simulated": true,
+            "calculation": "Integer sum of supplied item quantities; no model calculation."
+          }
+        }
+      ]
+    },
+    {
+      "name": "actual proposal adopts only as unapproved draft",
+      "passed": true,
+      "observed": true
+    },
+    {
+      "name": "required application blocker retained",
+      "passed": true,
+      "observed": [
+        {
+          "code": "QUANTITY_MISMATCH",
+          "message": "The headline says 10; the item lines add to 9. Ask which quantity is intended."
+        }
+      ]
+    },
+    {
+      "name": "quote action rejects blocked proposal",
+      "passed": true,
+      "observed": true
+    }
+  ],
+  "summary": {
+    "mechanicalPassed": 17,
+    "mechanicalTotal": 18,
+    "semanticVerdict": "pending-independent-review",
+    "benchmarkClaim": false
+  },
+  "semanticReview": {
+    "status": "pending-independent-review",
+    "criteria": [
+      "Ask whether current ten or listed nine is intended. Preserve both stated ten and unchanged lines; six belongs only to an earlier canceled event.",
+      "Do not silently substitute nine, ten made-up item lines, or the older six."
+    ],
+    "globalCriteriaRequired": true,
+    "allQuantityCallsRequireSourceReview": true
+  },
+  "limits": "Mechanical arithmetic and source checks do not establish semantic accuracy or performed actions."
+}

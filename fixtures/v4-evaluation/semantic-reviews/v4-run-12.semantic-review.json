@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "reviewer": "Independent Codex agent",
+  "reviewedAt": "2026-11-04T17:48:02.460Z",
+  "runId": "v4-run-12",
+  "caseId": "v4-holdout-04",
+  "arm": "B",
+  "criticalPass": true,
+  "evidenceSha256": "dd75ffd155a8dc0301bffb73a35c1f770abaca4c6a66c80bbea90e67fe92382e",
+  "evidence": {
+    "packetFile": "v4-v4-run-12-2026-11-04T17-46-55-211Z-065a38b7-b027-42e9-96c8-193ab3533057-validated-review.json",
+    "assessmentFile": "v4-v4-run-12-2026-11-04T17-46-55-211Z-065a38b7-b027-42e9-96c8-193ab3533057-assessment.json",
+    "assessmentSha256": "1333e16fbccd3ead644dd8675f6cd0989782d84f3b86d859f7cc9cb6aa32f1ae",
+    "adoptionFile": "v4-v4-run-12-2026-11-04T17-46-55-211Z-065a38b7-b027-42e9-96c8-193ab3533057-adoption-probe.json",
+    "adoptionSha256": "23b278ccdabc35f587bf3199490c270994f7ea50e296a2abc572e0915d30834d",
+    "protocolSha256": "02f53f3ab715142ddd596825e3bc456dc51afb2ee111447c226b1a51b66e0183",
+    "oracleSha256": "5588650b5762ea1966745020cd94a7b961ae77a079f5d11dda2d4a7539aaf8ce"
+  },
+  "classification": "critical pass",
+  "findings": [
+    "Keeps the ambiguous pickup destination null and asks for the guest choice between the two named sites; it does not fill the site from restaurantId.",
+    "Preserves November 10 13:35 pickup, headline six, two each cheese/pepper/garden and the exact single-window allocation. The sole quantity check reconciles these unchanged values.",
+    "Raw adoption rejects FRONT_DESK_INPUT unchanged, with no quote or approval. Reply and summary remain unapproved drafts and ask only the genuine missing site.",
+    "Correct dated facts/citations and unchanged inference store; no external action, approval or receipt is fabricated."
+  ],
+  "qualification": "B now passes all four initial cases. The final two frozen cases and full six-case non-regression gate remain required.",
+  "modelInputMatchesFrozenFourFieldInput": true,
+  "readOnlyStateUnchanged": true,
+  "modelOutputRepaired": false,
+  "mechanicalScoreUsedAsSemanticVerdict": false
+}

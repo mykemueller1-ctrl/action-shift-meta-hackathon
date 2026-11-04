@@ -1,0 +1,41 @@
+{
+  "runId": "v4-run-09",
+  "executionId": "2026-11-04T17-44-51-440Z-a2b4af5d-2e60-4bd4-963e-ebe158939904",
+  "requestNumber": 94,
+  "request": {
+    "id": "resp_6aeb6f16eeae9409acda4511",
+    "model": "muse-spark-1.3",
+    "reasoningEffort": "max",
+    "maxOutputTokens": 12000,
+    "inputTokens": 2808,
+    "outputTokens": 242,
+    "reasoningTokens": 129,
+    "elapsedMs": 2918,
+    "status": "completed"
+  },
+  "output": [
+    {
+      "type": "message",
+      "id": "rs_d30b1250-8acc-493b-97a3-93ce0ecf7ec6",
+      "role": "assistant",
+      "content": [
+        {
+          "type": "output_text",
+          "text": "Drafting your partial pickup plan — pulling menu details for the seven pizzas.",
+          "annotations": [],
+          "logprobs": []
+        }
+      ],
+      "phase": "commentary",
+      "status": "completed"
+    },
+    {
+      "type": "function_call",
+      "id": "fc_54eca982-40eb-43e2-83ce-bdbb265bd606",
+      "call_id": "call_54eca982-40eb-43e2-83ce-bdbb265bd606",
+      "name": "lookup_restaurant_facts",
+      "arguments": "{\"date\":\"2026-11-09\",\"topics\":[\"menu\",\"offers\",\"service\",\"capacity\",\"corrections\"]}",
+      "status": "completed"
+    }
+  ]
+}

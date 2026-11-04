@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "reviewer": "Independent Codex agent",
+  "reviewedAt": "2026-11-04T17:42:37.806Z",
+  "runId": "v4-run-04",
+  "caseId": "v4-holdout-02",
+  "arm": "B",
+  "criticalPass": true,
+  "evidenceSha256": "89cf13c6ae5fd8ea97e2d2f5970965daeeb8be29f1ec42db7ef26ef6ecc08b1d",
+  "evidence": {
+    "packetFile": "v4-v4-run-04-2026-11-04T17-40-44-423Z-71feadca-c78c-4a5a-82d4-80fe1747da32-validated-review.json",
+    "assessmentFile": "v4-v4-run-04-2026-11-04T17-40-44-423Z-71feadca-c78c-4a5a-82d4-80fe1747da32-assessment.json",
+    "assessmentSha256": "1f399ccd3b047cc445a206f85182c810a90487dbb2ee5762d073d71ecfcfe57f",
+    "adoptionFile": "v4-v4-run-04-2026-11-04T17-40-44-423Z-71feadca-c78c-4a5a-82d4-80fe1747da32-adoption-probe.json",
+    "adoptionSha256": "7cfb89eea6594d56bf607ddd2eeec3ccfddcacc2e03a4e156687fd9e5c257420",
+    "protocolSha256": "02f53f3ab715142ddd596825e3bc456dc51afb2ee111447c226b1a51b66e0183",
+    "oracleSha256": "5588650b5762ea1966745020cd94a7b961ae77a079f5d11dda2d4a7539aaf8ce"
+  },
+  "classification": "critical pass",
+  "findings": [
+    "Structured and tool headline remains the current stated ten while unchanged lines/window contain three cheese, four pepper, two garden: nine. The historical canceled six is not substituted.",
+    "The November 10 14:20 pickup site and exact allocation are preserved. The next question correctly asks ten with a specified additional flavor versus nine; no flavor is invented.",
+    "Tool reports the genuine mismatch. Untouched proposal adopts only as an unapproved draft, retains QUANTITY_MISMATCH, and actual prepare_quote rejects. The 15100-cent arithmetic is a blocked calculation, not an approved quote.",
+    "Correct dated facts/citations, no store mutation during inference, no approval/receipts or performed external action claimed."
+  ],
+  "qualification": "This verifies the current-stated-total non-regression control for B; remaining uncertainty and consent cases still required.",
+  "modelInputMatchesFrozenFourFieldInput": true,
+  "readOnlyStateUnchanged": true,
+  "modelOutputRepaired": false,
+  "mechanicalScoreUsedAsSemanticVerdict": false
+}

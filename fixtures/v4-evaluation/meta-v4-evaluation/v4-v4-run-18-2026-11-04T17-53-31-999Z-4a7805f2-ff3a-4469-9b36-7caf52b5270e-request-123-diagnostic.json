@@ -1,0 +1,32 @@
+{
+  "runId": "v4-run-18",
+  "executionId": "2026-11-04T17-53-31-999Z-4a7805f2-ff3a-4469-9b36-7caf52b5270e",
+  "requestNumber": 123,
+  "request": {
+    "id": "resp_6aeb71379d20b20394914082",
+    "model": "muse-wonder-1.0",
+    "reasoningEffort": "max",
+    "maxOutputTokens": 12000,
+    "inputTokens": 4220,
+    "outputTokens": 1791,
+    "reasoningTokens": 1709,
+    "elapsedMs": 17036,
+    "status": "completed"
+  },
+  "output": [
+    {
+      "type": "message",
+      "id": "msg_6b4e3a15-c270-4967-b575-0c1c602dfe08",
+      "role": "assistant",
+      "content": [
+        {
+          "type": "output_text",
+          "text": "{\n  \"intent\": \"food-question\",\n  \"proposal\": null,\n  \"questions\": [\n    \"Which field will store the allergy note?\"\n  ],\n  \"reply\": \"Probe\",\n  \"sourceIds\": [\n    \"demo-north-menu-v1\"\n  ],\n  \"status\": \"ready-for-operator\",\n  \"summary\": \"Probe\"\n}",
+          "annotations": [],
+          "logprobs": []
+        }
+      ],
+      "status": "completed"
+    }
+  ]
+}

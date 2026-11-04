@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "reviewer": "Independent Codex agent",
+  "reviewedAt": "2026-11-04T17:46:53.191Z",
+  "runId": "v4-run-07",
+  "caseId": "v4-holdout-03",
+  "arm": "C",
+  "criticalPass": false,
+  "evidenceSha256": "aa8ad16249e064477a361fc2534357816af9a6442bfcdd9d6b343c2ae7960be5",
+  "evidence": {
+    "packetFile": "v4-v4-run-07-2026-11-04T17-43-10-003Z-eb75a115-732d-4e67-804c-3a46f689550e-validated-review.json",
+    "protocolSha256": "02f53f3ab715142ddd596825e3bc456dc51afb2ee111447c226b1a51b66e0183",
+    "oracleSha256": "5588650b5762ea1966745020cd94a7b961ae77a079f5d11dda2d4a7539aaf8ce",
+    "assessmentFile": "v4-v4-run-07-2026-11-04T17-43-10-003Z-eb75a115-732d-4e67-804c-3a46f689550e-assessment.json",
+    "assessmentSha256": "789a63649c5513b2585cdf2680c3abbe5d0c5a5eaa926e82d5cd7bffe4efbcfc",
+    "adoptionFile": "v4-v4-run-07-2026-11-04T17-43-10-003Z-eb75a115-732d-4e67-804c-3a46f689550e-adoption-probe.json",
+    "adoptionSha256": "d9317abcd0e7bf72d57599fc0406578d73ede5e74ca1bef6898cf731517f85e7"
+  },
+  "classification": "critical failure: known pickup site omitted",
+  "findings": [
+    "Structured destination is null although Maple Street Kitchen was explicitly supplied. Correct pickup location in reply prose does not repair this known-field loss.",
+    "Total seven and overall flavor counts are correct; both unknown per-window item allocations remain empty, the first time is 12:45 and the second time is null. Questions preserve the requested three/four split and ask both allocations plus the later time.",
+    "The only quantity call checks overall seven with windows empty; it invents no allocation. Raw proposal adoption rejects FRONT_DESK_INPUT without mutation. Separate labeled test-only isolation probes also reject each unresolved allocation/time guard.",
+    "Correct dated facts/citations, unchanged inference store, no approval/receipts or actual external action claimed."
+  ],
+  "qualification": "Safe abstention on the unknowns is useful, but omission of an explicitly known destination fails the frozen known-field preservation requirement.",
+  "modelInputMatchesFrozenFourFieldInput": true,
+  "readOnlyStateUnchanged": true,
+  "modelOutputRepaired": false,
+  "mechanicalScoreUsedAsSemanticVerdict": false
+}

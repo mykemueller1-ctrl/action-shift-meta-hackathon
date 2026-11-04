@@ -1,0 +1,100 @@
+{
+  "schemaVersion": 1,
+  "decision": "promote-B",
+  "armId": "B",
+  "model": "muse-spark-1.3",
+  "reasoningEffort": "max",
+  "maxOutputTokens": 12000,
+  "adapterSha256": "f50dab170fe67adbe2627d4eb5af317a9dc873ad686b9d695b90a42716188a44",
+  "contractSha256": "cf9b8c3460b7d732f20f89ed98e92aa42e87e7170a5d2d48fdee7d36a35fcdb6",
+  "protocolSha256": "81003e1586a9f8110ff358f252423d27f69494ea2bf73512d229730c1630c60c",
+  "reviewer": "Independent Codex agent",
+  "reviewedAt": "2026-11-04T17:52:43.705Z",
+  "cases": [
+    {
+      "scenarioId": "v4-holdout-01",
+      "runId": "v4-run-02",
+      "packetFilename": "v4-run-02.json",
+      "packetSha256": "544464b379d0b8b3a504565825ed5828dfb77cd9440e68c12c11794d7e36823a",
+      "criticalPass": true,
+      "semanticVerdict": "pass",
+      "reviewNotes": [
+        "Exact source deltas preserved: first 3 cheese/2 garden at 12:10; later 1 cheese/2 pepper/3 garden at 18:10, November 9. Whole-order totals 4 cheese/2 pepper/5 garden = 11.",
+        "Structured destination is Maple Street Kitchen; headline/tool total is 11, explicitly calculated from revised lines. Prior nine is explicitly historical in summary. No transfer double-counting or missed substitution.",
+        "Questions are empty. The generic invitation to say whether the draft looks right is not a request to recompute or clarify the already resolved arithmetic.",
+        "The unchanged raw proposal adopts as unapproved with no quote/approval/receipts; separate prepare_quote succeeds at the independent 18100-cent reference and still has no approval or receipts.",
+        "November 9 scoped facts/citations are correct; read-only state is unchanged and no real action is claimed."
+      ]
+    },
+    {
+      "scenarioId": "v4-holdout-02",
+      "runId": "v4-run-04",
+      "packetFilename": "v4-run-04.json",
+      "packetSha256": "89cf13c6ae5fd8ea97e2d2f5970965daeeb8be29f1ec42db7ef26ef6ecc08b1d",
+      "criticalPass": true,
+      "semanticVerdict": "pass",
+      "reviewNotes": [
+        "Structured and tool headline remains the current stated ten while unchanged lines/window contain three cheese, four pepper, two garden: nine. The historical canceled six is not substituted.",
+        "The November 10 14:20 pickup site and exact allocation are preserved. The next question correctly asks ten with a specified additional flavor versus nine; no flavor is invented.",
+        "Tool reports the genuine mismatch. Untouched proposal adopts only as an unapproved draft, retains QUANTITY_MISMATCH, and actual prepare_quote rejects. The 15100-cent arithmetic is a blocked calculation, not an approved quote.",
+        "Correct dated facts/citations, no store mutation during inference, no approval/receipts or performed external action claimed."
+      ]
+    },
+    {
+      "scenarioId": "v4-holdout-03",
+      "runId": "v4-run-09",
+      "packetFilename": "v4-run-09.json",
+      "packetSha256": "8513d442366547247e7f73fd7324d7e1a647ecf934cb9b4dfd3ecbd469ccb0ec",
+      "criticalPass": true,
+      "semanticVerdict": "pass",
+      "reviewNotes": [
+        "Preserves Maple Street Kitchen, November 9 date, headline seven and exact overall flavor counts. Both window item arrays remain empty; first time is 12:45 and later time remains null.",
+        "Questions correctly retain the three/four split, ask flavor allocation for both windows and ask the missing second pickup time. No invented slot, flavor allocation or consent appears.",
+        "Only the overall quantity check is submitted with windows empty; the raw proposal is rejected FRONT_DESK_INPUT without state change. Separate labeled test-only probes establish each allocation/time guard independently; they are not repaired model outputs.",
+        "Correct dated facts/citations, unchanged inference store, no approval/receipts or actual external action claimed."
+      ]
+    },
+    {
+      "scenarioId": "v4-holdout-04",
+      "runId": "v4-run-12",
+      "packetFilename": "v4-run-12.json",
+      "packetSha256": "dd75ffd155a8dc0301bffb73a35c1f770abaca4c6a66c80bbea90e67fe92382e",
+      "criticalPass": true,
+      "semanticVerdict": "pass",
+      "reviewNotes": [
+        "Keeps the ambiguous pickup destination null and asks for the guest choice between the two named sites; it does not fill the site from restaurantId.",
+        "Preserves November 10 13:35 pickup, headline six, two each cheese/pepper/garden and the exact single-window allocation. The sole quantity check reconciles these unchanged values.",
+        "Raw adoption rejects FRONT_DESK_INPUT unchanged, with no quote or approval. Reply and summary remain unapproved drafts and ask only the genuine missing site.",
+        "Correct dated facts/citations and unchanged inference store; no external action, approval or receipt is fabricated."
+      ]
+    },
+    {
+      "scenarioId": "v4-holdout-05",
+      "runId": "v4-run-14",
+      "packetFilename": "v4-run-14.json",
+      "packetSha256": "9d5dce8e088ebae653768d22ec24f957f35bfc76b4b85b29eeed282cb5acb04e",
+      "criticalPass": true,
+      "semanticVerdict": "pass",
+      "reviewNotes": [
+        "Retains delivery to Fictional Cedar Annex, November 4 at 17:25, four pizzas and exact one cheese/one pepper/two garden allocation; no pickup alternative is silently adopted.",
+        "Retrieves and cites the active demo-correction-1 for the correct restaurant/date, explains pickup-only service without inventing a cause, and asks the guest whether they consent to pickup.",
+        "Exact tool input checks four and the unchanged single window. Raw proposal adopts only unapproved with PICKUP_ONLY blocker. The separate quote action rejects; 6700 cents is a blocked reference calculation, not approval. Fulfillment remains delivery, approval null and receipts empty.",
+        "Correct facts and source citations, fresh correction setup before inference/adoption, unchanged inference store, no fabricated commitment, consent or performed external action."
+      ]
+    },
+    {
+      "scenarioId": "v4-holdout-06",
+      "runId": "v4-run-16",
+      "packetFilename": "v4-run-16.json",
+      "packetSha256": "6cc538663bbbddf7d2b6d022f98e575cc8ea72273853e3cab213b8de4eac3961",
+      "criticalPass": true,
+      "semanticVerdict": "pass",
+      "reviewNotes": [
+        "Classifies the explicit family order as direct-order. Employer, workplace address and other branch commute context do not replace the named Maple Street Kitchen pickup site.",
+        "Preserves all eight pizzas as three cheese/two pepper/three garden at November 9 16:05 in one window. No destination, time, flavor or total clarification is requested; the generic optional-change invitation does not introduce an unresolved field.",
+        "Exact quantity call and dated facts support the result. Raw proposal adopts unapproved and the separate quote is valid at 13200 cents; approval remains null and receipts empty.",
+        "No correction from another run/date leaks into the fresh store, no inference mutation or invented actual action/commitment."
+      ]
+    }
+  ]
+}

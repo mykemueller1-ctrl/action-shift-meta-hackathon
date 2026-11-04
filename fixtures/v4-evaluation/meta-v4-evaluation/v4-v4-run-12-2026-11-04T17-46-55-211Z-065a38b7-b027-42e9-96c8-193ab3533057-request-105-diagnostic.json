@@ -1,0 +1,32 @@
+{
+  "runId": "v4-run-12",
+  "executionId": "2026-11-04T17-46-55-211Z-065a38b7-b027-42e9-96c8-193ab3533057",
+  "requestNumber": 105,
+  "request": {
+    "id": "resp_6aeb6fa406b846b3cb17444e",
+    "model": "muse-spark-1.3",
+    "reasoningEffort": "max",
+    "maxOutputTokens": 12000,
+    "inputTokens": 4553,
+    "outputTokens": 1026,
+    "reasoningTokens": 619,
+    "elapsedMs": 10695,
+    "status": "completed"
+  },
+  "output": [
+    {
+      "type": "message",
+      "id": "msg_ced4e0df-f2cd-458c-ad3d-22c16a5c17ca",
+      "role": "assistant",
+      "content": [
+        {
+          "type": "output_text",
+          "text": "{\"intent\": \"workplace-meal\", \"proposal\": {\"date\": \"2026-11-10\", \"destination\": null, \"fulfillment\": \"pickup\", \"headlineQuantity\": 6, \"items\": [{\"itemId\": \"cheese\", \"quantity\": 2}, {\"itemId\": \"pepper\", \"quantity\": 2}, {\"itemId\": \"garden\", \"quantity\": 2}], \"kind\": \"food\", \"windows\": [{\"id\": \"w-1335\", \"items\": [{\"itemId\": \"cheese\", \"quantity\": 2}, {\"itemId\": \"pepper\", \"quantity\": 2}, {\"itemId\": \"garden\", \"quantity\": 2}], \"readyAt\": \"2026-11-10T13:35:00-06:00\"}]}, \"questions\": [\"Which pickup collection site should we list for your November 10 order: Maple Street Kitchen or Maple Street South?\"], \"reply\": \"Thank you for your draft request for Fictional Alder Crew on November 10 \\u2014 6 pizzas for 13:35 pickup: 2 cheese, 2 roasted pepper, and 2 garden. This draft is unapproved and needs human review. Before we can prepare it for review, could you please confirm whether you would like Maple Street Kitchen or Maple Street South as the collection site?\", \"sourceIds\": [\"demo-north-menu-v1\", \"demo-north-service-v1\", \"demo-north-offer-current\"], \"status\": \"needs-clarification\", \"summary\": \"Workplace-meal draft for Fictional Alder Crew on 2026-11-10, pickup at 13:35: 2x cheese, 2x pepper, 2x garden, headline 6 matches lines and window total. Collection site ambiguous between Maple Street Kitchen and Maple Street South, so destination is null pending guest choice.\"}",
+          "annotations": [],
+          "logprobs": []
+        }
+      ],
+      "status": "completed"
+    }
+  ]
+}

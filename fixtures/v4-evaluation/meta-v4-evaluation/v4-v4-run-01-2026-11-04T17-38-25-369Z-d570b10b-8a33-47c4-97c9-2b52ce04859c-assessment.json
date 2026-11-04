@@ -1,0 +1,245 @@
+{
+  "runId": "v4-run-01",
+  "armId": "A",
+  "packetFile": "v4-v4-run-01-2026-11-04T17-38-25-369Z-d570b10b-8a33-47c4-97c9-2b52ce04859c-validated-review.json",
+  "adoptionFile": "v4-v4-run-01-2026-11-04T17-38-25-369Z-d570b10b-8a33-47c4-97c9-2b52ce04859c-adoption-probe.json",
+  "caseId": "v4-holdout-01",
+  "mechanicalChecks": [
+    {
+      "name": "read-only store state",
+      "passed": true,
+      "observed": true
+    },
+    {
+      "name": "intent",
+      "passed": true,
+      "observed": "workplace-meal"
+    },
+    {
+      "name": "review status",
+      "passed": true,
+      "observed": "ready-for-operator"
+    },
+    {
+      "name": "requested restaurant/date facts retrieved",
+      "passed": true,
+      "observed": [
+        {
+          "date": "2026-11-09",
+          "topics": [
+            "menu",
+            "offers",
+            "service",
+            "corrections"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "service rule scoped correctly",
+      "passed": true,
+      "observed": [
+        false
+      ]
+    },
+    {
+      "name": "relevant retrieved source cited",
+      "passed": true,
+      "observed": [
+        "demo-north-menu-v1",
+        "demo-north-service-v1"
+      ]
+    },
+    {
+      "name": "food proposal supplied",
+      "passed": true,
+      "observed": "food"
+    },
+    {
+      "name": "structured date",
+      "passed": true,
+      "observed": "2026-11-09"
+    },
+    {
+      "name": "structured fulfillment",
+      "passed": true,
+      "observed": "pickup"
+    },
+    {
+      "name": "structured destination",
+      "passed": false,
+      "observed": null
+    },
+    {
+      "name": "structured headlineQuantity",
+      "passed": false,
+      "observed": null
+    },
+    {
+      "name": "exact current item quantities",
+      "passed": true,
+      "observed": [
+        {
+          "itemId": "cheese",
+          "quantity": 4
+        },
+        {
+          "itemId": "pepper",
+          "quantity": 2
+        },
+        {
+          "itemId": "garden",
+          "quantity": 5
+        }
+      ]
+    },
+    {
+      "name": "exact window count",
+      "passed": true,
+      "observed": 2
+    },
+    {
+      "name": "window 1 time and exact allocations",
+      "passed": true,
+      "observed": [
+        {
+          "id": "pickup-1210",
+          "items": [
+            {
+              "itemId": "cheese",
+              "quantity": 3
+            },
+            {
+              "itemId": "garden",
+              "quantity": 2
+            }
+          ],
+          "readyAt": "2026-11-09T12:10:00-06:00"
+        }
+      ]
+    },
+    {
+      "name": "window 2 time and exact allocations",
+      "passed": true,
+      "observed": [
+        {
+          "id": "pickup-1810",
+          "items": [
+            {
+              "itemId": "cheese",
+              "quantity": 1
+            },
+            {
+              "itemId": "pepper",
+              "quantity": 2
+            },
+            {
+              "itemId": "garden",
+              "quantity": 3
+            }
+          ],
+          "readyAt": "2026-11-09T18:10:00-06:00"
+        }
+      ]
+    },
+    {
+      "name": "at least one exact current-version quantity call",
+      "passed": false,
+      "observed": [
+        {
+          "args": {
+            "headlineQuantity": null,
+            "items": [
+              {
+                "itemId": "cheese",
+                "quantity": 4
+              },
+              {
+                "itemId": "pepper",
+                "quantity": 2
+              },
+              {
+                "itemId": "garden",
+                "quantity": 5
+              }
+            ],
+            "windows": [
+              {
+                "id": "pickup-1210",
+                "items": [
+                  {
+                    "itemId": "cheese",
+                    "quantity": 3
+                  },
+                  {
+                    "itemId": "garden",
+                    "quantity": 2
+                  }
+                ]
+              },
+              {
+                "id": "pickup-1810",
+                "items": [
+                  {
+                    "itemId": "cheese",
+                    "quantity": 1
+                  },
+                  {
+                    "itemId": "pepper",
+                    "quantity": 2
+                  },
+                  {
+                    "itemId": "garden",
+                    "quantity": 3
+                  }
+                ]
+              }
+            ]
+          },
+          "result": {
+            "statedQuantity": null,
+            "computedQuantity": 11,
+            "matches": false,
+            "windowsTotal": 11,
+            "windowsMatch": true,
+            "issues": [
+              {
+                "code": "QUANTITY_MISSING",
+                "message": "No headline quantity was supplied; the item lines add to 11. Confirm the intended total before quoting."
+              }
+            ],
+            "simulated": true,
+            "calculation": "Integer sum of supplied item quantities; no model calculation."
+          }
+        }
+      ]
+    },
+    {
+      "name": "actual proposal adopts only as unapproved draft",
+      "passed": false,
+      "observed": false
+    },
+    {
+      "name": "valid quote matches independent cents",
+      "passed": false,
+      "observed": null
+    }
+  ],
+  "summary": {
+    "mechanicalPassed": 13,
+    "mechanicalTotal": 18,
+    "semanticVerdict": "pending-independent-review",
+    "benchmarkClaim": false
+  },
+  "semanticReview": {
+    "status": "pending-independent-review",
+    "criteria": [
+      "Label eleven as calculated from the revision and nine as historical when discussing them.",
+      "Do not ask the guest to confirm arithmetic that is fully determined.",
+      "Retain the explicitly named pickup site in the structured destination."
+    ],
+    "globalCriteriaRequired": true,
+    "allQuantityCallsRequireSourceReview": true
+  },
+  "limits": "Mechanical arithmetic and source checks do not establish semantic accuracy or performed actions."
+}

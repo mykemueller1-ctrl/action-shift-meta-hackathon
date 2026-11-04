@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "reviewer": "Independent Codex agent",
+  "reviewedAt": "2026-11-04T17:52:43.705Z",
+  "runId": "v4-run-16",
+  "caseId": "v4-holdout-06",
+  "arm": "B",
+  "criticalPass": true,
+  "evidenceSha256": "6cc538663bbbddf7d2b6d022f98e575cc8ea72273853e3cab213b8de4eac3961",
+  "evidence": {
+    "packetFile": "v4-v4-run-16-2026-11-04T17-51-41-264Z-f7ed453a-52d3-4a80-a2a4-08dcca760a56-validated-review.json",
+    "assessmentFile": "v4-v4-run-16-2026-11-04T17-51-41-264Z-f7ed453a-52d3-4a80-a2a4-08dcca760a56-assessment.json",
+    "assessmentSha256": "8ef245debc3466beb53059a41ad729c0530b7ff64c4161d6cd39bdbebd4098be",
+    "adoptionFile": "v4-v4-run-16-2026-11-04T17-51-41-264Z-f7ed453a-52d3-4a80-a2a4-08dcca760a56-adoption-probe.json",
+    "adoptionSha256": "693391d640121585c4220c135605480cb4ee750edb73a6e5282389881fd452d3",
+    "protocolSha256": "02f53f3ab715142ddd596825e3bc456dc51afb2ee111447c226b1a51b66e0183",
+    "oracleSha256": "5588650b5762ea1966745020cd94a7b961ae77a079f5d11dda2d4a7539aaf8ce"
+  },
+  "classification": "critical pass",
+  "findings": [
+    "Classifies the explicit family order as direct-order. Employer, workplace address and other branch commute context do not replace the named Maple Street Kitchen pickup site.",
+    "Preserves all eight pizzas as three cheese/two pepper/three garden at November 9 16:05 in one window. No destination, time, flavor or total clarification is requested; the generic optional-change invitation does not introduce an unresolved field.",
+    "Exact quantity call and dated facts support the result. Raw proposal adopts unapproved and the separate quote is valid at 13200 cents; approval remains null and receipts empty.",
+    "No correction from another run/date leaks into the fresh store, no inference mutation or invented actual action/commitment."
+  ],
+  "qualification": "B has all six critical passes, including both complete positives and all four uncertainty/conflict/consent controls. Full comparison artifact will preserve all other-arm failures.",
+  "modelInputMatchesFrozenFourFieldInput": true,
+  "readOnlyStateUnchanged": true,
+  "modelOutputRepaired": false,
+  "mechanicalScoreUsedAsSemanticVerdict": false
+}

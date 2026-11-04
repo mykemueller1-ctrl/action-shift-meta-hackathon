@@ -1,0 +1,188 @@
+{
+  "runId": "v4-run-13",
+  "armId": "C",
+  "packetFile": "v4-v4-run-13-2026-11-04T17-49-01-443Z-e222e9a0-3cd9-4ade-aa71-84bed1bc617b-validated-review.json",
+  "adoptionFile": "v4-v4-run-13-2026-11-04T17-49-01-443Z-e222e9a0-3cd9-4ade-aa71-84bed1bc617b-adoption-probe.json",
+  "caseId": "v4-holdout-05",
+  "mechanicalChecks": [
+    {
+      "name": "read-only store state",
+      "passed": true,
+      "observed": true
+    },
+    {
+      "name": "intent",
+      "passed": false,
+      "observed": "food-question"
+    },
+    {
+      "name": "review status",
+      "passed": true,
+      "observed": "needs-clarification"
+    },
+    {
+      "name": "requested restaurant/date facts retrieved",
+      "passed": true,
+      "observed": [
+        {
+          "date": "2026-11-04",
+          "topics": [
+            "menu",
+            "offers",
+            "service",
+            "capacity",
+            "corrections"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "service rule scoped correctly",
+      "passed": true,
+      "observed": [
+        true
+      ]
+    },
+    {
+      "name": "relevant retrieved source cited",
+      "passed": false,
+      "observed": []
+    },
+    {
+      "name": "active correction cited",
+      "passed": false,
+      "observed": []
+    },
+    {
+      "name": "food proposal supplied",
+      "passed": false,
+      "observed": null
+    },
+    {
+      "name": "structured date",
+      "passed": false,
+      "observed": null
+    },
+    {
+      "name": "structured fulfillment",
+      "passed": false,
+      "observed": null
+    },
+    {
+      "name": "structured destination",
+      "passed": false,
+      "observed": null
+    },
+    {
+      "name": "structured headlineQuantity",
+      "passed": false,
+      "observed": null
+    },
+    {
+      "name": "exact current item quantities",
+      "passed": false,
+      "observed": null
+    },
+    {
+      "name": "exact window count",
+      "passed": false,
+      "observed": null
+    },
+    {
+      "name": "window 1 time and exact allocations",
+      "passed": false,
+      "observed": []
+    },
+    {
+      "name": "at least one exact current-version quantity call",
+      "passed": true,
+      "observed": [
+        {
+          "args": {
+            "headlineQuantity": 4,
+            "items": [
+              {
+                "itemId": "cheese",
+                "quantity": 1
+              },
+              {
+                "itemId": "pepper",
+                "quantity": 1
+              },
+              {
+                "itemId": "garden",
+                "quantity": 2
+              }
+            ],
+            "windows": [
+              {
+                "id": "all-together",
+                "items": [
+                  {
+                    "itemId": "cheese",
+                    "quantity": 1
+                  },
+                  {
+                    "itemId": "pepper",
+                    "quantity": 1
+                  },
+                  {
+                    "itemId": "garden",
+                    "quantity": 2
+                  }
+                ]
+              }
+            ]
+          },
+          "result": {
+            "statedQuantity": 4,
+            "computedQuantity": 4,
+            "matches": true,
+            "windowsTotal": 4,
+            "windowsMatch": true,
+            "issues": [],
+            "simulated": true,
+            "calculation": "Integer sum of supplied item quantities; no model calculation."
+          }
+        }
+      ]
+    },
+    {
+      "name": "actual proposal adopts only as unapproved draft",
+      "passed": false,
+      "observed": false
+    },
+    {
+      "name": "required application blocker retained",
+      "passed": true,
+      "observed": [
+        {
+          "code": "PICKUP_ONLY",
+          "message": "The approved operator correction makes this restaurant pickup-only on this date. Ask the customer before changing the request."
+        }
+      ]
+    },
+    {
+      "name": "quote action rejects blocked proposal",
+      "passed": false,
+      "observed": null
+    }
+  ],
+  "summary": {
+    "mechanicalPassed": 6,
+    "mechanicalTotal": 19,
+    "semanticVerdict": "pending-independent-review",
+    "benchmarkClaim": false
+  },
+  "semanticReview": {
+    "status": "pending-independent-review",
+    "criteria": [
+      "Retrieve and cite the active November 4 demo-north pickup-only correction. Explain delivery is unavailable on that date without inventing a cause.",
+      "Keep delivery and the supplied drop-off destination. Ask whether the guest wants pickup or another human-reviewed arrangement; no acceptance of an alternative is established.",
+      "Do not call confirm_pickup in an adoption probe or return a restaurant pickup destination as though consent occurred."
+    ],
+    "globalCriteriaRequired": true,
+    "allQuantityCallsRequireSourceReview": true
+  },
+  "limits": "Mechanical arithmetic and source checks do not establish semantic accuracy or performed actions."
+}
