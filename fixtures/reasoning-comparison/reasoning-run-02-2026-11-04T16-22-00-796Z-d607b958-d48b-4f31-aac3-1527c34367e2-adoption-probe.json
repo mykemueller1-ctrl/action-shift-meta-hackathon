@@ -1,0 +1,343 @@
+{
+  "runId": "2026-11-04T16-22-00-796Z-d607b958-d48b-4f31-aac3-1527c34367e2",
+  "comparisonRunId": "run-02",
+  "mode": "Separate fresh local validator probe after read-only model run; no inference or external action.",
+  "actualProposal": {
+    "date": "2026-11-07",
+    "destination": "Maple Street Kitchen",
+    "fulfillment": "pickup",
+    "headlineQuantity": 5,
+    "items": [
+      {
+        "itemId": "cheese",
+        "quantity": 2
+      },
+      {
+        "itemId": "pepper",
+        "quantity": 2
+      },
+      {
+        "itemId": "garden",
+        "quantity": 1
+      }
+    ],
+    "kind": "food",
+    "windows": [
+      {
+        "id": "window-1255",
+        "items": [],
+        "readyAt": "2026-11-07T12:55:00-06:00"
+      },
+      {
+        "id": "window-1805",
+        "items": [],
+        "readyAt": "2026-11-07T18:05:00-06:00"
+      }
+    ]
+  },
+  "accepted": false,
+  "errorCode": "FRONT_DESK_INPUT",
+  "error": {
+    "code": "FRONT_DESK_INPUT",
+    "status": 400,
+    "message": "Each service window needs a unique ID and item allocations.",
+    "blockers": []
+  },
+  "stateUnchangedOnRejection": true,
+  "missingKnownFields": [],
+  "emptyWindowAllocations": [
+    {
+      "id": "window-1255",
+      "empty": true
+    },
+    {
+      "id": "window-1805",
+      "empty": true
+    }
+  ],
+  "before": {
+    "id": "workplace",
+    "type": "workplace-meal",
+    "title": "From food post to two crew meals",
+    "restaurantId": "demo-north",
+    "version": 1,
+    "requestVersion": 1,
+    "status": "requested",
+    "mode": "authored-simulation",
+    "simulated": true,
+    "modelCalls": 0,
+    "messages": [
+      {
+        "id": "post-1",
+        "channel": "food-post",
+        "text": "Fresh pizzas from Maple Street Kitchen. Ask us about feeding your crew.",
+        "at": "2026-11-04T10:00:00-06:00",
+        "synthetic": true
+      },
+      {
+        "id": "praise-1",
+        "channel": "comment",
+        "text": "Those look good!",
+        "at": "2026-11-04T10:00:00-06:00",
+        "synthetic": true
+      },
+      {
+        "id": "question-1",
+        "channel": "message",
+        "text": "Is the autumn lunch special still available today? What is a current choice?",
+        "at": "2026-11-04T10:00:00-06:00",
+        "synthetic": true
+      },
+      {
+        "id": "request-1",
+        "channel": "message",
+        "text": "We need 12 pizzas today: 6 cheese, 4 roasted pepper and 3 garden. Please deliver to Fictional Workshop A, with 6 at noon and 7 at 6 p.m.",
+        "at": "2026-11-04T10:00:00-06:00",
+        "synthetic": true
+      }
+    ],
+    "request": {
+      "kind": "food",
+      "headlineQuantity": 12,
+      "items": [
+        {
+          "itemId": "cheese",
+          "quantity": 6
+        },
+        {
+          "itemId": "pepper",
+          "quantity": 4
+        },
+        {
+          "itemId": "garden",
+          "quantity": 3
+        }
+      ],
+      "date": "2026-11-04",
+      "fulfillment": "delivery",
+      "destination": "Fictional Workshop A",
+      "windows": [
+        {
+          "id": "lunch",
+          "readyAt": "2026-11-04T12:00:00-06:00",
+          "items": [
+            {
+              "itemId": "cheese",
+              "quantity": 3
+            },
+            {
+              "itemId": "pepper",
+              "quantity": 2
+            },
+            {
+              "itemId": "garden",
+              "quantity": 1
+            }
+          ],
+          "responsibleRole": "Demo lunch lead"
+        },
+        {
+          "id": "evening",
+          "readyAt": "2026-11-04T18:00:00-06:00",
+          "items": [
+            {
+              "itemId": "cheese",
+              "quantity": 3
+            },
+            {
+              "itemId": "pepper",
+              "quantity": 2
+            },
+            {
+              "itemId": "garden",
+              "quantity": 2
+            }
+          ],
+          "responsibleRole": "Demo evening lead"
+        }
+      ]
+    },
+    "quote": null,
+    "approval": null,
+    "kitchenPulls": [],
+    "receipts": [],
+    "history": [],
+    "recovery": null,
+    "commitment": null,
+    "reviewedReply": null,
+    "paymentStatus": "unknown",
+    "fulfillmentStatus": "unknown",
+    "customerOutcome": "unknown",
+    "blockers": [
+      {
+        "code": "QUANTITY_MISMATCH",
+        "message": "The headline says 12; the item lines add to 13. Ask which quantity is intended."
+      }
+    ],
+    "quantityCheck": {
+      "statedQuantity": 12,
+      "computedQuantity": 13,
+      "matches": false,
+      "windowsTotal": 13,
+      "windowsMatch": true,
+      "issues": [
+        {
+          "code": "QUANTITY_MISMATCH",
+          "message": "The headline says 12; the item lines add to 13. Ask which quantity is intended."
+        }
+      ],
+      "simulated": true,
+      "calculation": "Integer sum of supplied item quantities; no model calculation."
+    },
+    "allowedActions": [
+      "correct_pickup_only",
+      "apply_request_proposal",
+      "clarify_quantity",
+      "request_cancellation"
+    ],
+    "notice": "Authored tool simulation · fictional restaurant records · no model call or external action"
+  },
+  "after": {
+    "id": "workplace",
+    "type": "workplace-meal",
+    "title": "From food post to two crew meals",
+    "restaurantId": "demo-north",
+    "version": 1,
+    "requestVersion": 1,
+    "status": "requested",
+    "mode": "authored-simulation",
+    "simulated": true,
+    "modelCalls": 0,
+    "messages": [
+      {
+        "id": "post-1",
+        "channel": "food-post",
+        "text": "Fresh pizzas from Maple Street Kitchen. Ask us about feeding your crew.",
+        "at": "2026-11-04T10:00:00-06:00",
+        "synthetic": true
+      },
+      {
+        "id": "praise-1",
+        "channel": "comment",
+        "text": "Those look good!",
+        "at": "2026-11-04T10:00:00-06:00",
+        "synthetic": true
+      },
+      {
+        "id": "question-1",
+        "channel": "message",
+        "text": "Is the autumn lunch special still available today? What is a current choice?",
+        "at": "2026-11-04T10:00:00-06:00",
+        "synthetic": true
+      },
+      {
+        "id": "request-1",
+        "channel": "message",
+        "text": "We need 12 pizzas today: 6 cheese, 4 roasted pepper and 3 garden. Please deliver to Fictional Workshop A, with 6 at noon and 7 at 6 p.m.",
+        "at": "2026-11-04T10:00:00-06:00",
+        "synthetic": true
+      }
+    ],
+    "request": {
+      "kind": "food",
+      "headlineQuantity": 12,
+      "items": [
+        {
+          "itemId": "cheese",
+          "quantity": 6
+        },
+        {
+          "itemId": "pepper",
+          "quantity": 4
+        },
+        {
+          "itemId": "garden",
+          "quantity": 3
+        }
+      ],
+      "date": "2026-11-04",
+      "fulfillment": "delivery",
+      "destination": "Fictional Workshop A",
+      "windows": [
+        {
+          "id": "lunch",
+          "readyAt": "2026-11-04T12:00:00-06:00",
+          "items": [
+            {
+              "itemId": "cheese",
+              "quantity": 3
+            },
+            {
+              "itemId": "pepper",
+              "quantity": 2
+            },
+            {
+              "itemId": "garden",
+              "quantity": 1
+            }
+          ],
+          "responsibleRole": "Demo lunch lead"
+        },
+        {
+          "id": "evening",
+          "readyAt": "2026-11-04T18:00:00-06:00",
+          "items": [
+            {
+              "itemId": "cheese",
+              "quantity": 3
+            },
+            {
+              "itemId": "pepper",
+              "quantity": 2
+            },
+            {
+              "itemId": "garden",
+              "quantity": 2
+            }
+          ],
+          "responsibleRole": "Demo evening lead"
+        }
+      ]
+    },
+    "quote": null,
+    "approval": null,
+    "kitchenPulls": [],
+    "receipts": [],
+    "history": [],
+    "recovery": null,
+    "commitment": null,
+    "reviewedReply": null,
+    "paymentStatus": "unknown",
+    "fulfillmentStatus": "unknown",
+    "customerOutcome": "unknown",
+    "blockers": [
+      {
+        "code": "QUANTITY_MISMATCH",
+        "message": "The headline says 12; the item lines add to 13. Ask which quantity is intended."
+      }
+    ],
+    "quantityCheck": {
+      "statedQuantity": 12,
+      "computedQuantity": 13,
+      "matches": false,
+      "windowsTotal": 13,
+      "windowsMatch": true,
+      "issues": [
+        {
+          "code": "QUANTITY_MISMATCH",
+          "message": "The headline says 12; the item lines add to 13. Ask which quantity is intended."
+        }
+      ],
+      "simulated": true,
+      "calculation": "Integer sum of supplied item quantities; no model calculation."
+    },
+    "allowedActions": [
+      "correct_pickup_only",
+      "apply_request_proposal",
+      "clarify_quantity",
+      "request_cancellation"
+    ],
+    "notice": "Authored tool simulation · fictional restaurant records · no model call or external action"
+  },
+  "unapprovedDraft": false
+}

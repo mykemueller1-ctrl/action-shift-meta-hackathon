@@ -50,7 +50,7 @@ export function createFrontDeskServer({ port = 4330, store, correctionFile = DEF
           res.writeHead(200, { ...headers, 'Content-Type': type }); res.end(bytes); return;
         }
         if (url.pathname === '/api/front-desk/status') return answer(res, 200, { ...store.getStatus(), recordedReviews: structuredClone(recordedReviews),
-          capabilities: { recordedProposalAdoption: Boolean(getRecordedReview), recordedReplyReview: Boolean(getRecordedReview) } });
+          capabilities: { recordedProposalAdoption: Boolean(getRecordedReview), recordedReplyReview: Boolean(getRecordedReview), recordedProposalCompletion: Boolean(getRecordedReview) } });
         if (url.pathname === '/api/front-desk/facts') return answer(res, 200, store.lookupFacts({ restaurantId: url.searchParams.get('restaurantId') || undefined, date: url.searchParams.get('date') || undefined, topics: url.searchParams.has('topics') ? url.searchParams.get('topics').split(',') : undefined }));
         if (url.pathname === '/api/front-desk/cases') return answer(res, 200, store.listCases());
         if (url.pathname === '/api/front-desk/case') return answer(res, 200, store.getCase(url.searchParams.get('id') || 'workplace'));
@@ -67,13 +67,14 @@ export function createFrontDeskServer({ port = 4330, store, correctionFile = DEF
       if (Number(req.headers['content-length'] || 0) > MAX_BYTES) { req.resume(); return answer(res, 413, { code: 'FRONT_DESK_BODY', error: 'Request is too large.' }); }
       const body = await bodyJson(req);
       if (!body || typeof body !== 'object' || Array.isArray(body) || Object.keys(body).length !== 4 || !['caseId', 'expectedVersion', 'action', 'payload'].every(key => Object.hasOwn(body, key))) return answer(res, 400, { code: 'FRONT_DESK_INPUT', error: 'Supply caseId, expectedVersion, action and payload only.' });
-      if (['apply_recorded_proposal', 'review_recorded_reply'].includes(body.action)) {
+      if (['apply_recorded_proposal', 'complete_recorded_proposal', 'review_recorded_reply'].includes(body.action)) {
         const reply = body.action === 'review_recorded_reply';
-        if (!getRecordedReview || !body.payload || typeof body.payload !== 'object' || Array.isArray(body.payload) || Object.keys(body.payload).length !== (reply ? 3 : 2)
-          || !Object.keys(body.payload).every(key => ['reviewId', 'operator', ...(reply ? ['text'] : [])].includes(key))
+        const completion = body.action === 'complete_recorded_proposal';
+        if (!getRecordedReview || !body.payload || typeof body.payload !== 'object' || Array.isArray(body.payload) || Object.keys(body.payload).length !== (reply ? 3 : completion ? 4 : 2)
+          || !Object.keys(body.payload).every(key => ['reviewId', 'operator', ...(reply ? ['text'] : completion ? ['changes', 'reason'] : [])].includes(key))
           || body.payload.operator !== 'Demo operator' || typeof body.payload.reviewId !== 'string' || !recordedReviews.some(review => review.id === body.payload.reviewId)) return answer(res, 400, { code: 'FRONT_DESK_RECORD', error: 'Choose a configured server-bound recorded result and explicitly review it.' });
         const review = await getRecordedReview(body.payload.reviewId);
-        return answer(res, 200, store[reply ? 'reviewRecordedReply' : 'applyRecordedProposal']({ caseId: body.caseId, expectedVersion: body.expectedVersion, ...body.payload }, review));
+        return answer(res, 200, store[reply ? 'reviewRecordedReply' : completion ? 'completeRecordedProposal' : 'applyRecordedProposal']({ caseId: body.caseId, expectedVersion: body.expectedVersion, ...body.payload }, review));
       }
       return answer(res, 200, store.action(body));
     } catch (error) {

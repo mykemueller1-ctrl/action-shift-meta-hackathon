@@ -1,0 +1,128 @@
+{
+  "runId": "2026-11-04T16-23-57-260Z-34cd05d4-fef5-4065-81d4-f9c92a67fa52",
+  "comparisonRunId": "run-05",
+  "reasoningEffort": "high",
+  "validatedReviewFile": "reasoning-run-05-2026-11-04T16-23-57-260Z-34cd05d4-fef5-4065-81d4-f9c92a67fa52-validated-review.json",
+  "evaluationCaseId": "regression-core-01",
+  "mechanicalChecks": [
+    {
+      "name": "read-only case and correction state",
+      "passed": true,
+      "observed": "unchanged"
+    },
+    {
+      "name": "intent classification",
+      "passed": true,
+      "observed": "workplace-meal"
+    },
+    {
+      "name": "proposal review state",
+      "passed": true,
+      "observed": "ready-for-operator"
+    },
+    {
+      "name": "retrieved facts for requested date",
+      "passed": true,
+      "observed": [
+        "2026-11-05"
+      ]
+    },
+    {
+      "name": "restaurant scope retained",
+      "passed": true,
+      "observed": [
+        "demo-north"
+      ]
+    },
+    {
+      "name": "dated pickup-only rule scope",
+      "passed": true,
+      "observed": [
+        false
+      ]
+    },
+    {
+      "name": "deterministic extracted quantity check",
+      "passed": false,
+      "observed": [
+        {
+          "headline": null,
+          "sum": 11,
+          "matches": false,
+          "windowsMatch": true
+        }
+      ]
+    },
+    {
+      "name": "food proposal supplied",
+      "passed": true,
+      "observed": "food"
+    },
+    {
+      "name": "proposal headlineQuantity",
+      "passed": false,
+      "observed": null
+    },
+    {
+      "name": "proposal date",
+      "passed": true,
+      "observed": "2026-11-05"
+    },
+    {
+      "name": "proposal fulfillment",
+      "passed": true,
+      "observed": "pickup"
+    },
+    {
+      "name": "exact item quantities retained",
+      "passed": true,
+      "observed": {
+        "cheese": 3,
+        "garden": 5,
+        "pepper": 3
+      }
+    },
+    {
+      "name": "separate windows retained",
+      "passed": true,
+      "observed": 2
+    },
+    {
+      "name": "exact window allocation at 2026-11-05T12:15:00-06:00",
+      "passed": true,
+      "observed": {
+        "cheese": 1,
+        "garden": 1,
+        "pepper": 1
+      }
+    },
+    {
+      "name": "exact window allocation at 2026-11-05T18:45:00-06:00",
+      "passed": true,
+      "observed": {
+        "cheese": 2,
+        "garden": 4,
+        "pepper": 2
+      }
+    }
+  ],
+  "summary": {
+    "mechanicalPassed": 13,
+    "mechanicalTotal": 15,
+    "semanticVerdict": "not-reviewed",
+    "benchmarkClaim": false
+  },
+  "semanticReview": {
+    "status": "pending-human-review",
+    "criteria": [
+      "Treats ten as the superseded original total and derives eleven from the explicit transfer, removal and addition; it must not retain ten or ask the guest to resolve arithmetic already specified by the change.",
+      "Preserves the first pickup at 2026-11-05T12:15:00-06:00 with one cheese, one pepper and one garden; changes the later pickup to 2026-11-05T18:45:00-06:00 with two cheese, two pepper and four garden. Window IDs are arbitrary; dates, times and allocations are not.",
+      "Retains pickup at Maple Street Kitchen and the workplace meal context. No destination, dish or quantity is invented.",
+      "Retrieves November 5 facts rather than applying the November 4 clock as the service date. If it mentions a menu total, the fictional tax-inclusive total is 18400 cents; outputting a price is not required.",
+      "Keeps the revision a draft awaiting operator price, timing and capacity review; no approval, kitchen acknowledgment, payment or fulfillment is claimed."
+    ],
+    "reviewer": null,
+    "notes": null
+  },
+  "limits": "Mechanical checks do not establish semantic correctness, general reliability, customer value or production readiness."
+}

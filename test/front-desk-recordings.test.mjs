@@ -11,17 +11,23 @@ const fixtureRoot = fileURLToPath(new URL('../fixtures/front-desk/', import.meta
 const sha256 = bytes => createHash('sha256').update(bytes).digest('hex');
 const json = async file => JSON.parse(await readFile(file, 'utf8'));
 const save = (file, value) => writeFile(file, JSON.stringify(value, null, 2) + '\n');
-async function temporaryFixtures(t) {
+async function temporaryFixtures(t, includeHumanReview = false) {
   const parent = fileURLToPath(new URL('../.local-state/recording-tests/', import.meta.url));
   await mkdir(parent, { recursive: true });
-  const directory = await mkdtemp(path.join(parent, 'front-desk-recordings-'));
+  const container = await mkdtemp(path.join(parent, 'front-desk-recordings-'));
+  const directory = path.join(container, 'front-desk');
   t.after(async () => {
-    const resolved = path.resolve(directory);
+    const resolved = path.resolve(container);
     assert.equal(path.dirname(resolved), path.resolve(parent));
     assert.ok(path.basename(resolved).startsWith('front-desk-recordings-'));
     await rm(resolved, { recursive: true, force: true });
   });
   await cp(fixtureRoot, directory, { recursive: true });
+  // These legacy-manifest tests intentionally omit the separately pinned failed example.
+  if (includeHumanReview) {
+    await mkdir(path.join(container, 'reasoning-comparison'));
+    await cp(path.join(fixtureRoot, '../reasoning-comparison/run-01.json'), path.join(container, 'reasoning-comparison/run-01.json'));
+  } else await rm(path.join(directory, 'human-review-manifest.json'), { force: true });
   return directory;
 }
 async function editPacketAndUpdateLocalHash(directory, mutate) {
@@ -39,7 +45,7 @@ async function editPacketAndUpdateLocalHash(directory, mutate) {
 test('all real fixture bytes match the manifest and retain reviewed limitations and failures', async () => {
   const loaded = await loadFrontDeskRecordings();
   assert.equal(loaded.manifest.reviews.length, 10);
-  assert.equal(loaded.recordedReviews.length, 4 + (loaded.additionalManifest?.reviews.filter(entry => entry.displayInApp).length || 0));
+  assert.equal(loaded.recordedReviews.length, 4 + (loaded.additionalManifest?.reviews.filter(entry => entry.displayInApp).length || 0) + (loaded.humanReviewManifest ? 1 : 0));
   let passed = 0; let total = 0;
   for (const entry of loaded.manifest.reviews) {
     const bytes = await readFile(path.join(fixtureRoot, entry.filename));
@@ -135,7 +141,7 @@ test('mock secondary permits only reviewed case-02 and case-03 with an approved 
 test('pinned v2 preserves reviewed limitations and model input while failed case-01 stays outside replay', async () => {
   const loaded = await loadFrontDeskRecordings();
   assert.deepEqual(loaded.additionalManifest.reviews.map(entry => entry.id).sort(), ['case-02', 'case-03']);
-  assert.equal(loaded.recordedReviews.length, 5);
+  assert.equal(loaded.recordedReviews.length, 5 + (loaded.humanReviewManifest ? 1 : 0));
   const descriptor = loaded.recordedReviews.find(entry => entry.id === 'case-02');
   assert.equal(descriptor.caseId, 'direct'); assert.equal(descriptor.preferred, true);
   const packet = await loaded.recordedReviewProvider('case-02');
@@ -255,5 +261,32 @@ test('manifest paths cannot escape the fixture directory', async t => {
   const manifest = await json(manifestPath);
   manifest.reviews[0].filename = '../offer-and-count.json';
   await save(manifestPath, manifest);
+  await assert.rejects(loadFrontDeskRecordings(directory), /integrity check/);
+});
+
+test('human-review replay is separately labeled fail and preserves the immutable result with a private allowlist', async t => {
+  const directory = await temporaryFixtures(t, true); const loaded = await loadFrontDeskRecordings(directory);
+  const descriptor = loaded.recordedReviews.find(item => item.id === 'fresh-01');
+  assert.equal(descriptor.semanticVerdict, 'fail'); assert.equal(descriptor.completionOnly, true); assert.equal(descriptor.preferred, true);
+  const packet = await loaded.recordedReviewProvider('fresh-01'); const raw = await json(path.join(directory, '../reasoning-comparison/run-01.json'));
+  assert.equal(packet.replayReview.semanticVerdict, 'fail'); assert.equal(packet.evaluation.semanticReviewStatus, 'pending');
+  assert.deepEqual(packet.result, raw.result); assert.deepEqual(packet.input, raw.input); assert.deepEqual(packet.receipt, raw.receipt);
+  packet.result.proposal.destination = 'Modified'; packet.replayReview.semanticVerdict = 'pass';
+  assert.equal((await loaded.recordedReviewProvider('fresh-01')).result.proposal.destination, null);
+  loaded.recordedReviews.push({ id: 'fresh-02', caseId: 'workplace' }); await assert.rejects(loaded.recordedReviewProvider('fresh-02'));
+});
+
+test('human-review manifest cannot reclassify failure, expand its fixed path, or accept altered source bytes', async t => {
+  for (const mutate of [
+    entry => { entry.semanticVerdict = 'pass'; }, entry => { entry.completionOnly = false; },
+    entry => { entry.filename = '../reasoning-comparison/run-02.json'; }, entry => { entry.id = 'fresh-02'; },
+    entry => { entry.caseId = 'direct'; }, entry => { entry.sha256 = '0'.repeat(64); },
+  ]) {
+    const directory = await temporaryFixtures(t, true); const file = path.join(directory, 'human-review-manifest.json');
+    const entry = await json(file); mutate(entry); await save(file, entry);
+    await assert.rejects(loadFrontDeskRecordings(directory), /integrity check/);
+  }
+  const directory = await temporaryFixtures(t, true); const file = path.join(directory, '../reasoning-comparison/run-01.json');
+  const packet = await json(file); packet.result.proposal.destination = 'Invented model completion'; await save(file, packet);
   await assert.rejects(loadFrontDeskRecordings(directory), /integrity check/);
 });

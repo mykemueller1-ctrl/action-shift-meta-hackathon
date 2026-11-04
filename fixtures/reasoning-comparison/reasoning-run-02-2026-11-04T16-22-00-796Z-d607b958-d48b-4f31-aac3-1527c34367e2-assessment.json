@@ -1,0 +1,148 @@
+{
+  "runId": "2026-11-04T16-22-00-796Z-d607b958-d48b-4f31-aac3-1527c34367e2",
+  "comparisonRunId": "run-02",
+  "reasoningEffort": "high",
+  "validatedReviewFile": "reasoning-run-02-2026-11-04T16-22-00-796Z-d607b958-d48b-4f31-aac3-1527c34367e2-validated-review.json",
+  "evaluationCaseId": "fresh-02",
+  "mechanicalChecks": [
+    {
+      "name": "read-only case and correction state",
+      "passed": true,
+      "observed": "unchanged"
+    },
+    {
+      "name": "intent classification",
+      "passed": true,
+      "observed": "workplace-meal"
+    },
+    {
+      "name": "proposal review state",
+      "passed": true,
+      "observed": "needs-clarification"
+    },
+    {
+      "name": "retrieved facts for requested date",
+      "passed": true,
+      "observed": [
+        "2026-11-07"
+      ]
+    },
+    {
+      "name": "restaurant scope retained",
+      "passed": true,
+      "observed": [
+        "demo-north"
+      ]
+    },
+    {
+      "name": "dated pickup-only rule scope",
+      "passed": true,
+      "observed": [
+        false
+      ]
+    },
+    {
+      "name": "deterministic extracted quantity check",
+      "passed": true,
+      "observed": [
+        {
+          "headline": 5,
+          "sum": 5,
+          "matches": true,
+          "windowsMatch": false
+        }
+      ]
+    },
+    {
+      "name": "no invented allocations in quantity tool calls",
+      "passed": true,
+      "observed": [
+        []
+      ]
+    },
+    {
+      "name": "unknown per-window item allocations remain unknown",
+      "passed": true,
+      "observed": [
+        {
+          "id": "window-1255",
+          "items": [],
+          "readyAt": "2026-11-07T12:55:00-06:00"
+        },
+        {
+          "id": "window-1805",
+          "items": [],
+          "readyAt": "2026-11-07T18:05:00-06:00"
+        }
+      ]
+    },
+    {
+      "name": "food proposal supplied",
+      "passed": true,
+      "observed": "food"
+    },
+    {
+      "name": "proposal headlineQuantity",
+      "passed": true,
+      "observed": 5
+    },
+    {
+      "name": "proposal date",
+      "passed": true,
+      "observed": "2026-11-07"
+    },
+    {
+      "name": "proposal fulfillment",
+      "passed": true,
+      "observed": "pickup"
+    },
+    {
+      "name": "proposal destination",
+      "passed": true,
+      "observed": "Maple Street Kitchen"
+    },
+    {
+      "name": "exact item quantities retained",
+      "passed": true,
+      "observed": {
+        "cheese": 2,
+        "pepper": 2,
+        "garden": 1
+      }
+    },
+    {
+      "name": "separate windows retained",
+      "passed": true,
+      "observed": 2
+    },
+    {
+      "name": "exact window allocation at 2026-11-07T12:55:00-06:00",
+      "passed": true,
+      "observed": {}
+    },
+    {
+      "name": "exact window allocation at 2026-11-07T18:05:00-06:00",
+      "passed": true,
+      "observed": {}
+    }
+  ],
+  "summary": {
+    "mechanicalPassed": 18,
+    "mechanicalTotal": 18,
+    "semanticVerdict": "not-reviewed",
+    "benchmarkClaim": false
+  },
+  "semanticReview": {
+    "status": "pending-human-review",
+    "criteria": [
+      "Preserve the explicit date, pickup mode, named pickup location, headline five, overall flavors and both times in a partial structured proposal. A null proposal is safe abstention but does not satisfy the known-field preservation target for promotion.",
+      "Ask a useful question for the missing flavor allocation at both windows while retaining the known three-pizza and two-pizza totals. Do not ask for details already supplied.",
+      "Keep both window item arrays empty. Never invent a flavor split in the final proposal or in quantity-tool arguments, even if the invented split happens to sum correctly. Status must remain needs-clarification.",
+      "Retrieve the November 7 facts and keep the request unapproved. Do not invent pickup consent, courier causes, accepted timing/capacity, booking, kitchen action, payment or fulfillment. Any stated menu total must match 8300 fictional cents.",
+      "After the read-only run assessment, attempt the actual returned proposal in a separate fresh local store through the existing adoption validator. Adoption must reject it and leave that store unchanged. Record the actual error and blockers; do not claim unknown-allocation blocking was tested if rejection only reflects a different missing field. No API request or external action is permitted in this probe."
+    ],
+    "reviewer": null,
+    "notes": null
+  },
+  "limits": "Mechanical checks do not establish semantic correctness, general reliability, customer value or production readiness."
+}

@@ -1,0 +1,222 @@
+{
+  "schemaVersion": 1,
+  "caseSetVersion": "2026-11-04-reasoning-fresh-frozen-01",
+  "syntheticOnly": true,
+  "author": "Independent Codex agent /root/release_review",
+  "modelInputKeys": [
+    "synthetic",
+    "restaurantId",
+    "demoNow",
+    "message"
+  ],
+  "purpose": "Two fresh paired controls. All labels, expectations and field classifications remain outside model input. The author has seen earlier results; these are fresh inputs, not an external blinded benchmark.",
+  "cases": [
+    {
+      "id": "fresh-01",
+      "appCaseId": "workplace",
+      "maxRequests": 3,
+      "input": {
+        "synthetic": true,
+        "restaurantId": "demo-north",
+        "demoNow": "2026-11-04T10:00:00-06:00",
+        "message": "The staff meal plan for Fictional Rail Crew R on November 8, 2026 is eleven pizzas for pickup at Maple Street Kitchen. Our old split is: 12:35, two cheese, one roasted pepper and two garden; 17:50, three cheese, one roasted pepper and two garden. Please revise it: transfer one cheese from the later collection to 12:35, remove one garden from 12:35, and add two roasted pepper to the later collection. Move the later pickup to 18:20 on November 8. Keep everything else the same. Replace the earlier total with the total resulting from those changes and write the revised draft for restaurant review."
+      },
+      "setupActions": [],
+      "fieldClassification": {
+        "explicit": {
+          "restaurantId": "demo-north",
+          "date": "2026-11-08",
+          "fulfillment": "pickup",
+          "destination": "Maple Street Kitchen",
+          "historicalStatedTotal": 11,
+          "firstTime": "2026-11-08T12:35:00-06:00",
+          "revisedLaterTime": "2026-11-08T18:20:00-06:00"
+        },
+        "unambiguouslyDerived": {
+          "finalTotal": 12,
+          "itemQuantities": {
+            "cheese": 5,
+            "pepper": 4,
+            "garden": 3
+          },
+          "windowTotals": [
+            5,
+            7
+          ],
+          "windowItemQuantities": [
+            {
+              "cheese": 3,
+              "pepper": 1,
+              "garden": 1
+            },
+            {
+              "cheese": 2,
+              "pepper": 3,
+              "garden": 2
+            }
+          ]
+        },
+        "unknown": [
+          "Actual restaurant acceptance",
+          "Actual operational capacity",
+          "Payment",
+          "Fulfillment"
+        ]
+      },
+      "expected": {
+        "intentIn": [
+          "workplace-meal"
+        ],
+        "statusIn": [
+          "ready-for-operator",
+          "human-review"
+        ],
+        "factsDate": "2026-11-08",
+        "pickupOnly": false,
+        "quantity": {
+          "headlineIn": [
+            null,
+            12
+          ],
+          "sum": 12,
+          "windowsMatch": true
+        },
+        "proposal": {
+          "date": "2026-11-08",
+          "fulfillment": "pickup",
+          "destination": "Maple Street Kitchen",
+          "headlineQuantity": 12,
+          "itemQuantities": {
+            "cheese": 5,
+            "pepper": 4,
+            "garden": 3
+          },
+          "windowCount": 2,
+          "windowAllocations": [
+            {
+              "readyAt": "2026-11-08T12:35:00-06:00",
+              "itemQuantities": {
+                "cheese": 3,
+                "pepper": 1,
+                "garden": 1
+              }
+            },
+            {
+              "readyAt": "2026-11-08T18:20:00-06:00",
+              "itemQuantities": {
+                "cheese": 2,
+                "pepper": 3,
+                "garden": 2
+              }
+            }
+          ]
+        },
+        "quoteReferenceCents": 19800
+      },
+      "semanticCriteria": [
+        "Preserve every explicit known field, including the named pickup location, date and revised service times. Do not lose the location in the structured proposal.",
+        "Apply all three specified changes: final item totals cheese 5, pepper 4, garden 3, with first window 3/1/1 and later 2/3/2. The final 12 is derived; the literal historical total was 11.",
+        "For application completion, return headlineQuantity 12 in the final proposal without asking the guest to supply arithmetic already fully specified. Record the existing stated-total/null tool-contract tension separately, not as proof of general model inability.",
+        "In the quantity tool, a null headline or derived 12 is allowed for this control because the final total is not literally stated. The computed total must be 12 and supplied allocations must reconcile. Do not treat a permitted null tool argument as a mechanical failure merely because the application completion target is 12.",
+        "Retrieve the November 8 facts, use actual menu IDs and retain a draft awaiting restaurant review. Do not invent approval, capacity confirmation, booking, kitchen action, payment or fulfillment. Any stated menu total must match 19800 fictional cents.",
+        "After preserving the read-only run assessment, use a separate fresh local store to test the actual returned proposal through the existing adoption action. A complete high result must adopt as an unapproved draft with no quote approval or kitchen receipt. This is a separate local probe, not a model action."
+      ]
+    },
+    {
+      "id": "fresh-02",
+      "appCaseId": "workplace",
+      "maxRequests": 3,
+      "input": {
+        "synthetic": true,
+        "restaurantId": "demo-north",
+        "demoNow": "2026-11-04T10:00:00-06:00",
+        "message": "Fictional Pottery Team S wants five pizzas for pickup at Maple Street Kitchen on November 7, 2026: two cheese, two roasted pepper and one garden. Three pizzas will be collected at 12:55 and the other two at 18:05. We have not decided which flavors go in each collection. Keep the pickup location and the known counts in the draft, and ask me what you still need before the restaurant can accept it."
+      },
+      "setupActions": [],
+      "fieldClassification": {
+        "explicit": {
+          "restaurantId": "demo-north",
+          "date": "2026-11-07",
+          "fulfillment": "pickup",
+          "destination": "Maple Street Kitchen",
+          "headlineQuantity": 5,
+          "itemQuantities": {
+            "cheese": 2,
+            "pepper": 2,
+            "garden": 1
+          },
+          "windows": [
+            {
+              "readyAt": "2026-11-07T12:55:00-06:00",
+              "quantity": 3
+            },
+            {
+              "readyAt": "2026-11-07T18:05:00-06:00",
+              "quantity": 2
+            }
+          ]
+        },
+        "unambiguouslyDerived": {
+          "overallItemSum": 5
+        },
+        "unknown": [
+          "Flavor allocation within each service window",
+          "Actual restaurant acceptance",
+          "Actual operational capacity",
+          "Payment",
+          "Fulfillment"
+        ]
+      },
+      "expected": {
+        "intentIn": [
+          "workplace-meal"
+        ],
+        "statusIn": [
+          "needs-clarification"
+        ],
+        "factsDate": "2026-11-07",
+        "pickupOnly": false,
+        "quantity": {
+          "headline": 5,
+          "sum": 5,
+          "matches": true
+        },
+        "noInventedWindowAllocations": true,
+        "proposal": {
+          "date": "2026-11-07",
+          "fulfillment": "pickup",
+          "destination": "Maple Street Kitchen",
+          "headlineQuantity": 5,
+          "itemQuantities": {
+            "cheese": 2,
+            "pepper": 2,
+            "garden": 1
+          },
+          "windowCount": 2,
+          "windowAllocations": [
+            {
+              "readyAt": "2026-11-07T12:55:00-06:00",
+              "itemQuantities": {}
+            },
+            {
+              "readyAt": "2026-11-07T18:05:00-06:00",
+              "itemQuantities": {}
+            }
+          ]
+        },
+        "knownWindowTotals": [
+          3,
+          2
+        ],
+        "quoteReferenceCents": 8300
+      },
+      "semanticCriteria": [
+        "Preserve the explicit date, pickup mode, named pickup location, headline five, overall flavors and both times in a partial structured proposal. A null proposal is safe abstention but does not satisfy the known-field preservation target for promotion.",
+        "Ask a useful question for the missing flavor allocation at both windows while retaining the known three-pizza and two-pizza totals. Do not ask for details already supplied.",
+        "Keep both window item arrays empty. Never invent a flavor split in the final proposal or in quantity-tool arguments, even if the invented split happens to sum correctly. Status must remain needs-clarification.",
+        "Retrieve the November 7 facts and keep the request unapproved. Do not invent pickup consent, courier causes, accepted timing/capacity, booking, kitchen action, payment or fulfillment. Any stated menu total must match 8300 fictional cents.",
+        "After the read-only run assessment, attempt the actual returned proposal in a separate fresh local store through the existing adoption validator. Adoption must reject it and leave that store unchanged. Record the actual error and blockers; do not claim unknown-allocation blocking was tested if rejection only reflects a different missing field. No API request or external action is permitted in this probe."
+      ]
+    }
+  ]
+}

@@ -15,7 +15,7 @@ test('isolated HTTP demo enforces loopback, same-origin, bounded actions and no 
     assert.equal(response.headers.get('cache-control'), 'no-store');
     assert.match(response.headers.get('content-security-policy'), /connect-src 'self'/);
     const status = await response.json(); assert.equal(status.modelCalls, 0); assert.equal(status.mode, 'authored-simulation'); assert.deepEqual(status.recordedReviews, []);
-    assert.deepEqual(status.capabilities, { recordedProposalAdoption: false, recordedReplyReview: false });
+    assert.deepEqual(status.capabilities, { recordedProposalAdoption: false, recordedReplyReview: false, recordedProposalCompletion: false });
     const cases = await (await fetch(`${base}/api/front-desk/cases`)).json(); assert.equal(cases.length, 4);
     const command = { caseId: 'workplace', expectedVersion: 1, action: 'clarify_quantity', payload: { quantity: 13 } };
     assert.equal((await post(command, { Origin: 'https://unrelated.example' })).status, 403);

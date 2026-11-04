@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "syntheticOnly": true,
+  "id": "fresh-01",
+  "caseId": "workplace",
+  "filename": "../reasoning-comparison/run-01.json",
+  "sha256": "d6fe4cab82bdf93f1715675064556e3b00a0854e72cafa214a334b06401f15ab",
+  "title": "Missing pickup location · operator review",
+  "semanticVerdict": "fail",
+  "reviewNotes": [
+    "The recorded model draft omitted Maple Street Kitchen from destination, although the source named it. This failed the frozen acceptance criterion.",
+    "The original model result remains unchanged. An operator may explicitly complete the missing location with a reason; this does not turn the model result into a pass or approve an order."
+  ],
+  "completionOnly": true,
+  "preferred": true
+}

@@ -1,12 +1,12 @@
-# Action Shift — From Craving to Kitchen
+# Action Shift
 
-**The guest changed the order. The kitchen still has the old one.**
+**The guest changed the order. Which version is the kitchen making?**
 
 The food and labor are real costs when a team makes the wrong version. Action Shift keeps the guest’s request, the restaurant’s decision and the kitchen’s version together. The idea comes from Myke Mueller, operator of Community Tap & Pizza in Fort Dodge, Iowa, and founder of Never86’d.
 
 In this standalone event prototype, Muse reads a fictional meal request and checks dated restaurant facts. Code checks the counts, price and version. A person reviews the promise before a local kitchen simulator acknowledges it. A later guest change stops the old approval from covering the new request.
 
-This v2 event release passed 90 focused tests and a browser journey that included an actual server restart. The three core v2 model cases and four separate supplemental cases received independent agent review, with every failure and qualification retained. The operational records here are authored fiction, not records from Myke’s restaurant.
+This v3 revision puts the operator's next decision first. A person can complete a missing pickup location or final total in a recorded proposal, with a demonstration reviewer role and reason, while the original model result stays intact. This creates an unapproved draft. Price, timing and capacity still need a separate review. Unknown item allocations remain blocked. The operational records here are authored fiction, not records from Myke’s restaurant. See [validation](docs/VALIDATION.md) for the final checks and limits.
 
 ## Run locally
 
@@ -30,7 +30,7 @@ The app saves reviewed synthetic restaurant corrections in `.local-state/operato
 
 ## Follow one request
 
-Start with the workplace meal and inspect the exact saved Muse input before adopting its proposed request. The headline and item lines disagree. Keep that disagreement visible until the customer clarification. Then prepare a quote from the fictional menu, review price, timing and capacity, and record a simulated acknowledgment for each service window.
+Start with the workplace meal and inspect the exact saved Muse input. The demonstrated revision totals twelve pizzas in two pickup windows. Muse got those quantities right but omitted the named pickup location. Read the original request, enter that location and record the reason. The original failed result remains available beside the separately completed draft. Then prepare a quote from the fictional menu, review price, timing and capacity, and record a simulated acknowledgment for each service window.
 
 A later guest change creates a new version. The old receipt stays visible. The new version needs its own review and acknowledgment. A dated operator correction can make this restaurant pickup only for that day. The next request reads that correction. Another restaurant and another date retain their own facts. Persisting that rule does not give the guest’s consent to switch from delivery to pickup.
 
@@ -50,17 +50,19 @@ Four [supplemental cases](fixtures/front-desk/supplemental-evaluation.json) then
 
 Browser review stopped the server, started a new process and confirmed that the correction loaded. Case flows reset. The next request preserved delivery and stayed blocked from quoting until explicit authored guest consent changed it to pickup. Another restaurant and the next date were unaffected.
 
-The browser also showed the exact recorded input retained with its adopted proposal and history. An operator corrected the qualified reply wording and saved it as reviewed and unsent while the original remained visible. There is no general editor for completing missing proposal fields. Incomplete proposals remain blocked from adoption. None of these features trains the model, sends a reply or establishes production memory.
+The browser also showed the exact recorded input retained with its adopted proposal and history. An operator corrected the qualified reply wording and saved it as reviewed and unsent while the original remained visible. V3 adds narrow human completion for a null pickup destination or null final total. It is bound to the recorded source and current case version, retains the original proposal and attributes each change. It cannot rewrite items, allocate unknown flavors, switch fulfillment, approve an order or send a reply. Other incomplete proposals remain blocked. None of these features trains the model or establishes production memory.
+
+Before that operator workflow was added, [six reasoning comparison runs](fixtures/reasoning-comparison/README.md) tested two fresh low/high pairs and two known failures. Both fresh pairs tied on critical outcomes, and only one known failure passed. The frozen promotion gate failed. The model adapter remains unchanged. All six outcomes and their original failures are retained separately from the earlier seventeen cases. The interface's human completion of one failed result does not change its model evaluation.
 
 ## Source and demonstration
 
-[Watch the demonstration](https://mykemueller1-ctrl.github.io/action-shift-meta-hackathon/), or open `docs/index.html` from this release. The revised video runs **2 minutes 50 seconds** and uses actual browser interactions at natural speed, with captions and persistent replay/simulation labels. It is silent. No voice is attributed to Myke. It shows the changed request, exact source adoption, reviewed correction, restart and consent boundary.
+[Watch the demonstration](https://mykemueller1-ctrl.github.io/action-shift-meta-hackathon/), or open `docs/index.html` from this release. The final video is under three minutes and uses recorded browser interaction with larger visual captions and persistent replay/simulation labels. It is silent. No voice is attributed to Myke. It follows the operator from the original source through a completed draft, current approval and changed kitchen version, then a separate dated correction and consent example.
 
 The earlier Evidence Inbox release is retained separately and is not included here.
 
 ## Build and scope
 
-Both the v1 implementation and this v2 revision were written November 4, 2026, during the event, with AI coding assistance. Myke’s restaurant experience, the Action Shift name and Never86’d product concepts predate the event. No earlier product implementation is included. See [provenance](docs/PROVENANCE.md) and [architecture](docs/ARCHITECTURE.md).
+The v1 implementation and subsequent v2/v3 revisions were written November 4, 2026, during the event, with AI coding assistance. Myke’s restaurant experience, the Action Shift name and Never86’d product concepts predate the event. Retained Mini Brain/operator documents informed the plain language, source preservation and explicit review pattern. No earlier product implementation or private restaurant corpus is included. See [provenance](docs/PROVENANCE.md) and [architecture](docs/ARCHITECTURE.md).
 
 The demo listens on loopback only. It has no production authentication, tenant access controls, live social channel, telephony, ordering, reservation or payment integration. Real customer records and credentials are excluded. No contest submission, eligibility decision or customer outcome is implied.
 

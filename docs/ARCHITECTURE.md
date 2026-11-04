@@ -2,7 +2,7 @@
 
 The key boundary is the restaurant’s commitment. A guest message or model proposal cannot authorize a kitchen handoff. Every change must stay attached to its source and version.
 
-The front desk runs on localhost port 4330. It serves a small browser interface and accepts bounded local requests. The earlier Evidence Inbox release is separate and is not a dependency. This document describes the v2 event release. Its 90 focused tests and local browser journey verified the boundaries below, including a real server restart.
+The front desk runs on localhost port 4330. It serves a small browser interface and accepts bounded local requests. The earlier Evidence Inbox release is separate and is not a dependency. This document describes the v3 event release. The earlier v2 release passed 90 focused tests and a local browser journey with a real restart. The current revision's additional checks are recorded in [validation](VALIDATION.md).
 
 `front-desk.mjs` owns the authored facts and versioned case state. Quantities and prices are calculated with integers. A quote binds the request and current facts. Operator approval binds that quote. Simulated kitchen receipts bind the approved version and each separate pull. A change retains the earlier commitment while invalidating current approval.
 
@@ -24,7 +24,11 @@ A trusted recorded review provider may load a pinned synthetic response. The bro
 
 The v2 source trail retains the exact recorded guest input, review and response references, original proposal and input digest beside the authored starter conversation. Focused tests and browser review verified that the exact source was displayed before adoption and appended to history afterward. The shorter starter conversation remained separately labeled. A digest demonstrates local integrity, not independent provider attestation.
 
-The app has no general editor for completing missing proposal fields. Such proposals remain blocked from adoption. The supported authored clarification actions operate on an adopted request and must not be described as a general model output repair feature.
+V3 adds `complete_recorded_proposal`. The server resolves the pinned recorded review and accepts only its review ID, operator, reason and bounded changes. It permits a destination only when the original destination is null and fulfillment is already pickup, or a final total only when the original headline is null. The latter must reconcile with the original item lines and service windows. It cannot overwrite existing values, change items or flavor allocations, or infer delivery consent. All normal proposal validation still applies.
+
+The completion is bound to the current case version. The retained source includes the exact original result and proposal, source message digest, review/response references and a separate field change record with name, reason and review time. The new draft has no quote, approval or kitchen receipt. A later quote and approval still bind the current request and facts. Human review data is session state and resets with cases on restart.
+
+The deliberately failed replay lives in a separate human review manifest. Its raw comparison packet is unchanged, including its pending review label. The replay envelope separately identifies the independently reviewed failure and completion only mode. Earlier passed or qualified manifests are not weakened to relabel this result as a success. Other missing fields and allocations remain blocked; this is not a general model output editor.
 
 Reply editing is a separate verified path. Browser review saved corrected wording separately from the original model reply, with an operator record and unsent status. These edits remain session state. Saving a draft does not route or send a message. In the new delivery example, adoption preserved requested delivery and the restored rule blocked quoting. Only explicit authored guest consent switched the request to pickup and produced a new version.
 

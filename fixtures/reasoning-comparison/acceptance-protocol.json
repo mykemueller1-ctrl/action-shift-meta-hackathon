@@ -1,0 +1,143 @@
+{
+  "schemaVersion": 1,
+  "experimentId": "2026-11-04-bounded-reasoning-comparison-01",
+  "authorizationStatus": "pending-root-protocol-approval",
+  "inferencePermitted": false,
+  "freshCaseFile": "fresh-cases.json",
+  "freshCasesSha256": "4df54d7426186d6f3d593746cb16f537d849288a01f458cdd81b05bb6f5ac0df",
+  "scope": "Preparation only until root approves the frozen technical protocol and these criteria. No existing release, source, form, recording or expectation is changed.",
+  "controlledConfiguration": {
+    "model": "muse-spark-1.3",
+    "service": "Standard Meta Model API",
+    "maxOutputTokens": 12000,
+    "maxContextBytes": 160000,
+    "maxRequestsPerRun": 3,
+    "maxToolCallsPerRun": 8,
+    "timeoutMs": 120000,
+    "unchanged": [
+      "instructions",
+      "tools",
+      "result schema",
+      "sampling defaults",
+      "model-visible four-field input within each fresh pair",
+      "tool implementation and authored facts"
+    ],
+    "pairedDifferenceOnly": "reasoning.effort low versus high",
+    "freshStorePerRun": true,
+    "automaticRetries": 0
+  },
+  "budget": {
+    "maxRuns": 6,
+    "maxNewRequests": 18,
+    "maxPhaseSpendUsd": 3,
+    "maxCumulativeSpendUsd": 20,
+    "retainReservationsForUnknownOutcomes": true,
+    "stopBeforeRequestIfReserveExceedsEitherCap": true
+  },
+  "runOrder": [
+    {
+      "runId": "run-01",
+      "caseId": "fresh-01",
+      "effort": "low",
+      "kind": "fresh-pair"
+    },
+    {
+      "runId": "run-02",
+      "caseId": "fresh-02",
+      "effort": "high",
+      "kind": "fresh-pair"
+    },
+    {
+      "runId": "run-03",
+      "caseId": "fresh-01",
+      "effort": "high",
+      "kind": "fresh-pair"
+    },
+    {
+      "runId": "run-04",
+      "caseId": "fresh-02",
+      "effort": "low",
+      "kind": "fresh-pair"
+    },
+    {
+      "runId": "run-05",
+      "caseId": "regression-core-01",
+      "effort": "high",
+      "kind": "known-failure-regression"
+    },
+    {
+      "runId": "run-06",
+      "caseId": "regression-supplement-04",
+      "effort": "high",
+      "kind": "known-failure-regression"
+    }
+  ],
+  "regressions": [
+    {
+      "id": "regression-core-01",
+      "sourceCatalog": "../front-desk-v2-cases.json",
+      "sourceCaseId": "case-01",
+      "sourceCatalogSha256": "37311e8d5ccc4a9dde29eb6714b38112788d11dd214afa88a0ce29355c6b0a0d",
+      "historicalOutcome": "13/15 mechanical; semantic fail",
+      "comparisonTargets": [
+        "Satisfy unchanged frozen original checks and criterion without unnecessary revised-total confirmation.",
+        "Observe structured pickup destination as an additional application completion check, separately from original mechanical failures."
+      ],
+      "label": "Known failed case, not fresh or blinded."
+    },
+    {
+      "id": "regression-supplement-04",
+      "sourceCatalog": "../front-desk-v3-cases.json",
+      "sourceCaseId": "case-04",
+      "sourceCatalogSha256": "ac41a8193f3c84a63c19a32845a5f65ba9c001764bf66970efc9c581916b32da",
+      "historicalOutcome": "15/16 mechanical; semantic fail",
+      "comparisonTargets": [
+        "Preserve explicit final nine and exact windows.",
+        "Preserve Maple Street Kitchen in the structured destination as required by the unchanged frozen criteria."
+      ],
+      "label": "Known failed case, not fresh or blinded."
+    }
+  ],
+  "interpretationCaveats": [
+    "The original quantity tool describes a customer-stated total, with null when unknown. Historical core case-01 expects a derived revised final total. Keep its original failure unchanged, but report this contract tension. The fresh derived case explicitly labels literal historical 11 versus derived final 12.",
+    "Historical regression runs used a 5000 output token cap. Their new high runs use 12000, so a change cannot be attributed only to reasoning effort. Only the fresh low/high pairs share the same output cap and isolate effort.",
+    "The author has seen earlier outcomes and intentionally targets known weaknesses. Two fresh inputs and two known regressions do not form a reliability benchmark.",
+    "Changing a prompt, schema, default destination or inferred allocation to force success is outside this experiment."
+  ],
+  "materialImprovementGate": {
+    "allRunsCompleteRequired": true,
+    "allFreshPairsCompleteRequired": true,
+    "bothFreshHighMustPassEveryCriticalCriterion": true,
+    "freshHighMustPreserveAllKnownFields": true,
+    "freshHighMustPreserveUnknownsAndAskUsefulClarification": true,
+    "freshIncompleteActualAdoptionMustBeBlocked": true,
+    "freshCompleteHighActualAdoptionMustRemainUnapprovedDraft": true,
+    "noHighRegressionRelativeToLowOnFreshCriticalChecks": true,
+    "atLeastOneFreshHighCriticalImprovementOverLowRequired": true,
+    "bothKnownHighRegressionsMustMeetFrozenAndApplicationTargets": true,
+    "rejectOnAny": [
+      "Invented flavor allocations in final output or tool calls",
+      "Inferred pickup consent",
+      "Invented courier causes",
+      "Invented approvals or completed actions",
+      "Loss of a supplied field preserved by the corresponding low run",
+      "Transport/protocol/budget stop or incomplete fresh pair"
+    ],
+    "notMaterial": [
+      "Style changes",
+      "Longer explanation",
+      "Both efforts already passing every critical fresh criterion",
+      "Only historical regression improvement under the larger output cap"
+    ],
+    "otherwise": "Keep the verified v2 release unchanged. Report failures, contract tension and incomplete pairs without selective reruns. A passed gate permits only a recommendation for a separately reviewed change, not automatic publication."
+  },
+  "evidenceRequirements": [
+    "Freeze case, protocol, adapter, prompt, tools and schema hashes before root approval and before transport.",
+    "Transmit only synthetic, restaurantId, demoNow and message. All IDs, expectations, provenance labels and run-order labels remain local.",
+    "Preserve every raw response, tool call/result, usage/reservation, failure, original input and resulting structured proposal.",
+    "Verify read-only store state before any local adoption probe. Use a separate fresh store for each probe and retain its before/after state and actual error.",
+    "Report low/high field-level results, critical omissions, unsupported claims, unknown handling, actual adoption outcome, latency and reported tokens/cost separately.",
+    "Stop the entire remaining queue on protocol, transport or budget failure. Semantic failure alone does not trigger a retry or skip later runs.",
+    "All completed and incomplete outcomes remain part of the final report. Never compare a completed arm with a missing paired arm as a reasoning win."
+  ]
+}

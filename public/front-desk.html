@@ -19,8 +19,8 @@
     <section class="hero" aria-labelledby="hero-title">
       <div class="hero-copy">
         <p class="eyebrow"><span></span>WHEN A GUEST CHANGES AN APPROVED ORDER</p>
-        <h1 id="hero-title">The guest changed<br>the order.<br><em>The kitchen still<br>has the old one.</em></h1>
-        <p class="hero-description">One more pizza changes the promise. Action Shift holds the revised request for a fresh quote, owner review and kitchen acknowledgment. The earlier receipt stays visible.</p>
+        <h1 id="hero-title">The guest changed<br>the order.<br><em>Which version is<br>the kitchen making?</em></h1>
+        <p class="hero-description">See the request, make the next decision, and keep the kitchen on the reviewed version. When a detail is missing, the operator fills it with a reason beside the original source.</p>
         <div class="founder-context"><span class="operator-avatar" aria-hidden="true">MM</span><div><strong>Built by Myke Mueller</strong><span>Founder, Never86’d · Community Tap &amp; Pizza operator</span></div></div>
         <a class="hero-cta" href="#desk">Follow the changed order <span aria-hidden="true">↗</span></a>
         <p class="hero-note"><strong>Real operator. Fictional case.</strong> Maple Street Kitchen uses synthetic requests and simulated handoffs.</p>
@@ -43,27 +43,29 @@
     </section>
 
     <section class="front-desk" id="desk" aria-labelledby="desk-title">
-      <div class="section-heading"><div><p class="eyebrow">THE RESTAURANT FRONT DESK</p><h2 id="desk-title">A little care. A better handoff.</h2></div><button type="button" class="text-button" id="refresh-button">Refresh workspace <span aria-hidden="true">↻</span></button></div>
+      <div class="section-heading"><div><p class="eyebrow">THE RESTAURANT FRONT DESK</p><h2 id="desk-title">What needs your decision?</h2></div><button type="button" class="text-button" id="refresh-button">Refresh <span aria-hidden="true">↻</span></button></div>
       <div class="workspace-banner"><div><span class="restaurant-icon" aria-hidden="true">⌂</span><div><strong id="restaurant-name">Maple Street Kitchen</strong><span id="workspace-date">Fictional training workspace</span></div></div><span class="simulation-pill">Synthetic · simulation</span></div>
       <div id="global-notice" class="global-notice" role="status">Loading the local workspace…</div>
       <div id="error-banner" class="error-banner" role="alert" hidden></div>
       <div class="scenario-nav" id="case-tabs" role="tablist" aria-label="Guest conversations"></div>
       <div class="facts-strip" id="facts-strip" aria-label="Current restaurant facts"></div>
       <section class="promise-status" id="promise-status" aria-label="Current request and kitchen commitment" aria-live="polite"></section>
+      <section class="next-step decision-card" id="next-step" aria-labelledby="next-decision-title"><div class="decision-copy"><p class="eyebrow">NEXT DECISION · DEMO OPERATOR</p><h3 id="next-decision-title">Review the guest request.</h3><p id="next-decision-description"></p></div><div id="action-controls" class="action-controls"></div></section>
 
       <div class="desk-layout">
         <div class="conversation-column">
+          <details class="conversation-history" id="conversation-history"><summary id="conversation-history-label">Conversation &amp; retained history</summary>
           <section class="card conversation-card" aria-labelledby="conversation-title">
             <div class="card-heading"><div><p class="eyebrow">01 · UNDERSTAND THE ASK</p><h3 id="conversation-title">The guest conversation</h3></div><span class="small-label" id="case-status">Loading</span></div>
             <p class="section-description" id="case-description">Every commitment starts with the current facts.</p>
             <div class="conversation-feed" id="conversation-feed" aria-live="polite"></div>
             <div id="quantity-card" class="quantity-card" hidden></div>
             <div id="blockers" class="blockers" hidden></div>
-            <div class="next-step" id="next-step"><p class="eyebrow">NEXT STEP</p><div id="action-controls" class="action-controls"></div></div>
           </section>
+          </details>
 
           <section class="card muse-card" aria-labelledby="muse-title">
-            <div class="card-heading"><div class="muse-heading"><span class="muse-icon" aria-hidden="true">M</span><div><p class="eyebrow">MODEL EVIDENCE</p><h3 id="muse-title">See what Muse checked.</h3></div></div><span class="small-label" id="muse-state">Testing pending</span></div>
+            <div class="card-heading"><div class="muse-heading"><span class="muse-icon" aria-hidden="true">M</span><div><p class="eyebrow">READ THE SOURCE · REVIEW THE DRAFT</p><h3 id="muse-title">What did the guest ask?</h3></div></div><span class="small-label" id="muse-state">Loading</span></div>
             <p id="muse-description" class="section-description">Muse workflow testing pending. The scenario controls above run an authored local simulation.</p>
             <label id="muse-selector-label" class="muse-selector" hidden>Recorded example<select id="muse-selector" aria-label="Recorded example"></select></label>
             <button type="button" id="muse-button" class="button secondary" disabled>View recorded Muse review <span aria-hidden="true">↗</span></button>
@@ -72,7 +74,7 @@
         </div>
 
         <aside class="operator-column" aria-label="Operator decision and kitchen handoff">
-          <section class="card quote-card" aria-labelledby="quote-title"><div class="card-heading"><div><p class="eyebrow">02 · MAKE A CLEAR COMMITMENT</p><h3 id="quote-title">The operator’s desk</h3></div><span id="request-version" class="version-pill">—</span></div><div id="quote-content" class="quote-content"></div><div id="approval-content" class="approval-content"></div></section>
+          <section class="card quote-card" aria-labelledby="quote-title"><div class="card-heading"><div><p class="eyebrow">REVIEW PRICE, TIME &amp; CAPACITY</p><h3 id="quote-title">The current request</h3></div><span id="request-version" class="version-pill">—</span></div><div id="quote-content" class="quote-content"></div><div id="approval-content" class="approval-content"></div></section>
           <section class="card kitchen-card" aria-labelledby="kitchen-title"><div class="card-heading"><div><p class="eyebrow">03 · CARRY THE RIGHT VERSION</p><h3 id="kitchen-title">Through to the kitchen.</h3></div><span class="small-label">Simulator</span></div><p class="section-description">An owner’s approval and the kitchen’s receipt are separate steps.</p><div id="service-windows" class="service-windows"></div><div id="receipt-content" class="receipt-content"></div></section>
         </aside>
       </div>

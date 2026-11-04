@@ -1,0 +1,665 @@
+{
+  "schemaVersion": 1,
+  "experimentId": "2026-11-04-bounded-reasoning-comparison-01",
+  "reviewedAt": "2026-11-04T16:29:54.337Z",
+  "reviewer": "Independent Codex agent",
+  "reviewStatus": "agent-reviewed",
+  "founderAcceptance": "unverified",
+  "scope": "All six planned runs reviewed without changing raw packets, expectations, frozen protocols or prior releases.",
+  "freshCasesSha256": "4df54d7426186d6f3d593746cb16f537d849288a01f458cdd81b05bb6f5ac0df",
+  "acceptanceProtocolSha256": "22c90c6a5bc02cf7366857be5959656f89fcabb5b4c489d06a3c50ab2b9c9e47",
+  "technicalProtocolSha256": "579c43fea75db2c43c06e8ef07094a10a095b74ca53044a1753e24ce5807dd7b",
+  "executionSummarySha256": "c18b4c35a80e5f7e48f96f7d7b7bd3933731e8b6f125ed91a8ae38429b245eed",
+  "executionApprovalSha256": "ba843c392da567b0c6708da2b582a90c002f641567706eb79c7aceebb47918df",
+  "plannedRunCount": 6,
+  "completedRunCount": 6,
+  "stopped": false,
+  "incompletePairs": [],
+  "summary": {
+    "requests": 18,
+    "mechanicalPassed": 95,
+    "mechanicalTotal": 99,
+    "semanticPass": 3,
+    "semanticFail": 3,
+    "freshPairCriticalWinsForHigh": 0,
+    "knownRegressionPasses": 1,
+    "knownRegressionTotal": 2,
+    "automaticRetries": 0,
+    "benchmarkClaim": false
+  },
+  "runs": [
+    {
+      "id": "run-01",
+      "caseId": "fresh-01",
+      "kind": "fresh-pair",
+      "effort": "low",
+      "status": "completed",
+      "reviewer": "Independent Codex agent",
+      "verdict": "fail",
+      "criteria": [
+        {
+          "criterion": 1,
+          "outcome": "fail",
+          "evidence": "Explicit Maple Street Kitchen is absent from structured destination, which is null. Other explicit date/time/service fields are retained."
+        },
+        {
+          "criterion": 2,
+          "outcome": "pass",
+          "evidence": "Final item totals are cheese 5, pepper 4, garden 3, with exact 5/7 allocations and revised 18:20 time."
+        },
+        {
+          "criterion": 3,
+          "outcome": "pass",
+          "evidence": "Final headline is 12 and no unnecessary arithmetic question is asked. The literal historical 11 is not reused as the final total."
+        },
+        {
+          "criterion": 4,
+          "outcome": "pass",
+          "evidence": "Quantity tool receives permitted derived headline 12, computes 12 and confirms matching allocations."
+        },
+        {
+          "criterion": 5,
+          "outcome": "pass",
+          "evidence": "November 8 facts and actual menu IDs are used. The result is an unapproved draft; no external action or menu price is claimed."
+        },
+        {
+          "criterion": 6,
+          "outcome": "fail",
+          "evidence": "Actual proposal is rejected by the existing adoption action for missing destination. The separate probe leaves all case state unchanged."
+        }
+      ],
+      "notes": [
+        "Low derives the correct final twelve and exact windows, but omits the supplied pickup location.",
+        "The actual complete-request proposal cannot be adopted; this is a structured completeness failure, not failed arithmetic."
+      ],
+      "packetFile": "reasoning-run-01-2026-11-04T16-21-23-777Z-13c77ca7-f3a9-45e3-8db1-2cd6834d32c2-validated-review.json",
+      "packetSha256": "d6fe4cab82bdf93f1715675064556e3b00a0854e72cafa214a334b06401f15ab",
+      "assessmentFile": "reasoning-run-01-2026-11-04T16-21-23-777Z-13c77ca7-f3a9-45e3-8db1-2cd6834d32c2-assessment.json",
+      "assessmentSha256": "901c4f16ec271aaeb44e38f69e9fcf2994d5419c401947a58dad28b96b6b16ad",
+      "adoptionProbeFile": "reasoning-run-01-2026-11-04T16-21-23-777Z-13c77ca7-f3a9-45e3-8db1-2cd6834d32c2-adoption-probe.json",
+      "adoptionProbeSha256": "e24b1fe388a368c8692c0641e9efd5f41a0e40e4a9469e254cc6407f536304f2",
+      "frozenCriteria": [
+        "Preserve every explicit known field, including the named pickup location, date and revised service times. Do not lose the location in the structured proposal.",
+        "Apply all three specified changes: final item totals cheese 5, pepper 4, garden 3, with first window 3/1/1 and later 2/3/2. The final 12 is derived; the literal historical total was 11.",
+        "For application completion, return headlineQuantity 12 in the final proposal without asking the guest to supply arithmetic already fully specified. Record the existing stated-total/null tool-contract tension separately, not as proof of general model inability.",
+        "In the quantity tool, a null headline or derived 12 is allowed for this control because the final total is not literally stated. The computed total must be 12 and supplied allocations must reconcile. Do not treat a permitted null tool argument as a mechanical failure merely because the application completion target is 12.",
+        "Retrieve the November 8 facts, use actual menu IDs and retain a draft awaiting restaurant review. Do not invent approval, capacity confirmation, booking, kitchen action, payment or fulfillment. Any stated menu total must match 19800 fictional cents.",
+        "After preserving the read-only run assessment, use a separate fresh local store to test the actual returned proposal through the existing adoption action. A complete high result must adopt as an unapproved draft with no quote approval or kitchen receipt. This is a separate local probe, not a model action."
+      ],
+      "criticalFieldObservations": {
+        "headlineQuantity": 12,
+        "expectedFinalHeadline": 12,
+        "destination": null,
+        "expectedPickupDestination": "Maple Street Kitchen",
+        "knownDestinationPreserved": false,
+        "actualAdoptionAccepted": false,
+        "noInventedCompletedActions": true,
+        "readOnlyModelStateUnchanged": true
+      },
+      "mechanicalPassed": 15,
+      "mechanicalTotal": 16,
+      "requests": 3,
+      "latencyMs": 15233,
+      "requestElapsedMs": 15132,
+      "inputTokens": 9720,
+      "outputTokens": 1512,
+      "reasoningTokens": 672,
+      "calculatedUsageUsd": 0.018577,
+      "rawFinalResultMatched": true,
+      "frozenModelInputMatched": true,
+      "independentAdoptionProbe": {
+        "method": "Independent fresh memory store, actual unchanged returned proposal, no inference or external action.",
+        "accepted": false,
+        "errorCode": "FRONT_DESK_INPUT",
+        "errorMessage": "A reviewed proposal needs bounded food, date, service, destination and window fields.",
+        "stateUnchangedOnRejection": true,
+        "unapprovedDraft": false,
+        "requestVersion": 1
+      }
+    },
+    {
+      "id": "run-02",
+      "caseId": "fresh-02",
+      "kind": "fresh-pair",
+      "effort": "high",
+      "status": "completed",
+      "reviewer": "Independent Codex agent",
+      "verdict": "pass",
+      "criteria": [
+        {
+          "criterion": 1,
+          "outcome": "pass",
+          "evidence": "Partial proposal retains date, pickup mode, Maple Street Kitchen, headline 5, exact overall flavors and both times."
+        },
+        {
+          "criterion": 2,
+          "outcome": "pass",
+          "evidence": "Questions ask the flavor breakdown for the known 3-pizza and 2-pizza windows without asking for supplied details."
+        },
+        {
+          "criterion": 3,
+          "outcome": "pass",
+          "evidence": "Both final window item arrays are empty; quantity-tool windows are empty. No guessed allocation is used and status is needs-clarification."
+        },
+        {
+          "criterion": 4,
+          "outcome": "pass",
+          "evidence": "November 7 facts are retrieved. The reply remains a draft without invented consent, courier cause, approval or completed action."
+        },
+        {
+          "criterion": 5,
+          "outcome": "pass",
+          "evidence": "Actual adoption rejects for empty window allocations, with all known fields present and state unchanged. This is the intended guard, not a rejection caused by another omission."
+        }
+      ],
+      "notes": [
+        "High preserves all known fields while asking for genuinely unknown flavor allocations.",
+        "The actual validator rejects specifically because allocations are empty. No known field is missing."
+      ],
+      "packetFile": "reasoning-run-02-2026-11-04T16-22-00-796Z-d607b958-d48b-4f31-aac3-1527c34367e2-validated-review.json",
+      "packetSha256": "23b46c943314cfd3464a82e99e5f77eac3a1c07f8bd03162b6d668a59b9b8340",
+      "assessmentFile": "reasoning-run-02-2026-11-04T16-22-00-796Z-d607b958-d48b-4f31-aac3-1527c34367e2-assessment.json",
+      "assessmentSha256": "275c9c29d83d5e7154f8583b17ef40f224178f84cf3900639280efc93a4cdf45",
+      "adoptionProbeFile": "reasoning-run-02-2026-11-04T16-22-00-796Z-d607b958-d48b-4f31-aac3-1527c34367e2-adoption-probe.json",
+      "adoptionProbeSha256": "bed4d5a07368cf6374aca6d6e08c8c8a05b3e6cc7d4a1faf829eaef8156d7fd7",
+      "frozenCriteria": [
+        "Preserve the explicit date, pickup mode, named pickup location, headline five, overall flavors and both times in a partial structured proposal. A null proposal is safe abstention but does not satisfy the known-field preservation target for promotion.",
+        "Ask a useful question for the missing flavor allocation at both windows while retaining the known three-pizza and two-pizza totals. Do not ask for details already supplied.",
+        "Keep both window item arrays empty. Never invent a flavor split in the final proposal or in quantity-tool arguments, even if the invented split happens to sum correctly. Status must remain needs-clarification.",
+        "Retrieve the November 7 facts and keep the request unapproved. Do not invent pickup consent, courier causes, accepted timing/capacity, booking, kitchen action, payment or fulfillment. Any stated menu total must match 8300 fictional cents.",
+        "After the read-only run assessment, attempt the actual returned proposal in a separate fresh local store through the existing adoption validator. Adoption must reject it and leave that store unchanged. Record the actual error and blockers; do not claim unknown-allocation blocking was tested if rejection only reflects a different missing field. No API request or external action is permitted in this probe."
+      ],
+      "criticalFieldObservations": {
+        "headlineQuantity": 5,
+        "expectedFinalHeadline": 5,
+        "destination": "Maple Street Kitchen",
+        "expectedPickupDestination": "Maple Street Kitchen",
+        "knownDestinationPreserved": true,
+        "actualAdoptionAccepted": false,
+        "noInventedCompletedActions": true,
+        "readOnlyModelStateUnchanged": true
+      },
+      "mechanicalPassed": 18,
+      "mechanicalTotal": 18,
+      "requests": 3,
+      "latencyMs": 40999,
+      "requestElapsedMs": 40905,
+      "inputTokens": 11959,
+      "outputTokens": 3761,
+      "reasoningTokens": 3026,
+      "calculatedUsageUsd": 0.030934,
+      "rawFinalResultMatched": true,
+      "frozenModelInputMatched": true,
+      "independentAdoptionProbe": {
+        "method": "Independent fresh memory store, actual unchanged returned proposal, no inference or external action.",
+        "accepted": false,
+        "errorCode": "FRONT_DESK_INPUT",
+        "errorMessage": "Each service window needs a unique ID and item allocations.",
+        "stateUnchangedOnRejection": true,
+        "unapprovedDraft": false,
+        "requestVersion": 1
+      }
+    },
+    {
+      "id": "run-03",
+      "caseId": "fresh-01",
+      "kind": "fresh-pair",
+      "effort": "high",
+      "status": "completed",
+      "reviewer": "Independent Codex agent",
+      "verdict": "fail",
+      "criteria": [
+        {
+          "criterion": 1,
+          "outcome": "fail",
+          "evidence": "Explicit Maple Street Kitchen is absent from structured destination, which is null. Other explicit date/time/service fields are retained."
+        },
+        {
+          "criterion": 2,
+          "outcome": "pass",
+          "evidence": "Final item totals are cheese 5, pepper 4, garden 3, with exact 5/7 allocations and revised 18:20 time."
+        },
+        {
+          "criterion": 3,
+          "outcome": "pass",
+          "evidence": "Final headline is 12 and no unnecessary arithmetic question is asked. The literal historical 11 is not reused as the final total."
+        },
+        {
+          "criterion": 4,
+          "outcome": "pass",
+          "evidence": "Quantity tool receives permitted derived headline 12, computes 12 and confirms matching allocations."
+        },
+        {
+          "criterion": 5,
+          "outcome": "pass",
+          "evidence": "November 8 facts and actual menu IDs are used. The result is an unapproved draft; no external action or menu price is claimed."
+        },
+        {
+          "criterion": 6,
+          "outcome": "fail",
+          "evidence": "Actual proposal is rejected by the existing adoption action for missing destination. The separate probe leaves all case state unchanged."
+        }
+      ],
+      "notes": [
+        "High repeats the same destination=null omission as low on the identical complete-request input.",
+        "The location appears in the high reply but not the structured proposal. That prose difference does not enable adoption or satisfy the frozen field-preservation gate."
+      ],
+      "packetFile": "reasoning-run-03-2026-11-04T16-22-48-158Z-c310ac82-3feb-4830-ba74-cb2bf175b2e7-validated-review.json",
+      "packetSha256": "ff98285eacac712c772603a95f2b6e731e22075ac9912bdad199b98c2d0fe34a",
+      "assessmentFile": "reasoning-run-03-2026-11-04T16-22-48-158Z-c310ac82-3feb-4830-ba74-cb2bf175b2e7-assessment.json",
+      "assessmentSha256": "cbb8b225bc1b82ab970e74cc1199de2250a436261bcde005a94e1d3661cce3ae",
+      "adoptionProbeFile": "reasoning-run-03-2026-11-04T16-22-48-158Z-c310ac82-3feb-4830-ba74-cb2bf175b2e7-adoption-probe.json",
+      "adoptionProbeSha256": "78c4ce029c7dbe9de43d21aff3c8b17ca4d2c1fd877ea4aad3e1903d920d653d",
+      "frozenCriteria": [
+        "Preserve every explicit known field, including the named pickup location, date and revised service times. Do not lose the location in the structured proposal.",
+        "Apply all three specified changes: final item totals cheese 5, pepper 4, garden 3, with first window 3/1/1 and later 2/3/2. The final 12 is derived; the literal historical total was 11.",
+        "For application completion, return headlineQuantity 12 in the final proposal without asking the guest to supply arithmetic already fully specified. Record the existing stated-total/null tool-contract tension separately, not as proof of general model inability.",
+        "In the quantity tool, a null headline or derived 12 is allowed for this control because the final total is not literally stated. The computed total must be 12 and supplied allocations must reconcile. Do not treat a permitted null tool argument as a mechanical failure merely because the application completion target is 12.",
+        "Retrieve the November 8 facts, use actual menu IDs and retain a draft awaiting restaurant review. Do not invent approval, capacity confirmation, booking, kitchen action, payment or fulfillment. Any stated menu total must match 19800 fictional cents.",
+        "After preserving the read-only run assessment, use a separate fresh local store to test the actual returned proposal through the existing adoption action. A complete high result must adopt as an unapproved draft with no quote approval or kitchen receipt. This is a separate local probe, not a model action."
+      ],
+      "criticalFieldObservations": {
+        "headlineQuantity": 12,
+        "expectedFinalHeadline": 12,
+        "destination": null,
+        "expectedPickupDestination": "Maple Street Kitchen",
+        "knownDestinationPreserved": false,
+        "actualAdoptionAccepted": false,
+        "noInventedCompletedActions": true,
+        "readOnlyModelStateUnchanged": true
+      },
+      "mechanicalPassed": 15,
+      "mechanicalTotal": 16,
+      "requests": 3,
+      "latencyMs": 25496,
+      "requestElapsedMs": 25424,
+      "inputTokens": 10302,
+      "outputTokens": 2047,
+      "reasoningTokens": 1135,
+      "calculatedUsageUsd": 0.021579,
+      "rawFinalResultMatched": true,
+      "frozenModelInputMatched": true,
+      "independentAdoptionProbe": {
+        "method": "Independent fresh memory store, actual unchanged returned proposal, no inference or external action.",
+        "accepted": false,
+        "errorCode": "FRONT_DESK_INPUT",
+        "errorMessage": "A reviewed proposal needs bounded food, date, service, destination and window fields.",
+        "stateUnchangedOnRejection": true,
+        "unapprovedDraft": false,
+        "requestVersion": 1
+      }
+    },
+    {
+      "id": "run-04",
+      "caseId": "fresh-02",
+      "kind": "fresh-pair",
+      "effort": "low",
+      "status": "completed",
+      "reviewer": "Independent Codex agent",
+      "verdict": "pass",
+      "criteria": [
+        {
+          "criterion": 1,
+          "outcome": "pass",
+          "evidence": "Partial proposal retains date, pickup mode, Maple Street Kitchen, headline 5, exact overall flavors and both times."
+        },
+        {
+          "criterion": 2,
+          "outcome": "pass",
+          "evidence": "Questions ask the flavor breakdown for the known 3-pizza and 2-pizza windows without asking for supplied details."
+        },
+        {
+          "criterion": 3,
+          "outcome": "pass",
+          "evidence": "Both final window item arrays are empty; quantity-tool windows are empty. No guessed allocation is used and status is needs-clarification."
+        },
+        {
+          "criterion": 4,
+          "outcome": "pass",
+          "evidence": "November 7 facts are retrieved. The reply remains a draft without invented consent, courier cause, approval or completed action."
+        },
+        {
+          "criterion": 5,
+          "outcome": "pass",
+          "evidence": "Actual adoption rejects for empty window allocations, with all known fields present and state unchanged. This is the intended guard, not a rejection caused by another omission."
+        }
+      ],
+      "notes": [
+        "Low also preserves all known fields and unknown allocations, asks useful questions, and remains correctly blocked.",
+        "The high arm has no additional critical success on this fresh pair."
+      ],
+      "packetFile": "reasoning-run-04-2026-11-04T16-23-24-817Z-07ea8f56-8fcc-47d1-93e4-a19aa418bded-validated-review.json",
+      "packetSha256": "90f1315458ddbeeb27615e8b6cccd26ac3f308a0143bc416bb85049452a6225d",
+      "assessmentFile": "reasoning-run-04-2026-11-04T16-23-24-817Z-07ea8f56-8fcc-47d1-93e4-a19aa418bded-assessment.json",
+      "assessmentSha256": "c69cafa8c852ff028b5b6525f4c4513c62da2ecd31bf944d95e1486635f082eb",
+      "adoptionProbeFile": "reasoning-run-04-2026-11-04T16-23-24-817Z-07ea8f56-8fcc-47d1-93e4-a19aa418bded-adoption-probe.json",
+      "adoptionProbeSha256": "baa99b0e2c1d2b7d12f626931d896d0f405a1d1a7092a5be0efe92ee0b50c17d",
+      "frozenCriteria": [
+        "Preserve the explicit date, pickup mode, named pickup location, headline five, overall flavors and both times in a partial structured proposal. A null proposal is safe abstention but does not satisfy the known-field preservation target for promotion.",
+        "Ask a useful question for the missing flavor allocation at both windows while retaining the known three-pizza and two-pizza totals. Do not ask for details already supplied.",
+        "Keep both window item arrays empty. Never invent a flavor split in the final proposal or in quantity-tool arguments, even if the invented split happens to sum correctly. Status must remain needs-clarification.",
+        "Retrieve the November 7 facts and keep the request unapproved. Do not invent pickup consent, courier causes, accepted timing/capacity, booking, kitchen action, payment or fulfillment. Any stated menu total must match 8300 fictional cents.",
+        "After the read-only run assessment, attempt the actual returned proposal in a separate fresh local store through the existing adoption validator. Adoption must reject it and leave that store unchanged. Record the actual error and blockers; do not claim unknown-allocation blocking was tested if rejection only reflects a different missing field. No API request or external action is permitted in this probe."
+      ],
+      "criticalFieldObservations": {
+        "headlineQuantity": 5,
+        "expectedFinalHeadline": 5,
+        "destination": "Maple Street Kitchen",
+        "expectedPickupDestination": "Maple Street Kitchen",
+        "knownDestinationPreserved": true,
+        "actualAdoptionAccepted": false,
+        "noInventedCompletedActions": true,
+        "readOnlyModelStateUnchanged": true
+      },
+      "mechanicalPassed": 18,
+      "mechanicalTotal": 18,
+      "requests": 3,
+      "latencyMs": 21425,
+      "requestElapsedMs": 21349,
+      "inputTokens": 9981,
+      "outputTokens": 1841,
+      "reasoningTokens": 1186,
+      "calculatedUsageUsd": 0.020301,
+      "rawFinalResultMatched": true,
+      "frozenModelInputMatched": true,
+      "independentAdoptionProbe": {
+        "method": "Independent fresh memory store, actual unchanged returned proposal, no inference or external action.",
+        "accepted": false,
+        "errorCode": "FRONT_DESK_INPUT",
+        "errorMessage": "Each service window needs a unique ID and item allocations.",
+        "stateUnchangedOnRejection": true,
+        "unapprovedDraft": false,
+        "requestVersion": 1
+      }
+    },
+    {
+      "id": "run-05",
+      "caseId": "regression-core-01",
+      "kind": "known-failure-regression",
+      "effort": "high",
+      "status": "completed",
+      "reviewer": "Independent Codex agent",
+      "verdict": "fail",
+      "criteria": [
+        {
+          "criterion": 1,
+          "outcome": "fail",
+          "evidence": "The model derives eleven in prose and item sums, but keeps headlineQuantity null and asks to reconfirm the revised total."
+        },
+        {
+          "criterion": 2,
+          "outcome": "pass",
+          "evidence": "November 5 12:15 and 18:45 windows retain exact 3/8 allocations."
+        },
+        {
+          "criterion": 3,
+          "outcome": "fail",
+          "evidence": "Structured destination is Fictional Print Room K, the requesting crew, instead of the named Maple Street Kitchen collection point. The intended pickup location is not retained in the result."
+        },
+        {
+          "criterion": 4,
+          "outcome": "pass",
+          "evidence": "Requested November 5 facts are retrieved; no price is asserted."
+        },
+        {
+          "criterion": 5,
+          "outcome": "pass",
+          "evidence": "The result remains a draft and does not invent approval, payment, kitchen action or fulfillment."
+        }
+      ],
+      "notes": [
+        "The original two mechanical misses remain: null headline in the quantity call and final proposal. They are not arithmetic errors.",
+        "Additional application target fails: the requester is placed in the pickup destination field. This is a role mismatch, not a corrected pickup location.",
+        "Actual adoption rejects for missing headline. The stated-total/null tool contract and derived-final application expectation remain in tension; this is not clean evidence of general model inability.",
+        "This is a known regression and also changes the historical output cap from 5000 to 12000."
+      ],
+      "packetFile": "reasoning-run-05-2026-11-04T16-23-57-260Z-34cd05d4-fef5-4065-81d4-f9c92a67fa52-validated-review.json",
+      "packetSha256": "0126feec10497d692c2bdac20c75c5543dc7eed309f1df2fae37418bb65f53b0",
+      "assessmentFile": "reasoning-run-05-2026-11-04T16-23-57-260Z-34cd05d4-fef5-4065-81d4-f9c92a67fa52-assessment.json",
+      "assessmentSha256": "06a2dceb1b4548257b14d7e928b125c173ee43c0a14831c659285ab55b3fc953",
+      "adoptionProbeFile": "reasoning-run-05-2026-11-04T16-23-57-260Z-34cd05d4-fef5-4065-81d4-f9c92a67fa52-adoption-probe.json",
+      "adoptionProbeSha256": "92691b019334ff786492cf778d05d00e04cf28bbcf46020490bb044f52c7942e",
+      "frozenCriteria": [
+        "Treats ten as the superseded original total and derives eleven from the explicit transfer, removal and addition; it must not retain ten or ask the guest to resolve arithmetic already specified by the change.",
+        "Preserves the first pickup at 2026-11-05T12:15:00-06:00 with one cheese, one pepper and one garden; changes the later pickup to 2026-11-05T18:45:00-06:00 with two cheese, two pepper and four garden. Window IDs are arbitrary; dates, times and allocations are not.",
+        "Retains pickup at Maple Street Kitchen and the workplace meal context. No destination, dish or quantity is invented.",
+        "Retrieves November 5 facts rather than applying the November 4 clock as the service date. If it mentions a menu total, the fictional tax-inclusive total is 18400 cents; outputting a price is not required.",
+        "Keeps the revision a draft awaiting operator price, timing and capacity review; no approval, kitchen acknowledgment, payment or fulfillment is claimed."
+      ],
+      "criticalFieldObservations": {
+        "headlineQuantity": null,
+        "expectedFinalHeadline": 11,
+        "destination": "Fictional Print Room K",
+        "expectedPickupDestination": "Maple Street Kitchen",
+        "knownDestinationPreserved": false,
+        "actualAdoptionAccepted": false,
+        "noInventedCompletedActions": true,
+        "readOnlyModelStateUnchanged": true
+      },
+      "mechanicalPassed": 13,
+      "mechanicalTotal": 15,
+      "requests": 3,
+      "latencyMs": 25714,
+      "requestElapsedMs": 25640,
+      "inputTokens": 10829,
+      "outputTokens": 3034,
+      "reasoningTokens": 2151,
+      "calculatedUsageUsd": 0.026432,
+      "rawFinalResultMatched": true,
+      "frozenModelInputMatched": true,
+      "independentAdoptionProbe": {
+        "method": "Independent fresh memory store, actual unchanged returned proposal, no inference or external action.",
+        "accepted": false,
+        "errorCode": "FRONT_DESK_INPUT",
+        "errorMessage": "A reviewed proposal needs bounded food, date, service, destination and window fields.",
+        "stateUnchangedOnRejection": true,
+        "unapprovedDraft": false,
+        "requestVersion": 1
+      }
+    },
+    {
+      "id": "run-06",
+      "caseId": "regression-supplement-04",
+      "kind": "known-failure-regression",
+      "effort": "high",
+      "status": "completed",
+      "reviewer": "Independent Codex agent",
+      "verdict": "pass",
+      "criteria": [
+        {
+          "criterion": 1,
+          "outcome": "pass",
+          "evidence": "Explicit final nine replaces the earlier seven; exact overall item totals are retained."
+        },
+        {
+          "criterion": 2,
+          "outcome": "pass",
+          "evidence": "November 6, both exact windows/allocations and Maple Street Kitchen in structured destination are retained."
+        },
+        {
+          "criterion": 3,
+          "outcome": "pass",
+          "evidence": "questions is empty; no unnecessary missing-total or missing-location question."
+        },
+        {
+          "criterion": 4,
+          "outcome": "pass",
+          "evidence": "The result remains an unapproved draft with no invented booking, payment, fulfillment or kitchen action."
+        }
+      ],
+      "notes": [
+        "High corrects the known supplemental location omission on this attempt and passes all frozen criteria.",
+        "The actual existing action adopts it as a new unapproved draft, with no quote, approval or kitchen receipt.",
+        "This known-case success does not establish an effort-only improvement: the historical run had a 5000 output cap, while this run uses 12000."
+      ],
+      "packetFile": "reasoning-run-06-2026-11-04T16-24-30-173Z-b1da2841-9091-427e-a98b-d4aab8d6d802-validated-review.json",
+      "packetSha256": "2160676ca52f3560347443a87ff7c6fbf01710eaa74d5365c8ebe6334b0cc19e",
+      "assessmentFile": "reasoning-run-06-2026-11-04T16-24-30-173Z-b1da2841-9091-427e-a98b-d4aab8d6d802-assessment.json",
+      "assessmentSha256": "27577346a971e92e0bd3ac93bc6079cc7cb0961ae1c8b45a7944d21cff937315",
+      "adoptionProbeFile": "reasoning-run-06-2026-11-04T16-24-30-173Z-b1da2841-9091-427e-a98b-d4aab8d6d802-adoption-probe.json",
+      "adoptionProbeSha256": "ede1574c55a4b4d47a7dc24e20340f8d39a08d90a0d05df06241affc35315444",
+      "frozenCriteria": [
+        "The explicit final nine supersedes the historical seven. Preserve the final four cheese, two pepper and three garden without treating the superseded note as an unresolved conflict.",
+        "Preserve November 6, the two named pickup windows and their exact allocations, with the named collection location Maple Street Kitchen in the structured destination.",
+        "Do not ask an unnecessary missing-total or missing-location question; both were supplied explicitly.",
+        "Keep the request a draft pending restaurant price, timing and capacity review; do not claim approval, booking, kitchen action, payment or fulfillment."
+      ],
+      "criticalFieldObservations": {
+        "headlineQuantity": 9,
+        "expectedFinalHeadline": 9,
+        "destination": "Maple Street Kitchen",
+        "expectedPickupDestination": "Maple Street Kitchen",
+        "knownDestinationPreserved": true,
+        "actualAdoptionAccepted": true,
+        "noInventedCompletedActions": true,
+        "readOnlyModelStateUnchanged": true
+      },
+      "mechanicalPassed": 16,
+      "mechanicalTotal": 16,
+      "requests": 3,
+      "latencyMs": 21566,
+      "requestElapsedMs": 21490,
+      "inputTokens": 9685,
+      "outputTokens": 2207,
+      "reasoningTokens": 1387,
+      "calculatedUsageUsd": 0.021487,
+      "rawFinalResultMatched": true,
+      "frozenModelInputMatched": true,
+      "independentAdoptionProbe": {
+        "method": "Independent fresh memory store, actual unchanged returned proposal, no inference or external action.",
+        "accepted": true,
+        "errorCode": null,
+        "errorMessage": null,
+        "stateUnchangedOnRejection": false,
+        "unapprovedDraft": true,
+        "requestVersion": 2
+      }
+    }
+  ],
+  "pairedComparisons": [
+    {
+      "caseId": "fresh-01",
+      "lowRun": "run-01",
+      "highRun": "run-03",
+      "complete": true,
+      "criticalImprovement": false,
+      "criticalRegression": false,
+      "outcome": "tie-fail",
+      "reason": "Both return the correct derived twelve and exact allocations but destination:null. Both actual adoption attempts reject for that omission. High only retains the location in prose.",
+      "lowLatencyMs": 15233,
+      "highLatencyMs": 25496,
+      "lowUsageUsd": 0.018577,
+      "highUsageUsd": 0.021579
+    },
+    {
+      "caseId": "fresh-02",
+      "lowRun": "run-04",
+      "highRun": "run-02",
+      "complete": true,
+      "criticalImprovement": false,
+      "criticalRegression": false,
+      "outcome": "tie-pass",
+      "reason": "Both preserve the known location/date/counts/times, leave unknown flavors empty, ask useful questions and are correctly rejected for incomplete allocations.",
+      "lowLatencyMs": 21425,
+      "highLatencyMs": 40999,
+      "lowUsageUsd": 0.020301,
+      "highUsageUsd": 0.030934
+    }
+  ],
+  "materialImprovementGate": {
+    "verdict": "fail",
+    "promote": false,
+    "recommendation": "Keep the verified v2 release unchanged.",
+    "frozenGate": {
+      "allRunsCompleteRequired": true,
+      "allFreshPairsCompleteRequired": true,
+      "bothFreshHighMustPassEveryCriticalCriterion": true,
+      "freshHighMustPreserveAllKnownFields": true,
+      "freshHighMustPreserveUnknownsAndAskUsefulClarification": true,
+      "freshIncompleteActualAdoptionMustBeBlocked": true,
+      "freshCompleteHighActualAdoptionMustRemainUnapprovedDraft": true,
+      "noHighRegressionRelativeToLowOnFreshCriticalChecks": true,
+      "atLeastOneFreshHighCriticalImprovementOverLowRequired": true,
+      "bothKnownHighRegressionsMustMeetFrozenAndApplicationTargets": true,
+      "rejectOnAny": [
+        "Invented flavor allocations in final output or tool calls",
+        "Inferred pickup consent",
+        "Invented courier causes",
+        "Invented approvals or completed actions",
+        "Loss of a supplied field preserved by the corresponding low run",
+        "Transport/protocol/budget stop or incomplete fresh pair"
+      ],
+      "notMaterial": [
+        "Style changes",
+        "Longer explanation",
+        "Both efforts already passing every critical fresh criterion",
+        "Only historical regression improvement under the larger output cap"
+      ],
+      "otherwise": "Keep the verified v2 release unchanged. Report failures, contract tension and incomplete pairs without selective reruns. A passed gate permits only a recommendation for a separately reviewed change, not automatic publication."
+    },
+    "checks": {
+      "allRunsCompleteRequired": {
+        "passed": true,
+        "evidence": "All six planned single attempts completed; no halt or missing arm."
+      },
+      "allFreshPairsCompleteRequired": {
+        "passed": true,
+        "evidence": "Both low/high pairs completed using identical model-visible input within each pair."
+      },
+      "bothFreshHighMustPassEveryCriticalCriterion": {
+        "passed": false,
+        "evidence": "run-03 fails explicit pickup-location preservation and complete-draft adoption."
+      },
+      "freshHighMustPreserveAllKnownFields": {
+        "passed": false,
+        "evidence": "run-03 destination is null despite explicit Maple Street Kitchen."
+      },
+      "freshHighMustPreserveUnknownsAndAskUsefulClarification": {
+        "passed": true,
+        "evidence": "run-02 keeps unknown window flavors empty in tools/output and asks exact allocation questions."
+      },
+      "freshIncompleteActualAdoptionMustBeBlocked": {
+        "passed": true,
+        "evidence": "run-02 actual rejection is specifically due to empty allocations, with no missing known fields."
+      },
+      "freshCompleteHighActualAdoptionMustRemainUnapprovedDraft": {
+        "passed": false,
+        "evidence": "run-03 cannot adopt because destination is missing."
+      },
+      "noHighRegressionRelativeToLowOnFreshCriticalChecks": {
+        "passed": true,
+        "evidence": "No fresh critical regression observed; both pairs tie on critical outcomes."
+      },
+      "atLeastOneFreshHighCriticalImprovementOverLowRequired": {
+        "passed": false,
+        "evidence": "No critical field or adoption improvement in either fresh pair."
+      },
+      "bothKnownHighRegressionsMustMeetFrozenAndApplicationTargets": {
+        "passed": false,
+        "evidence": "run-06 passes, but run-05 keeps null headline/unnecessary confirmation and has the wrong pickup destination."
+      }
+    },
+    "rejectConditionsObserved": [],
+    "reason": "The high complete fresh result is not adoptable; no fresh pair has a critical high improvement; one of two known regressions still fails. A single known-case improvement does not satisfy the predeclared gate."
+  },
+  "cost": {
+    "phaseCalculatedUsageUsd": 0.13931,
+    "cumulativeAccountedAndReservedUsd": 0.533298,
+    "oldUnknownChargeReserveUsd": 0.1,
+    "newUnknownOutcomes": 0,
+    "phaseCeilingUsd": 3,
+    "cumulativeCeilingUsd": 20,
+    "pricingCaveat": "Calculated from reported tokens at the frozen Standard rates; not reconciled to a provider invoice. Historical uncertainty reserve remains unchanged."
+  },
+  "caveats": [
+    "The original quantity tool describes a customer-stated total, with null when unknown. Historical core case-01 expects a derived revised final total. Keep its original failure unchanged, but report this contract tension. The fresh derived case explicitly labels literal historical 11 versus derived final 12.",
+    "Historical regression runs used a 5000 output token cap. Their new high runs use 12000, so a change cannot be attributed only to reasoning effort. Only the fresh low/high pairs share the same output cap and isolate effort.",
+    "The author has seen earlier outcomes and intentionally targets known weaknesses. Two fresh inputs and two known regressions do not form a reliability benchmark.",
+    "Changing a prompt, schema, default destination or inferred allocation to force success is outside this experiment.",
+    "The high known-core result misassigns the requesting crew to the pickup destination field. This is a separate application mismatch and was not an added historical mechanical check.",
+    "The observed high arms cost more and took longer in these two fresh pairs without changing their critical outcomes. Two single attempts per effort are not a latency, cost or reliability benchmark.",
+    "All actual adoption checks were repeated independently on fresh local memory stores after verifying the read-only model assessment. Accepted probe state is an unapproved local draft, not restaurant execution.",
+    "The frozen preparation protocol retains inferencePermitted:false. Actual execution was governed by the separate approved executionapproval.json, whose hash is recorded.",
+    "No inference call or existing source/public/form change was made by this semantic reviewer."
+  ]
+}

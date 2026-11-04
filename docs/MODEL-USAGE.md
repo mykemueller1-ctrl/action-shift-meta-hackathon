@@ -2,7 +2,7 @@
 
 The default app starts in authored simulation and offers saved model replays. Loading a replay needs no API key and makes no new model request.
 
-The included 2 minute 50 second demonstration uses saved results and local simulation. Its browser journey and the 90 focused tests do not require new paid inference. See [validation](VALIDATION.md) for the separate original and v2 model evaluations and their retained limitations.
+The included demonstration uses saved results and local simulation. Its browser journey and local tests do not require new paid inference. See [validation](VALIDATION.md) for the separate engineering checks and model evaluations, with their retained limitations.
 
 A developer can run a new review with an authorized Meta account and a key supplied to the Node process. Keep MODEL_API_KEY in the server environment or a local secret manager. Never put the key in browser code, a fixture, a public file or a chat.
 
@@ -75,7 +75,9 @@ The three new independent cases used opaque local IDs and a frozen expectation f
 
 Four later [supplemental controls](../fixtures/front-desk/supplemental-evaluation.json) used the unchanged adapter and another frozen expectation set. Each ran once, for twelve requests and 61 of 62 mechanical checks. Independent review recorded two passes, one qualified pass and one failure. The explicit pickup destination still dropped from a structured result. Both restaurant/date scope controls passed. All four raw packets are retained as evidence only, with final review in the separate evaluation file. They are not additional app replays or scenes in the recorded demonstration, and they do not replace earlier results.
 
-The app displays the original four recordings plus the new qualified delivery example. Its browser path retains requested delivery, applies the restored correction and requires explicit guest consent before switching to pickup. A reply may be edited and saved as reviewed and unsent. Missing proposal fields still block adoption because no general completion editor exists.
+The app retains the original recordings and qualified delivery example. V3 also exposes one explicitly failed comparison result for a separate human completion demonstration. Its raw packet and failure remain unchanged. A person can complete a null pickup location or null final total, with a demonstration reviewer role and reason, before normal quote review. The app cannot invent allocations or pickup consent. Its delivery path retains requested delivery and requires explicit guest consent before switching to pickup. A reply may be edited and saved as reviewed and unsent.
+
+The [six reasoning comparison runs](../fixtures/reasoning-comparison/README.md) used 18 requests, two fresh low/high pairs and two known regression probes. Both fresh pairs tied on critical outcomes. Only one known probe passed, under a larger output cap than its historical run. The promotion gate failed. The released adapter therefore retains its original low effort and output limit. No model call was needed for the V3 operator workflow. The newly demonstrated human completion is not an improvement to the model evaluation.
 
 Do not put setup commands, expected classifications, window answers or semantic review criteria into the model message. Preserve every run and miss, without selecting a preferred rerun.
 

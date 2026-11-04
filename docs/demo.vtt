@@ -1,73 +1,77 @@
 WEBVTT
 
 1
-00:00:00.000 --> 00:00:05.467
-Preview: the order changed. The kitchen has the earlier version.
+00:00:00.000 --> 00:00:04.867
+Preview: The guest changed the order. Which version is the kitchen making?
 
 2
-00:00:05.467 --> 00:00:14.400
-Built by Myke Mueller, Never86’d founder and Community Tap & Pizza operator.
+00:00:04.867 --> 00:00:12.600
+Myke Mueller. Never86’d founder. Community Tap & Pizza operator.
 
 3
-00:00:14.400 --> 00:00:23.900
-Start with the exact synthetic message Muse reviewed.
+00:00:12.600 --> 00:00:26.867
+Two crew pickups. One revised request. Keep the original message in view.
 
 4
-00:00:23.900 --> 00:00:32.133
-Muse checked dated menu facts and the 12-versus-13 count.
+00:00:26.867 --> 00:00:32.900
+Muse checked the restaurant’s facts before drafting.
 
 5
-00:00:32.133 --> 00:00:40.633
-Adopt the model draft. Its source stays attached; the conflict stays open.
+00:00:32.900 --> 00:00:40.300
+Muse left the pickup location blank. The guest had already supplied it.
 
 6
-00:00:40.633 --> 00:00:51.933
-An authored guest clarification makes it 13 pizzas. The quote is $213.
+00:00:40.300 --> 00:00:50.867
+Record the location and reason. Approval comes next.
 
 7
-00:00:51.933 --> 00:01:03.100
-The operator reviews price, timing and capacity for this exact version.
+00:00:50.867 --> 00:00:59.100
+Twelve pizzas. Two pickups. A $198 quote for this draft.
 
 8
-00:01:03.100 --> 00:01:12.433
-Two simulated receipts acknowledge version 3: six pizzas, then seven.
+00:00:59.100 --> 00:01:08.000
+Review the price, pickup times and capacity before saying yes.
 
 9
-00:01:12.433 --> 00:01:22.833
-One more garden pizza creates version 4. The old approval cannot cover it.
+00:01:08.000 --> 00:01:14.567
+Two simulated receipts: five pizzas first, seven later.
 
 10
-00:01:22.833 --> 00:01:34.167
-The operator reviews “pickup only” for this restaurant and this date.
+00:01:14.567 --> 00:01:23.967
+One more garden pizza. This change needs a new decision.
 
 11
-00:01:34.167 --> 00:01:41.233
-The reviewed rule is saved locally. Demo orders still reset on restart.
+00:01:23.967 --> 00:01:33.800
+Review the revised $215 quote. Ask the kitchen to acknowledge the change.
 
 12
-00:01:41.233 --> 00:01:50.267
-After a real server restart: the correction returns; demo orders reset.
+00:01:33.800 --> 00:01:42.333
+Current receipts: five and eight. Earlier versions stay in history.
 
 13
-00:01:50.267 --> 00:02:00.167
-Three local checks confirm the rule applies only to this restaurant today.
+00:01:42.333 --> 00:01:54.500
+A different case: November 4. The operator reviews a pickup only rule.
 
 14
-00:02:00.167 --> 00:02:12.433
-A separate recorded Muse review retrieves the restored rule and preserves delivery.
+00:01:54.500 --> 00:02:03.467
+After a real restart, the reviewed rule returns. Demo orders reset.
 
 15
-00:02:12.433 --> 00:02:24.133
-The courier claim exceeds the source. The operator edits an unsent reply.
+00:02:03.467 --> 00:02:10.800
+Three checks keep the rule with this restaurant and date.
 
 16
-00:02:24.133 --> 00:02:33.400
-Adopt the five-pizza draft. Delivery stays requested, and quoting stays blocked.
+00:02:10.800 --> 00:02:19.167
+The next guest requested delivery. The saved review keeps that request intact.
 
 17
-00:02:33.400 --> 00:02:43.000
-Only explicit, authored guest consent changes the request to pickup.
+00:02:19.167 --> 00:02:29.700
+The reply overstates the reason. The operator edits it and keeps it unsent.
 
 18
-00:02:43.000 --> 00:02:49.967
-Action Shift: keep the source, the owner’s decision and the right handoff together.
+00:02:29.700 --> 00:02:37.667
+The guest must accept pickup before the delivery request can change.
+
+19
+00:02:37.667 --> 00:02:45.467
+The detail. The decision. Who checked it.

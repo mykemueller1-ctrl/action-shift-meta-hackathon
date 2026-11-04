@@ -1,0 +1,66 @@
+{
+  "version": 1,
+  "description": "Six completed synthetic reasoning comparison runs. No higher reasoning promotion. Raw packets are unchanged; final semantic review is separate. Only run01 is used for an explicit operator-completion replay. This does not change its model failure.",
+  "runs": [
+    {
+      "run": "run-01",
+      "case": "fresh-01",
+      "effort": "low",
+      "file": "run-01.json",
+      "originalFile": "reasoning-run-01-2026-11-04T16-21-23-777Z-13c77ca7-f3a9-45e3-8db1-2cd6834d32c2-validated-review.json",
+      "sha256": "d6fe4cab82bdf93f1715675064556e3b00a0854e72cafa214a334b06401f15ab",
+      "assessment": "reasoning-run-01-2026-11-04T16-21-23-777Z-13c77ca7-f3a9-45e3-8db1-2cd6834d32c2-assessment.json",
+      "adoption": "reasoning-run-01-2026-11-04T16-21-23-777Z-13c77ca7-f3a9-45e3-8db1-2cd6834d32c2-adoption-probe.json"
+    },
+    {
+      "run": "run-02",
+      "case": "fresh-02",
+      "effort": "high",
+      "file": "run-02.json",
+      "originalFile": "reasoning-run-02-2026-11-04T16-22-00-796Z-d607b958-d48b-4f31-aac3-1527c34367e2-validated-review.json",
+      "sha256": "23b46c943314cfd3464a82e99e5f77eac3a1c07f8bd03162b6d668a59b9b8340",
+      "assessment": "reasoning-run-02-2026-11-04T16-22-00-796Z-d607b958-d48b-4f31-aac3-1527c34367e2-assessment.json",
+      "adoption": "reasoning-run-02-2026-11-04T16-22-00-796Z-d607b958-d48b-4f31-aac3-1527c34367e2-adoption-probe.json"
+    },
+    {
+      "run": "run-03",
+      "case": "fresh-01",
+      "effort": "high",
+      "file": "run-03.json",
+      "originalFile": "reasoning-run-03-2026-11-04T16-22-48-158Z-c310ac82-3feb-4830-ba74-cb2bf175b2e7-validated-review.json",
+      "sha256": "ff98285eacac712c772603a95f2b6e731e22075ac9912bdad199b98c2d0fe34a",
+      "assessment": "reasoning-run-03-2026-11-04T16-22-48-158Z-c310ac82-3feb-4830-ba74-cb2bf175b2e7-assessment.json",
+      "adoption": "reasoning-run-03-2026-11-04T16-22-48-158Z-c310ac82-3feb-4830-ba74-cb2bf175b2e7-adoption-probe.json"
+    },
+    {
+      "run": "run-04",
+      "case": "fresh-02",
+      "effort": "low",
+      "file": "run-04.json",
+      "originalFile": "reasoning-run-04-2026-11-04T16-23-24-817Z-07ea8f56-8fcc-47d1-93e4-a19aa418bded-validated-review.json",
+      "sha256": "90f1315458ddbeeb27615e8b6cccd26ac3f308a0143bc416bb85049452a6225d",
+      "assessment": "reasoning-run-04-2026-11-04T16-23-24-817Z-07ea8f56-8fcc-47d1-93e4-a19aa418bded-assessment.json",
+      "adoption": "reasoning-run-04-2026-11-04T16-23-24-817Z-07ea8f56-8fcc-47d1-93e4-a19aa418bded-adoption-probe.json"
+    },
+    {
+      "run": "run-05",
+      "case": "regression-core-01",
+      "effort": "high",
+      "file": "run-05.json",
+      "originalFile": "reasoning-run-05-2026-11-04T16-23-57-260Z-34cd05d4-fef5-4065-81d4-f9c92a67fa52-validated-review.json",
+      "sha256": "0126feec10497d692c2bdac20c75c5543dc7eed309f1df2fae37418bb65f53b0",
+      "assessment": "reasoning-run-05-2026-11-04T16-23-57-260Z-34cd05d4-fef5-4065-81d4-f9c92a67fa52-assessment.json",
+      "adoption": "reasoning-run-05-2026-11-04T16-23-57-260Z-34cd05d4-fef5-4065-81d4-f9c92a67fa52-adoption-probe.json"
+    },
+    {
+      "run": "run-06",
+      "case": "regression-supplement-04",
+      "effort": "high",
+      "file": "run-06.json",
+      "originalFile": "reasoning-run-06-2026-11-04T16-24-30-173Z-b1da2841-9091-427e-a98b-d4aab8d6d802-validated-review.json",
+      "sha256": "2160676ca52f3560347443a87ff7c6fbf01710eaa74d5365c8ebe6334b0cc19e",
+      "assessment": "reasoning-run-06-2026-11-04T16-24-30-173Z-b1da2841-9091-427e-a98b-d4aab8d6d802-assessment.json",
+      "adoption": "reasoning-run-06-2026-11-04T16-24-30-173Z-b1da2841-9091-427e-a98b-d4aab8d6d802-adoption-probe.json"
+    }
+  ]
+}

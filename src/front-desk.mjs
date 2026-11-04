@@ -210,12 +210,20 @@ export function createFrontDeskDemo({ correctionStorage } = {}) {
         value.proposalSource = { kind: 'operator-reviewed', reference: clone(payload.provenance || { mode: 'authored', responseId: null }), sourceVerified: context.verifiedRecord === true,
           verification: context.verifiedRecord === true ? 'Validated server-bound local record; not independent provider attestation.' : 'Client-provided source reference; not verified model provenance.' };
         if (context.recordedSource) {
-          Object.assign(value.proposalSource, clone(context.recordedSource), { originalProposal: clone(proposal) });
+          Object.assign(value.proposalSource, clone(context.recordedSource), { originalProposal: clone(context.originalProposal || proposal) });
+          if (context.operatorCompletion) Object.assign(value.proposalSource, {
+            kind: 'operator-completed', originalResult: clone(context.originalResult),
+            originalResultSha256: createHash('sha256').update(JSON.stringify(context.originalResult), 'utf8').digest('hex'),
+            operatorCompletion: clone(context.operatorCompletion),
+            verification: 'The original server-bound recording is verified locally. The completed fields are explicit human edits, not model output or order approval.',
+          });
           value.messages.push({ id: `${value.id}-model-source-${value.requestVersion}`, channel: 'model-reviewed-source', text: context.recordedSource.input.message,
             at: DEMO_NOW, synthetic: true, sourceMode: 'recorded-meta', reviewId: context.recordedSource.reviewId, responseId: context.recordedSource.responseId,
             sourceMessageSha256: context.recordedSource.sourceMessageSha256 });
         }
-        summary = 'Operator adopted the exact extracted proposal as a new request version. Counts were retained, not repaired; quote, price, timing, capacity and kitchen acknowledgment require separate checks.'; break;
+        summary = context.operatorCompletion
+          ? 'Demo operator completed only the recorded missing fields, with a reason beside the unchanged original result. This is a new unapproved draft; price, timing, capacity and kitchen acknowledgment require separate checks.'
+          : 'Operator adopted the exact extracted proposal as a new request version. Counts were retained, not repaired; quote, price, timing, capacity and kitchen acknowledgment require separate checks.'; break;
       }
       case 'review_recorded_reply': {
         fields(payload, ['operator', 'text']); operator(payload);
@@ -336,7 +344,7 @@ export function createFrontDeskDemo({ correctionStorage } = {}) {
       }
       default: fail('FRONT_DESK_ACTION', 'Choose a supported local demo action.');
     }
-    const event = appendEvent(value, name, summary, current); cases.set(caseId, value);
+    const event = appendEvent(value, context.operatorCompletion ? 'complete_recorded_proposal' : name, summary, current); cases.set(caseId, value);
     return { case: view(value), eventsAdded: [clone(event)], notice: DEMO_NOTICE };
   }
   function action(command, context) {
@@ -389,6 +397,35 @@ export function createFrontDeskDemo({ correctionStorage } = {}) {
       return action({ caseId: command.caseId, expectedVersion: command.expectedVersion, action: 'apply_request_proposal', payload: {
         operator: command.operator, proposal: review.result.proposal, provenance: { mode: 'recorded-meta', responseId: source.responseId },
       } }, { verifiedRecord: true, recordedSource: source });
+    },
+    completeRecordedProposal: (command, review) => {
+      fields(command, ['caseId', 'expectedVersion', 'reviewId', 'operator', 'changes', 'reason']);
+      const source = recordedSource(command, review); operator(command);
+      const original = review.result?.proposal;
+      if (!plain(original) || original.kind !== 'food') fail('FRONT_DESK_RECORD', 'The recorded result has no food proposal to complete.');
+      if (!plain(command.changes) || Object.keys(command.changes).length < 1
+        || Object.keys(command.changes).some(key => !['destination', 'headlineQuantity'].includes(key))) fail('FRONT_DESK_INPUT', 'Complete only a missing pickup location or final quantity.');
+      if (typeof command.reason !== 'string' || !command.reason.trim() || command.reason.length > 600
+        || /[<>\p{Cf}\x00-\x08\x0b\x0c\x0e-\x1f\x7f]/u.test(command.reason)) fail('FRONT_DESK_INPUT', 'Give a short plain-text reason for the operator completion.');
+      const proposal = clone(original); const changes = [];
+      for (const [field, after] of Object.entries(command.changes)) {
+        if (original[field] !== null) fail('FRONT_DESK_INPUT', 'Only an explicitly missing field in the original recorded proposal can be completed.');
+        if (field === 'destination' && (original.fulfillment !== 'pickup' || typeof after !== 'string' || !after.trim()
+          || after.length > 160 || /[<>\p{Cf}\x00-\x1f\x7f]/u.test(after))) fail('FRONT_DESK_INPUT', 'Enter a plain-text pickup location; this review cannot change delivery or infer pickup consent.');
+        if (field === 'headlineQuantity' && !integer(after)) fail('FRONT_DESK_INPUT', 'Enter the reviewed final quantity from 1 to 100.');
+        proposal[field] = after;
+        changes.push({ field, before: null, after });
+      }
+      // The operator supplies the value. Arithmetic checks it; this code never fills it.
+      if (Object.hasOwn(command.changes, 'headlineQuantity')) {
+        const checked = checkQuantities(proposal);
+        if (!checked.matches || !checked.windowsMatch) fail('FRONT_DESK_QUANTITY', 'The entered final quantity must match the item lines and every pickup allocation.');
+      }
+      const operatorCompletion = { operator: command.operator, reason: command.reason, reviewedAt: new Date().toISOString(),
+        reviewId: command.reviewId, responseId: source.responseId, changes, status: 'unapproved-draft', approved: false };
+      return action({ caseId: command.caseId, expectedVersion: command.expectedVersion, action: 'apply_request_proposal', payload: {
+        operator: command.operator, proposal, provenance: { mode: 'recorded-meta', responseId: source.responseId },
+      } }, { verifiedRecord: true, recordedSource: source, originalProposal: original, originalResult: review.result, operatorCompletion });
     },
     reviewRecordedReply: (command, review) => {
       fields(command, ['caseId', 'expectedVersion', 'reviewId', 'operator', 'text']);

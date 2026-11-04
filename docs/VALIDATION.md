@@ -43,7 +43,7 @@ The frozen case file has SHA256 `37311e8d5ccc4a9dde29eb6714b38112788d11dd214afa8
 
 The [complete v2 evaluation](../fixtures/front-desk/v2-evaluation.json) retains all frozen expectations and assessments. All three result packets are linked above. The [v2 replay manifest](../fixtures/front-desk/v2-manifest.json) excludes case 01 from replay because it failed. That result remains available in full. Case 03 is retained without a browser selector. Case 02 is the preferred direct request recording, with its qualification displayed.
 
-Case 01 correctly derived the item totals and both window allocations: 3 pizzas at 12:15 and 8 at 18:45 on November 5. It left `headlineQuantity` null and unnecessarily asked the guest to confirm the revised total. Both frozen mechanical misses concern that same null headline, once in the quantity tool call and once in the final proposal. They remain failures. The unnecessary confirmation also fails the frozen semantic criterion. A separate completeness observation is that destination was null despite the pickup location being supplied and repeated in its prose. Destination was not one of the failed frozen mechanical checks. The app has no general completion editor, so an incomplete proposal remains blocked from adoption.
+Case 01 correctly derived the item totals and both window allocations: 3 pizzas at 12:15 and 8 at 18:45 on November 5. It left `headlineQuantity` null and unnecessarily asked the guest to confirm the revised total. Both frozen mechanical misses concern that same null headline, once in the quantity tool call and once in the final proposal. They remain failures. The unnecessary confirmation also fails the frozen semantic criterion. A separate completeness observation is that destination was null despite the pickup location being supplied and repeated in its prose. Destination was not one of the failed frozen mechanical checks. At the time of that v2 evaluation, the app had no completion editor and the original proposal was blocked from adoption. V3's later narrow human completion does not change this model result or score.
 
 Criterion clarification: the original semantic report also marked its location retention criterion failed because the structured destination was null. The location was retained in the reply and summary. That label describes the structured completeness discrepancy, not loss of the location from all output and not an additional failed frozen mechanical check. The original report is preserved unchanged. The case remains a semantic failure because it unnecessarily asked the guest to confirm the fully specified revised total.
 
@@ -76,7 +76,7 @@ There were no retries, output repairs or changed expectations. This is independe
 
 ## Engineering checks and execution limits
 
-All **90 focused tests passed** with the actual pinned recordings. They cover quantity disagreements, integer prices, window allocations, approval and receipt versions, stale changes, dated corrections, persistence failures, source adoption, reply history, cancellation, reservations, recovery and tool boundaries. These are engineering checks on synthetic cases. They do not establish model reliability.
+The V2 release passed **90 focused tests** with the actual pinned recordings. They cover quantity disagreements, integer prices, window allocations, approval and receipt versions, stale changes, dated corrections, persistence failures, source adoption, reply history, cancellation, reservations, recovery and tool boundaries. These are engineering checks on synthetic cases. They do not establish model reliability. V3 checks are recorded separately below.
 
 The operational workflow uses authored local simulation. A simulated kitchen receipt is not evidence of a restaurant accepting an order. A simulated remedy is not an actual refund. Payment, fulfillment and guest recovery remain unknown unless separately evidenced.
 
@@ -88,11 +88,31 @@ V1 kept corrections only in memory. The v2 local browser journey verified:
 4. The new delivery proposal retaining all requested fields while the restored pickup rule blocked quoting. Only an explicit authored guest pickup confirmation created a new version and fictional $87 quote. Separate operator review was still required.
 5. The qualified reply corrected by an operator and saved as reviewed and unsent, with the original model text separately retained. No message, notification or dispatch occurred.
 
-There is no general missing field completion editor. Incomplete proposals remain blocked rather than borrowing details from the starter case.
+At V2, no missing field completion editor existed. V3 adds explicit human completion for two permitted null fields and preserves the failed original. It does not borrow details from the starter case or complete unknown allocations.
 
-The revised video runs 169.97 seconds, rounded to 2 minutes 50 seconds. Full decode passed for 5,099 frames at 30 frames per second. The rendered final frame of each of its 18 shots was inspected for captions and disclosures. This media check is separate from public hosting verification or contest submission.
+The V2 video runs 169.97 seconds, rounded to 2 minutes 50 seconds. Full decode passed for 5,099 frames at 30 frames per second. The rendered final frame of each of its 18 shots was inspected for captions and disclosures. That media check is historical and separate from the V3 video, public hosting verification or contest submission.
 
 The earlier Evidence Inbox evaluation and release are separate. Their accepted shift note response is not counted in this ten case front desk evaluation.
+
+## Reasoning comparison and V3 operator review
+
+Six [additional runs](../fixtures/reasoning-comparison/README.md) completed once, using eighteen requests. They compared low and high reasoning on two fresh synthetic inputs at the same 12,000 output cap, then revisited two known failed inputs at high reasoning. The latter also changed the historical 5,000 cap and cannot isolate reasoning effort. Both fresh pairs tied on critical outcomes. One known probe passed and one failed. Independent semantic review recorded three passes and three failures across the six runs. The frozen promotion gate failed, and the model adapter was not changed.
+
+The complete fresh request lost its named pickup location at both effort levels. Both actual proposals remained blocked. The incomplete request preserved the known location and counts at both levels, left flavor allocations unknown and was correctly blocked for those unknown allocations. The known core probe retained a null headline and unnecessary total question, and incorrectly placed the customer group in the pickup destination field. That separate semantic defect did not alter its frozen mechanical score. The known supplemental probe preserved all required fields and adopted as an unapproved draft.
+
+V3 improves the human workflow around these limits. The configured failed run retains its raw bytes and original failure, with a separate replay label. A person can complete only a null pickup location or null final total, supplying a reason and explicit review. Source and original result remain intact. Existing fields, item allocations, fulfillment and approval cannot be edited by that route.
+
+The candidate suite passed **97 of 97 tests**, including the new completion and failed recording integrity checks. A separate reviewer ran **12 of 12 adversarial probes**, covering actual incomplete records, forbidden fields, source substitution, stale versions, scoped service rules, unknown allocations, old receipts and unapproved state. Those probes are separate from the packaged test suite and are not a model accuracy measure.
+
+Chrome acceptance verified the complete main path through the visible interface: the saved failed November 8 request, explicit pickup location and reason, an unapproved twelve pizza draft, separate $198 quote, three review checks, two simulated receipts for five and seven, an authored guest change, invalidated approval, a new $215 quote and review, and current five/eight receipts with earlier five/seven receipts retained. The original model failure and operator completion audit stayed visible after subsequent actions.
+
+The UI was inspected at normal desktop size and a 390 by 844 phone viewport. Neither showed horizontal overflow. The phone override was reset. The unrelated authored starter is collapsed and labeled separately when the failed recorded request is selected. The demonstration reviewer is a fixed role named Demo operator, not authenticated founder acceptance.
+
+All twenty three original fixture JSON files and the Meta adapter remain byte identical to V2. All six additional comparison packets, twelve original mechanical/adoption records and the separate semantic review and frozen criteria remain unchanged. Human completion does not relabel a failed Muse result as a pass. No new model request was made for these V3 changes.
+
+The V3 video is 165.466667 seconds (2 minutes 45.47 seconds), with 4,964 decoded frames at 30 frames per second. The 1920 by 1080 H.264 export is silent and 6,577,066 bytes. Full decode passed, timestamps increased throughout, and the file is prepared for progressive playback. The corrected final bytes played from start to finish in Chrome at normal speed with no playback error. Midpoint and end frames from all nineteen scenes were inspected for readable text and accurate state. This is frame inspection plus a complete browser playback check, not uninterrupted human review of every frame.
+
+The newly captured footage includes the actual saved Meta fact lookup, the unchanged model omission and separate human completion, both approval and kitchen receipt versions, and the distinct November 4 correction example. That correction file retained the same hash across an actual server restart; the interface reported one correction loaded after restart and the three scope controls returned true, false and false. The final video keeps the fictional restaurant, saved response and local simulation labels visible. Its captions are an editorial guide, not a founder transcript.
 
 ## Claims not established
 
