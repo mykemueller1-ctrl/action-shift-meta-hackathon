@@ -1,0 +1,249 @@
+{
+  "mode": "recorded-meta",
+  "liveVerified": true,
+  "recorded": true,
+  "scenarioId": "other-restaurant",
+  "input": {
+    "synthetic": true,
+    "scenarioId": "other-restaurant",
+    "restaurantId": "demo-south",
+    "demoNow": "2026-11-04T10:00:00-06:00",
+    "message": "At Maple Street South, could you draft a request for two cheese pizzas delivered to Fictional Studio E at 1 p.m. today? I have not received restaurant confirmation."
+  },
+  "result": {
+    "intent": "direct-order",
+    "proposal": {
+      "date": "2026-11-04",
+      "destination": "Fictional Studio E",
+      "fulfillment": "delivery",
+      "headlineQuantity": 2,
+      "items": [
+        {
+          "itemId": "cheese",
+          "quantity": 2
+        }
+      ],
+      "kind": "food",
+      "windows": [
+        {
+          "id": "window-1",
+          "items": [
+            {
+              "itemId": "cheese",
+              "quantity": 2
+            }
+          ],
+          "readyAt": "2026-11-04T13:00:00-06:00"
+        }
+      ]
+    },
+    "questions": [],
+    "reply": "Hi there — DRAFT for your review (not sent, not confirmed): I can propose 2x Classic cheese pizza from Maple Street South, for delivery to Fictional Studio E today at 1:00 p.m. This is only a draft request and the restaurant has not confirmed it yet. Our team will review and follow up on confirmation, timing, and delivery.",
+    "sourceIds": [
+      "demo-south-menu-v1",
+      "demo-south-service-v1"
+    ],
+    "status": "ready-for-operator",
+    "summary": "Proposed 2x cheese pizza delivery to Fictional Studio E at 1pm today (2026-11-04). Within lead time and window capacity. Guest notes no restaurant confirmation yet; needs human review/confirmation."
+  },
+  "tools": [
+    {
+      "name": "lookup_restaurant_facts",
+      "args": {
+        "date": "2026-11-04",
+        "topics": [
+          "menu",
+          "offers",
+          "service",
+          "corrections"
+        ]
+      },
+      "result": {
+        "restaurantId": "demo-south",
+        "restaurantName": "Maple Street South",
+        "date": "2026-11-04",
+        "demoNow": "2026-11-04T10:00:00-06:00",
+        "mode": "authored-simulation",
+        "synthetic": true,
+        "menu": [
+          {
+            "id": "cheese",
+            "name": "Classic cheese pizza",
+            "unitPriceCents": 1500,
+            "sourceId": "demo-south-menu-v1",
+            "taxInclusive": true
+          },
+          {
+            "id": "pepper",
+            "name": "Roasted pepper pizza",
+            "unitPriceCents": 1800,
+            "sourceId": "demo-south-menu-v1",
+            "taxInclusive": true
+          },
+          {
+            "id": "garden",
+            "name": "Garden pizza",
+            "unitPriceCents": 1700,
+            "sourceId": "demo-south-menu-v1",
+            "taxInclusive": true
+          }
+        ],
+        "offers": [
+          {
+            "id": "demo-south-offer-old",
+            "name": "Previous autumn lunch offer",
+            "validFrom": "2026-11-01",
+            "validTo": "2026-11-03",
+            "status": "expired",
+            "sourceId": "demo-south-offer-old"
+          },
+          {
+            "id": "demo-south-offer-current",
+            "name": "Current garden choice",
+            "validFrom": "2026-11-04",
+            "validTo": "2026-11-10",
+            "status": "current",
+            "sourceId": "demo-south-offer-current"
+          }
+        ],
+        "service": {
+          "pickupOnly": false,
+          "deliveryAvailable": true,
+          "minimumLeadMinutes": 90,
+          "capacityPerWindow": 16,
+          "reservationCapacity": 40,
+          "sourceIds": [
+            "demo-south-service-v1"
+          ]
+        },
+        "sources": [
+          {
+            "id": "demo-south-menu-v1",
+            "label": "Authored demo menu",
+            "restaurantId": "demo-south",
+            "validFrom": "2026-11-01",
+            "validTo": "2026-11-30",
+            "text": "Synthetic tax-inclusive menu prices: cheese 1500 cents, roasted pepper 1800 cents, garden 1700 cents."
+          },
+          {
+            "id": "demo-south-service-v1",
+            "label": "Authored demo service policy",
+            "restaurantId": "demo-south",
+            "validFrom": "2026-11-01",
+            "validTo": "2026-11-30",
+            "text": "Fictional local delivery and pickup; at least 90 minutes lead time; up to 16 pizzas per service window; table capacity 40."
+          },
+          {
+            "id": "demo-south-offer-old",
+            "label": "Previous autumn lunch offer",
+            "restaurantId": "demo-south",
+            "validFrom": "2026-11-01",
+            "validTo": "2026-11-03",
+            "text": "Autumn lunch special, valid November 1 through November 3 only."
+          },
+          {
+            "id": "demo-south-offer-current",
+            "label": "Current garden choice",
+            "restaurantId": "demo-south",
+            "validFrom": "2026-11-04",
+            "validTo": "2026-11-10",
+            "text": "Garden pizza is the current featured choice from November 4 through November 10 at the approved menu price."
+          }
+        ],
+        "corrections": [],
+        "correctionHistory": [],
+        "factVersion": "cb9e56ed68b01c4f",
+        "notice": "Authored tool simulation · fictional restaurant records · no model call or external action"
+      }
+    },
+    {
+      "name": "check_order_quantities",
+      "args": {
+        "headlineQuantity": 2,
+        "items": [
+          {
+            "itemId": "cheese",
+            "quantity": 2
+          }
+        ],
+        "windows": [
+          {
+            "id": "window-1",
+            "items": [
+              {
+                "itemId": "cheese",
+                "quantity": 2
+              }
+            ]
+          }
+        ]
+      },
+      "result": {
+        "statedQuantity": 2,
+        "computedQuantity": 2,
+        "matches": true,
+        "windowsTotal": 2,
+        "windowsMatch": true,
+        "issues": [],
+        "simulated": true,
+        "calculation": "Integer sum of supplied item quantities; no model calculation."
+      }
+    }
+  ],
+  "receipt": {
+    "model": "muse-spark-1.3",
+    "provider": "Meta Model API",
+    "endpoint": "https://api.meta.ai/v1/responses",
+    "store": false,
+    "requests": [
+      {
+        "id": "resp_6aeae1dd4e9143228bf940bb",
+        "inputTokens": 2308,
+        "outputTokens": 213,
+        "reasoningTokens": 103,
+        "elapsedMs": 1927,
+        "status": "completed"
+      },
+      {
+        "id": "resp_6aeae1e010b49e5d828b48db",
+        "inputTokens": 3156,
+        "outputTokens": 224,
+        "reasoningTokens": 82,
+        "elapsedMs": 2965,
+        "status": "completed"
+      },
+      {
+        "id": "resp_6aeae1e6f1b596f1a5b94b2e",
+        "inputTokens": 3454,
+        "outputTokens": 651,
+        "reasoningTokens": 358,
+        "elapsedMs": 5724,
+        "status": "completed"
+      }
+    ],
+    "recordedAt": "2026-11-04T07:42:30.449Z",
+    "referenceChecksPassed": true,
+    "semanticReviewRequired": true,
+    "transport": "live"
+  },
+  "notice": "Read-only proposal. No customer message, approval, order, booking, kitchen dispatch, payment or remedy was executed.",
+  "caseId": null,
+  "evaluationCaseId": "other-restaurant",
+  "evaluation": {
+    "runId": "2026-11-04T07-42-19-789Z-319f73d1-3930-4778-99d6-f8c4aa2a8230",
+    "caseSetVersion": "2026-11-04-v2-pre-run",
+    "evaluationCasesSha256": "8b9c7baf7af003fcf3c224eb959514413869a6734bfa392befe8d76d5803e30a",
+    "inputSha256": "9cb4a8ae7f7d45fed8c324472636193e01eb656f07d3de71f0645d8ab5457400",
+    "expectedConditionsKeptOutsideInput": true,
+    "semanticReviewStatus": "pass",
+    "reviewer": "Independent Codex agent",
+    "reviewNotes": [
+      "Retrieves demo-south facts with delivery available and no North correction applied.",
+      "Keeps cheese2, November4 at13:00 and requested delivery; restaurant confirmation explicitly pending.",
+      "Only synthetic policy was checked; actual delivery address/service capacity and external confirmation are not established."
+    ],
+    "mechanicalPassed": 12,
+    "mechanicalTotal": 12,
+    "founderAcceptance": "unverified"
+  }
+}

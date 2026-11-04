@@ -1,0 +1,264 @@
+{
+  "mode": "recorded-meta",
+  "liveVerified": true,
+  "recorded": true,
+  "scenarioId": "next-day-control",
+  "input": {
+    "synthetic": true,
+    "scenarioId": "next-day-control",
+    "restaurantId": "demo-north",
+    "demoNow": "2026-11-04T10:00:00-06:00",
+    "message": "Can I request two cheese pizzas delivered to Fictional Studio F tomorrow, November 5, at 1 p.m.? Please use the facts for that service date and leave the final decision to the restaurant."
+  },
+  "result": {
+    "intent": "direct-order",
+    "proposal": {
+      "date": "2026-11-05",
+      "destination": "Fictional Studio F",
+      "fulfillment": "delivery",
+      "headlineQuantity": 2,
+      "items": [
+        {
+          "itemId": "cheese",
+          "quantity": 2
+        }
+      ],
+      "kind": "food",
+      "windows": [
+        {
+          "id": "window-1",
+          "items": [
+            {
+              "itemId": "cheese",
+              "quantity": 2
+            }
+          ],
+          "readyAt": "2026-11-05T13:00:00-06:00"
+        }
+      ]
+    },
+    "questions": [],
+    "reply": "Thanks for your request! DRAFT for review — Here is a draft for the team: 2x Classic cheese pizza for delivery to Fictional Studio F on November 5 at 1 p.m. This draft is unapproved and needs human review before anything is confirmed.",
+    "sourceIds": [
+      "demo-north-menu-v1",
+      "demo-north-service-v1"
+    ],
+    "status": "ready-for-operator",
+    "summary": "Proposed 2x cheese pizza delivery to Fictional Studio F on 2026-11-05 at 1pm. Facts retrieved for service date; quantities match; delivery available per service policy. Nov 4 pickup-only correction does not apply. Awaiting human review."
+  },
+  "tools": [
+    {
+      "name": "lookup_restaurant_facts",
+      "args": {
+        "date": "2026-11-05",
+        "topics": [
+          "menu",
+          "service",
+          "offers",
+          "corrections"
+        ]
+      },
+      "result": {
+        "restaurantId": "demo-north",
+        "restaurantName": "Maple Street Kitchen",
+        "date": "2026-11-05",
+        "demoNow": "2026-11-04T10:00:00-06:00",
+        "mode": "authored-simulation",
+        "synthetic": true,
+        "menu": [
+          {
+            "id": "cheese",
+            "name": "Classic cheese pizza",
+            "unitPriceCents": 1500,
+            "sourceId": "demo-north-menu-v1",
+            "taxInclusive": true
+          },
+          {
+            "id": "pepper",
+            "name": "Roasted pepper pizza",
+            "unitPriceCents": 1800,
+            "sourceId": "demo-north-menu-v1",
+            "taxInclusive": true
+          },
+          {
+            "id": "garden",
+            "name": "Garden pizza",
+            "unitPriceCents": 1700,
+            "sourceId": "demo-north-menu-v1",
+            "taxInclusive": true
+          }
+        ],
+        "offers": [
+          {
+            "id": "demo-north-offer-old",
+            "name": "Previous autumn lunch offer",
+            "validFrom": "2026-11-01",
+            "validTo": "2026-11-03",
+            "status": "expired",
+            "sourceId": "demo-north-offer-old"
+          },
+          {
+            "id": "demo-north-offer-current",
+            "name": "Current garden choice",
+            "validFrom": "2026-11-04",
+            "validTo": "2026-11-10",
+            "status": "current",
+            "sourceId": "demo-north-offer-current"
+          }
+        ],
+        "service": {
+          "pickupOnly": false,
+          "deliveryAvailable": true,
+          "minimumLeadMinutes": 90,
+          "capacityPerWindow": 16,
+          "reservationCapacity": 40,
+          "sourceIds": [
+            "demo-north-service-v1"
+          ]
+        },
+        "sources": [
+          {
+            "id": "demo-north-menu-v1",
+            "label": "Authored demo menu",
+            "restaurantId": "demo-north",
+            "validFrom": "2026-11-01",
+            "validTo": "2026-11-30",
+            "text": "Synthetic tax-inclusive menu prices: cheese 1500 cents, roasted pepper 1800 cents, garden 1700 cents."
+          },
+          {
+            "id": "demo-north-service-v1",
+            "label": "Authored demo service policy",
+            "restaurantId": "demo-north",
+            "validFrom": "2026-11-01",
+            "validTo": "2026-11-30",
+            "text": "Fictional local delivery and pickup; at least 90 minutes lead time; up to 16 pizzas per service window; table capacity 40."
+          },
+          {
+            "id": "demo-north-offer-old",
+            "label": "Previous autumn lunch offer",
+            "restaurantId": "demo-north",
+            "validFrom": "2026-11-01",
+            "validTo": "2026-11-03",
+            "text": "Autumn lunch special, valid November 1 through November 3 only."
+          },
+          {
+            "id": "demo-north-offer-current",
+            "label": "Current garden choice",
+            "restaurantId": "demo-north",
+            "validFrom": "2026-11-04",
+            "validTo": "2026-11-10",
+            "text": "Garden pizza is the current featured choice from November 4 through November 10 at the approved menu price."
+          }
+        ],
+        "corrections": [],
+        "correctionHistory": [
+          {
+            "id": "demo-correction-1",
+            "kind": "pickup-only",
+            "restaurantId": "demo-north",
+            "validFrom": "2026-11-04",
+            "validTo": "2026-11-04",
+            "operator": "Demo operator",
+            "at": "2026-11-04T10:00:00-06:00",
+            "reviewed": true,
+            "text": "Reviewed fictional operator correction: pickup only on this date; ask the customer before changing delivery to pickup.",
+            "previousValue": "Delivery or pickup available under the base demo service policy.",
+            "newValue": "Pickup only on the specified restaurant/date.",
+            "simulated": true
+          }
+        ],
+        "factVersion": "ccf81aea0ab7dd72",
+        "notice": "Authored tool simulation · fictional restaurant records · no model call or external action"
+      }
+    },
+    {
+      "name": "check_order_quantities",
+      "args": {
+        "headlineQuantity": 2,
+        "items": [
+          {
+            "itemId": "cheese",
+            "quantity": 2
+          }
+        ],
+        "windows": [
+          {
+            "id": "window-1",
+            "items": [
+              {
+                "itemId": "cheese",
+                "quantity": 2
+              }
+            ]
+          }
+        ]
+      },
+      "result": {
+        "statedQuantity": 2,
+        "computedQuantity": 2,
+        "matches": true,
+        "windowsTotal": 2,
+        "windowsMatch": true,
+        "issues": [],
+        "simulated": true,
+        "calculation": "Integer sum of supplied item quantities; no model calculation."
+      }
+    }
+  ],
+  "receipt": {
+    "model": "muse-spark-1.3",
+    "provider": "Meta Model API",
+    "endpoint": "https://api.meta.ai/v1/responses",
+    "store": false,
+    "requests": [
+      {
+        "id": "resp_6aeae1e86b3108d6dd304835",
+        "inputTokens": 2315,
+        "outputTokens": 160,
+        "reasoningTokens": 49,
+        "elapsedMs": 1683,
+        "status": "completed"
+      },
+      {
+        "id": "resp_6aeae1eadafbf56be122418b",
+        "inputTokens": 3249,
+        "outputTokens": 244,
+        "reasoningTokens": 102,
+        "elapsedMs": 2338,
+        "status": "completed"
+      },
+      {
+        "id": "resp_6aeae1eeaa5026319a7f4943",
+        "inputTokens": 3567,
+        "outputTokens": 534,
+        "reasoningTokens": 249,
+        "elapsedMs": 4426,
+        "status": "completed"
+      }
+    ],
+    "recordedAt": "2026-11-04T07:42:39.010Z",
+    "referenceChecksPassed": true,
+    "semanticReviewRequired": true,
+    "transport": "live"
+  },
+  "notice": "Read-only proposal. No customer message, approval, order, booking, kitchen dispatch, payment or remedy was executed.",
+  "caseId": "direct",
+  "evaluationCaseId": "next-day-control",
+  "evaluation": {
+    "runId": "2026-11-04T07-42-30-519Z-c3fd12ff-0b5a-4f68-a5bb-46e0fb25cc15",
+    "caseSetVersion": "2026-11-04-v2-pre-run",
+    "evaluationCasesSha256": "8b9c7baf7af003fcf3c224eb959514413869a6734bfa392befe8d76d5803e30a",
+    "inputSha256": "4b87bfc0d2bbc25d5fda1c2fe7edb812c9deb4b57f2ee8b4171a7dbfeae5566f",
+    "expectedConditionsKeptOutsideInput": true,
+    "semanticReviewStatus": "pass",
+    "reviewer": "Independent Codex agent",
+    "reviewNotes": [
+      "Retrieves November5 facts rather than the November4 demo-clock date.",
+      "Does not extend the November4-only pickup correction to November5, despite its presence in correction history.",
+      "Keeps requested delivery and13:00 onNovember5, with no capacity or acceptance promise."
+    ],
+    "mechanicalPassed": 12,
+    "mechanicalTotal": 12,
+    "founderAcceptance": "unverified"
+  }
+}

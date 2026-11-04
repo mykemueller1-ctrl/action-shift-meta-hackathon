@@ -1,0 +1,15 @@
+{
+  "name": "action-shift-meta-hackathon",
+  "version": "0.2.0",
+  "private": true,
+  "type": "module",
+  "license": "MIT",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "start": "node src/front-desk-demo.mjs",
+    "authored": "node src/front-desk-server.mjs",
+    "test": "node --test test/*.test.mjs"
+  }
+}

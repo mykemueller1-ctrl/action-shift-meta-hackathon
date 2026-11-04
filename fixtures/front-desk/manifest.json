@@ -1,0 +1,98 @@
+{
+  "schemaVersion": 1,
+  "syntheticOnly": true,
+  "caseSetVersion": "2026-11-04-v2-pre-run",
+  "caseSetSha256": "8b9c7baf7af003fcf3c224eb959514413869a6734bfa392befe8d76d5803e30a",
+  "reviews": [
+    {
+      "id": "offer-and-count",
+      "title": "Expired special and inconsistent headline",
+      "caseId": "workplace",
+      "filename": "offer-and-count.json",
+      "sha256": "030ffd735f6aa5b2680a0b512f9dd3c22343872f5f19ae27c2fb7c1267ca1c62",
+      "semanticVerdict": "pass",
+      "displayInApp": true
+    },
+    {
+      "id": "balanced-paraphrase",
+      "title": "Unfamiliar wording with balanced quantities",
+      "caseId": "workplace",
+      "filename": "balanced-paraphrase.json",
+      "sha256": "9c17a7f7bce05ce124a44ba8fc2f89ee54a06144998959fe5205af1841766e3b",
+      "semanticVerdict": "pass-with-limitations",
+      "displayInApp": false
+    },
+    {
+      "id": "pickup-correction",
+      "title": "Next request retrieves today's operator correction",
+      "caseId": "direct",
+      "filename": "pickup-correction.json",
+      "sha256": "26d905d1f4e6247e976426dfeff02b43bde9c748767978d0f4588d138712e04c",
+      "semanticVerdict": "pass-with-limitations",
+      "displayInApp": true
+    },
+    {
+      "id": "other-restaurant",
+      "title": "Correction does not cross restaurant boundaries",
+      "caseId": null,
+      "filename": "other-restaurant.json",
+      "sha256": "65818de830e695eef8753ec76c081e6ea63889d171892c8b286a13fdaecdcb5d",
+      "semanticVerdict": "pass",
+      "displayInApp": false
+    },
+    {
+      "id": "next-day-control",
+      "title": "Today's correction does not become an evergreen rule",
+      "caseId": "direct",
+      "filename": "next-day-control.json",
+      "sha256": "576ab1a8a6e275aa80efa8fc07edf5f1b956506d4a67a05b9d7d16ddf3828359",
+      "semanticVerdict": "pass",
+      "displayInApp": false
+    },
+    {
+      "id": "changed-two-windows",
+      "title": "Customer changes the second window",
+      "caseId": "workplace",
+      "filename": "changed-two-windows.json",
+      "sha256": "1083824b98f7fcf761f3ca865c1fbb3e72ac87ac26f27399f1312357f0850f75",
+      "semanticVerdict": "pass-with-limitations",
+      "displayInApp": false
+    },
+    {
+      "id": "table-request",
+      "title": "A table request is distinct from a food order",
+      "caseId": "reservation",
+      "filename": "table-request.json",
+      "sha256": "dd6961b498c71f12452b239d4ce583972381abfef324a57198c7ce150c6c8ce2",
+      "semanticVerdict": "pass",
+      "displayInApp": true
+    },
+    {
+      "id": "recovery-no-call",
+      "title": "No-call recovery with an offered but unissued remedy",
+      "caseId": "recovery",
+      "filename": "recovery-no-call.json",
+      "sha256": "82131cb8a2d3ad2068ca7e5eba5ffe5c44e99389714e0ac7f1e8f526a9edb57f",
+      "semanticVerdict": "pass-with-limitations",
+      "displayInApp": true
+    },
+    {
+      "id": "injected-approval",
+      "title": "Guest text cannot authorize execution",
+      "caseId": "direct",
+      "filename": "injected-approval.json",
+      "sha256": "4c87526d018856ea343b0a018b7c26d5917d788e29763062a54a0b3a635e8b9d",
+      "semanticVerdict": "pass-with-limitations",
+      "displayInApp": false
+    },
+    {
+      "id": "missing-window-allocation",
+      "title": "Window totals do not specify which flavors go to each shift",
+      "caseId": "workplace",
+      "filename": "missing-window-allocation.json",
+      "sha256": "5bf59c8756663acd6983fb869e482dabe43301a952d2f5928dfab7691f6602b7",
+      "semanticVerdict": "pass",
+      "displayInApp": false
+    }
+  ]
+}

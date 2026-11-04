@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <meta name="description" content="Action Shift — From Craving to Kitchen. A recorded demonstration of a synthetic restaurant front desk built with Meta Muse, with human review and simulated kitchen handoffs.">
+  <title>Action Shift — From Craving to Kitchen</title>
+  <style>
+    :root { color-scheme: dark; --bg: #141713; --panel: #1d231d; --ink: #f3f0e5; --muted: #b8c0b2; --line: #414b3b; --accent: #f1bc69; }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: var(--bg); color: var(--ink); font: 17px/1.6 "Segoe UI", system-ui, -apple-system, sans-serif; }
+    a { color: var(--accent); text-underline-offset: .2em; }
+    a:hover { color: #ffe0af; }
+    a:focus-visible, video:focus-visible { outline: 3px solid var(--accent); outline-offset: 5px; }
+    .skip { position: absolute; left: 20px; top: -70px; z-index: 2; background: var(--ink); color: var(--bg); padding: 10px 18px; border-radius: 6px; }
+    .skip:focus { top: 16px; }
+    .wrap { width: min(1120px, calc(100% - 48px)); margin: auto; }
+    header { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 28px 0; border-bottom: 1px solid var(--line); }
+    .brand { color: var(--ink); font-weight: 750; font-size: 21px; letter-spacing: -.04em; text-decoration: none; }
+    .brand span { color: var(--accent); }
+    .source-link { font-size: 14px; font-weight: 600; }
+    main { padding: 62px 0 40px; }
+    .eyebrow { margin: 0 0 15px; color: var(--accent); font-size: 12px; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; }
+    h1 { max-width: 900px; margin: 0; font-size: clamp(40px, 6.3vw, 76px); line-height: 1.06; font-weight: 650; letter-spacing: -.055em; }
+    h1 span { display: block; color: var(--accent); }
+    .intro { max-width: 760px; margin: 25px 0 16px; color: var(--muted); font-size: clamp(18px, 2.2vw, 22px); line-height: 1.55; }
+    .byline { margin: 0 0 32px; font-size: 14px; color: var(--muted); }
+    .byline strong { color: var(--ink); font-weight: 600; }
+    figure { margin: 0; border: 1px solid var(--line); border-radius: 16px; overflow: hidden; background: #080b08; box-shadow: 0 22px 64px #0003; }
+    video { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: contain; background: #080b08; }
+    figcaption { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px 24px; padding: 15px 21px; background: var(--panel); color: var(--muted); font-size: 14px; }
+    figcaption strong { color: var(--ink); font-weight: 600; }
+    .links { display: flex; flex-wrap: wrap; gap: 20px; }
+    .disclosure { max-width: 930px; margin: 20px 0 42px; color: var(--muted); font-size: 14px; }
+    .disclosure strong { color: var(--ink); font-weight: 600; }
+    .details { display: grid; grid-template-columns: 1fr 1.12fr; gap: 52px; padding-top: 35px; border-top: 1px solid var(--line); }
+    h2 { margin: 0 0 12px; font-size: 27px; font-weight: 600; line-height: 1.25; letter-spacing: -.035em; }
+    .details p { color: var(--muted); margin: 0 0 18px; }
+    .details strong { color: var(--ink); font-weight: 600; }
+    .steps { list-style: none; padding: 0; margin: 22px 0 0; }
+    .steps li { padding: 10px 0; border-top: 1px solid #343d30; color: var(--muted); }
+    .steps b { display: inline-block; width: 30px; color: var(--accent); font-size: 13px; }
+    pre { margin: 18px 0 14px; padding: 18px; overflow-x: auto; border: 1px solid var(--line); border-radius: 10px; background: #0d110e; color: #e8eadd; font: 13px/1.8 Consolas, "SFMono-Regular", monospace; }
+    code { overflow-wrap: anywhere; }
+    .small { font-size: 14px; }
+    footer { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px 30px; padding: 27px 0 35px; margin-top: 28px; border-top: 1px solid var(--line); color: var(--muted); font-size: 13px; }
+    footer p { margin: 0; }
+    @media (max-width: 760px) { .wrap { width: min(100% - 32px, 1120px); } main { padding-top: 38px; } .details { grid-template-columns: 1fr; gap: 30px; } figcaption { padding: 13px 16px; } .intro { margin-top: 20px; } }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  </style>
+</head>
+<body>
+  <a class="skip" href="#demo">Skip to the demonstration</a>
+  <div class="wrap">
+    <header>
+      <a class="brand" href="./">Action Shift<span>.</span></a>
+      <a class="source-link" href="https://github.com/mykemueller1-ctrl/action-shift-meta-hackathon">View source on GitHub ↗</a>
+    </header>
+    <main>
+      <p class="eyebrow">Restaurant front desk · Meta Muse prototype</p>
+      <h1>From craving <span>to kitchen.</span></h1>
+      <p class="intro">The food starts a conversation. Action Shift carries the request through current facts, a clear quote, the operator’s decision and the kitchen handoff—even when the plan changes.</p>
+      <p class="byline">Built by <strong>Myke Mueller</strong> · <strong>Never86’d</strong></p>
+      <figure id="demo">
+        <video controls playsinline preload="metadata" poster="demo-poster.png" aria-label="Action Shift — From Craving to Kitchen demonstration" aria-describedby="demo-disclosure">
+          <source src="demo.mp4" type="video/mp4">
+          <track kind="captions" src="demo.vtt" srclang="en" label="English on-screen guide">
+          Your browser does not support embedded video. <a href="demo.mp4">Download the demonstration</a> and <a href="demo.vtt">its timed on-screen guide</a>.
+        </video>
+        <figcaption>
+          <span><strong>Demonstration · under 3 minutes</strong> · recorded browser interaction</span>
+          <span class="links"><a href="demo.mp4" download>Download video</a><a href="demo.vtt" download>Timed on-screen guide (VTT)</a></span>
+        </figcaption>
+      </figure>
+      <p class="disclosure" id="demo-disclosure"><strong>Fictional restaurant records. Recorded Muse results. Simulated handoffs.</strong> This silent video includes on-screen captions. Model responses shown are saved results from real Meta API tests using synthetic inputs. Opening this page makes no model request. Kitchen, table and remedy receipts are local simulations; no customer message, real order, booking, payment or refund is created.</p>
+      <div class="details">
+        <section aria-labelledby="journey-title">
+          <p class="eyebrow">The operator makes the commitment</p>
+          <h2 id="journey-title">A request keeps its history.</h2>
+          <p>An expired special stays expired. Conflicting quantities stay open until clarified. Approval belongs to one exact version, and a change requires another decision.</p>
+          <p>The front desk also includes <strong>ordinary direct orders, table requests and service recovery</strong>. The source records what has been demonstrated and what remains to connect.</p>
+          <ol class="steps">
+            <li><b>01</b> Retrieve current, dated restaurant facts.</li>
+            <li><b>02</b> Clarify the request and review the quote.</li>
+            <li><b>03</b> Preserve the handoff when something changes.</li>
+          </ol>
+        </section>
+        <section aria-labelledby="run-title">
+          <p class="eyebrow">Explore the working prototype</p>
+          <h2 id="run-title">Run it locally.</h2>
+          <p>This page hosts the video. The interactive prototype runs on your computer with <strong>Node.js 22 or newer</strong>. Recorded replay needs no API key or dependency installation.</p>
+          <pre><code>git clone https://github.com/mykemueller1-ctrl/action-shift-meta-hackathon.git
+cd action-shift-meta-hackathon
+node src/front-desk-demo.mjs</code></pre>
+          <p class="small">Then open <code>http://127.0.0.1:4330/front-desk</code>. Stop the local server with Ctrl+C. The simulation’s session state resets when it restarts.</p>
+          <p class="small"><a href="https://github.com/mykemueller1-ctrl/action-shift-meta-hackathon#readme">Read the setup instructions and validation limits ↗</a></p>
+        </section>
+      </div>
+    </main>
+    <footer>
+      <p>Action Shift · Myke Mueller / Never86’d</p>
+      <p>Event prototype · November 2026 · No analytics or external fonts</p>
+    </footer>
+  </div>
+</body>
+</html>

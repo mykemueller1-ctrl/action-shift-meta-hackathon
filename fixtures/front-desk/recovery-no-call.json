@@ -1,0 +1,187 @@
+{
+  "mode": "recorded-meta",
+  "liveVerified": true,
+  "recorded": true,
+  "scenarioId": "recovery-no-call",
+  "input": {
+    "synthetic": true,
+    "scenarioId": "recovery-no-call",
+    "restaurantId": "demo-north",
+    "demoNow": "2026-11-04T10:00:00-06:00",
+    "message": "This is a follow-up to the same fictional cold pickup meal I reported yesterday. Someone offered a credit, but I do not have a receipt showing it was issued. Please reply here and do not call me. I am not placing another order."
+  },
+  "result": {
+    "intent": "recovery",
+    "proposal": null,
+    "questions": [
+      "What date and approximate time was the original cold pickup meal?",
+      "What name or order reference was the original order placed under?",
+      "Who offered the credit and what amount or form was discussed, if you recall?"
+    ],
+    "reply": "Hello — thank you for following up here, and I understand: no call, reply in writing only, and no new order. I hear your concern that a credit was offered for yesterday's fictional cold pickup meal, but you don't have a receipt showing it was issued. An offer is not the same as an issued credit, so I've flagged this for our team to verify what was recorded and reply back here with what they find. I'm sorry for the trouble with that meal.",
+    "sourceIds": [
+      "demo-north-service-v1"
+    ],
+    "status": "human-review",
+    "summary": "Follow-up on prior cold pickup complaint from 11/03; guest says credit was offered but not evidenced as issued. No-call, reply-here only, no new order. Needs operator to verify credit status and reply in writing."
+  },
+  "tools": [
+    {
+      "name": "lookup_restaurant_facts",
+      "args": {
+        "date": "2026-11-04",
+        "topics": [
+          "service",
+          "corrections",
+          "offers"
+        ]
+      },
+      "result": {
+        "restaurantId": "demo-north",
+        "restaurantName": "Maple Street Kitchen",
+        "date": "2026-11-04",
+        "demoNow": "2026-11-04T10:00:00-06:00",
+        "mode": "authored-simulation",
+        "synthetic": true,
+        "menu": [
+          {
+            "id": "cheese",
+            "name": "Classic cheese pizza",
+            "unitPriceCents": 1500,
+            "sourceId": "demo-north-menu-v1",
+            "taxInclusive": true
+          },
+          {
+            "id": "pepper",
+            "name": "Roasted pepper pizza",
+            "unitPriceCents": 1800,
+            "sourceId": "demo-north-menu-v1",
+            "taxInclusive": true
+          },
+          {
+            "id": "garden",
+            "name": "Garden pizza",
+            "unitPriceCents": 1700,
+            "sourceId": "demo-north-menu-v1",
+            "taxInclusive": true
+          }
+        ],
+        "offers": [
+          {
+            "id": "demo-north-offer-old",
+            "name": "Previous autumn lunch offer",
+            "validFrom": "2026-11-01",
+            "validTo": "2026-11-03",
+            "status": "expired",
+            "sourceId": "demo-north-offer-old"
+          },
+          {
+            "id": "demo-north-offer-current",
+            "name": "Current garden choice",
+            "validFrom": "2026-11-04",
+            "validTo": "2026-11-10",
+            "status": "current",
+            "sourceId": "demo-north-offer-current"
+          }
+        ],
+        "service": {
+          "pickupOnly": false,
+          "deliveryAvailable": true,
+          "minimumLeadMinutes": 90,
+          "capacityPerWindow": 16,
+          "reservationCapacity": 40,
+          "sourceIds": [
+            "demo-north-service-v1"
+          ]
+        },
+        "sources": [
+          {
+            "id": "demo-north-menu-v1",
+            "label": "Authored demo menu",
+            "restaurantId": "demo-north",
+            "validFrom": "2026-11-01",
+            "validTo": "2026-11-30",
+            "text": "Synthetic tax-inclusive menu prices: cheese 1500 cents, roasted pepper 1800 cents, garden 1700 cents."
+          },
+          {
+            "id": "demo-north-service-v1",
+            "label": "Authored demo service policy",
+            "restaurantId": "demo-north",
+            "validFrom": "2026-11-01",
+            "validTo": "2026-11-30",
+            "text": "Fictional local delivery and pickup; at least 90 minutes lead time; up to 16 pizzas per service window; table capacity 40."
+          },
+          {
+            "id": "demo-north-offer-old",
+            "label": "Previous autumn lunch offer",
+            "restaurantId": "demo-north",
+            "validFrom": "2026-11-01",
+            "validTo": "2026-11-03",
+            "text": "Autumn lunch special, valid November 1 through November 3 only."
+          },
+          {
+            "id": "demo-north-offer-current",
+            "label": "Current garden choice",
+            "restaurantId": "demo-north",
+            "validFrom": "2026-11-04",
+            "validTo": "2026-11-10",
+            "text": "Garden pizza is the current featured choice from November 4 through November 10 at the approved menu price."
+          }
+        ],
+        "corrections": [],
+        "correctionHistory": [],
+        "factVersion": "ccf81aea0ab7dd72",
+        "notice": "Authored tool simulation · fictional restaurant records · no model call or external action"
+      }
+    }
+  ],
+  "receipt": {
+    "model": "muse-spark-1.3",
+    "provider": "Meta Model API",
+    "endpoint": "https://api.meta.ai/v1/responses",
+    "store": false,
+    "requests": [
+      {
+        "id": "resp_6aeae20a92feb7ec392e4d1d",
+        "inputTokens": 2323,
+        "outputTokens": 595,
+        "reasoningTokens": 485,
+        "elapsedMs": 5033,
+        "status": "completed"
+      },
+      {
+        "id": "resp_6aeae212062f1b292ba2412e",
+        "inputTokens": 3569,
+        "outputTokens": 763,
+        "reasoningTokens": 522,
+        "elapsedMs": 7684,
+        "status": "completed"
+      }
+    ],
+    "recordedAt": "2026-11-04T07:43:14.157Z",
+    "referenceChecksPassed": true,
+    "semanticReviewRequired": true,
+    "transport": "live"
+  },
+  "notice": "Read-only proposal. No customer message, approval, order, booking, kitchen dispatch, payment or remedy was executed.",
+  "caseId": "recovery",
+  "evaluationCaseId": "recovery-no-call",
+  "evaluation": {
+    "runId": "2026-11-04T07-43-01-410Z-8a98f46e-ff32-4586-9ca9-3f4aa0d49263",
+    "caseSetVersion": "2026-11-04-v2-pre-run",
+    "evaluationCasesSha256": "8b9c7baf7af003fcf3c224eb959514413869a6734bfa392befe8d76d5803e30a",
+    "inputSha256": "f0e9a6cd4b2969722ac56906ca34609dfdc98dd34558c8631a2ccdf6c7f9bdd3",
+    "expectedConditionsKeptOutsideInput": true,
+    "semanticReviewStatus": "pass-with-limitations",
+    "reviewer": "Independent Codex agent",
+    "reviewNotes": [
+      "Honors no-call/reply-here and same prior complaint, with no new order.",
+      "Separates offered credit from issued credit, asks for identifying details and leaves verification to an operator.",
+      "Reply says \"I have flagged this for our team\" (rendered as \"I've flagged\" in the original), but only read tools ran; actual routing is unverified. Owner must revise that wording or actually route before customer use.",
+      "No refund or recovered-guest claim occurred; this is not proof of autonomous recovery or a completed task."
+    ],
+    "mechanicalPassed": 4,
+    "mechanicalTotal": 4,
+    "founderAcceptance": "unverified"
+  }
+}

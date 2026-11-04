@@ -1,0 +1,293 @@
+{
+  "mode": "recorded-meta",
+  "liveVerified": true,
+  "recorded": true,
+  "scenarioId": "pickup-correction",
+  "input": {
+    "synthetic": true,
+    "scenarioId": "pickup-correction",
+    "restaurantId": "demo-north",
+    "demoNow": "2026-11-04T10:00:00-06:00",
+    "message": "Could I have two cheese pizzas delivered to Fictional Studio D at 1 p.m. today? Please check whether that is possible before anyone confirms it."
+  },
+  "result": {
+    "intent": "direct-order",
+    "proposal": {
+      "date": "2026-11-04",
+      "destination": "Fictional Studio D",
+      "fulfillment": null,
+      "headlineQuantity": 2,
+      "items": [
+        {
+          "itemId": "cheese",
+          "quantity": 2
+        }
+      ],
+      "kind": "food",
+      "windows": [
+        {
+          "id": "window-1",
+          "items": [
+            {
+              "itemId": "cheese",
+              "quantity": 2
+            }
+          ],
+          "readyAt": "2026-11-04T13:00:00-06:00"
+        }
+      ]
+    },
+    "questions": [
+      "Delivery is not available today — would you like to change your request to pickup at 1:00 p.m. today for Fictional Studio D?",
+      "If pickup works, what pickup time and contact name should we hold for human review?"
+    ],
+    "reply": "Hello! Thanks for your request for two cheese pizzas for 1 p.m. today — I have not confirmed anything, just checking as you asked. For today, we are pickup only, so delivery to Fictional Studio D is not possible. The 1 p.m. time would meet our 90-minute lead time for pickup if you would like that. Could you let us know if you would like to switch to pickup? This draft is awaiting human review and nothing is booked yet.",
+    "sourceIds": [
+      "demo-north-menu-v1",
+      "demo-north-service-v1",
+      "demo-correction-1"
+    ],
+    "status": "needs-clarification",
+    "summary": "Guest requested 2x cheese delivery for 2026-11-04 13:00 to Studio D and asked for availability check only. Date is pickup-only per reviewed correction demo-correction-1, so delivery cannot be proposed. Quantities match (2=2). Needs guest consent to switch to pickup; nothing confirmed."
+  },
+  "tools": [
+    {
+      "name": "lookup_restaurant_facts",
+      "args": {
+        "date": "2026-11-04",
+        "topics": [
+          "menu",
+          "offers",
+          "service",
+          "capacity",
+          "corrections"
+        ]
+      },
+      "result": {
+        "restaurantId": "demo-north",
+        "restaurantName": "Maple Street Kitchen",
+        "date": "2026-11-04",
+        "demoNow": "2026-11-04T10:00:00-06:00",
+        "mode": "authored-simulation",
+        "synthetic": true,
+        "menu": [
+          {
+            "id": "cheese",
+            "name": "Classic cheese pizza",
+            "unitPriceCents": 1500,
+            "sourceId": "demo-north-menu-v1",
+            "taxInclusive": true
+          },
+          {
+            "id": "pepper",
+            "name": "Roasted pepper pizza",
+            "unitPriceCents": 1800,
+            "sourceId": "demo-north-menu-v1",
+            "taxInclusive": true
+          },
+          {
+            "id": "garden",
+            "name": "Garden pizza",
+            "unitPriceCents": 1700,
+            "sourceId": "demo-north-menu-v1",
+            "taxInclusive": true
+          }
+        ],
+        "offers": [
+          {
+            "id": "demo-north-offer-old",
+            "name": "Previous autumn lunch offer",
+            "validFrom": "2026-11-01",
+            "validTo": "2026-11-03",
+            "status": "expired",
+            "sourceId": "demo-north-offer-old"
+          },
+          {
+            "id": "demo-north-offer-current",
+            "name": "Current garden choice",
+            "validFrom": "2026-11-04",
+            "validTo": "2026-11-10",
+            "status": "current",
+            "sourceId": "demo-north-offer-current"
+          }
+        ],
+        "service": {
+          "pickupOnly": true,
+          "deliveryAvailable": false,
+          "minimumLeadMinutes": 90,
+          "capacityPerWindow": 16,
+          "reservationCapacity": 40,
+          "sourceIds": [
+            "demo-north-service-v1",
+            "demo-correction-1"
+          ]
+        },
+        "sources": [
+          {
+            "id": "demo-north-menu-v1",
+            "label": "Authored demo menu",
+            "restaurantId": "demo-north",
+            "validFrom": "2026-11-01",
+            "validTo": "2026-11-30",
+            "text": "Synthetic tax-inclusive menu prices: cheese 1500 cents, roasted pepper 1800 cents, garden 1700 cents."
+          },
+          {
+            "id": "demo-north-service-v1",
+            "label": "Authored demo service policy",
+            "restaurantId": "demo-north",
+            "validFrom": "2026-11-01",
+            "validTo": "2026-11-30",
+            "text": "Fictional local delivery and pickup; at least 90 minutes lead time; up to 16 pizzas per service window; table capacity 40."
+          },
+          {
+            "id": "demo-north-offer-old",
+            "label": "Previous autumn lunch offer",
+            "restaurantId": "demo-north",
+            "validFrom": "2026-11-01",
+            "validTo": "2026-11-03",
+            "text": "Autumn lunch special, valid November 1 through November 3 only."
+          },
+          {
+            "id": "demo-north-offer-current",
+            "label": "Current garden choice",
+            "restaurantId": "demo-north",
+            "validFrom": "2026-11-04",
+            "validTo": "2026-11-10",
+            "text": "Garden pizza is the current featured choice from November 4 through November 10 at the approved menu price."
+          },
+          {
+            "id": "demo-correction-1",
+            "label": "Reviewed demo operator correction",
+            "restaurantId": "demo-north",
+            "validFrom": "2026-11-04",
+            "validTo": "2026-11-04",
+            "text": "Reviewed fictional operator correction: pickup only on this date; ask the customer before changing delivery to pickup."
+          }
+        ],
+        "corrections": [
+          {
+            "id": "demo-correction-1",
+            "kind": "pickup-only",
+            "restaurantId": "demo-north",
+            "validFrom": "2026-11-04",
+            "validTo": "2026-11-04",
+            "operator": "Demo operator",
+            "at": "2026-11-04T10:00:00-06:00",
+            "reviewed": true,
+            "text": "Reviewed fictional operator correction: pickup only on this date; ask the customer before changing delivery to pickup.",
+            "previousValue": "Delivery or pickup available under the base demo service policy.",
+            "newValue": "Pickup only on the specified restaurant/date.",
+            "simulated": true
+          }
+        ],
+        "correctionHistory": [
+          {
+            "id": "demo-correction-1",
+            "kind": "pickup-only",
+            "restaurantId": "demo-north",
+            "validFrom": "2026-11-04",
+            "validTo": "2026-11-04",
+            "operator": "Demo operator",
+            "at": "2026-11-04T10:00:00-06:00",
+            "reviewed": true,
+            "text": "Reviewed fictional operator correction: pickup only on this date; ask the customer before changing delivery to pickup.",
+            "previousValue": "Delivery or pickup available under the base demo service policy.",
+            "newValue": "Pickup only on the specified restaurant/date.",
+            "simulated": true
+          }
+        ],
+        "factVersion": "91ab2d6221eb0bd7",
+        "notice": "Authored tool simulation · fictional restaurant records · no model call or external action"
+      }
+    },
+    {
+      "name": "check_order_quantities",
+      "args": {
+        "headlineQuantity": 2,
+        "items": [
+          {
+            "itemId": "cheese",
+            "quantity": 2
+          }
+        ],
+        "windows": [
+          {
+            "id": "window-1",
+            "items": [
+              {
+                "itemId": "cheese",
+                "quantity": 2
+              }
+            ]
+          }
+        ]
+      },
+      "result": {
+        "statedQuantity": 2,
+        "computedQuantity": 2,
+        "matches": true,
+        "windowsTotal": 2,
+        "windowsMatch": true,
+        "issues": [],
+        "simulated": true,
+        "calculation": "Integer sum of supplied item quantities; no model calculation."
+      }
+    }
+  ],
+  "receipt": {
+    "model": "muse-spark-1.3",
+    "provider": "Meta Model API",
+    "endpoint": "https://api.meta.ai/v1/responses",
+    "store": false,
+    "requests": [
+      {
+        "id": "resp_6aeae1d06a40187f47454a68",
+        "inputTokens": 2306,
+        "outputTokens": 245,
+        "reasoningTokens": 133,
+        "elapsedMs": 4109,
+        "status": "completed"
+      },
+      {
+        "id": "resp_6aeae1d4a28964a5421144e1",
+        "inputTokens": 3519,
+        "outputTokens": 492,
+        "reasoningTokens": 349,
+        "elapsedMs": 4028,
+        "status": "completed"
+      },
+      {
+        "id": "resp_6aeae1dbcf34af5e9ad74075",
+        "inputTokens": 4085,
+        "outputTokens": 910,
+        "reasoningTokens": 518,
+        "elapsedMs": 7402,
+        "status": "completed"
+      }
+    ],
+    "recordedAt": "2026-11-04T07:42:19.689Z",
+    "referenceChecksPassed": true,
+    "semanticReviewRequired": true,
+    "transport": "live"
+  },
+  "notice": "Read-only proposal. No customer message, approval, order, booking, kitchen dispatch, payment or remedy was executed.",
+  "caseId": "direct",
+  "evaluationCaseId": "pickup-correction",
+  "evaluation": {
+    "runId": "2026-11-04T07-42-04-107Z-6df76b82-7781-42c5-9b3b-973d67c41ac0",
+    "caseSetVersion": "2026-11-04-v2-pre-run",
+    "evaluationCasesSha256": "8b9c7baf7af003fcf3c224eb959514413869a6734bfa392befe8d76d5803e30a",
+    "inputSha256": "4c0190aee910aca5f9ad2fd43c2c5de70c9c51a2e528bd2a43a3ba1b0ff45a3f",
+    "expectedConditionsKeptOutsideInput": true,
+    "semanticReviewStatus": "pass-with-limitations",
+    "reviewer": "Independent Codex agent",
+    "reviewNotes": [
+      "Retrieves and cites the current demo-north pickup-only correction, asks permission to change fulfillment, and confirms no booking.",
+      "Mechanical fulfillment-retention check fails: proposal.fulfillment is null instead of the requested delivery. The original request remains in input/summary only.",
+      "No silent pickup conversion occurred, but the incomplete proposal must not be adopted until fulfillment is clarified. Preserve11/12 mechanical result."
+    ],
+    "mechanicalPassed": 11,
+    "mechanicalTotal": 12,
+    "founderAcceptance": "unverified"
+  }
+}
