@@ -1,61 +1,73 @@
 WEBVTT
 
 1
-00:00:00.000 --> 00:00:07.333
-From a craving to a kitchen commitment.
+00:00:00.000 --> 00:00:05.467
+Preview: the order changed. The kitchen has the earlier version.
 
 2
-00:00:07.333 --> 00:00:12.600
-One fictional restaurant. Two service windows to coordinate.
+00:00:05.467 --> 00:00:14.400
+Built by Myke Mueller, Never86’d founder and Community Tap & Pizza operator.
 
 3
-00:00:12.600 --> 00:00:25.300
-The exact synthetic request Muse received is preserved.
+00:00:14.400 --> 00:00:23.900
+Start with the exact synthetic message Muse reviewed.
 
 4
-00:00:25.300 --> 00:00:38.467
-Muse retrieved dated facts and used the quantity-checking tool.
+00:00:23.900 --> 00:00:32.133
+Muse checked dated menu facts and the 12-versus-13 count.
 
 5
-00:00:38.467 --> 00:00:45.967
-The extracted draft preserves the counts and both service windows.
+00:00:32.133 --> 00:00:40.633
+Adopt the model draft. Its source stays attached; the conflict stays open.
 
 6
-00:00:45.967 --> 00:00:56.767
-Adopt the draft. Keep the 12-versus-13 conflict visible.
+00:00:40.633 --> 00:00:51.933
+An authored guest clarification makes it 13 pizzas. The quote is $213.
 
 7
-00:00:56.767 --> 00:01:10.800
-After an authored guest clarification, the current-menu quote is $213.
+00:00:51.933 --> 00:01:03.100
+The operator reviews price, timing and capacity for this exact version.
 
 8
-00:01:10.800 --> 00:01:23.233
-Review price, timing and capacity before approving version 3.
+00:01:03.100 --> 00:01:12.433
+Two simulated receipts acknowledge version 3: six pizzas, then seven.
 
 9
-00:01:23.233 --> 00:01:34.100
-Two simulated receipts acknowledge the exact approved version.
+00:01:12.433 --> 00:01:22.833
+One more garden pizza creates version 4. The old approval cannot cover it.
 
 10
-00:01:34.100 --> 00:01:47.200
-One more pizza creates version 4. Earlier receipts stay historical.
+00:01:22.833 --> 00:01:34.167
+The operator reviews “pickup only” for this restaurant and this date.
 
 11
-00:01:47.200 --> 00:02:01.967
-“Pickup only today” keeps its restaurant, date and history.
+00:01:34.167 --> 00:01:41.233
+The reviewed rule is saved locally. Demo orders still reset on restart.
 
 12
-00:02:01.967 --> 00:02:10.733
-The next delivery request stops for pickup confirmation.
+00:01:41.233 --> 00:01:50.267
+After a real server restart: the correction returns; demo orders reset.
 
 13
-00:02:10.733 --> 00:02:23.567
-A separate recorded review found the rule—with disclosed limits.
+00:01:50.267 --> 00:02:00.167
+Three local checks confirm the rule applies only to this restaurant today.
 
 14
-00:02:23.567 --> 00:02:30.000
-Missing fulfillment stays visible. Draft adoption remains disabled.
+00:02:00.167 --> 00:02:12.433
+A separate recorded Muse review retrieves the restored rule and preserves delivery.
 
 15
-00:02:30.000 --> 00:02:35.400
-Action Shift by Never86’d. From craving to kitchen.
+00:02:12.433 --> 00:02:24.133
+The courier claim exceeds the source. The operator edits an unsent reply.
+
+16
+00:02:24.133 --> 00:02:33.400
+Adopt the five-pizza draft. Delivery stays requested, and quoting stays blocked.
+
+17
+00:02:33.400 --> 00:02:43.000
+Only explicit, authored guest consent changes the request to pickup.
+
+18
+00:02:43.000 --> 00:02:49.967
+Action Shift: keep the source, the owner’s decision and the right handoff together.

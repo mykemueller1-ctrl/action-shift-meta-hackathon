@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {reviewFrontDesk} from '../src/front-desk-meta.mjs';
+import {reviewFrontDesk, frontDeskModelInput} from '../src/front-desk-meta.mjs';
 import {createFrontDeskDemo} from '../src/front-desk.mjs';
 const packet={synthetic:true,scenarioId:'unseen-demo',restaurantId:'demo-north',demoNow:'2026-11-04T10:00:00-06:00',message:'Can our crew get the advertised lunch today?'};
 const answer={intent:'workplace-meal',status:'needs-clarification',summary:'The requested meal needs a current menu and quantity check.',reply:'I can help prepare a request. How many meals do you need?',questions:['How many meals do you need?'],sourceIds:['fact-menu'],proposal:null};
@@ -43,6 +43,19 @@ test('negative/fractional quantities are rejected before calculation',async()=>{
 
 test('a request budget veto prevents the paid transport',async()=>{
   const s=setup([]);await assert.rejects(reviewFrontDesk(packet,{...s.options,beforeRequest:async()=>{throw new Error('Test budget reached');}}),/Test budget reached/);assert.equal(s.bodies.length,0);
+});
+
+test('scenario labels and expected answers cannot cue a model request',async()=>{
+  const local={...packet,scenarioId:'pickup-only-wrong-count-test'};
+  const s=setup([envelope([final({...answer,sourceIds:[]})])]);
+  const result=await reviewFrontDesk(local,s.options);
+  const visible=JSON.parse(s.bodies[0].input[0].content[0].text);
+  assert.deepEqual(visible,{synthetic:true,restaurantId:local.restaurantId,demoNow:local.demoNow,message:local.message});
+  assert.ok(!JSON.stringify(s.bodies).includes(local.scenarioId));
+  assert.deepEqual(result.modelInput,visible);
+  assert.equal(result.scenarioId,local.scenarioId);
+  assert.deepEqual(frontDeskModelInput({...local,scenarioId:'unrelated-local-receipt'}),visible);
+  await assert.rejects(reviewFrontDesk({...local,expected:{intent:'workplace-meal'}},s.options),{code:'FRONT_DESK_INPUT'});
 });
 
 test('a request cap prevents a recursive model loop and performs no retry',async()=>{

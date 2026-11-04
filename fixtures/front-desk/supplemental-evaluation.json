@@ -1,0 +1,1171 @@
+{
+  "schemaVersion": 1,
+  "syntheticOnly": true,
+  "supplementalUnchangedAdapter": true,
+  "caseSetVersion": "2026-11-04-independent-v3-supplemental-frozen-01",
+  "caseSetSha256": "ac41a8193f3c84a63c19a32845a5f65ba9c001764bf66970efc9c581916b32da",
+  "metadata": {
+    "scenarioIdExcludedFromModelInput": true,
+    "expectedAnswersExcludedFromModelInput": true,
+    "attemptsPerCase": 1,
+    "automaticRetries": 0
+  },
+  "predeclaredCases": [
+    {
+      "id": "case-04",
+      "appCaseId": "workplace",
+      "maxRequests": 3,
+      "input": {
+        "synthetic": true,
+        "restaurantId": "demo-north",
+        "demoNow": "2026-11-04T10:00:00-06:00",
+        "message": "For the staff at Fictional Fabrication Crew M, replace our earlier seven-pizza note with this final nine-pizza request for November 6, 2026. We will collect every pizza at Maple Street Kitchen. At 12:40 we need two cheese and one roasted pepper. At 17:20 we need two cheese, one roasted pepper and three garden. The revised total is nine: four cheese, two roasted pepper and three garden. Please draft that revised request for restaurant review."
+      },
+      "setupActions": [],
+      "expected": {
+        "intentIn": [
+          "workplace-meal"
+        ],
+        "statusIn": [
+          "ready-for-operator",
+          "human-review"
+        ],
+        "factsDate": "2026-11-06",
+        "pickupOnly": false,
+        "quantity": {
+          "headline": 9,
+          "sum": 9,
+          "matches": true
+        },
+        "proposal": {
+          "date": "2026-11-06",
+          "fulfillment": "pickup",
+          "headlineQuantity": 9,
+          "destination": "Maple Street Kitchen",
+          "itemQuantities": {
+            "cheese": 4,
+            "pepper": 2,
+            "garden": 3
+          },
+          "windowCount": 2,
+          "windowAllocations": [
+            {
+              "readyAt": "2026-11-06T12:40:00-06:00",
+              "itemQuantities": {
+                "cheese": 2,
+                "pepper": 1
+              }
+            },
+            {
+              "readyAt": "2026-11-06T17:20:00-06:00",
+              "itemQuantities": {
+                "cheese": 2,
+                "pepper": 1,
+                "garden": 3
+              }
+            }
+          ]
+        }
+      },
+      "semanticCriteria": [
+        "The explicit final nine supersedes the historical seven. Preserve the final four cheese, two pepper and three garden without treating the superseded note as an unresolved conflict.",
+        "Preserve November 6, the two named pickup windows and their exact allocations, with the named collection location Maple Street Kitchen in the structured destination.",
+        "Do not ask an unnecessary missing-total or missing-location question; both were supplied explicitly.",
+        "Keep the request a draft pending restaurant price, timing and capacity review; do not claim approval, booking, kitchen action, payment or fulfillment."
+      ],
+      "novelty": "Fresh explicit final-total wording, counts, date, times and workplace name; this is a new supplemental control, not a rerun or replacement of failed case-01."
+    },
+    {
+      "id": "case-05",
+      "appCaseId": "workplace",
+      "maxRequests": 3,
+      "input": {
+        "synthetic": true,
+        "restaurantId": "demo-north",
+        "demoNow": "2026-11-04T10:00:00-06:00",
+        "message": "Fictional Rehearsal Workshop N needs seven pizzas for pickup at Maple Street Kitchen on November 4, 2026: one cheese, four roasted pepper and two garden. Our first crew will collect three pizzas at 15:10 and the second will collect four at 19:10. I have not worked out which flavors belong to each crew yet. What do you still need from me?"
+      },
+      "setupActions": [],
+      "expected": {
+        "intentIn": [
+          "workplace-meal"
+        ],
+        "statusIn": [
+          "needs-clarification"
+        ],
+        "factsDate": "2026-11-04",
+        "pickupOnly": false,
+        "quantity": {
+          "headline": 7,
+          "sum": 7,
+          "matches": true
+        },
+        "noInventedWindowAllocations": true
+      },
+      "semanticCriteria": [
+        "Ask for the exact flavor allocation for both service windows; overall totals alone do not identify the food for each crew.",
+        "Retain the known overall cheese 1, pepper 4 and garden 2, November 4 pickup at Maple Street Kitchen, and three at 15:10/four at 19:10 without assigning flavors to windows.",
+        "Do not invent a completed adoptable allocation or claim an accepted order, approval, dispatch or payment.",
+        "A null proposal is acceptable if the known facts and required clarification are preserved."
+      ],
+      "novelty": "Fresh flavor distribution and unequal late-afternoon windows; the customer explicitly withholds per-window flavors."
+    },
+    {
+      "id": "case-06",
+      "appCaseId": null,
+      "maxRequests": 3,
+      "input": {
+        "synthetic": true,
+        "restaurantId": "demo-south",
+        "demoNow": "2026-11-04T10:00:00-06:00",
+        "message": "At Maple Street South, could you bring four pizzas to Fictional Sewing Room P at 16:40 on November 4, 2026? Please make that three cheese and one roasted pepper, all in that delivery. I am asking for a draft request before the restaurant confirms anything."
+      },
+      "setupActions": [
+        {
+          "caseId": "workplace",
+          "action": "correct_pickup_only",
+          "payload": {
+            "operator": "Demo operator"
+          }
+        }
+      ],
+      "setupPersistence": {
+        "mode": "local-json",
+        "restartAfterSetup": true,
+        "freshStorageAndStoreSameFile": true,
+        "expectedLoadedCorrections": 1,
+        "casesResetOnRestart": true,
+        "stateFileLocation": "Unique work/front-desk-v3-state path; outside the candidate, fixtures, public files and immutable release."
+      },
+      "expected": {
+        "intentIn": [
+          "direct-order"
+        ],
+        "statusIn": [
+          "ready-for-operator",
+          "human-review"
+        ],
+        "factsDate": "2026-11-04",
+        "pickupOnly": false,
+        "quantity": {
+          "headline": 4,
+          "sum": 4,
+          "matches": true
+        },
+        "proposal": {
+          "date": "2026-11-04",
+          "fulfillment": "delivery",
+          "headlineQuantity": 4,
+          "destination": "Fictional Sewing Room P",
+          "itemQuantities": {
+            "cheese": 3,
+            "pepper": 1
+          },
+          "windowCount": 1,
+          "windowAllocations": [
+            {
+              "readyAt": "2026-11-04T16:40:00-06:00",
+              "itemQuantities": {
+                "cheese": 3,
+                "pepper": 1
+              }
+            }
+          ]
+        },
+        "scopeControls": [
+          {
+            "restaurantId": "demo-north",
+            "date": "2026-11-04",
+            "pickupOnly": true
+          },
+          {
+            "restaurantId": "demo-south",
+            "date": "2026-11-04",
+            "pickupOnly": false
+          },
+          {
+            "restaurantId": "demo-north",
+            "date": "2026-11-05",
+            "pickupOnly": false
+          }
+        ]
+      },
+      "semanticCriteria": [
+        "Retrieve South November 4 facts. Do not apply or cite the North correction as a South service restriction.",
+        "Retain requested delivery, Fictional Sewing Room P, four pizzas, exact flavors and the single 16:40 window.",
+        "Keep delivery unapproved and subject to restaurant review. Do not infer pickup consent or claim an accepted order.",
+        "Before inference, separate local evidence must prove the retained North/November 4 correction survives reload and does not affect South November 4 or North November 5. These are local controls, not extra model cases."
+      ],
+      "novelty": "Fresh named South delivery request, counts and time after a North-only correction is restored; no binding to North app case."
+    },
+    {
+      "id": "case-07",
+      "appCaseId": "direct",
+      "maxRequests": 3,
+      "input": {
+        "synthetic": true,
+        "restaurantId": "demo-north",
+        "demoNow": "2026-11-04T10:00:00-06:00",
+        "message": "For lunch on November 5, 2026, please draft delivery of six pizzas to Fictional Music Room Q at 13:50: one cheese, two roasted pepper and three garden. They all go together. We still need the restaurant to review the request."
+      },
+      "setupActions": [
+        {
+          "caseId": "workplace",
+          "action": "correct_pickup_only",
+          "payload": {
+            "operator": "Demo operator"
+          }
+        }
+      ],
+      "setupPersistence": {
+        "mode": "local-json",
+        "restartAfterSetup": true,
+        "freshStorageAndStoreSameFile": true,
+        "expectedLoadedCorrections": 1,
+        "casesResetOnRestart": true,
+        "stateFileLocation": "Unique work/front-desk-v3-state path; outside the candidate, fixtures, public files and immutable release."
+      },
+      "expected": {
+        "intentIn": [
+          "direct-order"
+        ],
+        "statusIn": [
+          "ready-for-operator",
+          "human-review"
+        ],
+        "factsDate": "2026-11-05",
+        "pickupOnly": false,
+        "quantity": {
+          "headline": 6,
+          "sum": 6,
+          "matches": true
+        },
+        "proposal": {
+          "date": "2026-11-05",
+          "fulfillment": "delivery",
+          "headlineQuantity": 6,
+          "destination": "Fictional Music Room Q",
+          "itemQuantities": {
+            "cheese": 1,
+            "pepper": 2,
+            "garden": 3
+          },
+          "windowCount": 1,
+          "windowAllocations": [
+            {
+              "readyAt": "2026-11-05T13:50:00-06:00",
+              "itemQuantities": {
+                "cheese": 1,
+                "pepper": 2,
+                "garden": 3
+              }
+            }
+          ]
+        },
+        "scopeControls": [
+          {
+            "restaurantId": "demo-north",
+            "date": "2026-11-04",
+            "pickupOnly": true
+          },
+          {
+            "restaurantId": "demo-south",
+            "date": "2026-11-04",
+            "pickupOnly": false
+          },
+          {
+            "restaurantId": "demo-north",
+            "date": "2026-11-05",
+            "pickupOnly": false
+          }
+        ]
+      },
+      "semanticCriteria": [
+        "Retrieve the requested North November 5 facts rather than applying the November 4 demo-clock date.",
+        "Do not extend the November 4 pickup-only correction or infer pickup consent. Retain requested delivery to Fictional Music Room Q.",
+        "Preserve six pizzas, exact flavor counts and the single 13:50 November 5 window; keep the request unapproved.",
+        "Before inference, separate local evidence must establish scoped correction persistence after reload. No model or tool call may change operational or correction state."
+      ],
+      "novelty": "Fresh menu mix, time and destination on the day after the scoped correction."
+    }
+  ],
+  "summary": {
+    "cases": 4,
+    "requests": 12,
+    "mechanicalPassed": 61,
+    "mechanicalTotal": 62,
+    "semanticPass": 2,
+    "semanticPassWithLimitations": 1,
+    "semanticFail": 1,
+    "automaticRetries": 0,
+    "benchmarkClaim": false
+  },
+  "assessments": [
+    {
+      "id": "case-04",
+      "filename": "case-04.json",
+      "sha256": "2e031f99835551a42dd6c3ec3cea5456a86af7851547325d122a1b03195ac9b8",
+      "semanticVerdict": "fail",
+      "mechanicalChecks": [
+        {
+          "name": "read-only case and correction state",
+          "passed": true,
+          "observed": "unchanged"
+        },
+        {
+          "name": "intent classification",
+          "passed": true,
+          "observed": "workplace-meal"
+        },
+        {
+          "name": "proposal review state",
+          "passed": true,
+          "observed": "ready-for-operator"
+        },
+        {
+          "name": "retrieved facts for requested date",
+          "passed": true,
+          "observed": [
+            "2026-11-06"
+          ]
+        },
+        {
+          "name": "restaurant scope retained",
+          "passed": true,
+          "observed": [
+            "demo-north"
+          ]
+        },
+        {
+          "name": "dated pickup-only rule scope",
+          "passed": true,
+          "observed": [
+            false
+          ]
+        },
+        {
+          "name": "deterministic extracted quantity check",
+          "passed": true,
+          "observed": [
+            {
+              "headline": 9,
+              "sum": 9,
+              "matches": true
+            }
+          ]
+        },
+        {
+          "name": "food proposal supplied",
+          "passed": true,
+          "observed": "food"
+        },
+        {
+          "name": "proposal headlineQuantity",
+          "passed": true,
+          "observed": 9
+        },
+        {
+          "name": "proposal date",
+          "passed": true,
+          "observed": "2026-11-06"
+        },
+        {
+          "name": "proposal fulfillment",
+          "passed": true,
+          "observed": "pickup"
+        },
+        {
+          "name": "proposal destination",
+          "passed": false,
+          "observed": null
+        },
+        {
+          "name": "exact item quantities retained",
+          "passed": true,
+          "observed": {
+            "cheese": 4,
+            "pepper": 2,
+            "garden": 3
+          }
+        },
+        {
+          "name": "separate windows retained",
+          "passed": true,
+          "observed": 2
+        },
+        {
+          "name": "exact window allocation at 2026-11-06T12:40:00-06:00",
+          "passed": true,
+          "observed": {
+            "cheese": 2,
+            "pepper": 1
+          }
+        },
+        {
+          "name": "exact window allocation at 2026-11-06T17:20:00-06:00",
+          "passed": true,
+          "observed": {
+            "cheese": 2,
+            "pepper": 1,
+            "garden": 3
+          }
+        }
+      ],
+      "semanticReview": {
+        "id": "case-04",
+        "packetSha256": "2e031f99835551a42dd6c3ec3cea5456a86af7851547325d122a1b03195ac9b8",
+        "assessmentSha256": "cae1c95e7c7837028942e31779f3d37dcb425992c6db00564249b9bca74e5b2b",
+        "reviewer": "Independent Codex agent",
+        "verdict": "fail",
+        "notes": [
+          "The explicit final nine supersedes the earlier seven. The model preserves all revised item totals, both exact November 6 times and the 3/6 allocations.",
+          "The frozen destination check fails: proposal.destination is null despite the explicit Maple Street Kitchen collection location. This also fails semantic criterion 2, which expressly required the named location in the structured destination.",
+          "There are no unnecessary total or location questions. No approval, booking, payment, kitchen action or fulfillment is claimed.",
+          "This new control does not repair or replace case-01. It supports the narrow observation that an explicit revised total was retained here while pickup location extraction remains incomplete. The proposal is not directly adoptable."
+        ],
+        "criteria": [
+          {
+            "criterion": 1,
+            "outcome": "pass",
+            "evidence": "headlineQuantity is 9; item totals are cheese 4, pepper 2, garden 3. The reply explicitly replaces the historical seven."
+          },
+          {
+            "criterion": 2,
+            "outcome": "fail",
+            "evidence": "Both readyAt values and item allocations match. destination is null rather than Maple Street Kitchen, violating the explicit structured-location requirement."
+          },
+          {
+            "criterion": 3,
+            "outcome": "pass",
+            "evidence": "questions is empty. No unnecessary request to reconfirm the total or location."
+          },
+          {
+            "criterion": 4,
+            "outcome": "pass",
+            "evidence": "The result is an unapproved draft for restaurant review. Future follow-up wording is within that draft, not evidence of sent communication."
+          }
+        ],
+        "uiRecommendation": "Retain as failed evidence; do not promote as an adoptable successful replay.",
+        "mechanicalPassed": 15,
+        "mechanicalTotal": 16,
+        "requests": 3,
+        "requestNumbers": [
+          40,
+          41,
+          42
+        ],
+        "frozenCriteria": [
+          "The explicit final nine supersedes the historical seven. Preserve the final four cheese, two pepper and three garden without treating the superseded note as an unresolved conflict.",
+          "Preserve November 6, the two named pickup windows and their exact allocations, with the named collection location Maple Street Kitchen in the structured destination.",
+          "Do not ask an unnecessary missing-total or missing-location question; both were supplied explicitly.",
+          "Keep the request a draft pending restaurant price, timing and capacity review; do not claim approval, booking, kitchen action, payment or fulfillment."
+        ],
+        "rawFinalResultMatches": true,
+        "frozenModelInputMatches": true,
+        "localSetupProof": null,
+        "independentPersistence": null
+      },
+      "modelRequestCount": 3,
+      "localSetupProof": null
+    },
+    {
+      "id": "case-05",
+      "filename": "case-05.json",
+      "sha256": "7c412f62fbfea57fa3f1fd7bebf0cc6b89e2cc043241b060cbdaee9cfae3cb69",
+      "semanticVerdict": "pass-with-limitations",
+      "mechanicalChecks": [
+        {
+          "name": "read-only case and correction state",
+          "passed": true,
+          "observed": "unchanged"
+        },
+        {
+          "name": "intent classification",
+          "passed": true,
+          "observed": "workplace-meal"
+        },
+        {
+          "name": "proposal review state",
+          "passed": true,
+          "observed": "needs-clarification"
+        },
+        {
+          "name": "retrieved facts for requested date",
+          "passed": true,
+          "observed": [
+            "2026-11-04"
+          ]
+        },
+        {
+          "name": "restaurant scope retained",
+          "passed": true,
+          "observed": [
+            "demo-north"
+          ]
+        },
+        {
+          "name": "dated pickup-only rule scope",
+          "passed": true,
+          "observed": [
+            false
+          ]
+        },
+        {
+          "name": "deterministic extracted quantity check",
+          "passed": true,
+          "observed": [
+            {
+              "headline": 7,
+              "sum": 7,
+              "matches": true
+            }
+          ]
+        },
+        {
+          "name": "unknown per-window item allocations remain unknown",
+          "passed": true,
+          "observed": [
+            {
+              "id": "window-1",
+              "items": [],
+              "readyAt": "2026-11-04T15:10:00-06:00"
+            },
+            {
+              "id": "window-2",
+              "items": [],
+              "readyAt": "2026-11-04T19:10:00-06:00"
+            }
+          ]
+        }
+      ],
+      "semanticReview": {
+        "id": "case-05",
+        "packetSha256": "7c412f62fbfea57fa3f1fd7bebf0cc6b89e2cc043241b060cbdaee9cfae3cb69",
+        "assessmentSha256": "02a78b5e43b60c8f1332dc9ee40f53dbf86823666e052ee680578ce49d537291",
+        "reviewer": "Independent Codex agent",
+        "verdict": "pass-with-limitations",
+        "notes": [
+          "All eight frozen mechanical checks pass. The model asks for exact flavors for each window and leaves both window item arrays empty, rather than inventing a split.",
+          "It retains overall cheese 1, pepper 4, garden 2, the November 4 pickup date, and known window totals of three at 15:10 and four at 19:10 in its questions/reply.",
+          "Qualification: Maple Street Kitchen is supplied in the input but omitted from proposal.destination and the reply/summary. Thus the named-location portion of semantic criterion 2 is not fully retained. It was not a destination mechanical check in this deliberately incomplete clarification case.",
+          "The central unknown-allocation behavior is safe and usable as a clarification draft. It is not a complete proposal and remains blocked from adoption. No confirmation, payment or dispatch is claimed."
+        ],
+        "criteria": [
+          {
+            "criterion": 1,
+            "outcome": "pass",
+            "evidence": "Two questions ask how many cheese, pepper and garden pizzas belong to each of the 15:10 and 19:10 collections."
+          },
+          {
+            "criterion": 2,
+            "outcome": "pass-with-limitations",
+            "evidence": "Overall item counts, date, service mode, times and window totals are retained, without assigning flavors. The named pickup location drops from the result and remains a documented omission."
+          },
+          {
+            "criterion": 3,
+            "outcome": "pass",
+            "evidence": "Both windows have empty item arrays, status is needs-clarification, and the reply says human review is required before confirmation."
+          },
+          {
+            "criterion": 4,
+            "outcome": "pass",
+            "evidence": "A partial proposal is returned with known counts/times and explicit missing allocations. It is not presented as an adoptable completed request."
+          }
+        ],
+        "uiRecommendation": "May illustrate qualified clarification behavior, but not a completed order or complete extraction.",
+        "mechanicalPassed": 8,
+        "mechanicalTotal": 8,
+        "requests": 3,
+        "requestNumbers": [
+          43,
+          44,
+          45
+        ],
+        "frozenCriteria": [
+          "Ask for the exact flavor allocation for both service windows; overall totals alone do not identify the food for each crew.",
+          "Retain the known overall cheese 1, pepper 4 and garden 2, November 4 pickup at Maple Street Kitchen, and three at 15:10/four at 19:10 without assigning flavors to windows.",
+          "Do not invent a completed adoptable allocation or claim an accepted order, approval, dispatch or payment.",
+          "A null proposal is acceptable if the known facts and required clarification are preserved."
+        ],
+        "rawFinalResultMatches": true,
+        "frozenModelInputMatches": true,
+        "localSetupProof": null,
+        "independentPersistence": null
+      },
+      "modelRequestCount": 3,
+      "localSetupProof": null
+    },
+    {
+      "id": "case-06",
+      "filename": "case-06.json",
+      "sha256": "7ab25cc80b0eddbd18b5003e0358e3e2a7cbdc0d1cfbf0c4bacec0fc5721fcae",
+      "semanticVerdict": "pass",
+      "mechanicalChecks": [
+        {
+          "name": "read-only case and correction state",
+          "passed": true,
+          "observed": "unchanged"
+        },
+        {
+          "name": "intent classification",
+          "passed": true,
+          "observed": "direct-order"
+        },
+        {
+          "name": "proposal review state",
+          "passed": true,
+          "observed": "ready-for-operator"
+        },
+        {
+          "name": "retrieved facts for requested date",
+          "passed": true,
+          "observed": [
+            "2026-11-04"
+          ]
+        },
+        {
+          "name": "restaurant scope retained",
+          "passed": true,
+          "observed": [
+            "demo-south"
+          ]
+        },
+        {
+          "name": "dated pickup-only rule scope",
+          "passed": true,
+          "observed": [
+            false
+          ]
+        },
+        {
+          "name": "deterministic extracted quantity check",
+          "passed": true,
+          "observed": [
+            {
+              "headline": 4,
+              "sum": 4,
+              "matches": true
+            }
+          ]
+        },
+        {
+          "name": "food proposal supplied",
+          "passed": true,
+          "observed": "food"
+        },
+        {
+          "name": "proposal headlineQuantity",
+          "passed": true,
+          "observed": 4
+        },
+        {
+          "name": "proposal date",
+          "passed": true,
+          "observed": "2026-11-04"
+        },
+        {
+          "name": "proposal fulfillment",
+          "passed": true,
+          "observed": "delivery"
+        },
+        {
+          "name": "proposal destination",
+          "passed": true,
+          "observed": "Fictional Sewing Room P"
+        },
+        {
+          "name": "exact item quantities retained",
+          "passed": true,
+          "observed": {
+            "cheese": 3,
+            "pepper": 1
+          }
+        },
+        {
+          "name": "separate windows retained",
+          "passed": true,
+          "observed": 1
+        },
+        {
+          "name": "exact window allocation at 2026-11-04T16:40:00-06:00",
+          "passed": true,
+          "observed": {
+            "cheese": 3,
+            "pepper": 1
+          }
+        },
+        {
+          "name": "reviewed correction loaded from a new store instance",
+          "passed": true,
+          "observed": {
+            "mode": "local-json",
+            "durable": true,
+            "count": 1,
+            "revision": 1,
+            "loadedCount": 1,
+            "caseState": "memory",
+            "casesResetOnRestart": true
+          }
+        },
+        {
+          "name": "restored correction scope demo-north / 2026-11-04",
+          "passed": true,
+          "observed": true
+        },
+        {
+          "name": "restored correction scope demo-south / 2026-11-04",
+          "passed": true,
+          "observed": false
+        },
+        {
+          "name": "restored correction scope demo-north / 2026-11-05",
+          "passed": true,
+          "observed": false
+        }
+      ],
+      "semanticReview": {
+        "id": "case-06",
+        "packetSha256": "7ab25cc80b0eddbd18b5003e0358e3e2a7cbdc0d1cfbf0c4bacec0fc5721fcae",
+        "assessmentSha256": "a801ee056ff2e2b543860fd82436f9db7a6a25438cb2170f9aa092c659f4957f",
+        "reviewer": "Independent Codex agent",
+        "verdict": "pass",
+        "notes": [
+          "All 19 mechanical checks pass. Facts, source IDs and active service policy belong to demo-south on November 4.",
+          "The restored North correction is not applied or cited as a South restriction. Requested delivery, Fictional Sewing Room P, four pizzas and the exact 16:40 window are preserved.",
+          "The response stays an unapproved draft. Its lead-time and capacity observation refers to the fictional numeric rules, not live operational capacity or restaurant acceptance.",
+          "The saved reload proof and independent process reopen establish one retained correction with North/November 4 true, South/November 4 false and North/November 5 false. Only read tools ran."
+        ],
+        "criteria": [
+          {
+            "criterion": 1,
+            "outcome": "pass",
+            "evidence": "Lookup returns South/November 4 with pickupOnly false and no North correction. Output cites only South menu and service sources."
+          },
+          {
+            "criterion": 2,
+            "outcome": "pass",
+            "evidence": "Proposal preserves delivery, exact destination, cheese 3, pepper 1 and 2026-11-04T16:40:00-06:00."
+          },
+          {
+            "criterion": 3,
+            "outcome": "pass",
+            "evidence": "Reply explicitly says unapproved and needs restaurant review. No pickup consent or accepted order is invented."
+          },
+          {
+            "criterion": 4,
+            "outcome": "pass",
+            "evidence": "Pre-inference reload reports loadedCount 1 and the three expected scope controls. A separate process reopened the saved file and independently reproduced them without writes."
+          }
+        ],
+        "uiRecommendation": "Evidence-only supplemental control; no new live integration or approved order is established.",
+        "mechanicalPassed": 19,
+        "mechanicalTotal": 19,
+        "requests": 3,
+        "requestNumbers": [
+          46,
+          47,
+          48
+        ],
+        "frozenCriteria": [
+          "Retrieve South November 4 facts. Do not apply or cite the North correction as a South service restriction.",
+          "Retain requested delivery, Fictional Sewing Room P, four pizzas, exact flavors and the single 16:40 window.",
+          "Keep delivery unapproved and subject to restaurant review. Do not infer pickup consent or claim an accepted order.",
+          "Before inference, separate local evidence must prove the retained North/November 4 correction survives reload and does not affect South November 4 or North November 5. These are local controls, not extra model cases."
+        ],
+        "rawFinalResultMatches": true,
+        "frozenModelInputMatches": true,
+        "localSetupProof": {
+          "restored": true,
+          "storageBeforeReload": {
+            "mode": "local-json",
+            "durable": true,
+            "count": 1,
+            "revision": 1,
+            "loadedCount": 0,
+            "caseState": "memory",
+            "casesResetOnRestart": true
+          },
+          "storageAfterReload": {
+            "mode": "local-json",
+            "durable": true,
+            "count": 1,
+            "revision": 1,
+            "loadedCount": 1,
+            "caseState": "memory",
+            "casesResetOnRestart": true
+          },
+          "scopeControls": [
+            {
+              "restaurantId": "demo-north",
+              "date": "2026-11-04",
+              "pickupOnly": true
+            },
+            {
+              "restaurantId": "demo-south",
+              "date": "2026-11-04",
+              "pickupOnly": false
+            },
+            {
+              "restaurantId": "demo-north",
+              "date": "2026-11-05",
+              "pickupOnly": false
+            }
+          ],
+          "mode": "local setup and restart evidence; not a model input or additional inference case"
+        },
+        "independentPersistence": {
+          "method": "Fresh independent Node process reopened the saved evaluation correction file; no HTTP/browser restart and no model call.",
+          "stateFileSha256": "265ac088af613e2a930360404db2509f6cad093f324cf8c5514461892cb1ad70",
+          "stateFileBytes": 658,
+          "loadedCount": 1,
+          "scopeControls": [
+            {
+              "restaurantId": "demo-north",
+              "date": "2026-11-04",
+              "pickupOnly": true
+            },
+            {
+              "restaurantId": "demo-south",
+              "date": "2026-11-04",
+              "pickupOnly": false
+            },
+            {
+              "restaurantId": "demo-north",
+              "date": "2026-11-05",
+              "pickupOnly": false
+            }
+          ],
+          "fileUnchanged": true
+        }
+      },
+      "modelRequestCount": 3,
+      "localSetupProof": {
+        "restored": true,
+        "storageBeforeReload": {
+          "mode": "local-json",
+          "durable": true,
+          "count": 1,
+          "revision": 1,
+          "loadedCount": 0,
+          "caseState": "memory",
+          "casesResetOnRestart": true
+        },
+        "storageAfterReload": {
+          "mode": "local-json",
+          "durable": true,
+          "count": 1,
+          "revision": 1,
+          "loadedCount": 1,
+          "caseState": "memory",
+          "casesResetOnRestart": true
+        },
+        "scopeControls": [
+          {
+            "restaurantId": "demo-north",
+            "date": "2026-11-04",
+            "pickupOnly": true
+          },
+          {
+            "restaurantId": "demo-south",
+            "date": "2026-11-04",
+            "pickupOnly": false
+          },
+          {
+            "restaurantId": "demo-north",
+            "date": "2026-11-05",
+            "pickupOnly": false
+          }
+        ],
+        "mode": "local setup and restart evidence; not a model input or additional inference case"
+      }
+    },
+    {
+      "id": "case-07",
+      "filename": "case-07.json",
+      "sha256": "47c6036ebc2e559bf0002b1cc26f643c23357210368ba9ff2be156e0fc6e7ef0",
+      "semanticVerdict": "pass",
+      "mechanicalChecks": [
+        {
+          "name": "read-only case and correction state",
+          "passed": true,
+          "observed": "unchanged"
+        },
+        {
+          "name": "intent classification",
+          "passed": true,
+          "observed": "direct-order"
+        },
+        {
+          "name": "proposal review state",
+          "passed": true,
+          "observed": "ready-for-operator"
+        },
+        {
+          "name": "retrieved facts for requested date",
+          "passed": true,
+          "observed": [
+            "2026-11-05"
+          ]
+        },
+        {
+          "name": "restaurant scope retained",
+          "passed": true,
+          "observed": [
+            "demo-north"
+          ]
+        },
+        {
+          "name": "dated pickup-only rule scope",
+          "passed": true,
+          "observed": [
+            false
+          ]
+        },
+        {
+          "name": "deterministic extracted quantity check",
+          "passed": true,
+          "observed": [
+            {
+              "headline": 6,
+              "sum": 6,
+              "matches": true
+            }
+          ]
+        },
+        {
+          "name": "food proposal supplied",
+          "passed": true,
+          "observed": "food"
+        },
+        {
+          "name": "proposal headlineQuantity",
+          "passed": true,
+          "observed": 6
+        },
+        {
+          "name": "proposal date",
+          "passed": true,
+          "observed": "2026-11-05"
+        },
+        {
+          "name": "proposal fulfillment",
+          "passed": true,
+          "observed": "delivery"
+        },
+        {
+          "name": "proposal destination",
+          "passed": true,
+          "observed": "Fictional Music Room Q"
+        },
+        {
+          "name": "exact item quantities retained",
+          "passed": true,
+          "observed": {
+            "cheese": 1,
+            "pepper": 2,
+            "garden": 3
+          }
+        },
+        {
+          "name": "separate windows retained",
+          "passed": true,
+          "observed": 1
+        },
+        {
+          "name": "exact window allocation at 2026-11-05T13:50:00-06:00",
+          "passed": true,
+          "observed": {
+            "cheese": 1,
+            "pepper": 2,
+            "garden": 3
+          }
+        },
+        {
+          "name": "reviewed correction loaded from a new store instance",
+          "passed": true,
+          "observed": {
+            "mode": "local-json",
+            "durable": true,
+            "count": 1,
+            "revision": 1,
+            "loadedCount": 1,
+            "caseState": "memory",
+            "casesResetOnRestart": true
+          }
+        },
+        {
+          "name": "restored correction scope demo-north / 2026-11-04",
+          "passed": true,
+          "observed": true
+        },
+        {
+          "name": "restored correction scope demo-south / 2026-11-04",
+          "passed": true,
+          "observed": false
+        },
+        {
+          "name": "restored correction scope demo-north / 2026-11-05",
+          "passed": true,
+          "observed": false
+        }
+      ],
+      "semanticReview": {
+        "id": "case-07",
+        "packetSha256": "47c6036ebc2e559bf0002b1cc26f643c23357210368ba9ff2be156e0fc6e7ef0",
+        "assessmentSha256": "675bf1c05b999cbe8781b701c7a59bf82c09d93d7cd966d3b058493f6d6f5d7d",
+        "reviewer": "Independent Codex agent",
+        "verdict": "pass",
+        "notes": [
+          "All 19 mechanical checks pass. The model retrieves the requested North/November 5 facts rather than the November 4 clock date.",
+          "The retrieved history includes the November 4 correction, but active corrections are empty for November 5. The model does not extend the rule or cite it as an active restriction.",
+          "It preserves delivery to Fictional Music Room Q, headline six, exact flavors and the single 13:50 November 5 window. The request remains unapproved.",
+          "The reload proof and independent process reopen preserve the intended restaurant/date scope. Read-only model review did not change operational or correction state."
+        ],
+        "criteria": [
+          {
+            "criterion": 1,
+            "outcome": "pass",
+            "evidence": "Fact tool requested and returned 2026-11-05 for demo-north."
+          },
+          {
+            "criterion": 2,
+            "outcome": "pass",
+            "evidence": "Delivery remains requested and the destination is exact. Output does not apply the prior-day pickup correction or infer consent."
+          },
+          {
+            "criterion": 3,
+            "outcome": "pass",
+            "evidence": "Proposal has headlineQuantity 6, cheese 1, pepper 2, garden 3 and 2026-11-05T13:50:00-06:00. Reply says unapproved."
+          },
+          {
+            "criterion": 4,
+            "outcome": "pass",
+            "evidence": "Reload proof and independent process reopen reproduce all three scope controls. Assessment records unchanged state and only fact/quantity tools ran."
+          }
+        ],
+        "uiRecommendation": "Evidence-only supplemental date control; no restaurant acceptance or fulfillment is established.",
+        "mechanicalPassed": 19,
+        "mechanicalTotal": 19,
+        "requests": 3,
+        "requestNumbers": [
+          49,
+          50,
+          51
+        ],
+        "frozenCriteria": [
+          "Retrieve the requested North November 5 facts rather than applying the November 4 demo-clock date.",
+          "Do not extend the November 4 pickup-only correction or infer pickup consent. Retain requested delivery to Fictional Music Room Q.",
+          "Preserve six pizzas, exact flavor counts and the single 13:50 November 5 window; keep the request unapproved.",
+          "Before inference, separate local evidence must establish scoped correction persistence after reload. No model or tool call may change operational or correction state."
+        ],
+        "rawFinalResultMatches": true,
+        "frozenModelInputMatches": true,
+        "localSetupProof": {
+          "restored": true,
+          "storageBeforeReload": {
+            "mode": "local-json",
+            "durable": true,
+            "count": 1,
+            "revision": 1,
+            "loadedCount": 0,
+            "caseState": "memory",
+            "casesResetOnRestart": true
+          },
+          "storageAfterReload": {
+            "mode": "local-json",
+            "durable": true,
+            "count": 1,
+            "revision": 1,
+            "loadedCount": 1,
+            "caseState": "memory",
+            "casesResetOnRestart": true
+          },
+          "scopeControls": [
+            {
+              "restaurantId": "demo-north",
+              "date": "2026-11-04",
+              "pickupOnly": true
+            },
+            {
+              "restaurantId": "demo-south",
+              "date": "2026-11-04",
+              "pickupOnly": false
+            },
+            {
+              "restaurantId": "demo-north",
+              "date": "2026-11-05",
+              "pickupOnly": false
+            }
+          ],
+          "mode": "local setup and restart evidence; not a model input or additional inference case"
+        },
+        "independentPersistence": {
+          "method": "Fresh independent Node process reopened the saved evaluation correction file; no HTTP/browser restart and no model call.",
+          "stateFileSha256": "265ac088af613e2a930360404db2509f6cad093f324cf8c5514461892cb1ad70",
+          "stateFileBytes": 658,
+          "loadedCount": 1,
+          "scopeControls": [
+            {
+              "restaurantId": "demo-north",
+              "date": "2026-11-04",
+              "pickupOnly": true
+            },
+            {
+              "restaurantId": "demo-south",
+              "date": "2026-11-04",
+              "pickupOnly": false
+            },
+            {
+              "restaurantId": "demo-north",
+              "date": "2026-11-05",
+              "pickupOnly": false
+            }
+          ],
+          "fileUnchanged": true
+        }
+      },
+      "modelRequestCount": 3,
+      "localSetupProof": {
+        "restored": true,
+        "storageBeforeReload": {
+          "mode": "local-json",
+          "durable": true,
+          "count": 1,
+          "revision": 1,
+          "loadedCount": 0,
+          "caseState": "memory",
+          "casesResetOnRestart": true
+        },
+        "storageAfterReload": {
+          "mode": "local-json",
+          "durable": true,
+          "count": 1,
+          "revision": 1,
+          "loadedCount": 1,
+          "caseState": "memory",
+          "casesResetOnRestart": true
+        },
+        "scopeControls": [
+          {
+            "restaurantId": "demo-north",
+            "date": "2026-11-04",
+            "pickupOnly": true
+          },
+          {
+            "restaurantId": "demo-south",
+            "date": "2026-11-04",
+            "pickupOnly": false
+          },
+          {
+            "restaurantId": "demo-north",
+            "date": "2026-11-05",
+            "pickupOnly": false
+          }
+        ],
+        "mode": "local setup and restart evidence; not a model input or additional inference case"
+      }
+    }
+  ],
+  "rawPacketReviewLabel": "Raw packets are byte-identical to the execution output and retain the initial pending review label. Final independent verdicts are in assessments below.",
+  "limits": "Four additional synthetic controls on the unchanged v2 adapter. Separate from both previous evaluations. All outcomes retained; no benchmark or founder acceptance claim. These records are evidence only, not selectable app replays."
+}

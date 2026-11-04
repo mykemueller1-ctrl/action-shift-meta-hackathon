@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "syntheticOnly": true,
+  "caseSetVersion": "2026-11-04-independent-v3-supplemental-frozen-01",
+  "caseSetSha256": "ac41a8193f3c84a63c19a32845a5f65ba9c001764bf66970efc9c581916b32da",
+  "evidenceOnly": true,
+  "files": [
+    {
+      "filename": "case-04.json",
+      "sha256": "2e031f99835551a42dd6c3ec3cea5456a86af7851547325d122a1b03195ac9b8"
+    },
+    {
+      "filename": "case-05.json",
+      "sha256": "7c412f62fbfea57fa3f1fd7bebf0cc6b89e2cc043241b060cbdaee9cfae3cb69"
+    },
+    {
+      "filename": "case-06.json",
+      "sha256": "7ab25cc80b0eddbd18b5003e0358e3e2a7cbdc0d1cfbf0c4bacec0fc5721fcae"
+    },
+    {
+      "filename": "case-07.json",
+      "sha256": "47c6036ebc2e559bf0002b1cc26f643c23357210368ba9ff2be156e0fc6e7ef0"
+    },
+    {
+      "filename": "supplemental-evaluation.json",
+      "sha256": "67ece83280dfe3d6971fd5afd8423307261c89f49185c249218786150619078d"
+    }
+  ]
+}

@@ -7,7 +7,7 @@ function proposed(store) {
   return { ...request, windows: request.windows.map(({ responsibleRole, ...window }) => window) };
 }
 function mockedRecord(store) {
-  return { recorded: true, liveVerified: true, caseId: 'workplace', input: { restaurantId: 'demo-north' }, result: { proposal: proposed(store) },
+  return { recorded: true, liveVerified: true, scenarioId: 'test-review', caseId: 'workplace', input: { synthetic: true, scenarioId: 'test-review', restaurantId: 'demo-north', demoNow: '2026-11-04T10:00:00-06:00', message: 'Synthetic test source with separate food allocations.' }, result: { proposal: proposed(store) },
     receipt: { model: 'muse-spark-1.3', transport: 'live', referenceChecksPassed: true, requests: [{ id: 'resp_synthetic_test_only' }] } };
 }
 

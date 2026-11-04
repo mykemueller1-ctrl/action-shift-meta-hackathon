@@ -15,6 +15,7 @@ test('isolated HTTP demo enforces loopback, same-origin, bounded actions and no 
     assert.equal(response.headers.get('cache-control'), 'no-store');
     assert.match(response.headers.get('content-security-policy'), /connect-src 'self'/);
     const status = await response.json(); assert.equal(status.modelCalls, 0); assert.equal(status.mode, 'authored-simulation'); assert.deepEqual(status.recordedReviews, []);
+    assert.deepEqual(status.capabilities, { recordedProposalAdoption: false, recordedReplyReview: false });
     const cases = await (await fetch(`${base}/api/front-desk/cases`)).json(); assert.equal(cases.length, 4);
     const command = { caseId: 'workplace', expectedVersion: 1, action: 'clarify_quantity', payload: { quantity: 13 } };
     assert.equal((await post(command, { Origin: 'https://unrelated.example' })).status, 403);
@@ -37,7 +38,7 @@ test('recorded adoption reads a configured server provider and cannot use a clie
   const port = 63000 + Math.floor(Math.random() * 1000);
   const store = createFrontDeskDemo();
   const request = store.getCase('workplace').request;
-  const record = { recorded: true, liveVerified: true, caseId: 'workplace', input: { restaurantId: 'demo-north' }, result: { proposal: { ...request, windows: request.windows.map(({ responsibleRole, ...window }) => window) } }, receipt: { model: 'muse-spark-1.3', transport: 'live', referenceChecksPassed: true, requests: [{ id: 'resp_http_synthetic_test' }] } };
+  const record = { recorded: true, liveVerified: true, scenarioId: 'synthetic-test-review', caseId: 'workplace', input: { synthetic: true, scenarioId: 'synthetic-test-review', restaurantId: 'demo-north', demoNow: '2026-11-04T10:00:00-06:00', message: 'Synthetic test source with separate food allocations.' }, result: { proposal: { ...request, windows: request.windows.map(({ responsibleRole, ...window }) => window) } }, receipt: { model: 'muse-spark-1.3', transport: 'live', referenceChecksPassed: true, requests: [{ id: 'resp_http_synthetic_test' }] } };
   let reads = 0;
   const server = createFrontDeskServer({ port, store, recordedReviews: [{ id: 'synthetic-test-review' }], recordedReviewProvider: async id => { reads += 1; assert.equal(id, 'synthetic-test-review'); return structuredClone(record); } });
   server.listen(port, '127.0.0.1'); await once(server, 'listening');

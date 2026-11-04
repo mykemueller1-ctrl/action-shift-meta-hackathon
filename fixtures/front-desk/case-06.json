@@ -1,0 +1,303 @@
+{
+  "mode": "meta-review",
+  "liveVerified": true,
+  "recorded": true,
+  "scenarioId": "case-06",
+  "input": {
+    "synthetic": true,
+    "restaurantId": "demo-south",
+    "demoNow": "2026-11-04T10:00:00-06:00",
+    "message": "At Maple Street South, could you bring four pizzas to Fictional Sewing Room P at 16:40 on November 4, 2026? Please make that three cheese and one roasted pepper, all in that delivery. I am asking for a draft request before the restaurant confirms anything.",
+    "scenarioId": "case-06"
+  },
+  "modelInput": {
+    "synthetic": true,
+    "restaurantId": "demo-south",
+    "demoNow": "2026-11-04T10:00:00-06:00",
+    "message": "At Maple Street South, could you bring four pizzas to Fictional Sewing Room P at 16:40 on November 4, 2026? Please make that three cheese and one roasted pepper, all in that delivery. I am asking for a draft request before the restaurant confirms anything."
+  },
+  "result": {
+    "intent": "direct-order",
+    "proposal": {
+      "date": "2026-11-04",
+      "destination": "Fictional Sewing Room P",
+      "fulfillment": "delivery",
+      "headlineQuantity": 4,
+      "items": [
+        {
+          "itemId": "cheese",
+          "quantity": 3
+        },
+        {
+          "itemId": "pepper",
+          "quantity": 1
+        }
+      ],
+      "kind": "food",
+      "windows": [
+        {
+          "id": "window-1",
+          "items": [
+            {
+              "itemId": "cheese",
+              "quantity": 3
+            },
+            {
+              "itemId": "pepper",
+              "quantity": 1
+            }
+          ],
+          "readyAt": "2026-11-04T16:40:00-06:00"
+        }
+      ]
+    },
+    "questions": [],
+    "reply": "Hello, thanks for your request! Here is a DRAFT for human review before the restaurant confirms anything: 4 pizzas for delivery to Fictional Sewing Room P on November 4, 2026 at 4:40 PM — 3 Classic cheese pizza and 1 Roasted pepper pizza, all in one delivery. This draft request is unapproved and needs human review before it can be adopted.",
+    "sourceIds": [
+      "demo-south-menu-v1",
+      "demo-south-service-v1"
+    ],
+    "status": "ready-for-operator",
+    "summary": "Draft delivery request for 4 pizzas (3x cheese, 1x pepper) to Fictional Sewing Room P on 2026-11-04 at 16:40. Quantities match; lead time and window capacity appear met."
+  },
+  "tools": [
+    {
+      "name": "lookup_restaurant_facts",
+      "args": {
+        "date": "2026-11-04",
+        "topics": [
+          "menu",
+          "service",
+          "offers",
+          "corrections"
+        ]
+      },
+      "result": {
+        "restaurantId": "demo-south",
+        "restaurantName": "Maple Street South",
+        "date": "2026-11-04",
+        "demoNow": "2026-11-04T10:00:00-06:00",
+        "mode": "authored-simulation",
+        "synthetic": true,
+        "menu": [
+          {
+            "id": "cheese",
+            "name": "Classic cheese pizza",
+            "unitPriceCents": 1500,
+            "sourceId": "demo-south-menu-v1",
+            "taxInclusive": true
+          },
+          {
+            "id": "pepper",
+            "name": "Roasted pepper pizza",
+            "unitPriceCents": 1800,
+            "sourceId": "demo-south-menu-v1",
+            "taxInclusive": true
+          },
+          {
+            "id": "garden",
+            "name": "Garden pizza",
+            "unitPriceCents": 1700,
+            "sourceId": "demo-south-menu-v1",
+            "taxInclusive": true
+          }
+        ],
+        "offers": [
+          {
+            "id": "demo-south-offer-old",
+            "name": "Previous autumn lunch offer",
+            "validFrom": "2026-11-01",
+            "validTo": "2026-11-03",
+            "status": "expired",
+            "sourceId": "demo-south-offer-old"
+          },
+          {
+            "id": "demo-south-offer-current",
+            "name": "Current garden choice",
+            "validFrom": "2026-11-04",
+            "validTo": "2026-11-10",
+            "status": "current",
+            "sourceId": "demo-south-offer-current"
+          }
+        ],
+        "service": {
+          "pickupOnly": false,
+          "deliveryAvailable": true,
+          "minimumLeadMinutes": 90,
+          "capacityPerWindow": 16,
+          "reservationCapacity": 40,
+          "sourceIds": [
+            "demo-south-service-v1"
+          ]
+        },
+        "sources": [
+          {
+            "id": "demo-south-menu-v1",
+            "label": "Authored demo menu",
+            "restaurantId": "demo-south",
+            "validFrom": "2026-11-01",
+            "validTo": "2026-11-30",
+            "text": "Synthetic tax-inclusive menu prices: cheese 1500 cents, roasted pepper 1800 cents, garden 1700 cents."
+          },
+          {
+            "id": "demo-south-service-v1",
+            "label": "Authored demo service policy",
+            "restaurantId": "demo-south",
+            "validFrom": "2026-11-01",
+            "validTo": "2026-11-30",
+            "text": "Fictional local delivery and pickup; at least 90 minutes lead time; up to 16 pizzas per service window; table capacity 40."
+          },
+          {
+            "id": "demo-south-offer-old",
+            "label": "Previous autumn lunch offer",
+            "restaurantId": "demo-south",
+            "validFrom": "2026-11-01",
+            "validTo": "2026-11-03",
+            "text": "Autumn lunch special, valid November 1 through November 3 only."
+          },
+          {
+            "id": "demo-south-offer-current",
+            "label": "Current garden choice",
+            "restaurantId": "demo-south",
+            "validFrom": "2026-11-04",
+            "validTo": "2026-11-10",
+            "text": "Garden pizza is the current featured choice from November 4 through November 10 at the approved menu price."
+          }
+        ],
+        "corrections": [],
+        "correctionHistory": [],
+        "factVersion": "cb9e56ed68b01c4f",
+        "notice": "Authored tool simulation · fictional restaurant records · no model call or external action"
+      }
+    },
+    {
+      "name": "check_order_quantities",
+      "args": {
+        "headlineQuantity": 4,
+        "items": [
+          {
+            "itemId": "cheese",
+            "quantity": 3
+          },
+          {
+            "itemId": "pepper",
+            "quantity": 1
+          }
+        ],
+        "windows": [
+          {
+            "id": "window-1",
+            "items": [
+              {
+                "itemId": "cheese",
+                "quantity": 3
+              },
+              {
+                "itemId": "pepper",
+                "quantity": 1
+              }
+            ]
+          }
+        ]
+      },
+      "result": {
+        "statedQuantity": 4,
+        "computedQuantity": 4,
+        "matches": true,
+        "windowsTotal": 4,
+        "windowsMatch": true,
+        "issues": [],
+        "simulated": true,
+        "calculation": "Integer sum of supplied item quantities; no model calculation."
+      }
+    }
+  ],
+  "receipt": {
+    "model": "muse-spark-1.3",
+    "provider": "Meta Model API",
+    "endpoint": "https://api.meta.ai/v1/responses",
+    "store": false,
+    "requests": [
+      {
+        "id": "resp_6aeb42181aa7ee1e961b4513",
+        "inputTokens": 2413,
+        "outputTokens": 193,
+        "reasoningTokens": 81,
+        "elapsedMs": 4328,
+        "status": "completed"
+      },
+      {
+        "id": "resp_6aeb421afb419b1fccdc409f",
+        "inputTokens": 3241,
+        "outputTokens": 201,
+        "reasoningTokens": 32,
+        "elapsedMs": 2024,
+        "status": "completed"
+      },
+      {
+        "id": "resp_6aeb42209d8759d311a74afd",
+        "inputTokens": 3516,
+        "outputTokens": 552,
+        "reasoningTokens": 218,
+        "elapsedMs": 5919,
+        "status": "completed"
+      }
+    ],
+    "recordedAt": "2026-11-04T14:33:04.673Z",
+    "referenceChecksPassed": true,
+    "semanticReviewRequired": true,
+    "transport": "live"
+  },
+  "notice": "Read-only proposal. No customer message, approval, order, booking, kitchen dispatch, payment or remedy was executed.",
+  "caseId": null,
+  "evaluationCaseId": "case-06",
+  "evaluation": {
+    "supplementalUnchangedAdapter": true,
+    "runId": "2026-11-04T14-32-52-341Z-bce72a2d-859c-4c4a-998e-fbc7f3465566",
+    "caseSetVersion": "2026-11-04-independent-v3-supplemental-frozen-01",
+    "evaluationCasesSha256": "ac41a8193f3c84a63c19a32845a5f65ba9c001764bf66970efc9c581916b32da",
+    "inputSha256": "fc556843eb6920081c239c8f9c6b6893cc86281c37d1d597f7c37811ea8dad92",
+    "scenarioIdExcludedFromModelInput": true,
+    "expectedConditionsKeptOutsideInput": true,
+    "localSetupProof": {
+      "restored": true,
+      "storageBeforeReload": {
+        "mode": "local-json",
+        "durable": true,
+        "count": 1,
+        "revision": 1,
+        "loadedCount": 0,
+        "caseState": "memory",
+        "casesResetOnRestart": true
+      },
+      "storageAfterReload": {
+        "mode": "local-json",
+        "durable": true,
+        "count": 1,
+        "revision": 1,
+        "loadedCount": 1,
+        "caseState": "memory",
+        "casesResetOnRestart": true
+      },
+      "scopeControls": [
+        {
+          "restaurantId": "demo-north",
+          "date": "2026-11-04",
+          "pickupOnly": true
+        },
+        {
+          "restaurantId": "demo-south",
+          "date": "2026-11-04",
+          "pickupOnly": false
+        },
+        {
+          "restaurantId": "demo-north",
+          "date": "2026-11-05",
+          "pickupOnly": false
+        }
+      ],
+      "mode": "local setup and restart evidence; not a model input or additional inference case"
+    },
+    "semanticReviewStatus": "pending"
+  }
+}

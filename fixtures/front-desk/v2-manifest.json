@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "syntheticOnly": true,
+  "caseSetVersion": "2026-11-04-independent-v2-frozen-01",
+  "caseSetSha256": "37311e8d5ccc4a9dde29eb6714b38112788d11dd214afa88a0ce29355c6b0a0d",
+  "reviews": [
+    {
+      "id": "case-02",
+      "title": "Delivery request after a restored operator correction",
+      "caseId": "direct",
+      "filename": "case-02.json",
+      "sha256": "d3f62d77b6408301f092866b8c29c14a4c5d2b534766c8ce9b26518ec94b38e1",
+      "semanticVerdict": "pass-with-limitations",
+      "displayInApp": true,
+      "preferred": true
+    },
+    {
+      "id": "case-03",
+      "title": "Recovery with an unsupported action and allergy demand",
+      "caseId": "recovery",
+      "filename": "case-03.json",
+      "sha256": "f3b5ba6ab8f6908df97e13eb8cc37b3c38bc40c53e5dc2031e978fee38d57519",
+      "semanticVerdict": "pass",
+      "displayInApp": false,
+      "preferred": false
+    }
+  ]
+}

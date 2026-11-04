@@ -4,6 +4,7 @@ import { readFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createFrontDeskDemo } from './front-desk.mjs';
+import { createFileCorrectionStorage, DEFAULT_CORRECTION_FILE } from './front-desk-corrections.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const assets = new Map([
@@ -31,10 +32,11 @@ async function bodyJson(req) {
   catch { throw Object.assign(new Error('Send valid JSON.'), { code: 'FRONT_DESK_JSON', status: 400 }); }
 }
 
-export function createFrontDeskServer({ port = 4330, store = createFrontDeskDemo(), recordedReviews = [], getRecordedReview, recordedReviewProvider } = {}) {
+export function createFrontDeskServer({ port = 4330, store, correctionFile = DEFAULT_CORRECTION_FILE, recordedReviews = [], getRecordedReview, recordedReviewProvider } = {}) {
   getRecordedReview = recordedReviewProvider || getRecordedReview;
   if (!Number.isInteger(port) || port < 1024 || port > 65535) throw new Error('Select a loopback port from 1024 to 65535.');
   if (!Array.isArray(recordedReviews) || (getRecordedReview !== undefined && typeof getRecordedReview !== 'function')) throw new Error('Invalid local recorded-review configuration.');
+  store ||= createFrontDeskDemo({ correctionStorage: createFileCorrectionStorage({ filePath: correctionFile }) });
   const hosts = new Set([`127.0.0.1:${port}`, `localhost:${port}`]);
   const origins = new Set([...hosts].map(host => `http://${host}`));
   const server = http.createServer(async (req, res) => {
@@ -47,7 +49,8 @@ export function createFrontDeskServer({ port = 4330, store = createFrontDeskDemo
           const bytes = await readFile(path.join(root, 'public', filename));
           res.writeHead(200, { ...headers, 'Content-Type': type }); res.end(bytes); return;
         }
-        if (url.pathname === '/api/front-desk/status') return answer(res, 200, { ...store.getStatus(), recordedReviews: structuredClone(recordedReviews) });
+        if (url.pathname === '/api/front-desk/status') return answer(res, 200, { ...store.getStatus(), recordedReviews: structuredClone(recordedReviews),
+          capabilities: { recordedProposalAdoption: Boolean(getRecordedReview), recordedReplyReview: Boolean(getRecordedReview) } });
         if (url.pathname === '/api/front-desk/facts') return answer(res, 200, store.lookupFacts({ restaurantId: url.searchParams.get('restaurantId') || undefined, date: url.searchParams.get('date') || undefined, topics: url.searchParams.has('topics') ? url.searchParams.get('topics').split(',') : undefined }));
         if (url.pathname === '/api/front-desk/cases') return answer(res, 200, store.listCases());
         if (url.pathname === '/api/front-desk/case') return answer(res, 200, store.getCase(url.searchParams.get('id') || 'workplace'));
@@ -64,15 +67,18 @@ export function createFrontDeskServer({ port = 4330, store = createFrontDeskDemo
       if (Number(req.headers['content-length'] || 0) > MAX_BYTES) { req.resume(); return answer(res, 413, { code: 'FRONT_DESK_BODY', error: 'Request is too large.' }); }
       const body = await bodyJson(req);
       if (!body || typeof body !== 'object' || Array.isArray(body) || Object.keys(body).length !== 4 || !['caseId', 'expectedVersion', 'action', 'payload'].every(key => Object.hasOwn(body, key))) return answer(res, 400, { code: 'FRONT_DESK_INPUT', error: 'Supply caseId, expectedVersion, action and payload only.' });
-      if (body.action === 'apply_recorded_proposal') {
-        if (!getRecordedReview || !body.payload || typeof body.payload !== 'object' || Array.isArray(body.payload) || Object.keys(body.payload).length !== 2 || body.payload.operator !== 'Demo operator' || typeof body.payload.reviewId !== 'string' || !recordedReviews.some(review => review.id === body.payload.reviewId)) return answer(res, 400, { code: 'FRONT_DESK_RECORD', error: 'Choose a configured server-bound recorded proposal and explicitly review it.' });
+      if (['apply_recorded_proposal', 'review_recorded_reply'].includes(body.action)) {
+        const reply = body.action === 'review_recorded_reply';
+        if (!getRecordedReview || !body.payload || typeof body.payload !== 'object' || Array.isArray(body.payload) || Object.keys(body.payload).length !== (reply ? 3 : 2)
+          || !Object.keys(body.payload).every(key => ['reviewId', 'operator', ...(reply ? ['text'] : [])].includes(key))
+          || body.payload.operator !== 'Demo operator' || typeof body.payload.reviewId !== 'string' || !recordedReviews.some(review => review.id === body.payload.reviewId)) return answer(res, 400, { code: 'FRONT_DESK_RECORD', error: 'Choose a configured server-bound recorded result and explicitly review it.' });
         const review = await getRecordedReview(body.payload.reviewId);
-        return answer(res, 200, store.applyRecordedProposal({ caseId: body.caseId, expectedVersion: body.expectedVersion, ...body.payload }, review));
+        return answer(res, 200, store[reply ? 'reviewRecordedReply' : 'applyRecordedProposal']({ caseId: body.caseId, expectedVersion: body.expectedVersion, ...body.payload }, review));
       }
       return answer(res, 200, store.action(body));
     } catch (error) {
       if (res.writableEnded) return;
-      const safe = typeof error?.code === 'string' && /^FRONT_DESK_[A-Z_]+$/.test(error.code) && [400, 404, 409, 413].includes(error.status);
+      const safe = typeof error?.code === 'string' && /^FRONT_DESK_[A-Z_]+$/.test(error.code) && [400, 404, 409, 413, 503].includes(error.status);
       answer(res, safe ? error.status : 500, safe ? { code: error.code, error: error.message, ...(error.blockers ? { blockers: error.blockers } : {}) } : { code: 'FRONT_DESK_LOCAL_FAILURE', error: 'The local demo request failed.' });
     }
   });
@@ -81,9 +87,14 @@ export function createFrontDeskServer({ port = 4330, store = createFrontDeskDemo
 }
 
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+  try {
   const port = Number(process.env.FRONT_DESK_PORT || 4330);
-  const server = createFrontDeskServer({ port });
+  const server = createFrontDeskServer({ port, correctionFile: process.env.FRONT_DESK_CORRECTIONS_FILE || DEFAULT_CORRECTION_FILE });
   server.on('error', error => { console.error(error.code === 'EADDRINUSE' ? 'The local front-desk port is already in use.' : 'The local front-desk server could not start.'); process.exitCode = 1; });
   server.listen(port, '127.0.0.1', () => console.log(`Front Desk: http://127.0.0.1:${port}/front-desk\nAuthored synthetic tool simulation. No model or external request is made.`));
   for (const signal of ['SIGINT', 'SIGTERM']) process.on(signal, () => server.close(() => process.exit(0)));
+  } catch {
+    console.error('The local correction state or server configuration could not be loaded. Startup stopped; no corrections were discarded.');
+    process.exitCode = 1;
+  }
 }

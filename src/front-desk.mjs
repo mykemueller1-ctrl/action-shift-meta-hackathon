@@ -1,6 +1,7 @@
 // New November 4, 2026 event-period implementation. All records below are newly authored fiction.
 // No private restaurant corpus, pre-event implementation, model request or external adapter is used.
 import { createHash } from 'node:crypto';
+import { makePickupCorrection, validateCorrections } from './front-desk-corrections.mjs';
 
 export const DEMO_NOW = '2026-11-04T10:00:00-06:00';
 export const DEMO_DATE = '2026-11-04';
@@ -31,7 +32,7 @@ const baseWindows = () => [
 
 function initialCase(id, type, title, request, messages, recovery = null) {
   return { id, type, title, restaurantId: 'demo-north', version: 1, requestVersion: 1, status: 'requested', mode: 'authored-simulation', simulated: true, modelCalls: 0,
-    messages, request, quote: null, approval: null, kitchenPulls: [], receipts: [], history: [], recovery, commitment: null,
+    messages, request, quote: null, approval: null, kitchenPulls: [], receipts: [], history: [], recovery, commitment: null, reviewedReply: null,
     paymentStatus: 'unknown', fulfillmentStatus: 'unknown', customerOutcome: 'unknown' };
 }
 function initialCases() {
@@ -86,11 +87,18 @@ export function checkQuantities({ headlineQuantity, items, windows = [] } = {}) 
   return { statedQuantity: headlineQuantity, computedQuantity, matches, windowsTotal, windowsMatch, issues, simulated: true, calculation: 'Integer sum of supplied item quantities; no model calculation.' };
 }
 
-export function createFrontDeskDemo() {
+export function createFrontDeskDemo({ correctionStorage } = {}) {
+  if (correctionStorage !== undefined && (!correctionStorage || correctionStorage.mode !== 'local-json' || correctionStorage.durable !== true
+    || ['load', 'save', 'assertCurrent'].some(key => typeof correctionStorage[key] !== 'function'))) fail('FRONT_DESK_CORRECTION_STATE', 'Use a validated local correction storage adapter.', 503);
   let cases = initialCases();
-  const corrections = [];
+  const corrections = correctionStorage ? validateCorrections(correctionStorage.load()) : [];
+  const loadedCount = corrections.length;
+  const assertStorage = () => correctionStorage?.assertCurrent();
+  const storageStatus = () => ({ mode: correctionStorage?.mode || 'memory', durable: Boolean(correctionStorage), count: corrections.length,
+    revision: corrections.length, loadedCount, caseState: 'memory', casesResetOnRestart: true });
   const getRaw = id => { const value = cases.get(id); if (!value) fail('FRONT_DESK_NOT_FOUND', 'Choose an available synthetic case.', 404); return value; };
   function lookupFacts({ restaurantId = 'demo-north', date = DEMO_DATE, topics } = {}) {
+    assertStorage();
     if (!restaurants.has(restaurantId) || typeof date !== 'string' || !/^2026-\d{2}-\d{2}$/.test(date) || Number.isNaN(Date.parse(`${date}T00:00:00Z`)) || new Date(`${date}T00:00:00Z`).toISOString().slice(0, 10) !== date) fail('FRONT_DESK_INPUT', 'Choose an available fictional restaurant and a valid demo date.');
     if (topics !== undefined && (!Array.isArray(topics) || topics.some(topic => !['menu', 'offers', 'service', 'capacity', 'corrections', 'all'].includes(topic)))) fail('FRONT_DESK_INPUT', 'Choose supported restaurant fact topics.');
     const activeCorrections = corrections.filter(rule => rule.restaurantId === restaurantId && rule.validFrom <= date && date <= rule.validTo);
@@ -134,7 +142,8 @@ export function createFrontDeskDemo() {
     if (value.status === 'cancellation_requested') return ['acknowledge_cancellation'];
     if (value.type === 'recovery') return value.recovery.status === 'reported' ? ['offer_remedy'] : value.recovery.status === 'offered' ? ['authorize_remedy'] : value.recovery.status === 'authorized' ? ['issue_remedy'] : [];
     if (value.type === 'reservation') return value.commitment?.status === 'acknowledged' ? ['request_cancellation'] : value.approval ? ['acknowledge_reservation', 'request_cancellation'] : ['approve_reservation', 'request_cancellation'];
-    const actions = ['correct_pickup_only', 'apply_request_proposal'];
+    const actions = ['apply_request_proposal'];
+    if (!corrections.some(rule => rule.restaurantId === value.restaurantId && rule.validFrom === value.request.date)) actions.unshift('correct_pickup_only');
     if (blockers.some(item => ['QUANTITY_MISMATCH', 'QUANTITY_MISSING'].includes(item.code))) actions.push('clarify_quantity');
     if (blockers.some(item => item.code === 'PICKUP_ONLY')) actions.push('confirm_pickup');
     if (!blockers.length && !value.quote) actions.push('prepare_quote');
@@ -161,7 +170,8 @@ export function createFrontDeskDemo() {
     value.version += 1;
     const event = { id: `${value.id}-event-${value.version}`, version: value.version, requestVersion: value.requestVersion, action, summary, at: DEMO_NOW, simulated: true,
       before: { status: before.status, requestVersion: before.requestVersion, request: clone(before.request), quoteId: before.quote?.id || null },
-      after: { status: value.status, requestVersion: value.requestVersion, quoteId: value.quote?.id || null }, proposalSource: clone(value.proposalSource || null) };
+      after: { status: value.status, requestVersion: value.requestVersion, quoteId: value.quote?.id || null }, proposalSource: clone(value.proposalSource || null),
+      ...(action === 'review_recorded_reply' ? { replyReview: clone(value.reviewedReply), previousReplyReview: clone(before.reviewedReply) } : {}) };
     value.history.push(event); return event;
   }
   function actionImpl({ caseId, expectedVersion, action: name, payload = {} } = {}, context = {}) {
@@ -199,7 +209,21 @@ export function createFrontDeskDemo() {
         value.requestVersion += 1; invalidate(value, 'proposal_reviewed');
         value.proposalSource = { kind: 'operator-reviewed', reference: clone(payload.provenance || { mode: 'authored', responseId: null }), sourceVerified: context.verifiedRecord === true,
           verification: context.verifiedRecord === true ? 'Validated server-bound local record; not independent provider attestation.' : 'Client-provided source reference; not verified model provenance.' };
+        if (context.recordedSource) {
+          Object.assign(value.proposalSource, clone(context.recordedSource), { originalProposal: clone(proposal) });
+          value.messages.push({ id: `${value.id}-model-source-${value.requestVersion}`, channel: 'model-reviewed-source', text: context.recordedSource.input.message,
+            at: DEMO_NOW, synthetic: true, sourceMode: 'recorded-meta', reviewId: context.recordedSource.reviewId, responseId: context.recordedSource.responseId,
+            sourceMessageSha256: context.recordedSource.sourceMessageSha256 });
+        }
         summary = 'Operator adopted the exact extracted proposal as a new request version. Counts were retained, not repaired; quote, price, timing, capacity and kitchen acknowledgment require separate checks.'; break;
+      }
+      case 'review_recorded_reply': {
+        fields(payload, ['operator', 'text']); operator(payload);
+        if (!context.recordedSource || typeof context.originalReply !== 'string') fail('FRONT_DESK_RECORD', 'Reply review requires a configured server-bound recorded result.');
+        if (typeof payload.text !== 'string' || !payload.text.trim() || payload.text.length > 2500 || /[<>\p{Cf}\x00-\x08\x0b\x0c\x0e-\x1f\x7f]/u.test(payload.text)) fail('FRONT_DESK_INPUT', 'Use a bounded plain-text draft without markup or hidden controls.');
+        value.reviewedReply = { reviewId: context.recordedSource.reviewId, responseId: context.recordedSource.responseId, sourceMessageSha256: context.recordedSource.sourceMessageSha256,
+          originalReply: context.originalReply, text: payload.text, operator: payload.operator, reviewedAt: new Date().toISOString(), status: 'reviewed-unsent', sent: false };
+        summary = 'Operator reviewed an edited draft beside the original recorded reply. The draft remains unsent; no restaurant, kitchen, payment or recovery action was performed.'; break;
       }
       case 'clarify_quantity': {
         fields(payload, ['quantity']); foodOnly(); active();
@@ -270,13 +294,13 @@ export function createFrontDeskDemo() {
       case 'correct_pickup_only': {
         fields(payload, ['operator']); foodOnly(); active(); operator(payload);
         if (corrections.some(rule => rule.restaurantId === value.restaurantId && rule.validFrom === value.request.date && rule.kind === 'pickup-only')) fail('FRONT_DESK_TRANSITION', 'This dated restaurant correction is already recorded.');
-        const rule = { id: `demo-correction-${corrections.length + 1}`, kind: 'pickup-only', restaurantId: value.restaurantId, validFrom: value.request.date, validTo: value.request.date, operator: payload.operator, at: DEMO_NOW, reviewed: true, text: 'Reviewed fictional operator correction: pickup only on this date; ask the customer before changing delivery to pickup.', previousValue: 'Delivery or pickup available under the base demo service policy.', newValue: 'Pickup only on the specified restaurant/date.', simulated: true };
+        const rule = makePickupCorrection({ sequence: corrections.length + 1, restaurantId: value.restaurantId, date: value.request.date });
         corrections.push(rule);
         for (const [id, other] of cases) {
           if (id === caseId || other.restaurantId !== value.restaurantId || other.request.date !== value.request.date || other.request.kind !== 'food' || ['cancelled', 'cancellation_requested'].includes(other.status)) continue;
-          const changed = clone(other); invalidate(changed, 'operator_correction_pending'); appendEvent(changed, name, 'Dated restaurant correction requires fresh facts and any necessary customer clarification.', other); cases.set(id, changed);
+          const changed = clone(other); changed.requestVersion += 1; invalidate(changed, 'operator_correction_pending'); appendEvent(changed, name, 'Dated restaurant correction advances the review version and requires fresh approval and any necessary customer clarification.', other); cases.set(id, changed);
         }
-        invalidate(value, 'operator_correction_pending'); summary = 'Operator correction retained beside the original policy, scoped to this restaurant and this date. Future fact lookups retrieve it.'; break;
+        value.requestVersion += 1; invalidate(value, 'operator_correction_pending'); summary = 'Operator correction retained beside the original policy, scoped to this restaurant and this date. The review version advances; future fact lookups retrieve it.'; break;
       }
       case 'confirm_pickup': {
         fields(payload); foodOnly(); active(); if (value.request.fulfillment !== 'delivery' || !lookupFacts({ restaurantId: value.restaurantId, date: value.request.date }).service.pickupOnly) fail('FRONT_DESK_TRANSITION', 'This action confirms pickup only after the dated service correction.');
@@ -316,25 +340,62 @@ export function createFrontDeskDemo() {
     return { case: view(value), eventsAdded: [clone(event)], notice: DEMO_NOTICE };
   }
   function action(command, context) {
+    assertStorage();
     // A rejected command cannot leave a partial correction or another case mutated.
     const beforeCases = clone(cases); const beforeCorrections = clone(corrections);
-    try { return actionImpl(command, context); }
+    try {
+      const result = actionImpl(command, context);
+      // Persist only after all validation/view work succeeds, before acknowledging the action.
+      if (correctionStorage && corrections.length !== beforeCorrections.length) correctionStorage.save(corrections);
+      return { ...result, correctionStorage: storageStatus() };
+    }
     catch (error) { cases = beforeCases; corrections.splice(0, corrections.length, ...beforeCorrections); throw error; }
   }
+  // Rebuild only the effect of retained facts. Conversations, approvals and receipts start fresh.
+  for (const rule of corrections) {
+    for (const [id, original] of cases) {
+      if (original.request.kind !== 'food' || original.restaurantId !== rule.restaurantId || original.request.date !== rule.validFrom) continue;
+      const changed = clone(original); changed.requestVersion += 1; invalidate(changed, 'operator_correction_pending');
+      appendEvent(changed, 'restore_operator_correction', 'Previously reviewed restaurant/date correction restored from local storage. Case execution state was reset; a fresh quote and approval are required.', original);
+      cases.set(id, changed);
+    }
+  }
+  function recordedSource(command, review) {
+    const target = getRaw(command.caseId);
+    const responseId = review?.receipt?.id || review?.receipt?.requests?.at(-1)?.id;
+    const input = review?.input;
+    if (!plain(review) || review.recorded !== true || review.liveVerified !== true || review.receipt?.transport !== 'live'
+      || review.caseId !== command.caseId || !plain(input) || input.synthetic !== true || input.restaurantId !== target.restaurantId
+      || input.demoNow !== DEMO_NOW || input.scenarioId !== command.reviewId || review.scenarioId !== command.reviewId
+      || typeof command.reviewId !== 'string' || !/^[a-z0-9-]{1,64}$/.test(command.reviewId)
+      || typeof input.message !== 'string' || !input.message.trim() || input.message.length > 5000
+      || typeof responseId !== 'string' || !/^[A-Za-z0-9_.:-]{1,160}$/.test(responseId)) fail('FRONT_DESK_RECORD', 'The server-bound recorded source does not match this case, restaurant and demo clock.');
+    fields(input, ['synthetic', 'scenarioId', 'restaurantId', 'demoNow', 'message']);
+    const actualInput = { synthetic: true, restaurantId: input.restaurantId, demoNow: input.demoNow, message: input.message };
+    if (review.modelInput !== undefined) {
+      fields(review.modelInput, ['synthetic', 'restaurantId', 'demoNow', 'message']);
+      if (Object.keys(actualInput).some(key => actualInput[key] !== review.modelInput[key])) fail('FRONT_DESK_RECORD', 'The recorded model input and source receipt disagree.');
+    }
+    return { reviewId: command.reviewId, responseId, input: actualInput, sourceMessageSha256: createHash('sha256').update(input.message, 'utf8').digest('hex') };
+  }
   return {
-    getStatus: () => ({ mode: 'authored-simulation', modelCalls: 0, demoNow: DEMO_NOW, demoDate: DEMO_DATE, notice: DEMO_NOTICE, recordedReviews: [] }),
-    listCases: () => [...cases.values()].map(value => ({ id: value.id, type: value.type, title: value.title, restaurantId: value.restaurantId, version: value.version, requestVersion: value.requestVersion, status: value.status })),
-    getCase: id => view(getRaw(id)), lookupFacts, checkQuantities, calculateQuote, action: command => action(command),
+    getStatus: () => { assertStorage(); return { mode: 'authored-simulation', modelCalls: 0, demoNow: DEMO_NOW, demoDate: DEMO_DATE, notice: DEMO_NOTICE, recordedReviews: [], correctionStorage: storageStatus() }; },
+    listCases: () => { assertStorage(); return [...cases.values()].map(value => ({ id: value.id, type: value.type, title: value.title, restaurantId: value.restaurantId, version: value.version, requestVersion: value.requestVersion, status: value.status })); },
+    getCase: id => { assertStorage(); return view(getRaw(id)); }, lookupFacts, checkQuantities, calculateQuote, action: command => action(command),
     applyRecordedProposal: (command, review) => {
       fields(command, ['caseId', 'expectedVersion', 'reviewId', 'operator']);
-      const target = getRaw(command.caseId);
-      const responseId = review?.receipt?.id || review?.receipt?.requests?.at(-1)?.id;
-      if (!plain(review) || review.recorded !== true || review.liveVerified !== true || review.receipt?.transport !== 'live'
-        || review.caseId !== command.caseId || review.input?.restaurantId !== target.restaurantId || !review.result?.proposal
-        || typeof responseId !== 'string' || !/^[A-Za-z0-9_.:-]{1,160}$/.test(responseId)) fail('FRONT_DESK_RECORD', 'The server-bound recorded proposal does not match this case and restaurant.');
+      const source = recordedSource(command, review);
+      if (!review.result?.proposal) fail('FRONT_DESK_RECORD', 'The recorded result has no complete food proposal to review.');
       return action({ caseId: command.caseId, expectedVersion: command.expectedVersion, action: 'apply_request_proposal', payload: {
-        operator: command.operator, proposal: review.result.proposal, provenance: { mode: 'recorded-meta', responseId },
-      } }, { verifiedRecord: true });
+        operator: command.operator, proposal: review.result.proposal, provenance: { mode: 'recorded-meta', responseId: source.responseId },
+      } }, { verifiedRecord: true, recordedSource: source });
+    },
+    reviewRecordedReply: (command, review) => {
+      fields(command, ['caseId', 'expectedVersion', 'reviewId', 'operator', 'text']);
+      const source = recordedSource(command, review);
+      if (typeof review.result?.reply !== 'string' || !review.result.reply.trim() || review.result.reply.length > 2500) fail('FRONT_DESK_RECORD', 'The recorded result has no bounded original reply.');
+      return action({ caseId: command.caseId, expectedVersion: command.expectedVersion, action: 'review_recorded_reply', payload: { operator: command.operator, text: command.text } },
+        { recordedSource: source, originalReply: review.result.reply });
     },
   };
 }

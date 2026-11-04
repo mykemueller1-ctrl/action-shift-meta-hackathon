@@ -18,11 +18,12 @@
   <main>
     <section class="hero" aria-labelledby="hero-title">
       <div class="hero-copy">
-        <p class="eyebrow"><span></span>THE NEXT CONVERSATION IS AN OPPORTUNITY</p>
-        <h1 id="hero-title">“That looks good.”<br><em>Let’s get it right.</em></h1>
-        <p class="hero-description">Turn a guest’s craving into a clear plan for the kitchen. Catch the missing details, keep the owner in charge, and carry the right version all the way through.</p>
-        <a class="hero-cta" href="#desk">Step behind the desk <span aria-hidden="true">↗</span></a>
-        <p class="hero-note">One conversation. A quote you can check.<br>A kitchen handoff you can trace.</p>
+        <p class="eyebrow"><span></span>WHEN A GUEST CHANGES AN APPROVED ORDER</p>
+        <h1 id="hero-title">The guest changed<br>the order.<br><em>The kitchen still<br>has the old one.</em></h1>
+        <p class="hero-description">One more pizza changes the promise. Action Shift holds the revised request for a fresh quote, owner review and kitchen acknowledgment. The earlier receipt stays visible.</p>
+        <div class="founder-context"><span class="operator-avatar" aria-hidden="true">MM</span><div><strong>Built by Myke Mueller</strong><span>Founder, Never86’d · Community Tap &amp; Pizza operator</span></div></div>
+        <a class="hero-cta" href="#desk">Follow the changed order <span aria-hidden="true">↗</span></a>
+        <p class="hero-note"><strong>Real operator. Fictional case.</strong> Maple Street Kitchen uses synthetic requests and simulated handoffs.</p>
       </div>
       <figure class="meal-story">
         <svg viewBox="0 0 640 520" role="img" aria-labelledby="meal-title meal-description">
@@ -36,8 +37,8 @@
           <g transform="rotate(7 511 148)"><ellipse cx="516" cy="203" rx="48" ry="16" fill="#9f623e" opacity=".18"/><path d="M474 94h81l-8 103q-31 17-64 0Z" fill="#f9f4df"/><path d="M481 112h68l-6 66q-29 13-57 0Z" fill="#d99942"/><path d="M492 118h18v21h-18Zm30 25h16v17h-16Z" fill="#fff0c2" opacity=".6"/><ellipse cx="514" cy="94" rx="41" ry="12" fill="#fffbea"/><path d="m526 112 7-70 20-8" fill="none" stroke="#245744" stroke-width="8" stroke-linecap="round"/></g>
           <g transform="rotate(-5 120 419)"><rect x="35" y="378" width="133" height="84" rx="5" fill="#f8e9cd"/><path d="M54 401h75M54 414h57M54 427h69" stroke="#b5bba3" stroke-width="3"/><path d="m124 433 9 8 16-21" fill="none" stroke="#37644c" stroke-width="4" stroke-linecap="round"/></g>
         </svg>
-        <div class="guest-bubble"><span class="bubble-person">G</span><div><small>A GUEST HAS A PLAN</small><p>Can you help with lunch<br>for our team?</p></div><span class="bubble-arrow" aria-hidden="true">↗</span></div>
-        <figcaption><span class="live-dot"></span>Illustrated possibility. Verified details come next.</figcaption>
+        <div class="guest-bubble"><span class="bubble-person">G</span><div><small>FICTIONAL GUEST CHANGE</small><p>Can you add one more<br>garden pizza?</p></div><span class="bubble-arrow" aria-hidden="true">↗</span></div>
+        <figcaption><span class="live-dot"></span>Original illustration · synthetic restaurant and guest.</figcaption>
       </figure>
     </section>
 
@@ -48,6 +49,7 @@
       <div id="error-banner" class="error-banner" role="alert" hidden></div>
       <div class="scenario-nav" id="case-tabs" role="tablist" aria-label="Guest conversations"></div>
       <div class="facts-strip" id="facts-strip" aria-label="Current restaurant facts"></div>
+      <section class="promise-status" id="promise-status" aria-label="Current request and kitchen commitment" aria-live="polite"></section>
 
       <div class="desk-layout">
         <div class="conversation-column">
@@ -63,6 +65,7 @@
           <section class="card muse-card" aria-labelledby="muse-title">
             <div class="card-heading"><div class="muse-heading"><span class="muse-icon" aria-hidden="true">M</span><div><p class="eyebrow">MODEL EVIDENCE</p><h3 id="muse-title">See what Muse checked.</h3></div></div><span class="small-label" id="muse-state">Testing pending</span></div>
             <p id="muse-description" class="section-description">Muse workflow testing pending. The scenario controls above run an authored local simulation.</p>
+            <label id="muse-selector-label" class="muse-selector" hidden>Recorded example<select id="muse-selector" aria-label="Recorded example"></select></label>
             <button type="button" id="muse-button" class="button secondary" disabled>View recorded Muse review <span aria-hidden="true">↗</span></button>
             <div id="muse-review" class="muse-review" hidden></div>
           </section>
@@ -75,12 +78,12 @@
       </div>
 
       <section class="learning-card" aria-labelledby="learning-title">
-        <div class="learning-intro"><span class="learning-symbol" aria-hidden="true">↻</span><p class="eyebrow">OWNER CORRECTION → THE NEXT REQUEST</p><h3 id="learning-title">“Pickup only today.”<br><em>Heard. And remembered.</em></h3><p>A correction should improve the next conversation. Keep its date, restaurant and source attached.</p></div>
-        <div class="learning-detail"><div class="rule-heading"><span id="rule-status" class="rule-pill">Checking today’s rule</span><button type="button" id="correction-button" class="button secondary">Set pickup only today <span aria-hidden="true">↗</span></button></div><div id="learning-content"></div><button type="button" id="next-request-button" class="text-button">Try the next guest request <span aria-hidden="true">→</span></button></div>
+        <div class="learning-intro"><span class="learning-symbol" aria-hidden="true">↻</span><p class="eyebrow">OWNER CORRECTION → THE NEXT REQUEST</p><h3 id="learning-title">“Pickup only today.”<br><em>Reviewed. Scoped. Retained.</em></h3><p>The operator chooses the rule. Its restaurant, date and reviewer stay attached so the next request can use the right fact.</p></div>
+        <div class="learning-detail"><div class="rule-heading"><span id="rule-status" class="rule-pill">Checking today’s rule</span></div><div id="correction-review"></div><button type="button" id="correction-button" class="button secondary" disabled>Save reviewed correction</button><div id="learning-content"></div><button type="button" id="scope-check-button" class="button secondary" disabled>Check where this rule applies</button><div id="scope-check-results" aria-live="polite"></div><button type="button" id="next-request-button" class="text-button">Try the next guest request <span aria-hidden="true">→</span></button></div>
       </section>
       <details class="source-details"><summary><span>Current facts &amp; decision history</span><small>The source stays with the decision.</small></summary><div class="source-detail-grid"><section><h3>What the desk knows</h3><div id="source-facts"></div></section><section><h3>What changed</h3><ol id="history-list" class="history-list"></ol></section></div></details>
     </section>
-    <section class="founder-note" id="story"><span class="founder-monogram">MM</span><div><p class="eyebrow">BUILT BY MYKE MUELLER · NEVER86’D</p><h2>The conversation is only the start.</h2><p>Action Shift brings the guest’s request, the owner’s judgment and the kitchen’s next step into one place. This fictional workspace makes those handoffs visible—from the first craving to the correction that helps tomorrow’s shift.</p></div></section>
+    <section class="founder-note" id="story"><span class="founder-monogram">MM</span><div><p class="eyebrow">MYKE MUELLER · NEVER86’D FOUNDER · COMMUNITY TAP &amp; PIZZA OPERATOR</p><h2>A changed order needs a changed handoff.</h2><p>Myke brings restaurant operating experience to Action Shift. This demonstration uses fictional Maple Street Kitchen requests to show the work: clarify the count, review the price and capacity, acknowledge the right version, and retain an operator’s correction for the next request.</p></div></section>
   </main>
   <footer><a class="footer-brand" href="#">Action Shift <span>by Never86’d</span></a><p>Fictional restaurant · local simulation.<br>No real payment, reservation, delivery, refund or kitchen order is created.</p></footer>
   <div id="toast" class="toast" role="status" hidden></div>

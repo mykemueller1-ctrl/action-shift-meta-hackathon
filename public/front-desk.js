@@ -4,7 +4,7 @@
 // Recorded Muse reviews are evidence; no model call or external action runs here.
 const API = '/api/front-desk';
 const $ = id => document.getElementById(id);
-const state = { status: null, cases: [], facts: null, current: null, selected: 'workplace', busy: false, loadToken: 0, recorded: null, appliedReviewId: null, reviewId: null };
+const state = { status: null, cases: [], facts: null, current: null, selected: 'workplace', busy: false, loadToken: 0, recorded: null, appliedReviewId: null, reviewId: null, selectedReviewId: null, scopeCheck: null };
 const caseNames = { workplace: 'Crew meals', direct: 'The next guest', reservation: 'Reservations', recovery: 'Guest care' };
 const statusNames = { requested: 'Needs review', proposal_reviewed: 'Muse draft adopted', clarified: 'Details clarified', quoted: 'Quote ready', operator_approved: 'Operator approved', kitchen_acknowledged: 'Kitchen acknowledged', revision_requested: 'Changes need review', operator_correction_pending: 'Service rule changed', cancellation_requested: 'Cancellation pending', cancelled: 'Released in simulator', reservation_acknowledged: 'Table acknowledged', remedy_offered: 'Remedy offered', remedy_authorized: 'Remedy authorized', remedy_issued: 'Issuance recorded' };
 let toastTimer;
@@ -33,7 +33,7 @@ async function api(path, body) {
 function setBusy(value) {
   state.busy = value; document.body.classList.toggle('busy', value);
   $('desk').setAttribute('aria-busy', String(value));
-  for (const button of document.querySelectorAll('#case-tabs button, #action-controls button, #correction-button, #next-request-button, #refresh-button, #muse-button, #muse-review button')) button.disabled = value;
+  for (const button of document.querySelectorAll('#case-tabs button, #action-controls button, #correction-button, #scope-check-button, #next-request-button, #refresh-button, #muse-button, #muse-review button')) button.disabled = value;
   if (!value && state.current) { renderActions(); renderLearning(); renderMuse(); }
 }
 
@@ -43,8 +43,10 @@ async function loadWorkspace(id = state.selected) {
     const [status, cases, current] = await Promise.all([api('/status'), api('/cases'), api(`/case?id=${encodeURIComponent(id)}`)]);
     const facts = await api(`/facts?restaurantId=${encodeURIComponent(current.restaurantId)}&date=${encodeURIComponent(current.request.date)}`);
     if (token !== state.loadToken) return;
-    if (id !== state.selected) { state.recorded = null; state.reviewId = null; state.appliedReviewId = null; }
-    Object.assign(state, { status, cases, current, facts, selected: id }); render();
+    if (id !== state.selected) { state.recorded = null; state.reviewId = null; state.selectedReviewId = null; state.appliedReviewId = null; }
+    Object.assign(state, { status, cases, current, facts, selected: id, scopeCheck: null });
+    if (state.reviewId && !availableReviews().some(review => review.id === state.reviewId)) { state.recorded = null; state.reviewId = null; state.selectedReviewId = null; }
+    render();
   } catch (failure) { if (token === state.loadToken) error(failure.message, failure.status === 409); }
   finally { if (token === state.loadToken) setBusy(false); }
 }
@@ -77,16 +79,32 @@ function renderConversation() {
   $('case-status').textContent = statusNames[current.status] || 'Needs operator review'; $('case-status').className = `small-label${current.status.includes('acknowledged') || current.status === 'remedy_issued' ? ' status-complete' : ''}`;
   const feed = $('conversation-feed'); clear(feed);
   for (const message of current.messages || []) {
-    const brand = message.channel === 'food-post'; const clarification = message.channel === 'customer-clarification';
-    const article = el('article', `message${brand ? '' : clarification ? ' operator' : ' guest'}`); const meta = el('div', 'message-meta');
-    const label = brand ? `${state.facts.restaurantName} · fictional post` : clarification ? 'Guest clarification · authored' : message.channel === 'comment' ? 'Guest comment · fictional' : 'Guest message · fictional';
+    const brand = message.channel === 'food-post'; const clarification = message.channel === 'customer-clarification'; const reviewedSource = message.channel === 'model-reviewed-source';
+    const article = el('article', `message${reviewedSource ? ' reviewed-source' : brand ? '' : clarification ? ' operator' : ' guest'}`); const meta = el('div', 'message-meta');
+    const label = reviewedSource ? 'Source reviewed by Muse · recorded' : brand ? `${state.facts.restaurantName} · authored starter` : clarification ? 'Guest clarification · authored' : message.channel === 'comment' ? 'Guest comment · authored starter' : 'Guest message · authored example';
     const time = el('time', '', clock(message.at)); if (message.at) time.dateTime = message.at;
-    meta.append(el('span', '', label), time); article.append(meta, el('p', '', message.text)); feed.append(article);
+    meta.append(el('span', '', label), time); article.append(meta, el('p', '', message.text));
+    if (reviewedSource) { article.append(el('small', 'source-reference', `Recorded review: ${message.reviewId || 'reference unavailable'}. This exact source was adopted as the draft.`)); const trace = el('details'); trace.append(el('summary', '', 'Source reference'), el('p', 'receipt-key', message.responseId || 'Response reference not supplied'), el('p', 'receipt-key', message.sourceMessageSha256 || 'Source digest not supplied')); article.append(trace); }
+    feed.append(article);
   }
   const quantity = current.quantityCheck; const quantityBox = $('quantity-card'); clear(quantityBox); quantityBox.hidden = !quantity || quantity.matches;
   if (quantity && !quantity.matches) { quantityBox.append(el('h4', '', 'One detail changes the whole order.')); const compare = el('div', 'quantity-compare'); const asked = el('div'); asked.append(el('strong', '', quantity.statedQuantity), el('span', '', 'in the headline')); const counted = el('div'); counted.append(el('strong', '', quantity.computedQuantity), el('span', '', 'in the item lines')); compare.append(asked, el('span', '', '≠'), counted); quantityBox.append(compare, el('p', '', `The kitchen windows also total ${quantity.windowsTotal}. Confirm the intended quantity before a quote can move forward.`)); }
   const blockers = $('blockers'); clear(blockers); blockers.hidden = !(current.blockers?.length);
   if (current.blockers?.length) { blockers.append(el('strong', '', 'Before making a commitment')); const list = el('ul'); current.blockers.forEach(blocker => list.append(el('li', '', blocker.message))); blockers.append(list); }
+}
+
+function renderPromiseStatus() {
+  const current = state.current; const target = $('promise-status'); clear(target); target.hidden = current.request.kind !== 'food'; if (target.hidden) return;
+  const held = current.commitment && (current.commitment.requestVersion !== current.requestVersion || current.commitment.status === 'change_pending');
+  const released = current.status === 'cancelled'; const cancelling = current.status === 'cancellation_requested';
+  target.classList.toggle('promise-held', Boolean(held || cancelling));
+  const request = el('div'); request.append(el('span', 'promise-label', `Current request · v${current.requestVersion}`));
+  const requestTitle = released ? 'Released in the simulator' : cancelling ? 'Cancellation still needs acknowledgment' : held ? 'Changed request: promise on hold' : current.approval ? 'Owner reviewed this version' : current.quote ? 'Quote ready for owner review' : current.blockers?.length ? 'Details needed before promising' : 'Unapproved draft';
+  request.append(el('strong', '', requestTitle), el('p', '', held ? 'A new quote, owner review and kitchen acknowledgment are required before this change is accepted.' : 'A reply or a quote does not establish kitchen acceptance.'));
+  const kitchen = el('div'); kitchen.append(el('span', 'promise-label', 'Kitchen commitment · local simulator'));
+  kitchen.append(el('strong', '', released ? 'Release acknowledged' : current.commitment ? `${held || cancelling ? 'Earlier' : 'Acknowledged'} version ${current.commitment.requestVersion}` : 'No acknowledgment yet'));
+  kitchen.append(el('p', '', held ? 'The earlier receipt remains visible. It cannot silently approve the changed request.' : current.commitment ? 'The recorded receipt is separate from preparation, fulfillment and payment.' : 'Only a separate simulator receipt records the reviewed handoff.'));
+  target.append(request, kitchen);
 }
 
 function renderQuote() {
@@ -178,8 +196,17 @@ async function runAction(action, payload = {}) {
 
 function renderLearning() {
   if (!state.facts || !state.current) return;
-  const rule = state.facts.corrections?.find(item => item.kind === 'pickup-only'); $('rule-status').textContent = rule ? 'Owner correction active today' : 'Pickup or delivery in current policy';
-  $('correction-button').disabled = state.busy || Boolean(rule) || !state.current.allowedActions?.includes('correct_pickup_only'); $('correction-button').textContent = rule ? 'Pickup-only rule recorded ✓' : 'Set pickup only today ↗';
+  const rule = state.facts.corrections?.find(item => item.kind === 'pickup-only'); const storage = state.status?.correctionStorage;
+  $('rule-status').textContent = rule ? 'Reviewed pickup-only correction active' : 'Pickup or delivery in current policy';
+  const canCorrect = state.current.allowedActions?.includes('correct_pickup_only');
+  $('correction-button').disabled = true; $('correction-button').textContent = rule ? storage?.durable ? 'Reviewed correction saved locally ✓' : 'Correction recorded for this session ✓' : 'Save reviewed correction';
+  const review = $('correction-review'); clear(review); review.hidden = Boolean(rule);
+  if (!rule) {
+    const scope = el('div', 'correction-scope'); addDetail(scope, 'Change', 'Pickup only'); addDetail(scope, 'Restaurant', state.facts.restaurantName); addDetail(scope, 'Applies only on', dateLabel(state.facts.date)); addDetail(scope, 'Reviewing as', 'Demo operator'); review.append(scope);
+    const label = el('label', 'correction-consent'); const check = document.createElement('input'); check.type = 'checkbox'; check.id = 'correction-reviewed'; check.disabled = state.busy || !canCorrect;
+    check.addEventListener('change', () => { $('correction-button').disabled = state.busy || !canCorrect || !check.checked; });
+    label.append(check, el('span', '', `I reviewed pickup only for ${state.facts.restaurantName} on ${dateLabel(state.facts.date)}. Ask the guest before changing delivery to pickup.`)); review.append(label);
+  }
   const target = $('learning-content'); clear(target);
   if (!rule) { target.append(el('p', 'learning-empty', 'The current service policy allows delivery or pickup. Record a reviewed correction to see the next guest request retrieve the new rule.')); }
   else {
@@ -187,10 +214,40 @@ function renderLearning() {
     const before = el('li'); before.append(el('strong', '', 'Before the correction'), el('span', '', earlier?.before?.request?.fulfillment === 'delivery' ? `The request proposed delivery${earlier.before.request.destination ? ` to ${earlier.before.request.destination}` : ''}. That earlier proposal stays in history.` : rule.previousValue));
     const correction = el('li'); correction.append(el('strong', '', 'The owner changes today’s rule'), el('span', '', 'Pickup only. Confirm that change with the guest before replacing a delivery request.'));
     const after = el('li'); after.append(el('strong', '', 'The next request gets the corrected fact'), el('span', '', 'Open “The next guest.” A delivery request must now pause for pickup confirmation. It cannot reuse an earlier approval.'));
-    list.append(before, correction, after); const scope = el('div', 'scope-labels'); scope.append(el('span', '', state.facts.restaurantName), el('span', '', `${dateLabel(rule.validFrom)} only`), el('span', '', 'Reviewed owner correction')); target.append(list, scope);
+    list.append(before, correction, after); const scope = el('div', 'scope-labels'); scope.append(el('span', '', state.facts.restaurantName), el('span', '', `${dateLabel(rule.validFrom)} only`), el('span', '', `Reviewed by ${rule.operator || 'reviewer not supplied'}`)); target.append(list, scope);
+    const proof = el('div', 'correction-proof'); proof.append(el('strong', '', storage?.durable ? 'Saved correction evidence' : 'Current correction evidence')); addDetail(proof, 'Correction reference', rule.id); addDetail(proof, 'Review recorded', rule.reviewed === true ? 'Yes' : 'Not established'); addDetail(proof, 'Scope', `${state.facts.restaurantName} · ${dateLabel(rule.validFrom)}${rule.validTo !== rule.validFrom ? `–${dateLabel(rule.validTo)}` : ' only'}`); target.append(proof);
   }
-  target.append(el('p', 'learning-memory-note', 'Demo session memory: corrections reset when the local server restarts.'));
+  if (storage?.durable === true) {
+    const memory = el('div', 'memory-status'); memory.append(el('strong', '', 'Reviewed corrections survive a restart.'));
+    memory.append(el('p', '', `${storage.count} saved correction${storage.count === 1 ? '' : 's'} · ${storage.loadedCount} loaded at startup · saved revision ${storage.revision}.`));
+    if (storage.casesResetOnRestart === true) memory.append(el('p', '', 'Demo conversations, quotes, approvals and kitchen receipts reset on restart. The reviewed restaurant/date corrections remain.')); target.append(memory);
+  } else target.append(el('p', 'learning-memory-note', storage ? 'Session-only mode: corrections and case flows reset when this local server restarts.' : 'Correction storage has not been confirmed. No restart-persistence claim is made.'));
+  $('scope-check-button').disabled = state.busy || !rule;
+  renderScopeProof();
   $('next-request-button').disabled = state.busy;
+}
+
+async function checkCorrectionScope() {
+  if (state.busy || !state.facts?.corrections?.some(rule => rule.kind === 'pickup-only')) return;
+  const restaurantId = state.facts.restaurantId; const date = state.facts.date; const tomorrow = new Date(`${date}T12:00:00Z`); tomorrow.setUTCDate(tomorrow.getUTCDate() + 1);
+  const otherRestaurant = restaurantId === 'demo-north' ? 'demo-south' : 'demo-north';
+  error(''); setBusy(true);
+  try {
+    const dates = [{ label: 'Same restaurant · today', restaurantId, date }, { label: 'Same restaurant · tomorrow', restaurantId, date: tomorrow.toISOString().slice(0, 10) }, { label: 'Other restaurant · today', restaurantId: otherRestaurant, date }];
+    const results = await Promise.all(dates.map(async scope => ({ label: scope.label, facts: await api(`/facts?restaurantId=${encodeURIComponent(scope.restaurantId)}&date=${encodeURIComponent(scope.date)}`) })));
+    state.scopeCheck = { key: `${restaurantId}/${date}`, results }; renderScopeProof();
+  } catch (failure) { error(failure.message); }
+  finally { setBusy(false); }
+}
+
+function renderScopeProof() {
+  const target = $('scope-check-results'); clear(target); const proof = state.scopeCheck;
+  if (!proof || proof.key !== `${state.facts?.restaurantId}/${state.facts?.date}`) return;
+  target.append(el('h4', '', 'Local fact checks · no model call'));
+  for (const result of proof.results) {
+    const row = el('div', 'scope-proof-row'); const context = el('div'); context.append(el('strong', '', result.label), el('span', '', `${result.facts.restaurantName} · ${dateLabel(result.facts.date)}`)); row.append(context, el('span', `scope-proof-value${result.facts.service.pickupOnly ? ' active' : ''}`, `pickupOnly: ${String(result.facts.service.pickupOnly)}`)); target.append(row);
+  }
+  target.append(el('p', '', 'These results come from current local restaurant/date lookups. They do not make a model request or change an order.'));
 }
 
 function renderHistory() {
@@ -199,9 +256,13 @@ function renderHistory() {
   for (const event of [...(state.current.history || [])].reverse()) { const row = el('li'); row.append(el('strong', '', `Request v${event.requestVersion} · ${statusNames[event.after?.status] || 'Decision recorded'}`), el('span', '', event.summary), el('small', '', `${clock(event.at)} training clock · local history ${event.version}`)); if (event.before?.quoteId && event.before.quoteId !== event.after?.quoteId) row.append(el('small', '', `Earlier quote retained in history: ${event.before.quoteId}`)); list.append(row); }
 }
 
-function availableReview() { return state.status?.recordedReviews?.find(review => review.caseId === state.selected); }
+function availableReviews() { return (state.status?.recordedReviews || []).filter(review => review.caseId === state.selected); }
+function availableReview() { const reviews = availableReviews(); return reviews.find(review => review.id === state.selectedReviewId) || reviews.find(review => review.preferred) || reviews[0]; }
 function syncMuseButton() {
   const review = availableReview(); $('muse-button').disabled = state.busy || !review;
+  const reviews = availableReviews(); const selector = $('muse-selector'); clear(selector); $('muse-selector-label').hidden = reviews.length < 2;
+  for (const item of reviews) { const option = el('option', '', `${item.title}${item.preferred ? ' · recommended review' : ''}`); option.value = item.id; selector.append(option); }
+  selector.value = review?.id || ''; selector.disabled = state.busy;
   $('muse-state').textContent = review ? 'Recorded live review' : 'Testing pending';
   $('muse-description').textContent = review ? 'Inspect a saved Muse review and the restaurant facts it requested. Opening it makes no new model call and changes no order.' : 'Muse workflow testing pending. The scenario controls above run an authored local simulation.';
 }
@@ -247,9 +308,14 @@ function renderMuse() {
     const notes = el('ul'); for (const note of packet.evaluation.reviewNotes || []) notes.append(el('li', '', note)); limitations.append(notes);
     limitations.append(el('p', 'pending-note', 'This is the original saved model response. An operator must resolve these limitations before customer use. No draft reply has been sent.')); target.append(limitations);
   }
-  const input = el('details', 'recorded-input'); input.open = true; input.append(el('summary', '', 'Exact synthetic request sent to Muse'), el('p', '', packet.input?.message || 'The recorded request was not supplied.'));
-  input.append(el('small', '', 'This is the model’s actual input. It may differ from the authored starter conversation above.')); target.append(input, el('p', '', result.reply || result.summary));
-  if (result.summary && result.summary !== result.reply) target.append(el('p', '', result.summary));
+  const modelInput = packet.modelInput || packet.input;
+  const input = el('details', 'recorded-input'); input.open = true; input.id = 'muse-source'; input.append(el('summary', '', 'Source reviewed by Muse'), el('p', '', modelInput?.message || 'The recorded request was not supplied.'));
+  input.append(el('small', '', 'This is the complete synthetic message supplied for this saved review. The authored starter conversation above is a separate source.'));
+  const fullInput = el('details'); fullInput.append(el('summary', '', packet.modelInput ? 'Full exact model input' : 'Recorded input envelope · legacy record'), el('pre', '', JSON.stringify(modelInput || {}, null, 2))); input.append(fullInput); target.append(input);
+  if (result.summary) target.append(el('p', '', result.summary));
+  if (result.reply) { const reply = el('details', 'original-model-draft'); reply.append(el('summary', '', 'Original recorded draft reply · not sent'));
+    reply.append(el('p', 'draft-use-note', packet.evaluation?.semanticReviewStatus === 'pass-with-limitations' ? 'Not actionable as written. Resolve the review limitations before customer use. This text did not route a task, contact a guest or execute an action.' : 'Saved model text for operator review. This reply has not been sent and does not execute an action.'), el('p', '', result.reply)); target.append(reply); }
+  renderReplyEditor(target, packet);
   if (result.questions?.length) { const list = el('ul'); result.questions.forEach(question => list.append(el('li', '', question))); target.append(list); }
   const calls = el('details'); calls.append(el('summary', '', `${packet.tools?.length || 0} recorded source/tool check${packet.tools?.length === 1 ? '' : 's'}`));
   for (const tool of packet.tools || []) {
@@ -273,16 +339,41 @@ function renderMuse() {
   for (const request of packet.receipt?.requests || []) receipt.append(el('p', 'receipt-key', `${request.id} · ${request.inputTokens} input / ${request.outputTokens} output tokens`)); target.append(receipt);
 }
 
+function renderReplyEditor(parent, packet) {
+  const descriptor = availableReview();
+  if (!state.status?.capabilities?.recordedReplyReview || descriptor?.id !== state.reviewId || descriptor.caseId !== state.current.id || !packet.result.reply) return;
+  const saved = state.current.reviewedReply?.reviewId === state.reviewId ? state.current.reviewedReply : null;
+  const panel = el('details', 'reply-editor'); panel.open = Boolean(saved); panel.append(el('summary', '', saved ? 'Operator-reviewed reply · remains unsent' : 'Review an unsent reply'));
+  panel.append(el('p', 'pending-note', 'Reviewing as Demo operator. Saving records the wording and its source; it does not route a task, send a message or contact the guest.'));
+  const label = el('label', 'reply-editor-label', 'Reviewed reply text'); const field = document.createElement('textarea'); field.id = 'reviewed-reply-text'; field.rows = 7; field.maxLength = 2500; field.value = saved?.text || packet.result.reply; field.disabled = state.busy; label.htmlFor = field.id;
+  const count = el('small', 'reply-count'); const warning = el('p', 'reply-warning'); const reviewed = el('label', 'reply-consent'); const check = document.createElement('input'); check.type = 'checkbox'; check.disabled = state.busy;
+  reviewed.append(check, el('span', '', 'I reviewed this wording. It does not claim an action that has not happened.'));
+  const save = el('button', 'button secondary', 'Save reviewed reply · keep unsent'); save.type = 'button';
+  const sync = () => {
+    const text = field.value.trim(); const unsupportedRouting = packet.evaluation?.reviewNotes?.some(note => /flagged/i.test(note)) && /(?:I['’]ve|I have) flagged/i.test(text);
+    count.textContent = `${field.value.length} / 2,500 characters`; warning.hidden = !unsupportedRouting;
+    warning.textContent = unsupportedRouting ? 'The review identified “I’ve flagged” as unsupported. Remove that claim before saving; no routing action is recorded here.' : '';
+    save.disabled = state.busy || !check.checked || text.length < 1 || text.length > 2500 || Boolean(unsupportedRouting);
+  };
+  field.addEventListener('input', sync); check.addEventListener('change', sync);
+  save.addEventListener('click', () => { sync(); if (!save.disabled) runAction('review_recorded_reply', { reviewId: state.reviewId, operator: 'Demo operator', text: field.value.trim() }); });
+  panel.append(label, field, count, warning, reviewed, save);
+  if (saved) { const receipt = el('div', 'reply-review-receipt'); receipt.append(el('strong', '', saved.status === 'reviewed-unsent' && saved.sent === false ? 'Review saved · no message sent' : 'Review state needs verification'), el('p', '', `${saved.operator} · ${dateLabel(saved.reviewedAt)} · ${clock(saved.reviewedAt)}`), el('p', '', saved.text), el('small', '', `Recorded source: ${saved.reviewId}. No delivery or routing receipt is established.`)); panel.append(receipt); }
+  sync(); parent.append(panel);
+}
+
 async function openMuseReview() {
   const descriptor = availableReview(); if (!descriptor || state.busy) return; error(''); setBusy(true);
-  try { const packet = await api(`/recorded?id=${encodeURIComponent(descriptor.id)}`); if (packet.mode !== 'recorded-meta' || packet.liveVerified !== true || packet.recorded !== true || !packet.result) throw new Error('A verified recorded Muse review was not available. No authored response has been substituted.'); state.recorded = packet; state.reviewId = descriptor.id; renderMuse(); }
+  try { const packet = await api(`/recorded?id=${encodeURIComponent(descriptor.id)}`); if (packet.mode !== 'recorded-meta' || packet.liveVerified !== true || packet.recorded !== true || !packet.result) throw new Error('A verified recorded Muse review was not available. No authored response has been substituted.'); state.recorded = packet; state.reviewId = descriptor.id; state.selectedReviewId = descriptor.id; renderMuse(); }
   catch (failure) { error(failure.message); }
   finally { setBusy(false); if (state.recorded) renderMuse(); }
 }
 
-function render() { renderTabs(); renderFacts(); renderConversation(); renderQuote(); renderKitchen(); renderActions(); renderLearning(); renderHistory(); renderMuse(); }
+function render() { renderTabs(); renderFacts(); renderConversation(); renderPromiseStatus(); renderQuote(); renderKitchen(); renderActions(); renderLearning(); renderHistory(); renderMuse(); }
 $('refresh-button').addEventListener('click', () => loadWorkspace());
-$('correction-button').addEventListener('click', () => runAction('correct_pickup_only', { operator: 'Demo operator' }));
+$('correction-button').addEventListener('click', () => { if ($('correction-reviewed')?.checked) runAction('correct_pickup_only', { operator: 'Demo operator' }); });
 $('next-request-button').addEventListener('click', () => { loadWorkspace('direct').then(() => $('conversation-title').scrollIntoView({ block: 'start', behavior: 'auto' })); });
 $('muse-button').addEventListener('click', openMuseReview);
+$('muse-selector').addEventListener('change', () => { state.selectedReviewId = $('muse-selector').value; state.recorded = null; state.reviewId = null; renderMuse(); });
+$('scope-check-button').addEventListener('click', checkCorrectionScope);
 loadWorkspace();
